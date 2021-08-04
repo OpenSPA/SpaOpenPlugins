@@ -1,0 +1,15 @@
+<default>
+	<prerequisites>
+		<tag type="Multimedia" />
+	</prerequisites>
+	<info>
+		<author>OpenSPA Team</author>
+		<name>PlutoTV</name>
+		<packagename>enigma2-plugin-extensions-plutotv</packagename>
+		<shortdescription>Play VOD PlutoTV and create bouquet with LiveTV channels</shortdescription>
+		<description>Play VOD PlutoTV and create bouquet with LiveTV channels</description>
+	</info>
+	<files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-plutotv" />
+	</files>
+</default>

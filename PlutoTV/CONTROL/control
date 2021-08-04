@@ -1,0 +1,10 @@
+Package: enigma2-plugin-extensions-plutotv
+Version: 1.0-r0
+Description: Play VOD PlutoTV and create bouquet with LiveTV channels
+Architecture: all
+Section: extra
+Priority: optional
+Maintainer: openspa
+Homepage: https://openspa.info
+Depends: python-json, python-requests
+Source: https://openspa.info
