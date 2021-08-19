@@ -1,0 +1,142 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: spzRemoteChannels\n"
+"POT-Creation-Date: 2015-03-19 11:11+0100\n"
+"PO-Revision-Date: 2018-08-16 10:14+0200\n"
+"Language-Team: openspa.info\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"Last-Translator: ardilla99 <openspa.info>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+"X-Poedit-SearchPath-0: /home/morser/Azbox/OpenSPA/repositorio/plugins/nuevos/spzRemoteChannels/plugin\n"
+
+msgid "EPG Download: Remote Channels"
+msgstr "EPG-Download: Remote-Kanäle"
+
+msgid "Wait..."
+msgstr "warten..."
+
+msgid "Wait for Channel: "
+msgstr "Warten auf Sender:"
+
+msgid "The download is in progress. Exit now?"
+msgstr "Der Download ist im Gange. Jetzt abbrechen?"
+
+msgid "Exit"
+msgstr "Beenden"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "FTP Server Editor"
+msgstr "FTP Server Editor"
+
+msgid "Keyboard"
+msgstr "Tastatur"
+
+msgid "Use address"
+msgstr "Adresse verwenden"
+
+msgid "Use IP"
+msgstr "Benutze IP"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Username:"
+msgstr "Benutzername:"
+
+msgid "Password:"
+msgstr "Passwort:"
+
+msgid "FTPport:"
+msgstr "FTPPort:"
+
+msgid "Passive:"
+msgstr "Passiv:"
+
+msgid "Telnetport:"
+msgstr "Telnetport:"
+
+msgid "HTTPport:"
+msgstr "HTTPPort:"
+
+msgid "HTTP Authentication:"
+msgstr "HTTP-Authentifizierung"
+
+msgid "Adress:"
+msgstr "Adresse:"
+
+msgid "Enter address"
+msgstr "Adresse eingeben"
+
+msgid "Enter username"
+msgstr "Nutzernamen eingeben"
+
+msgid "Enter password"
+msgstr "Passwort eingeben"
+
+msgid "Close"
+msgstr "Schliessen"
+
+msgid "Set server IP"
+msgstr "Server IP einsetzen"
+
+msgid "Select a remote server IP first"
+msgstr "Wählen Sie zuerst eine entfernte Server-IP"
+
+msgid "Select bouquets to convert"
+msgstr "Bouquets zum konvertieren auswählen"
+
+msgid "Testing remote connection"
+msgstr "Fernsteuerung test"
+
+msgid "Connection to remote IP ok"
+msgstr "Verbindung zum externen Server OK"
+
+msgid "Could not connect to remote IP"
+msgstr "Keine Verbindung zum externen Server"
+
+msgid "Downloading remote services"
+msgstr "Herunterladen von Remote-Diensten"
+
+msgid "Download from remote failed"
+msgstr "Download von ext.Quelle fehlgeschlagen"
+
+msgid "FTP reading file %d of %d"
+msgstr "FTP-Lesedatei %d von %d"
+
+msgid "Make your selection"
+msgstr "Treffen Sie Ihre Auswahl"
+
+msgid "Download"
+msgstr "Herunterladen"
+
+msgid "Invert"
+msgstr "Umkehren"
+
+msgid "No bouquets selected"
+msgstr "Keine Bouquet ausgewählt"
+
+msgid "Append Remote channels streams"
+msgstr "Hängen Sie Remote-Sender-Streams an"
+
+msgid "Convert remote channel list for streaming"
+msgstr "Konvertieren Sie die Externe-Senderliste für das Streaming"
+
+msgid "Download EPG from Remote Channels"
+msgstr "Laden Sie EPG von Externen Sender herunter"
+
+msgid "Register Channel as:"
+msgstr "Sender registrieren als:"
+
+msgid "Streamport:"
+msgstr "Streamport:"
+
+msgid "Stream Authentication:"
+msgstr "Stream Authentifizierung:"

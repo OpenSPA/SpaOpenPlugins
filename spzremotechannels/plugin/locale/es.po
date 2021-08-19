@@ -1,0 +1,144 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: spzRemoteChannels\n"
+"POT-Creation-Date: 2015-03-19 11:11+0100\n"
+"PO-Revision-Date: 2021-04-29 19:32+0200\n"
+"Last-Translator: morser\n"
+"Language-Team: openspa.info\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"Language: es\n"
+"X-Poedit-SearchPath-0: /home/morser/Azbox/OpenSPA/repositorio/plugins/nuevos/spzRemoteChannels/plugin\n"
+
+msgid "EPG Download: %s Remote Channels"
+msgstr "Descarga de EPG: %s Canales Remotos"
+
+msgid "Wait..."
+msgstr "Espere..."
+
+msgid "Wait for Channel: "
+msgstr "Esperando el canal: "
+
+msgid "The download is in progress. Exit now?"
+msgstr "La descarga está en proceso. Desea salir ahora?"
+
+msgid "Exit"
+msgstr "Salir"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "FTP Server Editor"
+msgstr "Editor de servidor FTP"
+
+msgid "Keyboard"
+msgstr "Teclado"
+
+msgid "Use address"
+msgstr "Usar direcc."
+
+msgid "Use IP"
+msgstr "Usar IP"
+
+msgid "IP:"
+msgstr "IP:"
+
+msgid "Username:"
+msgstr "Nombre de usuario:"
+
+msgid "Password:"
+msgstr "Contraseña:"
+
+msgid "FTPport:"
+msgstr "Puerto FTP"
+
+msgid "Passive:"
+msgstr "Pasivo:"
+
+msgid "Telnetport:"
+msgstr "Puerto telnet:"
+
+msgid "HTTPport:"
+msgstr "Puerto HTTP:"
+
+msgid "HTTP Authentication:"
+msgstr "Autenticación HTTP:"
+
+msgid "Adress:"
+msgstr "Dirección:"
+
+msgid "Enter address"
+msgstr "Introduzca dirección"
+
+msgid "Enter username"
+msgstr "Introduzca nombre de usuario"
+
+msgid "Enter password"
+msgstr "Introduzca contraseña"
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Set server IP"
+msgstr "Configurar IP"
+
+msgid "Select a remote server IP first"
+msgstr "Seleccione primero una dirección IP del servidor"
+
+msgid "Select bouquets to convert"
+msgstr "Seleccione los favoritos a convertir"
+
+msgid "Testing remote connection"
+msgstr "Comprobar la conexión remota"
+
+msgid "Connection to remote IP ok"
+msgstr "Conexión a IP remota correcta"
+
+msgid "Could not connect to remote IP"
+msgstr "No se puede conectar a la IP remota"
+
+msgid "Downloading remote services"
+msgstr "Descargando canales remotos"
+
+msgid "Download from remote failed"
+msgstr "La descarga remota ha fallado"
+
+msgid "FTP reading file %d of %d"
+msgstr "FTP: Leyendo archivo %d de %d"
+
+msgid "Make your selection"
+msgstr "Haga su selección"
+
+msgid "Download"
+msgstr "Descargar"
+
+msgid "Invert"
+msgstr "Invertir"
+
+msgid "No bouquets selected"
+msgstr "No hay listas seleccionadas"
+
+msgid "Append Remote channels streams"
+msgstr "Añadir canales remotos"
+
+msgid "Convert remote channel list for streaming"
+msgstr "Convertir lista de canales remotos para streaming"
+
+msgid "Download EPG from Remote Channels"
+msgstr "Descargar EPG de canales remotos"
+
+msgid "Register Channel as:"
+msgstr "Registrar canal como"
+
+msgid "Streamport:"
+msgstr "Puerto para el Stream:"
+
+msgid "Stream Authentication:"
+msgstr "Autenticación para el Stream:"
+
+msgid "It is not possible to connect to the indicated address"
+msgstr "No es posible conectar con la dirección indicada"
