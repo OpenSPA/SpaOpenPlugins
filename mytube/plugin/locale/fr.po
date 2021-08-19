@@ -288,7 +288,7 @@ msgstr "Entrées vidéo connexes."
 
 msgid "Relevance"
 msgstr "Relevancia"
-Pertinence
+
 msgid "Response video entries."
 msgstr "Réponse pour la  vidéo ."
 
