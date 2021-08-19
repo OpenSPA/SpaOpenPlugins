@@ -1,0 +1,648 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - MyTube\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-15 18:36+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: pe.tardo <openspa.info>\n"
+"Language-Team: openspa.info\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: /home/mpiero/Plugins/MyTube\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_ES\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-SearchPath-0: /home/mpiero/Plugins/MyTube\n"
+
+msgid " Results"
+msgstr " Resultados"
+
+msgid "Added: "
+msgstr "Añadido: "
+
+msgid "All"
+msgstr "Todos"
+
+msgid "All Time"
+msgstr "Cualquier fecha"
+
+msgid "An error occured."
+msgstr "Ha ocurrido un error."
+
+msgid "Ascending"
+msgstr "Ascendente"
+
+msgid "Ask to load new entries"
+msgstr "Cargar nuevas entradas"
+
+msgid "Ask user"
+msgstr "Preguntar al usuario"
+
+msgid "Australia"
+msgstr "Australia"
+
+msgid "Author: "
+msgstr "Autor: "
+
+msgid "Autos & Vehicles"
+msgstr "Coches y vehículos"
+
+msgid "Brazil"
+msgstr "Brasil"
+
+msgid "Canada"
+msgstr "Canadá"
+
+msgid "Choose target folder"
+msgstr "Elija la carpeta de destino"
+
+msgid "Clear history on Exit:"
+msgstr "Borrar histórico al salir:"
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Comedy"
+msgstr "Humor"
+
+msgid "Czech Republic"
+msgstr "República Checa"
+
+msgid "Descending"
+msgstr "Descendente"
+
+msgid "Display search results by:"
+msgstr "Visualizar resultados por:"
+
+msgid "Do you want to see more entries?"
+msgstr "Desea ver más entradas?"
+
+msgid "Download Video"
+msgstr "Descargar video"
+
+msgid "Download location"
+msgstr "Ruta de descarga"
+
+msgid "Downloading screenshots. Please wait..."
+msgstr "Descargando imágenes. Espere..."
+
+msgid "Duration: "
+msgstr "Duración: "
+
+msgid "Education"
+msgstr "Educación"
+
+msgid "Enter your search term(s)"
+msgstr "Introduzca término(s) de búsqueda"
+
+msgid "Entertainment"
+msgstr "Entretenimiento"
+
+msgid "Fetching feed entries"
+msgstr "Obteniendo entradas"
+
+msgid "Fetching search entries"
+msgstr "Obteniendo entradas de búsqueda"
+
+msgid "Film & Animation"
+msgstr "Películas y animación"
+
+msgid "France"
+msgstr "Francia"
+
+msgid "Gaming"
+msgstr "Juegos"
+
+msgid "Genuine Dreambox validation failed!"
+msgstr "Validación de Dreambox genuina fallida!"
+
+msgid "Germany"
+msgstr "Alemania"
+
+msgid "Great Britain"
+msgstr "Gran Bretaña"
+
+msgid "HD videos"
+msgstr "Videos HD"
+
+msgid "Help"
+msgstr "Ayuda"
+
+msgid "History"
+msgstr "Histórico"
+
+msgid "Holland"
+msgstr "Holanda"
+
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+msgid "Howto & Style"
+msgstr "Estilo"
+
+msgid "India"
+msgstr "India"
+
+msgid "Ireland"
+msgstr "Irlanda"
+
+msgid "Israel"
+msgstr "Israel"
+
+msgid "Italy"
+msgstr "Italia"
+
+msgid "Japan"
+msgstr "Japón"
+
+msgid "Load feed on startup:"
+msgstr "Cargar entradas al iniciar:"
+
+msgid "Mexico"
+msgstr "México"
+
+msgid "More video entries."
+msgstr "Más entradas de video."
+
+msgid "Most discussed"
+msgstr "Más discutidos"
+
+msgid "Most linked"
+msgstr "Más enlazados"
+
+msgid "Most popular"
+msgstr "Más populares"
+
+msgid "Most recent"
+msgstr "Más recientes"
+
+msgid "Most responded"
+msgstr "Más respondidos"
+
+msgid "Most shared"
+msgstr "Más compartidos"
+
+msgid "Most viewed"
+msgstr "Más vistos"
+
+msgid "Music"
+msgstr "Música"
+
+msgid "My TubePlayer"
+msgstr "My TubePlayer"
+
+msgid "MyTube Settings"
+msgstr "Configuración MyTubePlayer"
+
+msgid "MyTubePlayer"
+msgstr "MyTubePlayer"
+
+msgid "MyTubePlayer Help"
+msgstr "Ayuda MyTubePlayer"
+
+msgid "MyTubePlayer active video downloads"
+msgstr "Descargas activas de MyTubePlayer"
+
+msgid "MyTubePlayer settings"
+msgstr "Configuración MyTubePlayer"
+
+msgid "MyTubeVideoInfoScreen"
+msgstr "Info de MyTubeVideo"
+
+msgid "MyTubeVideohelpScreen"
+msgstr "Ayuda de MyTubeVideo"
+
+msgid "New Zealand"
+msgstr "Nueva Zelanda"
+
+msgid "News & Politic"
+msgstr "Noticias y política"
+
+msgid "No"
+msgstr "No"
+
+msgid "No playable video found! Stop playing this movie?"
+msgstr ""
+"No se ha encontrado ningún video visualizable! Detener la reproducción?"
+
+msgid "No videos to display"
+msgstr "No hay videos para mostrar"
+
+msgid "No, but play video again"
+msgstr "No, ver el video de nuevo"
+
+msgid "No, but switch to video entries."
+msgstr "No, ir a entradas de video."
+
+msgid "No, but switch to video search."
+msgstr "No, realizar otra búsqueda"
+
+msgid "Nonprofits & Activism"
+msgstr "ONGs y activismo"
+
+msgid "Not fetching feed entries"
+msgstr "No hay entradas"
+
+msgid "People & Blogs"
+msgstr "Gente y blogs"
+
+msgid "Pets & Animals"
+msgstr "Mascotas y animales"
+
+msgid "Play YouTube movies"
+msgstr "Reproducir videos de YouTube"
+
+msgid "Play next video"
+msgstr "Ver siguiente video"
+
+msgid "Play video again"
+msgstr "Ver video de nuevo"
+
+msgid "Please enter your search term."
+msgstr "Por favor, introduzca su término de búsqueda"
+
+msgid "Please select a standard feed or try searching for videos."
+msgstr "Por favor, seleccione un video o intente una búsqueda"
+
+msgid "Poland"
+msgstr "Polonia"
+
+msgid "Published"
+msgstr "Publicado"
+
+msgid "Rating"
+msgstr "Valoración"
+
+msgid "Ratings: "
+msgstr "Valoración: "
+
+msgid "Really quit MyTube Player?"
+msgstr "Seguro que quiere salir de MyTubePlayer?"
+
+msgid "Recently featured"
+msgstr "Destacados"
+
+msgid "Related video entries."
+msgstr "Videos relacionados."
+
+msgid "Relevance"
+msgstr "Relevancia"
+
+msgid "Response video entries."
+msgstr "Videos de respuesta."
+
+msgid "Return to movie list"
+msgstr "Volver a la lista de películas"
+
+msgid "Return to movie list?"
+msgstr "Volver a la lista de películas?"
+
+msgid "Russia"
+msgstr "Rusia"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Science & Technology"
+msgstr "Ciencia y tecnología"
+
+msgid "Search Term(s)"
+msgstr "Buscar:"
+
+msgid "Search category:"
+msgstr "Categoría de búsqueda:"
+
+msgid "Search region:"
+msgstr "Región de búsqueda:"
+
+msgid "Search restricted content:"
+msgstr "Buscar contenido restringido:"
+
+msgid "Select new feed to view."
+msgstr "Seleccione una nueva entrada para ver."
+
+msgid "Select your choice."
+msgstr "Seleccione una opción."
+
+msgid "Short Movies"
+msgstr "Cortos de cine"
+
+msgid "Sorry, video is not available!"
+msgstr "El video no está disponible!"
+
+msgid "South Korea"
+msgstr "Korea del Sur"
+
+msgid "Spain"
+msgstr "España"
+
+msgid "Sports"
+msgstr "Deportes"
+
+msgid "Start with following feed:"
+msgstr "Iniciar con las entradas siguientes:"
+
+msgid "Std. Feeds"
+msgstr "Categorías"
+
+msgid "Stop playing this movie?"
+msgstr "Detener la reproducción de este video?"
+
+msgid "Sweden"
+msgstr "Suecia"
+
+msgid "Tags: "
+msgstr "Etiquetas: "
+
+msgid "Taiwan"
+msgstr "Taiwan"
+
+msgid "There was an error getting the feed entries. Please try again."
+msgstr ""
+"Se ha producido un error al obtener las entradas. Por favor, inténtelo de "
+"nuevo."
+
+msgid "This Month"
+msgstr "Este mes"
+
+msgid "This Week"
+msgstr "Esta semana"
+
+msgid "This is the help screen. Feed me with something to display."
+msgstr "Esta es la pantalla de ayuda. "
+
+msgid "Today"
+msgstr "Hoy"
+
+msgid "Top favorites"
+msgstr "Top favoritos"
+
+msgid "Top rated"
+msgstr "Mejor valorados"
+
+msgid "Travel & Events"
+msgstr "Viajes y eventos"
+
+msgid "Trending videos"
+msgstr "Videos populares (trending videos)"
+
+msgid "Trying to download the Youtube feed entries. Please wait..."
+msgstr "Intentando descargar las entradas de Youtube. Espere..."
+
+msgid "Trying to download the Youtube search results. Please wait..."
+msgstr "Intentando descargar los resultados de búqueda de Youtube. Espere..."
+
+msgid "United States"
+msgstr "Estados Unidos"
+
+msgid "User video entries."
+msgstr "Entradas de video del usuario."
+
+msgid ""
+"Verify your Dreambox authenticity by running the genuine dreambox plugin!"
+msgstr "Verifica la autencidad del receptor"
+
+msgid "Video YouTube..."
+msgstr "Video de YouTube"
+
+msgid "Videobrowser exit behavior:"
+msgstr "Comportamiento del VideoBrowser al salir:"
+
+msgid "Videoplayer stop/exit behavior:"
+msgstr "Comportamiento del reproductor al parar/salir:"
+
+msgid "View Count"
+msgstr "Número de visitas"
+
+msgid "View Users Video"
+msgstr "Ver videos de usuarios"
+
+msgid "View active downloads"
+msgstr "Ver descargas activas"
+
+msgid "View related videos"
+msgstr "Ver videos relacionados"
+
+msgid "View response videos"
+msgstr "Ver videos de respuesta"
+
+msgid "Views: "
+msgstr "Visitas: "
+
+msgid ""
+"Welcome to the MyTube Youtube Player.\n"
+"\n"
+"Use the Bouqet+ button to navigate to the search field and the Bouqet- to "
+"navigate to the video entries.\n"
+"\n"
+"To play a movie just press OK on your remote control.\n"
+"\n"
+"Press info to see the movie description.\n"
+"\n"
+"Press the Menu button for additional options.\n"
+"\n"
+"The Help button shows this help again."
+msgstr ""
+"Bienvenido a MyTube Youtube Player.\n"
+"\n"
+"Use CH+ para ir a la zona de búsqueda, y CH- para ir a las entradas de "
+"video.\n"
+"\n"
+"Para ver un video pulse OK.\n"
+"\n"
+"Pulse INFO para ver información del video.\n"
+"\n"
+"Pulse MENU para ver más opciones.\n"
+"\n"
+"."
+
+msgid ""
+"Welcome to the MyTube Youtube Player.\n"
+"\n"
+"While entering your search term(s) you will get suggestions displayed "
+"matching your search term.\n"
+"\n"
+"To select a suggestion press DOWN on your remote, select the desired result "
+"and press OK on your remote to start the search.\n"
+"\n"
+"Press exit to get back to the input field."
+msgstr ""
+"Bienvenido a MyTube Youtube Player.\n"
+"\n"
+"Al introducir los términos de búsqueda puede ver sugerencias al respecto.\n"
+"\n"
+"Para seleccionar una sugerencia pulse tecla abajo, seleccione el término "
+"deseado y pulse OK.\n"
+"\n"
+"Pulse EXIT para volver a la caja de texto."
+
+msgid "Yes"
+msgstr "Si"
+
+msgid "Yes, but play next video"
+msgstr "Sí, pero reproducir el siguiente video"
+
+msgid "Yes, but play previous video"
+msgstr "Sí, pero reproducir el video anterior"
+
+msgid "Exit "
+msgstr "Salir"
+
+msgid "My Subscriptions"
+msgstr "Mis suscripciones"
+
+msgid "My Favorites"
+msgstr "Mis favoritos"
+
+msgid "My History"
+msgstr "Mi historial"
+
+msgid "My Watch Later"
+msgstr "Mis 'Ver más tarde'"
+
+msgid "My Recommendations"
+msgstr "Mis recomendaciones"
+
+msgid "My Uploads"
+msgstr "Mis videos subidos"
+
+msgid "Subscribe to user"
+msgstr "Suscribirme a este usuario"
+
+msgid "Add to favorites"
+msgstr "Añadir a favoritos"
+
+msgid "Results:"
+msgstr "Resultados:"
+
+msgid "Page:"
+msgstr "Página:"
+
+msgid "Search results"
+msgstr "Resultados de búsqueda"
+
+msgid "Login OK"
+msgstr "Acceso OK"
+
+msgid "Hello"
+msgstr "Hola"
+
+msgid "Login failed"
+msgstr "Fallo de acceso"
+
+msgid "Youtube Username (reopen plugin on change):"
+msgstr "Usuario de Youtube (reabrir plugin si se cambia):"
+
+msgid "Youtube Password (reopen plugin on change):"
+msgstr "Password de Youtube (reabrir plugin si se cambia):"
+
+msgid "Auto paginate on last entry:"
+msgstr "Auto-paginar en la última entrada:"
+
+msgid "Reset tv-screen after playback:"
+msgstr "Resetear la ventana de tv después del video:"
+
+msgid "Subscriptors"
+msgstr "Suscriptores"
+
+msgid "My videos uploaded viewed"
+msgstr "Mis videos subidos vistos"
+
+msgid "Videos watch"
+msgstr "Videos vistos"
+
+msgid "Videos uploaded"
+msgstr "Videos subidos"
+
+msgid "New subscription added"
+msgstr "Nueva suscripción añadida"
+
+msgid "Unknown error"
+msgstr "Error desconocido"
+
+msgid "Video successfully added to favorites"
+msgstr "Video correctamente añadido a favoritos"
+
+msgid "View user videos"
+msgstr "Ver videos del usuario"
+
+msgid "Allow viewing adult videos:"
+msgstr "Permitir videos de adultos:"
+
+msgid "Sorry, Video has age restriction!"
+msgstr "El video tiene restriccion por edad!"
+
+msgid "Video EOF behavior:"
+msgstr "Comportamiento al finalizar el video:"
+
+msgid "by"
+msgstr "de"
+
+msgid "Login at start:"
+msgstr "Login al iniciar:"
+
+msgid "Channel"
+msgstr "Canal"
+
+msgid "Login"
+msgstr "Acceso"
+
+msgid "Remove Subscription"
+msgstr "Eliminar suscripción"
+
+msgid "Remove From Favorites"
+msgstr "Eliminar de favoritos"
+
+msgid ""
+"Go to %s\n"
+"And enter the code %s"
+msgstr ""
+"Acceda a %s\n"
+"e introduzca el código %s"
+
+msgid "Subscription Succesfully"
+msgstr "Suscripción realizada"
+
+msgid "Subscription error"
+msgstr "Error al realizar la suscripción"
+
+msgid "Remove Subscription Succesfully"
+msgstr "Suscripción eliminada correctamente"
+
+msgid "Error: No remove Subscription"
+msgstr "Error: No se ha eliminado la suscripción"
+
+msgid "Video append to favorites"
+msgstr "Video añadido a favoritos"
+
+msgid "Error: No video append"
+msgstr "Error: Video no añadido"
+
+msgid "Video remove from favorites"
+msgstr "Video eliminado de favoritos"
+
+msgid "Error: No remove video from favorites"
+msgstr "Error: No se ha eliminado el video de favoritos"
+
+msgid "Search for videos:"
+msgstr "Buscar videos:"
+
+msgid "Search for channels:"
+msgstr "Buscar canales:"
+
+msgid "My videos likes"
+msgstr "Videos que me gustan"
+
+msgid "Like this video"
+msgstr "Este video me gusta"
+
+msgid "Dislike this video"
+msgstr "Este video no me gusta"
+
+msgid "Please, type your CLIENT_ID & CLIENT_SECRET in /etc/keys/mytube.key"
+msgstr "Por favor, pont tu CLIENT_ID y CLIENT_SECRET en /etc/keys/mytube.key"
+
+msgid "Please, type your YOUTUBE API KEY in /etc/keys/mytube.key"
+msgstr "Por favor, pon tu YOUTUBE API KEY en /etc/keys/mytube.key"
