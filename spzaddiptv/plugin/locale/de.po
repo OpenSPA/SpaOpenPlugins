@@ -1,0 +1,69 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: spzAddIPTV\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-04 13:10+0100\n"
+"PO-Revision-Date: 2018-08-14 16:11+0200\n"
+"Language-Team: openspa.info\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: ardilla99 <openspa.info>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+"X-Poedit-SearchPath-0: /home/morser/Azbox/spzAddIPTV\n"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Select"
+msgstr "Wählen"
+
+msgid "View"
+msgstr "Ansicht"
+
+msgid "Add Selected"
+msgstr "Auswahl hinzufügen"
+
+msgid "Select streams to add in bouquet"
+msgstr "Wählen Sie Streams zum Hinzufügen in Bouquets aus"
+
+msgid "Add stream from "
+msgstr "Stream hinzufügen von "
+
+msgid "Select URL type"
+msgstr "Wählen Sie den URL-Typ"
+
+msgid "Append"
+msgstr "Anhängen"
+
+msgid "From file"
+msgstr "Aus Datei"
+
+msgid "New bouquet"
+msgstr "Neue Favoriten"
+
+msgid "Select a bouquet to add channels to"
+msgstr "Wählen Sie ein Favoriten aus, dem Sie Sender hinzufügen möchten"
+
+msgid "Enter Bouquet name"
+msgstr "Geben Sie den Favoritenname ein"
+
+msgid "Add IPTV Channels"
+msgstr "Fügen Sie IPTV-Sender hinzu"
+
+msgid "Enter name"
+msgstr "Name eingeben"
+
+msgid "Enter URL"
+msgstr "URL eingeben"
+
+msgid "Add streaming channels to your channellist"
+msgstr "Füge Streaming-Sender zu deiner Senderliste hinzu"
+
+msgid "Change All Selections"
+msgstr "Alle Auswahlen ändern"
