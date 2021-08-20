@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openSPAnetTest\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-25 22:28+0200\n"
+"PO-Revision-Date: 2021-08-01 00:08+0200\n"
+"Last-Translator: VillaK <soporte@openspa.info>\n"
+"Language-Team: VillaK\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Match"
+msgstr "Partidos"
+
+msgid "Today"
+msgstr "Hoy"
+
+msgid "Match Today"
+msgstr "Partidos de Hoy"
+
+msgid "Olympic Games Tokyo 2020"
+msgstr "Juegos Olímpicos de Tokio 2020"
+
+msgid "Football Fixtures"
+msgstr "Partidos de Fútbol"
+
+# OpenPanel
+#~ msgid "Test result not exist, first do the test."
+#~ msgstr "¡Resultado del Test no existe! primero haz el Test."
+
+#~ msgid ""
+#~ "In the path /tmp/resultest.png you have your result, in order to share it. Or you can use the mobile to download your result, (with OpteleBot)...\n"
+#~ "/desc /tmp/resultest.png"
+#~ msgstr ""
+#~ "En la ruta /tmp/resultest.png tienes el resultado, para poder compartirlo. O puedes utilizar el móvil para descargar el resultado, (con OpteleBot)…\n"
+#~ "/desc /tmp/resultest.png"
+
+#~ msgid "Choose server and press ok, to test."
+#~ msgstr "Elije servidor, pulsa OK, para hacer test y guardar tu servidor favorito."
+
+#~ msgid "OpNetSpeed Server List"
+#~ msgstr "OpNetSpeed Lista de Servidores"
+
+#~ msgid "View last result to share."
+#~ msgstr "Ver el último resultado para compartir."
+
+#~ msgid "Test your favourite server."
+#~ msgstr "Probar tu servidor favorito."
+
+#~ msgid "Test auto server."
+#~ msgstr "Probar servidor automático (en función al Ping)."
+
+#~ msgid "Select your favourite server."
+#~ msgstr "Selecciona tu servidor favorito."
+
+#~ msgid "Choose your option, to test."
+#~ msgstr "Elige opción para hacer test."
+
+# OpenPanel
+#~ msgid "SpeedTest"
+#~ msgstr "Test de Velocidad"
+
+#~ msgid "Testing net speed,please wait......"
+#~ msgstr "Realizando Test de Velocidad, por favor espere......"
+
+#
+#~ msgid "finished test"
+#~ msgstr "Prueba de velocidad terminada."
+
+#~ msgid "OpNetSpeed Test"
+#~ msgstr "OpNetSpeed Test"
+
+#~ msgid "Testing upload speed...."
+#~ msgstr "Comprobando la velocidad de subida...."
+
+#~ msgid " Test completed,to test again press green"
+#~ msgstr "Prueba completada, para probar de nuevo Presione verde"
+
+#~ msgid "speedtest"
+#~ msgstr "Test de Velocidad"
+
+#~ msgid "SpeedNetTest by openSPA"
+#~ msgstr "Test de velocidad con OpenSPA"
+
+#~ msgid "OpenSPA netSpeedTest"
+#~ msgstr "OpenSPA Test de Velocidad"
+
+#~ msgid "Error! Test result not downloaded!"
+#~ msgstr "¡Error! Resultado de la prueba no descargado!"
+
+#~ msgid "OpenSPA netSpeedTest Server List"
+#~ msgstr "OpenSPA Test de Velocidad listado de Servidores"
+
+#~ msgid "Test in: %s %s"
+#~ msgstr "Test en: %s %s"
