@@ -277,6 +277,7 @@ def buildepg(data):
 		series     = (episode.get('series',{}) or item)
 		epdur      = int(episode.get('duration','0') or '0') // 1000 # in seconds
 		epgenre    = episode.get('genre','')
+		etype      = series.get('type','film')
 
 		genre = convertgenre(epgenre)
 
@@ -297,9 +298,10 @@ def buildepg(data):
 		if len(epmpaa) > 0 and not "Not Rated" in epmpaa:
 			epplot = '(%s). %s' % (epmpaa, epplot)
 
-		if epseason > 0 and epnumber > 0:
+		noserie = "live film"
+		if epseason > 0 and epnumber > 0 and etype not in noserie:
 			title = title + ' (T%d)' % epseason
-			epplot = 'T%d Ep.%d ' + epplot
+			epplot = 'T%d Ep.%d %s' % (epseason, epnumber, epplot)
 
 		if epdur > 0:
 			GuideList[_id].append((title,epplot,start,epdur,genre))
@@ -313,11 +315,13 @@ def buildGuide(event):
 	timelines = event.get('timelines',[])
 	chplot = (event.get('description','') or event.get('summary',''))
 
+
 	for item in timelines:
 		episode    = (item.get('episode',{})   or item)
 		series     = (episode.get('series',{}) or item)
 		epdur      = int(episode.get('duration','0') or '0') // 1000 # in seconds
 		epgenre    = episode.get('genre','')
+		etype      = series.get('type','film')
 
 		genre = convertgenre(epgenre)
 
@@ -338,9 +342,10 @@ def buildGuide(event):
 		if len(epmpaa) > 0 and not "Not Rated" in epmpaa:
 			epplot = '(%s). %s' % (epmpaa, epplot)
 
-		if epseason > 0 and epnumber > 0:
+		noserie = "live film"
+		if epseason > 0 and epnumber > 0 and etype not in noserie:
 			title = title + ' (T%d)' % epseason
-			epplot = 'T%d Ep.%d ' + epplot
+			epplot = 'T%d Ep.%d %s' % (epseason, epnumber, epplot)
 
 		if epdur > 0:
 			GuideList[_id].append((title,epplot,start,epdur,genre))
