@@ -460,8 +460,11 @@ class PlutoDownload(Screen):
 						key = Categories[self.key]
 						if self.chitem == self.subtotal:
 							self.chitem = 0
-							self.key = self.key + 1
-							key = Categories[self.key]
+							pase = False
+							while not pase:
+								self.key = self.key + 1
+								key = Categories[self.key]
+								pase = ChannelsList.has_key(key)
 							self.subtotal = len(ChannelsList[key])
 
 
@@ -597,8 +600,11 @@ class DownloadSilent:
 						key = Categories[self.key]
 						if self.chitem == self.subtotal:
 							self.chitem = 0
-							self.key = self.key + 1
-							key = Categories[self.key]
+							pase = False
+							while not pase:
+								self.key = self.key + 1
+								key = Categories[self.key]
+								pase = ChannelsList.has_key(key)
 							self.subtotal = len(ChannelsList[key])
 
 
