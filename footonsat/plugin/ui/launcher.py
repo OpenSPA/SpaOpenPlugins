@@ -65,11 +65,11 @@ class FootOnsatLauncher(Screen):
 		self.Moveframe()
 
 	def up(self):
-		self['menu'].up()
+		self['menu'].pageUp()
 		self.Moveframe()
 
 	def down(self):
-		self['menu'].down()
+		self['menu'].pageDown()
 		self.Moveframe()
 
 	def exit(self):

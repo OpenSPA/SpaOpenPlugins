@@ -78,7 +78,7 @@ class FootOnSat(Screen):
 		self.link = link
 		titles = {"today":"Match Today","championsleague":"UEFA Champions League","europaleague":"UEFA Europa League","premierleague":"Premier League"
 					,"laliga":"La Liga Santander","seriea":"Serie A","bundesliga":"Bundesliga","ligue1":"Ligue 1","ConferenceLeague":"UEFA Conference League",
-     			"olympicgames":"Olympic Games Tokyo 2020"}
+				"laliga2":"La Liga Smartbank"}
 		self["counter"] = Label()
 		self["compet"] = Label()
 		self["compet"].setText(_(titles[link]))
