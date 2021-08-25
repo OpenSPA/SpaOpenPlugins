@@ -74,7 +74,13 @@ class DownloadComponent:
 
 	def startCmd(self, cmd):
 		rute = 'wget'
-		filename = os.path.join(config.misc.picon_path.value, self.ref.replace(":","_") + ".png")
+		try:
+			picon_path = config.misc.picon_path.value
+		except:
+			picon_path = '/usr/share/enigma2/picon'
+		if not os.path.isdir(picon_path):
+			os.mkdir(picon_path)
+		filename = os.path.join(picon_path, self.ref.replace(":","_") + ".png")
 		if filename:
 			rute = rute + ' -O '+filename
 			self.filename = filename
@@ -133,7 +139,6 @@ def getClips(epid):
 	return getURL(BASE_CLIPS%(epid), header=buildHeader(), life=datetime.timedelta(hours=1))
 
 def getVOD(epid):
-	open("/tmp/url","w").write(SEASON_VOD%(epid,'sid=%s&deviceId=%s'%(getUUID())))
 	return getURL(SEASON_VOD%(epid,'sid=%s&deviceId=%s'%(getUUID())), header=buildHeader(), life=datetime.timedelta(hours=1))
 
 def getOndemand():
@@ -372,10 +377,10 @@ class PlutoDownload(Screen):
 	if esHD():
 		skin = """
 		<screen name="PlutoTVdownload" position="60,60" size="615,195" title="PlutoTV EPG Download" flags="wfNoBorder" backgroundColor="#ff000000">
-		<ePixmap name="background" position="0,0" size="615,195" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzPlugins/mhw2Timer/images/backgroundHD.png" zPosition="-1" alphatest="off" />
+		<ePixmap name="background" position="0,0" size="615,195" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PlutoTV/images/backgroundHD.png" zPosition="-1" alphatest="off" />
 		<widget name="picon" position="15,55" size="120,80" transparent="1" noWrap="1" alphatest="blend"/>
 		<widget name="action" halign="left" valign="center" position="13,9" size="433,30" font="RegularHD;17" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
-		<widget name="progress" position="150,97" size="420,12" borderWidth="0" backgroundColor="#1143495b" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spzRemoteChannels/progresoHD.png" zPosition="2" alphatest="blend" />
+		<widget name="progress" position="150,97" size="420,12" borderWidth="0" backgroundColor="#1143495b" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PlutoTV/images/progresoHD.png" zPosition="2" alphatest="blend" />
 		<eLabel name="fondoprogreso" position="150,97" size="420,12" backgroundColor="#102a3b58" />
 		<widget name="espera" valign="center" halign="center" position="150,63" size="420,30" font="RegularHD;15" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
 		<widget name="status" halign="center" valign="center" position="150,120" size="420,30" font="RegularHD;16" foregroundColor="#ffffff" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
@@ -383,10 +388,10 @@ class PlutoDownload(Screen):
 	else:
 		skin = """
 		<screen name="PlutoTVdownload" position="40,40" size="410,130" title="PlutoTV EPG Download" flags="wfNoBorder" backgroundColor="#ff000000">
-		<ePixmap name="background" position="0,0" size="410,130" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzPlugins/mhw2Timer/images/background.png" zPosition="-1" alphatest="off" />
+		<ePixmap name="background" position="0,0" size="410,130" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PlutoTV/images/background.png" zPosition="-1" alphatest="off" />
 		<widget name="picon" position="10,36" size="80,53" transparent="1" noWrap="1" alphatest="blend"/>
 		<widget name="action" halign="left" valign="center" position="9,6" size="289,20" font="Regular;17" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
-		<widget name="progress" position="100,65" size="280,8" borderWidth="0" backgroundColor="#1143495b" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spzRemoteChannels/progreso.png" zPosition="2" alphatest="blend" />
+		<widget name="progress" position="100,65" size="280,8" borderWidth="0" backgroundColor="#1143495b" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PlutoTV/images/progreso.png" zPosition="2" alphatest="blend" />
 		<eLabel name="fondoprogreso" position="100,65" size="280,8" backgroundColor="#102a3b58" />
 		<widget name="espera" valign="center" halign="center" position="100,42" size="240,20" font="Regular;15" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
 		<widget name="status" halign="center" valign="center" position="100,80" size="240,20" font="Regular;16" foregroundColor="#ffffff" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>

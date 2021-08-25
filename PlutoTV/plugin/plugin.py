@@ -240,11 +240,11 @@ class PlutoTV(Screen):
 		<widget name="playlist" render="FixedLabel" position="400,48" size="1150,55" font="RegularHD; 28" backgroundColor="#00000000" transparent="1" foregroundColor="#00AB2A3E" zPosition="2" halign="center" />
 		<widget name="feedlist" position="70,170" size="615,743" scrollbarMode="showOnDemand" enableWrapAround="0" transparent="1" zPosition="5" foregroundColor="#00ffffff" backgroundColorSelected="#00ff0063" backgroundColor="#00000000" />
 		<widget name="poster" position="772,235" size="483,675" zPosition="3" alphatest="blend" />
-		<widget source="description" position="1282,270" size="517,347" render="RunningTextSpa" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="RegularHD; 19" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" valign="top" />
+		<widget source="description" position="1282,270" size="517,347" render="RunningText" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="RegularHD; 19" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" valign="top" />
 		<widget name="vtitle" position="775,180" size="1027,48" font="RegularHD; 25" backgroundColor="#00000000" foregroundColor="#00ffff00" transparent="1" />
 		<widget name="vinfo" position="1282,235" size="517,48" font="RegularHD; 17" backgroundColor="#00000000" foregroundColor="#009B9B9B" transparent="1" />
 		<widget name="eptitle" position="1282,627" size="517,33" font="RegularHD; 19" backgroundColor="#00000000" foregroundColor="#00ffff00" transparent="1" />
-		<widget source="epinfo" position="1282,667" size="517,246" render="RunningTextSpa" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="RegularHD; 19" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
+		<widget source="epinfo" position="1282,667" size="517,246" render="RunningText" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="RegularHD; 19" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
 		<widget name="help" position="70,980" size="615,48" font="RegularHD; 17" backgroundColor="#00000000" foregroundColor="#009B9B9B" transparent="0" halign="center"/>
 		<eLabel position="770,956" size="30,85" backgroundColor="#00FF0000" />
 		<eLabel position="1100,956" size="30,85" backgroundColor="#00ffff00" />
@@ -265,11 +265,11 @@ class PlutoTV(Screen):
 		<widget name="playlist" render="FixedLabel" position="267,32" size="767,37" font="Regular; 28" backgroundColor="#00000000" transparent="1" foregroundColor="#00AB2A3E" zPosition="2" halign="center" />
 		<widget name="feedlist" position="47,113" size="410,495" scrollbarMode="showOnDemand" enableWrapAround="0" transparent="1" zPosition="5" foregroundColor="#00ffffff" backgroundColorSelected="#00ff0063" backgroundColor="#00000000" />
 		<widget name="poster" position="515,157" size="322,450" zPosition="3" alphatest="blend" />
-		<widget source="description" position="855,180" size="345,231" render="RunningTextSpa" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="Regular; 19" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" valign="top" />
+		<widget source="description" position="855,180" size="345,231" render="RunningText" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="Regular; 19" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" valign="top" />
 		<widget name="vtitle" position="517,120" size="685,32" font="Regular; 25" backgroundColor="#00000000" foregroundColor="#00ffff00" transparent="1" />
 		<widget name="vinfo" position="855,157" size="345,32" font="Regular; 17" backgroundColor="#00000000" foregroundColor="#009B9B9B" transparent="1" />
 		<widget name="eptitle" position="855,418" size="345,22" font="Regular; 19" backgroundColor="#00000000" foregroundColor="#00ffff00" transparent="1" />
-		<widget source="epinfo" position="855,445" size="345,164" render="RunningTextSpa" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="Regular; 19" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
+		<widget source="epinfo" position="855,445" size="345,164" render="RunningText" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="Regular; 19" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
 		<widget name="help" position="47,653" size="410,32" font="Regular; 17" backgroundColor="#00000000" foregroundColor="#009B9B9B" transparent="0" halign="center"/>
 		<eLabel position="513,637" size="20,57" backgroundColor="#00FF0000" />
 		<eLabel position="733,637" size="20,57" backgroundColor="#00ffff00" />
