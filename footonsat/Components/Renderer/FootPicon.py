@@ -23,11 +23,9 @@ def getServiceRef(service):
 	else:
 		return eServiceReference()
 
-
 def getAlternativeChannels(service):
 	alternativeServices = eServiceCenter.getInstance().list(getServiceRef(service))
 	return alternativeServices and alternativeServices.getContent("S", True)
-
 
 def GetWithAlternative(service):
 	service = getServiceRef(service)
