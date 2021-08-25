@@ -284,7 +284,7 @@ class downloads(Screen):
 									m_type = (jp['results'][0]['media_type']) + "s"
 								else:
 									mm_type = m_type
-								print(m_type)
+#								print(m_type)
 								if m_type == "movies":
 									url = "https://webservice.fanart.tv/v3/{}/{}?api_key={}".format(m_type, tmdb_id, fanart_api)
 									
@@ -458,7 +458,7 @@ class downloads(Screen):
 						try:
 							url = "http://www.omdbapi.com/?apikey={}&t={}".format(omdb_api, title)
 							info_omdb = requests.get(url).json()
-							print ("RESULTADO JSON:" , info_omdb)
+#							print ("RESULTADO JSON:" , info_omdb)
 							open(info_files,"w").write(json.dumps(info_omdb))
 							info_downloaded += 1
 							downloaded = info_downloaded
