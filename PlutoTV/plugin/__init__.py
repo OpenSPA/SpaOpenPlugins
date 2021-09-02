@@ -24,6 +24,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
 from os import environ
 import gettext
+import sys 
 
 PluginLanguageDomain = "PlutoTV"
 PluginLanguagePath = "Extensions/PlutoTV/locale"
@@ -31,14 +32,14 @@ PluginLanguagePath = "Extensions/PlutoTV/locale"
 def localeInit():
 	lang = language.getLanguage()[:2] # getLanguage returns e.g. "fi_FI" for "language_country"
 	environ["LANGUAGE"] = lang # Enigma doesn't set this (or LC_ALL, LC_MESSAGES, LANG). gettext needs it!
-	print "[PlutoTV] set language to ", lang
+	print("[PlutoTV] set language to ", lang)
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 def _(txt):
 	if gettext.dgettext(PluginLanguageDomain, txt):
 		return gettext.dgettext(PluginLanguageDomain, txt)
 	else:
-		print "[" + PluginLanguageDomain + "] fallback to default translation for " + txt
+		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
 language.addCallback(localeInit())
@@ -46,6 +47,12 @@ language.addCallback(localeInit())
 
 def esHD():
 	if getDesktop(0).size().width() > 1400:
+		return True
+	else:
+		return False
+
+def py3():
+	if sys.version_info[0] == 3:
 		return True
 	else:
 		return False

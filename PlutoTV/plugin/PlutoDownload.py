@@ -21,7 +21,7 @@
 #
 
 # for localized messages
-from . import esHD, _
+from . import py3, esHD, _
 
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -34,7 +34,10 @@ from enigma import eDVBDB, eEPGCache, eServiceCenter, eServiceReference, eConsol
 from Screens.MessageBox import MessageBox
 import os, datetime, uuid, time
 import json, collections, requests
-from urllib import quote
+if py3():
+	from urllib.parse import quote
+else:
+	from urllib import quote
 from Components.config import config
 
 BASE_API      = 'https://api.pluto.tv'
@@ -99,7 +102,7 @@ class DownloadComponent:
 			self.runCmd(rute)
 
 	def runCmd(self, cmd):
-		print "executing", cmd
+		print("executing", cmd)
 		self.cmd.appClosed.append(self.cmdFinished)
 		if self.cmd.execute(cmd):
 			self.cmdFinished(-1)
@@ -193,7 +196,7 @@ def buildM3U(channel):
 	if isinstance(urls, list):
 		urls = [url['url'].replace('deviceType=&','deviceType=web&').replace('deviceMake=&','deviceMake=Chrome&').replace('deviceModel=&','deviceModel=Chrome&').replace('appName=&','appName=web&') for url in urls if url['type'].lower() == 'hls'][0] # todo select quality
 
-	if group not in ChannelsList.keys():
+	if group not in list(ChannelsList.keys()):
 		ChannelsList[group] = []
 		Categories.append(group)
 
@@ -245,7 +248,7 @@ def addBouquet():
 				mutableBouquet.setListName("Pluto TV")
 				mutableBouquet.flushChanges()
 			else:
-				print "get mutable list for new created bouquet failed"
+				print("get mutable list for new created bouquet failed")
 
 def strpTime(datestring, format='%Y-%m-%dT%H:%M:%S.%fZ'):
 	try: return datetime.datetime.strptime(datestring, format)
@@ -431,6 +434,7 @@ class PlutoDownload(Screen):
 		guide = getGuidedata()
 		[buildM3U(channel) for channel in channels]
 		self.total = len(channels)
+
 		self.fd = open("/etc/enigma2/" + BOUQUET,"w")
 		self.fd.write("#NAME Pluto TV\n")
 
@@ -474,7 +478,7 @@ class PlutoDownload(Screen):
 							while not pase:
 								self.key = self.key + 1
 								key = Categories[self.key]
-								pase = ChannelsList.has_key(key)
+								pase = key in ChannelsList
 							self.subtotal = len(ChannelsList[key])
 
 
@@ -487,17 +491,25 @@ class PlutoDownload(Screen):
 						self.fd.write("%s\n#DESCRIPTION %s\n" % (sref,channel[2]))
 						self.chitem = self.chitem + 1
 
-						ref = "4097:0:1:%s:0:0:0:0:0:0" % channel[0].encode("utf-8")
-						name = channel[2]
-						self["status"].setText(_("Wait for Channel: ")+name.encode("utf-8"))
-
+						if py3():
+							ref = "4097:0:1:%s:0:0:0:0:0:0" % channel[0]
+							name = channel[2]
+							self["status"].setText(_("Wait for Channel: ")+name)
+						else:
+							ref = "4097:0:1:%s:0:0:0:0:0:0" % channel[0].encode("utf-8")
+							name = channel[2]
+							self["status"].setText(_("Wait for Channel: ")+name.encode("utf-8"))
 
 						chevents = []
-						if GuideList.has_key(channel[1]):
+						if channel[1] in GuideList:
 							for evt in GuideList[channel[1]]:
-								title = evt[0].encode("utf-8")
-								summary = evt[1].encode("utf-8")
-								begin = long(round(evt[2]))
+								if py3():
+									title = evt[0]
+									summary = evt[1]
+								else:
+									title = evt[0].encode("utf-8")
+									summary = evt[1].encode("utf-8")
+								begin = int(round(evt[2]))
 								duration = evt[3]
 								genre = evt[4]
 
@@ -582,7 +594,7 @@ class DownloadSilent:
 		self.fd.write("#NAME Pluto TV\n")
 
 		if len(Categories) == 0:
-			print "[Pluto TV] " + _('There is no data, it is possible that Puto TV is not available in your Country')
+			print("[Pluto TV] " + _('There is no data, it is possible that Puto TV is not available in your Country'))
 			self.stop()
 			self.close()
 		else:
@@ -614,7 +626,7 @@ class DownloadSilent:
 							while not pase:
 								self.key = self.key + 1
 								key = Categories[self.key]
-								pase = ChannelsList.has_key(key)
+								pase = key in ChannelsList
 							self.subtotal = len(ChannelsList[key])
 
 
@@ -627,16 +639,23 @@ class DownloadSilent:
 						self.fd.write("%s\n#DESCRIPTION %s\n" % (sref,channel[2]))
 						self.chitem = self.chitem + 1
 
-						ref = "4097:0:1:%s:0:0:0:0:0:0" % channel[0].encode("utf-8")
+						if py3():
+							ref = "4097:0:1:%s:0:0:0:0:0:0" % channel[0]
+						else:
+							ref = "4097:0:1:%s:0:0:0:0:0:0" % channel[0].encode("utf-8")
 						name = channel[2]
 
 
 						chevents = []
-						if GuideList.has_key(channel[1]):
+						if channel[1] in GuideList:
 							for evt in GuideList[channel[1]]:
-								title = evt[0].encode("utf-8")
-								summary = evt[1].encode("utf-8")
-								begin = long(round(evt[2]))
+								if py3():
+									title = evt[0]
+									summary = evt[1]
+								else:
+									title = evt[0].encode("utf-8")
+									summary = evt[1].encode("utf-8")
+								begin = int(round(evt[2]))
 								duration = evt[3]
 								genre = evt[4]
 
