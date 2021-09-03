@@ -382,11 +382,11 @@ class PlutoDownload(Screen):
 		<screen name="PlutoTVdownload" position="60,60" size="615,195" title="PlutoTV EPG Download" flags="wfNoBorder" backgroundColor="#ff000000">
 		<ePixmap name="background" position="0,0" size="615,195" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PlutoTV/images/backgroundHD.png" zPosition="-1" alphatest="off" />
 		<widget name="picon" position="15,55" size="120,80" transparent="1" noWrap="1" alphatest="blend"/>
-		<widget name="action" halign="left" valign="center" position="13,9" size="433,30" font="RegularHD;17" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
+		<widget name="action" halign="left" valign="center" position="13,9" size="433,30" font="Regular;25" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
 		<widget name="progress" position="150,97" size="420,12" borderWidth="0" backgroundColor="#1143495b" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PlutoTV/images/progresoHD.png" zPosition="2" alphatest="blend" />
 		<eLabel name="fondoprogreso" position="150,97" size="420,12" backgroundColor="#102a3b58" />
-		<widget name="espera" valign="center" halign="center" position="150,63" size="420,30" font="RegularHD;15" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
-		<widget name="status" halign="center" valign="center" position="150,120" size="420,30" font="RegularHD;16" foregroundColor="#ffffff" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
+		<widget name="espera" valign="center" halign="center" position="150,63" size="420,30" font="Regular;22" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
+		<widget name="status" halign="center" valign="center" position="150,120" size="420,30" font="Regular;24" foregroundColor="#ffffff" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
 		</screen>"""
 	else:
 		skin = """

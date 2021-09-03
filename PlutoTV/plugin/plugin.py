@@ -237,25 +237,25 @@ class PlutoTV(Screen):
 		<screen name="PlutoTV" zPosition="2" position="0,0" size="1920,1080" flags="wfNoBorder" title="Pluto TV" transparent="0">
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PlutoTV/images/fondo.png" position="0,0" size="1920,1080" zPosition="-2" alphatest="blend" />
 		<widget name="logo" position="70,30" size="300,90" zPosition="0" alphatest="blend" transparent="1" />
-		<widget source="global.CurrentTime" render="Label" position="1555,48" size="300,55" font="RegularHD; 29" halign="right" zPosition="5" backgroundColor="#00000000" transparent="1">
+		<widget source="global.CurrentTime" render="Label" position="1555,48" size="300,55" font="Regular; 43" halign="right" zPosition="5" backgroundColor="#00000000" transparent="1">
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget name="loading" position="560,440" size="800,200" font="RegularHD; 40" backgroundColor="#00000000" transparent="0" zPosition="10" halign="center" valign="center" />
-		<widget name="playlist" render="FixedLabel" position="400,48" size="1150,55" font="RegularHD; 28" backgroundColor="#00000000" transparent="1" foregroundColor="#00AB2A3E" zPosition="2" halign="center" />
+		<widget name="loading" position="560,440" size="800,200" font="Regular; 60" backgroundColor="#00000000" transparent="0" zPosition="10" halign="center" valign="center" />
+		<widget name="playlist" render="FixedLabel" position="400,48" size="1150,55" font="Regular; 40" backgroundColor="#00000000" transparent="1" foregroundColor="#00AB2A3E" zPosition="2" halign="center" />
 		<widget name="feedlist" position="70,170" size="615,743" scrollbarMode="showOnDemand" enableWrapAround="0" transparent="1" zPosition="5" foregroundColor="#00ffffff" backgroundColorSelected="#00ff0063" backgroundColor="#00000000" />
 		<widget name="poster" position="772,235" size="483,675" zPosition="3" alphatest="blend" />
-		<widget source="description" position="1282,270" size="517,347" render="RunningText" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="RegularHD; 19" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" valign="top" />
-		<widget name="vtitle" position="775,180" size="1027,48" font="RegularHD; 25" backgroundColor="#00000000" foregroundColor="#00ffff00" transparent="1" />
-		<widget name="vinfo" position="1282,235" size="517,48" font="RegularHD; 17" backgroundColor="#00000000" foregroundColor="#009B9B9B" transparent="1" />
-		<widget name="eptitle" position="1282,627" size="517,33" font="RegularHD; 19" backgroundColor="#00000000" foregroundColor="#00ffff00" transparent="1" />
-		<widget source="epinfo" position="1282,667" size="517,246" render="RunningText" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="RegularHD; 19" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
-		<widget name="help" position="70,980" size="615,48" font="RegularHD; 17" backgroundColor="#00000000" foregroundColor="#009B9B9B" transparent="0" halign="center"/>
+		<widget source="description" position="1282,270" size="517,347" render="RunningText" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="Regular; 28" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" valign="top" />
+		<widget name="vtitle" position="775,180" size="1027,48" font="Regular; 37" backgroundColor="#00000000" foregroundColor="#00ffff00" transparent="1" />
+		<widget name="vinfo" position="1282,235" size="517,48" font="Regular; 25" backgroundColor="#00000000" foregroundColor="#009B9B9B" transparent="1" />
+		<widget name="eptitle" position="1282,627" size="517,33" font="Regular; 28" backgroundColor="#00000000" foregroundColor="#00ffff00" transparent="1" />
+		<widget source="epinfo" position="1282,667" size="517,246" render="RunningText" options="movetype=swimming,startpoint=0,direction=top,steptime=140,repeat=5,always=0,startdelay=8000,wrap" font="Regular; 28" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
+		<widget name="help" position="70,980" size="615,48" font="Regular; 25" backgroundColor="#00000000" foregroundColor="#009B9B9B" transparent="0" halign="center"/>
 		<eLabel position="770,956" size="30,85" backgroundColor="#00FF0000" />
 		<eLabel position="1100,956" size="30,85" backgroundColor="#00ffff00" />
 		<eLabel position="1430,956" size="30,85" backgroundColor="#0032cd32" /> 
-		<widget name="red" position="810,956" size="290,85" valign="center" font="RegularHD; 20" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
-		<widget name="yellow" position="1140,956" size="290,85" valign="center" font="RegularHD; 20" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
-		<widget name="green" position="1470,956" size="425,85" valign="center" font="RegularHD; 20" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" /> 
+		<widget name="red" position="810,956" size="290,85" valign="center" font="Regular; 30" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
+		<widget name="yellow" position="1140,956" size="290,85" valign="center" font="Regular; 30" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
+		<widget name="green" position="1470,956" size="425,85" valign="center" font="Regular; 30" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" /> 
 		</screen>"""
 	else:
 		skin = """
