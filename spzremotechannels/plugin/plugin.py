@@ -1,3 +1,4 @@
+from . import _, esHD, fhd, fontHD, py3
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
@@ -13,16 +14,15 @@ from Screens.MessageBox import MessageBox
 #from twisted.internet.protocol import ClientCreator
 #from twisted.protocols.ftp import FTPClient
 #from urllib import quote
-from EPGImport import EPGdownload, addBouquet, createBouquetFile
+from .EPGImport import EPGdownload, addBouquet, createBouquetFile
 
 import xml.etree.ElementTree as ET
-import urllib2, base64
+if py3():
+	import urllib.request, urllib.error, urllib.parse, base64
+else:
+	import urllib2, base64
 
 #from FTPDownloader import FTPDownloader
-
-from . import _
-from Plugins.Extensions.spazeMenu.plugin import esHD, fhd, fontHD
-
 
 DIR_ENIGMA2 = '/etc/enigma2/'
 DIR_TMP = '/tmp/'
@@ -49,11 +49,11 @@ class ServerEditor(ConfigListScreen, Screen):
 			<ePixmap pixmap="skin_default/buttons/green_HD.png" position="210,0" size="210,60" transparent="1" alphatest="blend" />
 			<ePixmap pixmap="skin_default/buttons/yellow_HD.png" position="420,0" size="210,60" transparent="1" alphatest="blend" />
 			<ePixmap pixmap="skin_default/buttons/blue_HD.png" position="630,0" size="210,60" transparent="1" alphatest="blend" />
-			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="210,60" font="RegularHD;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="key_green" render="Label" position="210,0" zPosition="1" size="210,60" font="RegularHD;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="key_yellow" render="Label" position="420,0" zPosition="1" size="210,60" font="RegularHD;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="key_blue" render="Label"  position="630,0" zPosition="1" size="210,60" font="RegularHD;20" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget name="config" font="RegularHD;20" position="15,75" size="825,487" scrollbarMode="showOnDemand" itemHeight="45" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="210,60" font="Regular;30" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_green" render="Label" position="210,0" zPosition="1" size="210,60" font="Regular;30" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="420,0" zPosition="1" size="210,60" font="Regular;30" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_blue" render="Label"  position="630,0" zPosition="1" size="210,60" font="Regular;30" valign="center" halign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="config" font="Regular;30" position="15,75" size="825,487" scrollbarMode="showOnDemand" itemHeight="45" />
 		</screen>"""
 	else:
 		skin = """
@@ -209,13 +209,13 @@ class StreamingChannelFromServerScreen(Screen):
 			<ePixmap pixmap="skin_default/buttons/green_HD.png" position="210,0" size="210,60" alphatest="blend" />
 			<ePixmap pixmap="skin_default/buttons/yellow_HD.png" position="420,0" size="210,60" alphatest="blend" />
 			<ePixmap pixmap="skin_default/buttons/blue_HD.png" position="630,0" size="210,60" alphatest="blend" />
-			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="210,60" font="RegularHD;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget source="key_green" render="Label" position="210,0" zPosition="1" size="210,60" font="RegularHD;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-			<widget source="key_yellow" render="Label" position="420,0" zPosition="1" size="210,60" font="RegularHD;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-			<widget source="key_blue" render="Label" position="630,0" zPosition="1" size="210,60" font="RegularHD;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="210,60" font="Regular;30" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="210,0" zPosition="1" size="210,60" font="Regular;30" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="420,0" zPosition="1" size="210,60" font="Regular;30" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget source="key_blue" render="Label" position="630,0" zPosition="1" size="210,60" font="Regular;30" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
 			<widget name="list" position="7,75" size="810,540" itemHeight="45" />
 			<ePixmap pixmap="skin_default/div-h.png" position="0,615" zPosition="10" size="840,3" transparent="1" alphatest="on" />
-			<widget source="statusbar" render="Label" position="7,630" zPosition="10" size="825,45" halign="center" valign="center" font="RegularHD;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+			<widget source="statusbar" render="Label" position="7,630" zPosition="10" size="825,45" halign="center" valign="center" font="Regular;33" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 		</screen>"""
 	else:
 		skin = """
@@ -311,13 +311,25 @@ class StreamingChannelFromServerScreen(Screen):
 		url = 'http://%s/web/bouquets' % ip 
 		html = None
 		if config.plugins.RemoteStreamConverter.httpauthentication.value:
-			request = urllib2.Request(url)
-			b64auth = base64.standard_b64encode("%s:%s" % (config.plugins.RemoteStreamConverter.username.value,config.plugins.RemoteStreamConverter.password.value))
-			request.add_header("Authorization", "Basic %s" % b64auth)
+			if py3():
+				request = urllib.request.Request(url)
+			else:
+				request = urllib2.Request(url)
+
+			data = "%s:%s" % (config.plugins.RemoteStreamConverter.username.value,config.plugins.RemoteStreamConverter.password.value)
+			if py3():
+				b64auth = base64.standard_b64encode(data.encode('ascii'))
+				request.add_header("Authorization", "Basic " + b64auth.decode('ascii'))
+			else:
+				b64auth = base64.standard_b64encode(data)
+				request.add_header("Authorization", "Basic %s" % b64auth)
 		else:
 			request = url
 		try:
-			html = urllib2.urlopen(request).read()
+			if py3():
+				html = urllib.request.urlopen(request).read()
+			else:
+				html = urllib2.urlopen(request).read()
 		except:
 			html = None
 			self.session.open(MessageBox, _('It is not possible to connect to the indicated address'), type=MessageBox.TYPE_ERROR, timeout=10)
@@ -333,11 +345,17 @@ class StreamingChannelFromServerScreen(Screen):
 			for bouquet in bouquets:
 				for child in bouquet:
 					if child.tag == "e2servicereference":
-						service = child.text.encode("utf-8").split('"')
+						if py3():
+							service = child.text.split('"')
+						else:
+							service = child.text.encode("utf-8").split('"')
 						if len(service)>1:
 							filename = service[1]
 					if child.tag == "e2servicename":
-						name = child.text.encode("utf-8")
+						if py3():
+							name = child.text
+						else:
+							name = child.text.encode("utf-8")
 				if filename and name:
 					self.readIndex += 1
 					self.list.addSelection(name, filename, listindex, False)

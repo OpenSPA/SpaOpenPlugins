@@ -1,8 +1,13 @@
 # -*- encoding: utf-8 -*-
 
+from . import _, esHD, py3
 import xml.etree.ElementTree as ET
-import urllib2, base64
-from urllib import quote
+if py3():
+	import urllib.request, urllib.error, urllib.parse, base64
+	from urllib.parse import quote
+else:
+	import urllib2, base64
+	from urllib import quote
 from enigma import eEPGCache, eConsoleAppContainer, eTimer, eDVBDB, eServiceCenter, eServiceReference
 from Screens.Screen import Screen
 from Components.Label import Label
@@ -13,10 +18,6 @@ from Components.config import config
 from Screens.MessageBox import MessageBox
 from os import remove, listdir
 from Tools.Directories import fileExists,SCOPE_CURRENT_SKIN, resolveFilename
-
-from Plugins.Extensions.spazeMenu.plugin import esHD
-
-from . import _
 
 class DownloadComponent:
 	EVENT_DOWNLOAD = 0
@@ -50,7 +51,7 @@ class DownloadComponent:
 		self.runCmd(rute)
 
 	def runCmd(self, cmd):
-		print "executing", cmd
+		print("executing", cmd)
 		self.cmd.appClosed.append(self.cmdFinished)
 		self.cmd.dataAvail.append(self.cmdData)
 		if self.cmd.execute(cmd):
@@ -68,6 +69,8 @@ class DownloadComponent:
 
 
 	def cmdData(self, data):
+		if py3():
+			data = data.decode('utf-8')
 		if self.cache is None:
 			self.cache = data
 		else:
@@ -93,8 +96,8 @@ class DownloadComponent:
 				self.callCallbacks(self.EVENT_ERROR, None)
 			elif data.startswith('Failed to download'):
 				self.callCallbacks(self.EVENT_ERROR, None)
-		except Exception, ex:
-			print "Failed to parse: '%s'" % data
+		except Exception as ex:
+			print("Failed to parse: '%s'" % data)
 
 	def callCallbacks(self, event, param = None, data = None, ref = None, name = None, target=None):
 		for callback in self.callbackList:
@@ -113,11 +116,11 @@ class EPGdownload(Screen):
 		<screen name="EPGdownload" position="60,60" size="615,195" title="RemoteChannels EPG Download" flags="wfNoBorder" backgroundColor="#ff000000">
 		<ePixmap name="background" position="0,0" size="615,195" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spzRemoteChannels/backgroundHD.png" zPosition="-1" alphatest="off" />
 		<widget name="picon" position="15,55" size="120,80" transparent="1" noWrap="1" alphatest="blend"/>
-		<widget name="action" halign="left" valign="center" position="13,9" size="433,30" font="RegularHD;17" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
+		<widget name="action" halign="left" valign="center" position="13,9" size="433,30" font="Regular;25" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
 		<widget name="progress" position="150,97" size="420,12" borderWidth="0" backgroundColor="#1143495b" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spzRemoteChannels/progresoHD.png" zPosition="2" alphatest="blend" />
 		<eLabel name="fondoprogreso" position="150,97" size="420,12" backgroundColor="#102a3b58" />
-		<widget name="espera" valign="center" halign="center" position="150,63" size="420,30" font="RegularHD;15" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
-		<widget name="status" halign="center" valign="center" position="150,120" size="420,30" font="RegularHD;16" foregroundColor="#ffffff" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
+		<widget name="espera" valign="center" halign="center" position="150,63" size="420,30" font="Regular;22" foregroundColor="#dfdfdf" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
+		<widget name="status" halign="center" valign="center" position="150,120" size="420,30" font="Regular;24" foregroundColor="#ffffff" transparent="1" backgroundColor="#000000" borderColor="black" borderWidth="1" noWrap="1"/>
 		</screen>"""
 	else:
 		skin = """
@@ -281,7 +284,7 @@ class EPGdownload(Screen):
 	def parse_channel(self, xml, ref_target):
 		events = []
 
-		print "Load epg for service %s" % ref_target
+		print("Load epg for service %s" % ref_target)
 		try:
 			ch_epg = ET.fromstring(xml)
 		except:
@@ -296,24 +299,27 @@ class EPGdownload(Screen):
 			name = ""
 			for child in event:
 				if child.tag == "e2eventstart":
-					start = long(child.text)
+					start = int(child.text)
 				if child.tag == "e2eventduration":
 					duration = int(child.text)
 				if child.tag == "e2eventtitle":
 					title = child.text
 					if title == None:
 						title = ""
-					title = title.encode("utf-8")
+					if not py3():
+						title = title.encode("utf-8")
 				if child.tag == "e2eventdescription":
 					description = child.text
 					if description == None:
 						description = ""
-					description = description.encode("utf-8")
+					if not py3():
+						description = description.encode("utf-8")
 				if child.tag == "e2eventdescriptionextended":
 					extended = child.text
 					if extended == None:
 						extended = ""
-					extended = extended.encode("utf-8")
+					if not py3():
+						extended = extended.encode("utf-8")
 			events.append((start,duration,title,description,extended,0))
 		if len(events)>0:
 			iterator = iter(events)
@@ -347,7 +353,7 @@ def addBouquet(bouquet, name):
 				mutableBouquet.setListName(name)
 				mutableBouquet.flushChanges()
 			else:
-				print "get mutable list for new created bouquet failed"
+				print("get mutable list for new created bouquet failed")
 
 def createBouquetFile(bouquet, name, data, lista):
 	line = "1:576:0:0:0:0:0:0:0:0::%s" % data
@@ -377,19 +383,33 @@ def createBouquetFile(bouquet, name, data, lista):
 		url = 'http://%s/web/getservices?sRef=1:7:1:0:0:0:0:0:0:0:' % ip1 + quote('FROM BOUQUET "%s" ORDER BY bouquet' % bouquet.replace("remote_",""))
 		html = None
 
-		print "url: ", url
+		print("url: ", url)
 		if auth == 1:
-			request = urllib2.Request(url)
-			b64auth = base64.standard_b64encode("%s:%s" % (user,password))
-			request.add_header("Authorization", "Basic %s" % b64auth)
+			if py3():
+				request = urllib.request.Request(url)
+			else:
+				request = urllib2.Request(url)
+
+			data = "%s:%s" % (config.plugins.RemoteStreamConverter.username.value,config.plugins.RemoteStreamConverter.password.value)
+			if py3():
+				b64auth = base64.standard_b64encode(data.encode('ascii'))
+				request.add_header("Authorization", "Basic " + b64auth.decode('ascii'))
+			else:
+				b64auth = base64.standard_b64encode(data)
+				request.add_header("Authorization", "Basic %s" % b64auth)
 		else:
 			request = url
 
-		print "request: ", str(request)
+		print("request: ", str(request))
 		try:
-			html = urllib2.urlopen(request).read()
+			if py3():
+				html = urllib.request.urlopen(request).read()
+			else:
+				html = urllib2.urlopen(request).read()
+
 		except:
 			html = None
+
 		ch_epg = []
 	
 		if html:
@@ -401,7 +421,10 @@ def createBouquetFile(bouquet, name, data, lista):
 			for e2service in ch_epg:
 				for child in e2service:
 					if child.tag == "e2servicereference":
-						service = child.text.encode("utf-8")
+						if py3():
+							service = child.text
+						else:
+							service = child.text.encode("utf-8")
 						n=service.find(':')
 						if n>-1:
 							tag2 = stype+service[n:-1]
@@ -409,7 +432,10 @@ def createBouquetFile(bouquet, name, data, lista):
 							tag2 = service
 
 					if child.tag == "e2servicename":
-						name = child.text.encode("utf-8")
+						if py3():
+							name = child.text
+						else:
+							name = child.text.encode("utf-8")
 				ip1=ip
 				if streamaut == 1:
 					ip1 = user+":"+password+"@"+ip1
