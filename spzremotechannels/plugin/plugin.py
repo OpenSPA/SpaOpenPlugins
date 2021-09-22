@@ -10,10 +10,6 @@ from Components.config import config, configfile, ConfigInteger, ConfigSubsectio
 from enigma import eServiceCenter, eServiceReference, eDVBDB, eEPGCache, eTimer
 from ServiceReference import ServiceReference
 from Screens.MessageBox import MessageBox
-#from twisted.internet import reactor
-#from twisted.internet.protocol import ClientCreator
-#from twisted.protocols.ftp import FTPClient
-#from urllib import quote
 from .EPGImport import EPGdownload, addBouquet, createBouquetFile
 
 import xml.etree.ElementTree as ET
@@ -22,7 +18,6 @@ if py3():
 else:
 	import urllib2, base64
 
-#from FTPDownloader import FTPDownloader
 
 DIR_ENIGMA2 = '/etc/enigma2/'
 DIR_TMP = '/tmp/'
@@ -32,9 +27,6 @@ config.plugins.RemoteStreamConverter.address = ConfigText(default = "", fixed_si
 config.plugins.RemoteStreamConverter.ip = ConfigIP(default = [0,0,0,0])
 config.plugins.RemoteStreamConverter.username = ConfigText(default = "root", fixed_size = False)
 config.plugins.RemoteStreamConverter.password = ConfigText(default = "", fixed_size = False)
-#config.plugins.RemoteStreamConverter.port = ConfigInteger(21, (0, 65535))
-#config.plugins.RemoteStreamConverter.passive = ConfigYesNo(False)
-#config.plugins.RemoteStreamConverter.telnetport = ConfigInteger(23, (0, 65535))
 config.plugins.RemoteStreamConverter.HTTPport = ConfigInteger(80, (0, 65535))
 config.plugins.RemoteStreamConverter.Streamport = ConfigInteger(8001, (0, 65535))
 config.plugins.RemoteStreamConverter.Streamauthentication = ConfigYesNo(False)
@@ -133,9 +125,6 @@ class ServerEditor(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("IP:"), config.plugins.RemoteStreamConverter.ip, False))
 		self.list.append(getConfigListEntry(_("Username:"), config.plugins.RemoteStreamConverter.username, True))
 		self.list.append(getConfigListEntry(_("Password:"), config.plugins.RemoteStreamConverter.password, True))
-#		self.list.append(getConfigListEntry(_("FTPport:"), config.plugins.RemoteStreamConverter.port, False))
-#		self.list.append(getConfigListEntry(_("Passive:"), config.plugins.RemoteStreamConverter.passive, False))
-#		self.list.append(getConfigListEntry(_("Telnetport:"), config.plugins.RemoteStreamConverter.telnetport, False))
 		self.list.append(getConfigListEntry(_("HTTPport:"), config.plugins.RemoteStreamConverter.HTTPport, False))
 		self.list.append(getConfigListEntry(_("HTTP Authentication:"), config.plugins.RemoteStreamConverter.httpauthentication, False))
 		self.list.append(getConfigListEntry(_("Streamport:"), config.plugins.RemoteStreamConverter.Streamport, False))
@@ -151,9 +140,6 @@ class ServerEditor(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Adress:"), config.plugins.RemoteStreamConverter.address, True))
 		self.list.append(getConfigListEntry(_("Username:"), config.plugins.RemoteStreamConverter.username, True))
 		self.list.append(getConfigListEntry(_("Password:"), config.plugins.RemoteStreamConverter.password, True))
-#		self.list.append(getConfigListEntry(_("FTPport:"), config.plugins.RemoteStreamConverter.port, False))
-#		self.list.append(getConfigListEntry(_("Passive:"), config.plugins.RemoteStreamConverter.passive, False))
-#		self.list.append(getConfigListEntry(_("Telnetport:"), config.plugins.RemoteStreamConverter.telnetport, False))
 		self.list.append(getConfigListEntry(_("HTTPport:"), config.plugins.RemoteStreamConverter.HTTPport, False))
 		self.list.append(getConfigListEntry(_("HTTP Authentication:"), config.plugins.RemoteStreamConverter.httpauthentication, False))
 		self.list.append(getConfigListEntry(_("Streamport:"), config.plugins.RemoteStreamConverter.Streamport, False))
@@ -280,22 +266,6 @@ class StreamingChannelFromServerScreen(Screen):
 	def setRemoteIpCallback(self, ret = False):
 		if ret:
 			self.fetchRemoteBouqets()
-#			self["statusbar"].setText(_("Testing remote connection"))
-#			timeout = 3000
-#			self.currentLength = 0
-#			self.total = 0
-#			self.working = True
-#			creator = ClientCreator(reactor, FTPClient, config.plugins.RemoteStreamConverter.username.value, config.plugins.RemoteStreamConverter.password.value, config.plugins.RemoteStreamConverter.passive.value)
-#			creator.connectTCP(self.getRemoteAdress(), config.plugins.RemoteStreamConverter.port.value, timeout).addCallback(self.controlConnectionMade).addErrback(self.connectionFailed)
-
-#	def controlConnectionMade(self, ftpclient):
-#		self["statusbar"].setText(_("Connection to remote IP ok"))
-#		ftpclient.quit()
-#		self.fetchRemoteBouqets()
-
-#	def connectionFailed(self, *args):
-#		self.working = False
-#		self["statusbar"].setText(_("Could not connect to remote IP"))
 
 	def fetchRemoteBouqets(self):
 		self["statusbar"].setText(_("Downloading remote services"))
@@ -303,7 +273,6 @@ class StreamingChannelFromServerScreen(Screen):
 		self.workList = []
 		self.workList.append('bouquets.tv')
 		self.workList.append('bouquets.radio')
-#		self.download(self.workList[0]).addCallback(self.fetchRemoteBouqetsFinished).addErrback(self.fetchRemoteBouqetsFailed)
 		listindex = 0
 		ip = self.getRemoteAdress()
 		if config.plugins.RemoteStreamConverter.HTTPport.value != 80:
@@ -368,176 +337,6 @@ class StreamingChannelFromServerScreen(Screen):
 			self["key_blue"].setText(_("Invert"))
 			self["key_yellow"].setText("")
 					
-#	def fetchRemoteBouqetsFailed(self, string):
-#		self.working = False
-#		self["statusbar"].setText(_("Download from remote failed"))
-
-#	def fetchRemoteBouqetsFinished(self, string):
-#		self.readIndex += 1
-#		if self.readIndex < len(self.workList):
-#			self.download(self.workList[self.readIndex]).addCallback(self.fetchRemoteBouqetsFinished).addErrback(self.fetchRemoteBouqetsFailed)
-#		else:
-#			self.parseBouqets()
-
-#	def parserWork(self, list, name):
-#		try:
-#			lines = open(name).readlines()
-#			for line in lines:
-#				tmp = line.split('userbouquet.')
-#				if len(tmp) > 1:
-#					if '\"' in line:
-#						tmp2 = tmp[1].split('\"')
-#					else:
-#						tmp2 = tmp[1].split('\n')
-#					list.append(tmp2[0])
-#		except:
-#			pass
-
-#	def parseBouqets(self):
-#		list = []
-#		self.parserWork(list, DIR_TMP + 'bouquets.tv')
-#		self.parserWork(list, DIR_TMP + 'bouquets.radio')
-#		self.readIndex = 0
-#		self.workList = []
-#		for listindex in range(len(list)):
-#			self.workList.append('userbouquet.' + list[listindex])
-#		self.workList.append('lamedb')
-#		self.download(self.workList[0]).addCallback(self.fetchUserBouquetsFinished).addErrback(self.fetchUserBouquetsFailed)
-
-#	def fetchUserBouquetsFailed(self, string):
-#		if self.readIndex < len(self.workList) and self.readIndex > 0:
-#			self.workList.remove(self.workList[self.readIndex])
-#			self.readIndex -= 1
-#			self.fetchUserBouquetsFinished('')
-#		self.working = False
-#		self["statusbar"].setText(_("Download from remote failed"))
-
-#	def fetchUserBouquetsFinished(self, string):
-#		self.readIndex += 1
-#		if self.readIndex < len(self.workList):
-#			self["statusbar"].setText(_("FTP reading file %d of %d") % (self.readIndex, len(self.workList)-1))
-#			self.download(self.workList[self.readIndex]).addCallback(self.fetchUserBouquetsFinished).addErrback(self.fetchUserBouquetsFailed)
-#		else:
-#			if len(self.workList) > 0:
-#				self["statusbar"].setText(_("Make your selection"))
-#				for listindex in range(len(self.workList) - 1):
-#					name = self.readBouquetName(DIR_TMP + self.workList[listindex])
-#					self.list.addSelection(name, self.workList[listindex], listindex, False)
-##				self.removeFiles(DIR_TMP, "bouquets.")
-#				self.working = False
-#				self.hasFiles = True
-#				self["key_green"].setText(_("Download"))
-#				self["key_blue"].setText(_("Invert"))
-#				self["key_yellow"].setText("")
-
-#	def download(self, file, contextFactory = None, *args, **kwargs):
-#		client = FTPDownloader(
-#			self.getRemoteAdress(),
-#			config.plugins.RemoteStreamConverter.port.value,
-#			DIR_ENIGMA2 + file,
-#			DIR_TMP + file,
-#			config.plugins.RemoteStreamConverter.username.value,
-#			config.plugins.RemoteStreamConverter.password.value,
-#			*args,
-#			**kwargs
-#		)
-#		return client.deferred
-
-#	def convertBouquets(self):
-#		self.readIndex = 0
-#		while True:
-#			if 'lamedb' not in self.workList[self.readIndex]:
-#				filename = DIR_TMP + self.workList[self.readIndex]
-#				#hasRemoteTag = False
-#				self.workList[self.readIndex] = self.workList[self.readIndex].replace('userbouquet.', 'userbouquet.remote_')
-#				if self.checkBouquetAllreadyInList(self.workList[self.readIndex], self.workList[self.readIndex]) is True:
-#					self.workList[self.readIndex] = self.workList[self.readIndex].replace('userbouquet.remote_', 'userbouquet.remote2_')
-					#hasRemoteTag = True
-
-#				name = self.readBouquetName(filename)
-#				fp = open(DIR_ENIGMA2 + self.workList[self.readIndex], 'w')
-#				try:
-#					lines = open(filename).readlines()
-#					was_html = False
-#					for line in lines:
-#						if was_html and '#DESCRIPTION' in line:
-#							was_html = False
-#							continue
-#						if '#NAME' in line:  #and hasRemoteTag:
-#							if '\r' in line:
-#								name_orig = line.replace('\r\n','')
-#							else:
-#								name_orig = line.replace('\n','')
-#							line = "%s#SERVICE 1:576:0:0:0:0:0:0:0:0::%s|%d|%s|%s|%d\n#DESCRIPTION marker for Remote Bouquet\n" % (line.replace(name_orig, '#NAME remote_' + name), self.getRemoteAdress(), config.plugins.RemoteStreamConverter.HTTPport.value, config.plugins.RemoteStreamConverter.username.value, config.plugins.RemoteStreamConverter.password.value,config.plugins.RemoteStreamConverter.httpauthentication.value)
-#						was_html = False
-#						if 'http' in line:
-#							was_html = True
-#							continue
-#						elif '#SERVICE' in line and not "#NAME" in line and line.split(":")[1] != "832" and line.split(":")[1] != "64":
-#							line = line.strip('\r\n')
-#							line = line.strip('\n')
-#							tmp = line.split('#SERVICE')
-#							if '::' in tmp[1]:
-#								desc = tmp[1].split("::")
-#								if (len(desc)) == 2:
-#									tmp2 = tmp[1].split('::')
-#									service_ref = ServiceReference(tmp2[0] + ':')
-#									tag = tmp2[0][1:]
-#							else:
-#								tag = tmp[1][1:-1]
-#								n=tmp[1].find(':')
-#								if n>-1:
-#									tag2 = config.plugins.RemoteStreamConverter.servicestype.value+tmp[1][n:-1]
-#								else:
-#									tag2 = tmp[1][1:-1]
-#								aut = ""
-#								if config.plugins.RemoteStreamConverter.Streamauthentication.value:
-#									aut = config.plugins.RemoteStreamConverter.username.value + ':' + config.plugins.RemoteStreamConverter.password.value + '@'
-
-#								service_ref = ServiceReference(tag)
-								#open("/etc/enigma2/remotechannels","a").write(self.getRemoteAdress()+"|"+tag+"|"+service_ref.getServiceName()+"\n")
-#							out = '#SERVICE ' + tag2 + ':' + quote('http://' + aut + self.getRemoteAdress() + ':' + str(config.plugins.RemoteStreamConverter.Streamport.value) + '/' + tag) + ':' + service_ref.getServiceName() + '\n'
-#						else:
-#							out = line
-#						fp.write(out)
-#				except:
-#					pass
-#				fp.close()
-#			self.readIndex += 1
-#			if self.readIndex == len(self.workList):
-#				break
-#		self.removeFiles(DIR_TMP, "userbouquet.")
-#		self.removeFiles(DIR_TMP, "bouquets.")
-
-
-#	def getTransponders(self, fp):
-#		step = 0
-#		lines = open(DIR_TMP + 'lamedb').readlines()
-#		for line in lines:
-#			if step == 0:
-#				if 'transponders' in line:
-#					step =1
-#			elif step == 1:
-#				if 'end' in line[:3]:
-#					fp.write(line)
-#					break
-#				else:
-#					fp.write(line)
-
-#	def getServices(self, fp):
-#		step = 0
-#		lines = open(DIR_TMP + 'lamedb').readlines()
-#		for line in lines:
-#			if step == 0:
-#				if 'services' in line[:8]:
-#					step =1
-#			elif step == 1:
-#				if 'end' in line[:3]:
-#					fp.write(line)
-#					break
-#				else:
-#					fp.write(line)
-
 	def checkBouquetAllreadyInList(self, typestr, item):
 		item = item.replace('userbouquet.', '')
 		list = []
@@ -550,31 +349,6 @@ class StreamingChannelFromServerScreen(Screen):
 				if item in x:
 					return True
 		return False
-
-#	def createBouquetFile(self, target, source, matchstr, typestr):
-#		tmpFile = []
-#		fp = open(target, 'w')
-#		try:
-#			lines = open(source).readlines()
-#			for line in lines:
-#				tmpFile.append(line)
-#				fp.write(line)
-#			for item in self.workList:
-#				if typestr in item:
-#					item = item.replace('userbouquet.', 'userbouquet.remote_')
-#					if self.checkBouquetAllreadyInList(typestr, item) is True:
-#						item = item.replace('userbouquet.', 'userbouquet.remote2_')
-#					tmp = matchstr + item + '\" ORDER BY bouquet\n'
-#					match = False
-#					for x in tmpFile:
-#						if tmp in x:
-#							match = True
-#					if match is not True:
-#						fp.write(tmp)
-#			fp.close()
-#			self.copyFile(target, source)
-#		except:
-#			pass
 
 	def keyGreen(self):
 		if not self.hasFiles:
@@ -611,58 +385,6 @@ class StreamingChannelFromServerScreen(Screen):
 		db.reloadBouquets()
 
 
-#		fileValid = False
-#		state = 0
-#		fp = open(DIR_TMP + 'tmp_lamedb', 'w')
-#		try:
-#			lines = open(DIR_ENIGMA2 + 'lamedb').readlines()
-#			for line in lines:
-#				if 'eDVB services' in line:
-#					fileValid = True
-#				if state == 0:
-#					if 'transponders' in line[:12]:
-#						fp.write(line)
-#					elif 'end' in line[:3]:
-#						self.getTransponders(fp)
-#						state = 1
-#					else:
-#						fp.write(line)
-#				elif state == 1:
-#					if 'services' in line[:8]:
-#						fp.write(line)
-#					elif 'end' in line[:3]:
-#						self.getServices(fp)
-#						state = 2
-#					else:
-#						fp.write(line)
-#				elif state == 2:
-#					fp.write(line)
-#		except:
-#			pass
-#		fp.close()
-#		if fileValid is not True:
-#			self.copyFile(DIR_TMP + 'lamedb', DIR_TMP + 'tmp_lamedb')
-#		tv = False
-#		radio = False
-#		for item in self.workList:
-#			if '.tv' in item:
-#				tv = True
-#			if '.radio' in item:
-#				radio = True
-#		if radio or tv:
-#			if tv:
-#				self.createBouquetFile(DIR_TMP + 'tmp_bouquets.tv', DIR_ENIGMA2 + 'bouquets.tv', '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET \"', '.tv')
-#			if radio:
-#				self.createBouquetFile(DIR_TMP + 'tmp_bouquets.radio', DIR_ENIGMA2 + 'bouquets.radio', '#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET \"', '.radio')
-#			self.copyFile(DIR_TMP + 'tmp_lamedb', DIR_ENIGMA2 + 'lamedb')
-#			db = eDVBDB.getInstance()
-#			db.reloadServicelist()
-#			self.convertBouquets()
-#			self.removeFiles(DIR_TMP, "tmp_")
-#			self.removeFiles(DIR_TMP, "lamedb")
-#			db = eDVBDB.getInstance()
-#			db.reloadServicelist()
-#			db.reloadBouquets()
 		self.close()
 
 	def getRemoteAdress(self):
@@ -725,18 +447,6 @@ class StreamingChannelFromServerScreen(Screen):
 							tmp2 = tmp[1].split('\"')
 							name = self.readBouquetName(DIR_ENIGMA2 + 'userbouquet.' + tmp2[0])
 							list.append((name, tmp2[0]))
-
-#	def removeFiles(self, targetdir, target):
-#		import os
-#		targetLen = len(target)
-#		for root, dirs, files in os.walk(targetdir):
-#			for name in files:
-#				if target in name[:targetLen]:
-#					os.remove(os.path.join(root, name))
-
-#	def copyFile(self, source, dest):
-#		import shutil
-#		shutil.copy2(source, dest)
 
 
 def Download_EPG(session, **kwargs):

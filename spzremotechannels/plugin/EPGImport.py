@@ -43,10 +43,6 @@ class DownloadComponent:
 		else:
 			self.filename = cmd.split('/')[-1]
 		
-#		if http_name:
-#			rute = rute + ' --http-user='+http_name
-#		if http_pass:
-#			rute = rute + ' --http-passwd='+http_pass
 		rute = rute + ' ' + cmd
 		self.runCmd(rute)
 
