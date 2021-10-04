@@ -1,0 +1,6 @@
+<screen name="Permanent Event" position="0,0" size="820,75" zPosition="-1" flags="wfNoBorder" backgroundColor="transparent">
+<widget source="session.CurrentService" render="Label" position="145,0" size="673,75" zPosition="4" foregroundColor="white" font="Autumn; 25" valign="center" halign="left" transparent="1">
+<convert type="SpaPrimeTime" /> 
+</widget>
+<widget source="session.CurrentService" render="SpaPrimeTimeBackdrop" position="1,0" size="140,75" zPosition="10" />
+</screen>

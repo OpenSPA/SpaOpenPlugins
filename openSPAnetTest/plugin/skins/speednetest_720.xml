@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<skin>
+<screen name="SpeedTestScreen" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+<widget name="introduction" position="924,371" size="302,301" font="Regular; 24" halign="center" valign="top" transparent="1" foregroundColor="#00e5b243" backgroundColor="black" />
+<ePixmap position="946,116" size="256,256" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/speedtestlog.png" transparent="1" alphatest="blend" />
+<ePixmap position="103,108" size="800,300" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/speed.png" transparent="1" alphatest="blend" />
+<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/red.png" alphatest="blend" position="68,443" size="34,34" backgroundColor="red" />
+<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/yellow.png" alphatest="blend" position="68,578" size="34,34" backgroundColor="green" />
+<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/green.png" alphatest="blend" position="68,511" size="34,34" backgroundColor="yellow" />
+<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/blue.png" alphatest="blend" position="68,647" size="34,34" backgroundColor="blue" />
+<widget font="Regular; 32" halign="left" position="117,564" render="Label" size="800,60" name="key_yellow" transparent="1" zPosition="1" noWrap="1" valign="center" foregroundColor="white" backgroundColor="black" />
+<widget font="Regular; 32" halign="left" position="117,428" render="Label" size="800,60" name="key_red" transparent="1" zPosition="1" noWrap="1" valign="center" foregroundColor="white" backgroundColor="black" />
+<widget font="Regular; 32" halign="left" position="117,496" render="Label" size="800,60" name="key_green" transparent="1" zPosition="1" noWrap="1" valign="center" foregroundColor="white" backgroundColor="black" />
+<widget font="Regular; 32" halign="left" position="117,632" size="800,60" transparent="1" zPosition="1" noWrap="1" name="key_blue" render="Label" valign="center" foregroundColor="white" backgroundColor="black" />
+<eLabel text="INFO" position="994,655" size="121,50" font="Regular; 30" zPosition="2" halign="center" noWrap="1" transparent="1" valign="center" backgroundColor="background" foregroundColor="darkgrey" />
+<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/graph.png" position="55,100" size="169,89" alphatest="blend" zPosition="10" />
+<eLabel position="40,9" size="1200,701" zPosition="-10" transparent="0" backgroundColor="background" />
+<widget source="Title" transparent="1" render="Label" zPosition="2" font="Regular; 38" position="57,25" size="875,60" valign="center" foregroundColor="green" backgroundColor="black" />
+<widget font="Regular; 35" halign="left" position="1081,39" render="Label" size="131,45" source="global.CurrentTime" transparent="1" valign="center" foregroundColor="darkgrey" backgroundColor="black">
+<convert type="ClockToText">Default</convert></widget>
+<widget font="Regular; 35" halign="right" position="931,39" render="Label" size="145,45" source="global.CurrentTime" transparent="1" valign="center" foregroundColor="darkgrey" backgroundColor="black">
+<convert type="ClockToText">Format:%e %b</convert></widget>
+<eLabel text="EXIT" position="1119,655" size="121,50" font="Regular; 30" zPosition="2" halign="center" noWrap="1" transparent="1" valign="center" backgroundColor="background" foregroundColor="darkgrey" />
+</screen>
+<screen name="SpeedTestScreenauto" position="center,center" size="1280,720" title="Speed Test" backgroundColor="transparent" flags="wfNoBorder">
+<ePixmap position="center,center" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/speedtestSD.png" zPosition="1" transparent="1" alphatest="blend" />
+<widget name="data" position="152,496" zPosition="4" size="787,25" font="Console; 23" foregroundColor="#2196F3" transparent="1" halign="center" valign="center" backgroundColor="black" />
+<widget name="ping" position="123,135" zPosition="4" size="383,71" font="Console; 28" foregroundColor="#0000ff00" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="key_blue" position="430,657" zPosition="4" size="499,40" font="Regular; 20" foregroundColor="white" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="host" position="123,224" zPosition="4" size="408,108" font="Console; 28" foregroundColor="white" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="ip" position="569,22" zPosition="4" size="276,82" font="Console; 25" foregroundColor="#00e5b243" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="download" position="123,24" zPosition="4" size="308,80" font="Console; 40" foregroundColor="#2196F3" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="upload" position="858,24" zPosition="4" size="308,80" font="Console; 40" foregroundColor="#B865D8" transparent="1" halign="right" valign="center" backgroundColor="black" />
+<widget font="Regular; 20" halign="left" position="97,657" render="Label" size="243,40" name="key_green" transparent="1" zPosition="4" valign="center" backgroundColor="black" foregroundColor="white" />
+<widget font="Regular; 20" halign="left" position="973,657" render="Label" size="303,40" name="key_yellow" transparent="1" zPosition="4" valign="center" backgroundColor="black" foregroundColor="white" />
+<widget name="green" position="56,661" size="30,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/green.png" alphatest="blend" zPosition="5" />
+<widget name="blue" position="390,661" size="30,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/blue.png" alphatest="blend" zPosition="5" />
+<widget name="yellow" position="933,661" size="30,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/yellow.png" alphatest="blend" zPosition="6" />
+<widget source="session.CurrentService" render="Label" position="123,109" zPosition="4" size="380,30" font="Console; 25" foregroundColor="#2196F3" transparent="1" halign="left" valign="center" backgroundColor="black">
+<convert type="SPNetSpeedInfo">RC</convert>
+</widget>
+<widget source="session.CurrentService" render="Label" position="781,109" zPosition="4" size="382,30" font="Console; 25" foregroundColor="#B865D8" transparent="1" halign="right" valign="center" backgroundColor="black">
+<convert type="SPNetSpeedInfo">TM</convert>
+</widget>
+</screen>
+<screen name="serversel" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+<widget name="introduction" position="924,391" size="302,301" font="Regular; 24" halign="center" valign="top" transparent="1" foregroundColor="#00e5b243" backgroundColor="black" />
+<ePixmap position="946,116" size="256,256" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/speedtestlog.png" transparent="1" alphatest="blend" />
+<widget name="list" position="79,99" size="830,538" itemHeight="45" font="Regular; 29" scrollbarMode="showNever" enableWrapAround="1" transparent="1" foregroundColor="white" backgroundColor="black" />
+<eLabel text="EXIT" position="1119,655" size="121,50" font="Regular; 30" zPosition="2" halign="center" noWrap="1" transparent="1" valign="center" foregroundColor="darkgrey" backgroundColor="black" />
+<eLabel position="40,9" size="1200,701" zPosition="-10" transparent="0" backgroundColor="background" />
+<widget source="Title" transparent="1" render="Label" zPosition="2" font="Regular; 38" position="57,25" size="875,60" valign="center" foregroundColor="green" backgroundColor="black" />
+<widget font="Regular; 35" halign="left" position="1081,39" render="Label" size="131,45" source="global.CurrentTime" transparent="1" valign="center" foregroundColor="darkgrey" backgroundColor="black">
+<convert type="ClockToText">Default</convert></widget>
+<widget font="Regular; 35" halign="right" position="931,39" render="Label" size="145,45" source="global.CurrentTime" transparent="1" valign="center" foregroundColor="darkgrey" backgroundColor="black">
+<convert type="ClockToText">Format:%e %b</convert></widget>
+<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/red.png" position="131,656" size="34,34" />
+<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/green.png" position="426,656" size="34,34" />
+<widget backgroundColor="black" font="Regular; 24" halign="left" position="170,656" render="Label" size="240,34" name="key_red" transparent="1" zPosition="1" foregroundColor="darkgrey" valign="center" />
+<widget backgroundColor="black" font="Regular; 24" halign="left" position="465,656" render="Label" size="240,34" name="key_green" transparent="1" zPosition="1" foregroundColor="darkgrey" valign="center" /> 
+</screen>
+<screen name="sharesult" position="center,center" size="1280,720" title="Main menu" flags="wfNoBorder" backgroundColor="transparent">
+<ePixmap pixmap="/tmp/resultest.png" position="265,80" size="750,400" alphatest="blend" />
+<widget name="stb" position="305,158" zPosition="4" size="601,32" font="Regular; 21" foregroundColor="white" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="info" position="center,500" zPosition="4" size="737,121" font="Regular; 20" foregroundColor="white" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/backtest.png" position="center,center" size="776,591" zPosition="-10" />
+<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/graph.png" position="846,401" size="169,89" alphatest="blend" zPosition="1" />
+</screen>
+<screen name="SpeedTestScreenfav" position="center,center" size="1280,720" title="Speed Test" backgroundColor="transparent" flags="wfNoBorder">
+<ePixmap position="center,center" size="1280,720" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/speedtestSD.png" zPosition="1" transparent="1" alphatest="blend" />
+<widget name="data" position="152,496" zPosition="4" size="787,25" font="Console; 23" foregroundColor="#2196F3" transparent="1" halign="center" valign="center" backgroundColor="black" />
+<widget name="ping" position="123,135" zPosition="4" size="383,71" font="Console; 28" foregroundColor="#0000ff00" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="key_blue" position="430,657" zPosition="4" size="499,40" font="Regular; 20" foregroundColor="white" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="host" position="123,224" zPosition="4" size="408,108" font="Console; 28" foregroundColor="white" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="ip" position="569,22" zPosition="4" size="276,82" font="Console; 25" foregroundColor="#00e5b243" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="download" position="123,24" zPosition="4" size="308,80" font="Console; 40" foregroundColor="#2196F3" transparent="1" halign="left" valign="center" backgroundColor="black" />
+<widget name="upload" position="858,24" zPosition="4" size="308,80" font="Console; 40" foregroundColor="#B865D8" transparent="1" halign="right" valign="center" backgroundColor="black" />
+<widget font="Regular; 20" halign="left" position="97,657" render="Label" size="243,40" name="key_green" transparent="1" zPosition="4" valign="center" backgroundColor="black" foregroundColor="white" />
+<widget font="Regular; 20" halign="left" position="973,657" render="Label" size="303,40" name="key_yellow" transparent="1" zPosition="4" valign="center" backgroundColor="black" foregroundColor="white" />
+<widget name="green" position="56,661" size="30,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/green.png" alphatest="blend" zPosition="5" />
+<widget name="blue" position="390,661" size="30,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/blue.png" alphatest="blend" zPosition="5" />
+<widget name="yellow" position="933,661" size="30,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/yellow.png" alphatest="blend" zPosition="6" />
+<ePixmap position="9,224" size="40,40" zPosition="10" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/images/favourite.png" transparent="1" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="123,109" zPosition="4" size="380,30" font="Console; 25" foregroundColor="#2196F3" transparent="1" halign="left" valign="center" backgroundColor="black">
+<convert type="SPNetSpeedInfo">RC</convert>
+</widget>
+<widget source="session.CurrentService" render="Label" position="781,109" zPosition="4" size="382,30" font="Console; 25" foregroundColor="#B865D8" transparent="1" halign="right" valign="center" backgroundColor="black">
+<convert type="SPNetSpeedInfo">TM</convert>
+</widget>
+</screen>
+</skin>

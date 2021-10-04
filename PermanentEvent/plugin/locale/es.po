@@ -1,0 +1,420 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PermanentEvent\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2021-08-12 18:42+0200\n"
+"Last-Translator: VillaK <soporte@openspa.info>\n"
+"Language-Team: OpenSPA\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+msgid "Next program with clock"
+msgstr "Siguiente programa, con reloj"
+
+msgid "Current program with clock"
+msgstr "Programa actual, con reloj"
+
+msgid "Current program with image"
+msgstr "Programa actual, con imagen"
+
+msgid "Next program with image"
+msgstr "Siguiente programa, con imagen"
+
+msgid "Primetime"
+msgstr "Evento de máxima audiencia"
+
+msgid "Primetime with image"
+msgstr "Evento de máxima audiencia, con imagen"
+
+msgid "Current program"
+msgstr "Programa actual"
+
+msgid "Next program"
+msgstr "Siguiente programa"
+
+msgid ""
+"The value of the slider is used to move the widget faster or slower. Slider "
+"value of (1 - 20)."
+msgstr ""
+"El valor del control deslizante, se usa para mover el widget, más rápido o "
+"más lento. \n"
+"Valor del control de (1 - 20)."
+
+msgid "Save position or set slider valor..."
+msgstr "Guarda posición o cambia valor del Slider..."
+
+msgid "Set slider step (1 - 20):"
+msgstr "Establecer el valor del control deslizante (1 - 20):"
+
+msgid "Set slider"
+msgstr "Establecer valor control deslizante"
+
+msgid ""
+"Activate Permanent Event, choose the widget you like the most, if you choose "
+"primetime widget, choose the time of maximum audience, and finally, place "
+"the widget where you like the most!"
+msgstr ""
+"Activa Evento Permanente, escoge el widget que más te guste. Si eliges el "
+"widget de \"Primetime\", escoge el horario de máxima audiencia, y "
+"finalmente... ¡Coloca el widget donde más te guste!"
+
+msgid "Permanent Event Setup"
+msgstr "Configurar PermanentEvent"
+
+msgid " Deactivate permanent event"
+msgstr " Desactivar PermanentEvent"
+
+msgid " Select widget type"
+msgstr " Selecciona tipo de widget"
+
+msgid " Primetime hour"
+msgstr " Hora de máxima audiencia"
+
+msgid " Config Images for Events"
+msgstr " Configurar imágenes para eventos"
+
+msgid " Change permanent event position"
+msgstr " Cambiar posición del widget"
+
+msgid " Activate permanent event"
+msgstr " Activar PermanentEvent"
+
+msgid " Disable key 'long EXIT' show/hide"
+msgstr " Deshabilitar tecla 'EXIT larga' para mostrar/ocultar"
+
+msgid " Enable key 'long EXIT' show/hide"
+msgstr " Habilitar la tecla 'EXIT larga' para mostrar/ocultar"
+
+msgid ""
+"In order to use the image widgets, you must activate \"backdrops\" in the "
+"PermanentEvents plugin."
+msgstr ""
+"Para utilizar los widgets de imagen, debe \"Activar Descarga de Fondos\" en "
+"la configuración de imágenes para Eventos."
+
+msgid "Choose widget type..."
+msgstr "Escoge tipo widget..."
+
+msgid "Pick the time for primetime...(+20 minutes tolerance)"
+msgstr ""
+"Elija el horario de máxima audiencia...\n"
+"(+20 minutos de tolerancia)"
+
+msgid "PrimeTime hour added!"
+msgstr "¡Hora de máxima audiencia añadida!"
+
+msgid "Delete IMG"
+msgstr "Borrar IMG"
+
+msgid "Optimize IMG"
+msgstr "Optimizar IMG"
+
+msgid "Broken IMG Remove"
+msgstr "Eliminar IMG corruptas"
+
+msgid "PermanentEvent..."
+msgstr "PermanentEvent..."
+
+msgid "Storage folder..."
+msgstr "Carpeta de almacenamiento..."
+
+msgid "Total Images Optimized : "
+msgstr "Total IMG Optimizadas : "
+
+msgid "Final Size : "
+msgstr "Tamaño Final : "
+
+msgid "Gain : "
+msgstr "Ganado : "
+
+msgid "Size : "
+msgstr "Tamaño Total : "
+
+msgid "Default Folder"
+msgstr "Carpeta predeterminada"
+
+msgid "Show/hide Menu Configuration..."
+msgstr "Mostrar/Ocultar Menú de Configuración..."
+
+msgid "Select search language..."
+msgstr "Selecciona idioma de búsqueda..."
+
+msgid "Delete images older than...(Number of days)"
+msgstr "Eliminar imágenes anteriores a... (Num. días)"
+
+msgid "Enter Your API'S..."
+msgstr "Introduce tus propias claves API..."
+
+msgid "Enter your TMDB api key..."
+msgstr "Introduce tu TMDB clave API..."
+
+msgid "Enter your TVDB api key..."
+msgstr "Introduce tu TVDB clave API..."
+
+msgid "Enter your FANART api key..."
+msgstr "Introduzca tu FANART clave API..."
+
+msgid "Activate Images Download"
+msgstr "Activar fuentes para la descarga de Fondos..."
+
+msgid "Source TMDB..."
+msgstr "Fuente TMDB..."
+
+msgid "Source TVDB..."
+msgstr "Fuente TVDB..."
+
+msgid "Source FANART..."
+msgstr "Fuente FANART..."
+
+msgid "Source TVMOVIE.de..."
+msgstr "Fuente TVMOVIE.de..."
+
+msgid "Source GOOGLE search images..."
+msgstr "Fuente GOOGLE imágenes ..."
+
+msgid "Size images FANART"
+msgstr "Tamaño de imágenes FANART..."
+
+msgid "Size images TVDB"
+msgstr "Tamaño de imágenes TVDB..."
+
+msgid "Size of images TMDB"
+msgstr "Tamaño de las imágenes TMDB..."
+
+msgid "Total Backdrops : "
+msgstr "Total IMG Fondos : "
+
+msgid "Removed Broken Images : "
+msgstr "IMG Corruptas Eliminadas : "
+
+msgid "Total Removed Images : "
+msgstr "Total IMG Borradas : "
+
+msgid "Permanent Event"
+msgstr "Evento Permanente"
+
+msgid "SHOW CONFIG MENU"
+msgstr "MOSTRAR MENÚ CONFIGURACIÓN"
+
+msgid "LOCALIZATION *"
+msgstr "LOCALIZACIóN *"
+
+msgid "SEARCH LANGUAGE"
+msgstr "IDIOMA DE BÚSQUEDA"
+
+msgid "DELETE PREVIOUS IMAGES (days)"
+msgstr "BORRAR IMÁGENES ANTERIORES (días)"
+
+msgid "YOUR API'S"
+msgstr "CONFIGURA TUS PROPIAS CLAVES API"
+
+msgid "      FANART API"
+msgstr "      FANART API"
+
+msgid "      TMDB API"
+msgstr "      TMDB API"
+
+msgid "      TVDB API"
+msgstr "      TVDB API"
+
+msgid "IMAGE DOWNLOAD SOURCES"
+msgstr "ACTIVA LA DESCARGA DE FONDOS"
+
+msgid "   TMDB"
+msgstr "   TMDB"
+
+msgid "       TMDB SIZE OF BACKDROP"
+msgstr "       TAMAÑO DE FONDO TMDB"
+
+msgid "   TVDB"
+msgstr "   TVDB"
+
+msgid "       TVDB SIZE OF BACKDROP"
+msgstr "       TAMAÑO DE FONDO TVDB"
+
+msgid "   FANART"
+msgstr "   FANART"
+
+msgid "       FANART SIZE OF BACKDROP"
+msgstr "       TAMAÑO DE FONDO FANART"
+
+msgid "   TVMOVIE.de"
+msgstr "   TVMOVIE.de"
+
+msgid "   GOOGLE"
+msgstr "   GOOGLE IMÁGENES"
+
+msgid "Save position widget"
+msgstr "Guardar posición del widget"
+
+msgid "Primetime with image and hour"
+msgstr "Evento de máxima audiencia, con imagen y hora"
+
+msgid "Donwloads..."
+msgstr "Descargas..."
+
+msgid "Download : "
+msgstr "Descargado(s) desde, "
+
+msgid "Downloaded from TVMOVIE.DE... "
+msgstr "Descargando de TVMOVIE.DE, "
+
+msgid "Downloaded from TMDB... "
+msgstr "Descargando de TMDB... "
+
+msgid "Downloaded from TVDB... "
+msgstr "Descargando de TVDB... "
+
+msgid "Downloaded from FANART... "
+msgstr "Descargando de FANART... "
+
+msgid "Downloads finished..."
+msgstr "Descargas finalizadas..."
+
+msgid "Downloaded from GOOGLE... "
+msgstr "Descargando de GOOGLE... "
+
+msgid "NOW AND RESTART TO SEARCH AND DOWNLOAD IN BACKGROUND WITH TIMER?"
+msgstr ""
+"¿Quiere reiniciar ahora para buscar y descargar con el temporizador, en "
+"segundo plano?"
+
+msgid "ACTIVATE TIMER"
+msgstr "ACTIVAR TEMPORIZADOR"
+
+msgid "Select timer update for events..."
+msgstr "Temporizador para descarga de eventos..."
+
+msgid "   TIMER (HOURS)"
+msgstr "   TEMPORIZADOR (Horas)"
+
+msgid "Select hours to update..."
+msgstr "Selecciona el tiempo para actualizar..."
+
+msgid "   SEARCH NEXT EVENTS"
+msgstr "   BUSCAR PRÓXIMOS EVENTOS"
+
+msgid "Enter the number of next events..."
+msgstr "Introduzca el número de eventos a buscar..."
+
+msgid "   CHOOSE BOUQUET LIST"
+msgstr "   ESCOGE LISTA DE FAVORITOS"
+
+msgid "(OK) To select bouquet to search..."
+msgstr "(OK) Para seleccionar lista favoritos a buscar..."
+
+msgid "(Ok) to select bouquet"
+msgstr "(OK) seleccionar lista favoritos"
+
+msgid "now-next"
+msgstr "programa actual y siguiente"
+
+msgid "This backdrop exists or not found on TMDB... "
+msgstr "Imagen existe, o no se encuentra en TMDB... "
+
+msgid "This backdrop exists or not found on TVDB... "
+msgstr "Imagen existe, o no se encuentra en TVDB... "
+
+msgid "This backdrop exists or not found on FANART... "
+msgstr "Imagen existe, o no se encuentra en FANART... "
+
+msgid "Choose favorites list to download..."
+msgstr "Elije la lista de favoritos para descargar..."
+
+msgid "Press the green button to start downloads..."
+msgstr "Pulsa el botón verde para iniciar las descargas..."
+
+msgid "'OK' select location downloads..."
+msgstr "(OK) seleccionar ubicación de las descargas..."
+
+msgid "Bouquet Selection..."
+msgstr "Selección Favoritos..."
+
+msgid "This backdrop exists or not found on GOOGLE... "
+msgstr "Imagen existe, o no se encuentra en GOOGLE... "
+
+msgid "This backdrop exists or not found on TVMOVIE.DE... "
+msgstr "Imagen existe, o no se encuentra en TVMOVIE.DE... "
+
+msgid ""
+"Do you want to restart now, to change location? \n"
+"If you use Timer, you will have to choose bouquet list again on restart."
+msgstr ""
+"¿Quieres reiniciar ahora, para cambiar ubicación?\n"
+"Si usas Temporizador, deberás volver a escoger lista de favoritos al "
+"reiniciar."
+
+msgid "Bouquet list not found! Before launching search, choose bouquet list!"
+msgstr ""
+"¡Lista de favoritos no encontrada! ¡Antes de iniciar la búsqueda, elije la "
+"lista de favoritos!"
+
+msgid "Error! There is no Internet conection!"
+msgstr "¡Error! ¡No hay conexión a Internet!"
+
+msgid "PermanentEvent Downloads finished!"
+msgstr "PermanentEvent ¡Descarga de imágenes finalizada!"
+
+msgid "PermanentEvent Downloads started!"
+msgstr "PermanentEvent ¡Descarga de imágenes iniciada!"
+
+msgid "   TIMER ALERTS"
+msgstr "   ALERTAS DEL TEMPORIZADOR"
+
+msgid "Enable Info downloads notification..."
+msgstr "Activa la notificación de las descargas..."
+
+msgid "Are you sure you want to delete the images?"
+msgstr "¿Estás seguro que quieres borrar las imágenes?"
+
+msgid "Do you want to restart now, to change widget?"
+msgstr "¿Quieres reiniciar ahora, para cambiar widget?"
+
+msgid "Shows the event permanent on the screen"
+msgstr "Muestra el evento permanente en la pantalla"
+
+#~ msgid "Primetime compact"
+#~ msgstr "Evento de máxima audiencia, compacto"
+
+#~ msgid "Next Program..."
+#~ msgstr "A continuación..."
+
+#~ msgid "Tonight at... "
+#~ msgstr "Esta noche en... "
+
+#~ msgid "Tomorrow at... "
+#~ msgstr "Mañana en... "
+
+#~ msgid "images optimization end..."
+#~ msgstr "Optimización de imágenes..."
+
+#~ msgid "to"
+#~ msgstr "a"
+
+#~ msgid "Images : {} backdrop {} MB"
+#~ msgstr "Imagenes : {} backdrop {} MB"
+
+#~ msgid ""
+#~ "{} images optimization end...\n"
+#~ "Gain : {}KB to {}KB \n"
+#~ "Final size : {}KB"
+#~ msgstr ""
+#~ "{} Optimización de imágenes...\n"
+#~ "Ganado : {}KB de {}KB \n"
+#~ "Tamaño Final: {}KB"
+
+#~ msgid ""
+#~ "Total Removed Images : {} \n"
+#~ "Gain : {}MB to {}MB \n"
+#~ "Final size : {}MB"
+#~ msgstr ""
+#~ "Total Imágenes borradas : {} \n"
+#~ "Ganado : {}MB de {}MB \n"
+#~ "Tamaño Final : {}MB"

@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openSPAnetTest\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-25 22:28+0200\n"
+"PO-Revision-Date: 2021-07-23 20:29+0200\n"
+"Last-Translator: VillaK <soporte@openspa.info>\n"
+"Language-Team: VillaK\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# OpenPanel
+msgid "Test result not exist, first do the test."
+msgstr "Testergebnis existiert nicht! Machen Sie zuerst den Test."
+
+msgid ""
+"In the path /tmp/resultest.png you have your result, in order to share it. "
+"Or you can use the mobile to download your result, (with OpteleBot)...\n"
+"/desc /tmp/resultest.png"
+msgstr ""
+"Im Pfad /tmp/resultest.png haben Sie Ihr Ergebnis, um es zu teilen. Oder Sie "
+"können das Handy verwenden, um Ihr Ergebnis herunterzuladen, (mit "
+"OpteleBot)...\n"
+"/desc /tmp/resultest.png"
+
+msgid "Choose server and press ok, to test."
+msgstr "Wählen Sie Server und drücken Sie OK, um zu testen."
+
+msgid "OpNetSpeed Server List"
+msgstr "OpNetSpeed-Serverliste"
+
+msgid "View last result to share."
+msgstr "Sehen Sie sich das neueste Ergebnis an, um es zu teilen."
+
+msgid "Test your favourite server."
+msgstr "Probieren Sie Ihren Lieblingsserver aus."
+
+msgid "Test auto server."
+msgstr "Testen Sie den automatischen Server (gemäß Ping)."
+
+msgid "Select your favourite server."
+msgstr "Wählen Sie Ihren Lieblingsserver."
+
+msgid "Choose your option, to test."
+msgstr "Wählen Sie die Option zum Testen."
+
+# OpenPanel
+msgid "SpeedTest"
+msgstr "Geschwindigkeitstest"
+
+#| msgid "Testing net speed,please wait......"
+msgid "Testing internet speed, please wait..."
+msgstr ""
+
+#
+msgid "finished test"
+msgstr "Geschwindigkeitstest abgeschlossen."
+
+msgid "OpNetSpeed Test"
+msgstr "OpNetSpeed Test"
+
+msgid "Testing download from"
+msgstr ""
+
+#| msgid "Testing upload speed...."
+msgid "Testing upload speed"
+msgstr ""
+
+#| msgid " Test completed,to test again press green"
+msgid "Test completed,to test again press green"
+msgstr ""
+
+msgid "Test again"
+msgstr ""
+
+msgid "speedtest"
+msgstr "Geschwindigkeitstest"
+
+msgid "SpeedNetTest by openSPA"
+msgstr "Geschwindigkeitstest mit OpenSPA"
+
+msgid "OpenSPA netSpeedTest"
+msgstr "OpenSPA-Geschwindigkeitstest"
+
+msgid "Error! Test result not downloaded!"
+msgstr "Fehler! Testergebnis nicht heruntergeladen!"
+
+msgid "OpenSPA netSpeedTest Server List"
+msgstr "OpenSPA Geschwindigkeitstest der Server-Liste"
+
+msgid "Test in: %s %s"
+msgstr "Test in: %s %s"
+
+msgid "Show results"
+msgstr ""
+
+msgid "Download resultest.png failed!"
+msgstr ""
+
+msgid "Download result"
+msgstr ""

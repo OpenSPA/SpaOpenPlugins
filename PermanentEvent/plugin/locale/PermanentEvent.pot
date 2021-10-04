@@ -1,0 +1,360 @@
+"Project-Id-Version: PermanentEvent\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-27 09:56+0000\n"
+"PO-Revision-Date: 2021-01-24 18:06+0100\n"
+"Last-Translator: VillaK <soporte@openspa.info>\n"
+"Language-Team: OpenSPA\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3.1\n"
+
+msgid "Next program with clock"
+msgstr ""
+
+msgid "Current program with clock"
+msgstr ""
+
+msgid "Current program with image"
+msgstr ""
+
+msgid "Next program with image"
+msgstr ""
+
+msgid "Primetime"
+msgstr ""
+
+msgid "Primetime with image"
+msgstr ""
+
+msgid "Current program"
+msgstr ""
+
+msgid "Next program"
+msgstr ""
+
+msgid ""
+"The value of the slider is used to move the widget faster or slower. Slider "
+"value of (1 - 20)."
+msgstr ""
+
+msgid "Save position or set slider valor..."
+msgstr ""
+
+msgid "Set slider step (1 - 20):"
+msgstr ""
+
+msgid "Set slider"
+msgstr ""
+
+msgid ""
+"Activate Permanent Event, choose the widget you like the most, if you choose "
+"primetime widget, choose the time of maximum audience, and finally, place "
+"the widget where you like the most!"
+msgstr ""
+
+msgid "Permanent Event Setup"
+msgstr ""
+
+msgid " Deactivate permanent event"
+msgstr ""
+
+msgid " Select widget type"
+msgstr ""
+
+msgid " Primetime hour"
+msgstr ""
+
+msgid " Config Images for Events"
+msgstr ""
+
+msgid " Change permanent event position"
+msgstr ""
+
+msgid " Activate permanent event"
+msgstr ""
+
+msgid " Disable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid " Enable key 'long EXIT' show/hide"
+msgstr ""
+
+msgid ""
+"In order to use the image widgets, you must activate \"backdrops\" in the "
+"PermanentEvents plugin."
+msgstr ""
+
+msgid "Choose widget type..."
+msgstr ""
+
+msgid "Pick the time for primetime...(+20 minutes tolerance)"
+msgstr ""
+
+msgid "PrimeTime hour added!"
+msgstr ""
+
+msgid "Delete IMG"
+msgstr ""
+
+msgid "Optimize IMG"
+msgstr ""
+
+msgid "Broken IMG Remove"
+msgstr ""
+
+msgid "PermanentEvent..."
+msgstr ""
+
+msgid "Storage folder..."
+msgstr ""
+
+msgid "Total Images Optimized : "
+msgstr ""
+
+msgid "Final Size : "
+msgstr ""
+
+msgid "Gain : "
+msgstr ""
+
+msgid "Size : "
+msgstr ""
+
+msgid "Default Folder"
+msgstr ""
+
+msgid "Show/hide Menu Configuration..."
+msgstr ""
+
+msgid "Select search language..."
+msgstr ""
+
+msgid "Delete images older than...(Number of days)"
+msgstr ""
+
+msgid "Enter Your API'S..."
+msgstr ""
+
+msgid "Enter your TMDB api key..."
+msgstr ""
+
+msgid "Enter your TVDB api key..."
+msgstr ""
+
+msgid "Enter your FANART api key..."
+msgstr ""
+
+msgid "Activate Images Download"
+msgstr ""
+
+msgid "Source TMDB..."
+msgstr ""
+
+msgid "Source TVDB..."
+msgstr ""
+
+msgid "Source FANART..."
+msgstr ""
+
+msgid "Source TVMOVIE.de..."
+msgstr ""
+
+msgid "Source GOOGLE search images..."
+msgstr ""
+
+msgid "Size images FANART"
+msgstr ""
+
+msgid "Size images TVDB"
+msgstr ""
+
+msgid "Size of images TMDB"
+msgstr ""
+
+msgid "Total Backdrops : "
+msgstr ""
+
+msgid "Removed Broken Images : "
+msgstr ""
+
+msgid "Total Removed Images : "
+msgstr ""
+
+msgid "Permanent Event"
+msgstr ""
+
+msgid "SHOW CONFIG MENU"
+msgstr ""
+
+msgid "LOCALIZATION *"
+msgstr ""
+
+msgid "SEARCH LANGUAGE"
+msgstr ""
+
+msgid "DELETE PREVIOUS IMAGES (days)"
+msgstr ""
+
+msgid "YOUR API'S"
+msgstr ""
+
+msgid "      FANART API"
+msgstr ""
+
+msgid "      TMDB API"
+msgstr ""
+
+msgid "      TVDB API"
+msgstr ""
+
+msgid "IMAGE DOWNLOAD SOURCES"
+msgstr ""
+
+msgid "   TMDB"
+msgstr ""
+
+msgid "       TMDB SIZE OF BACKDROP"
+msgstr ""
+
+msgid "   TVDB"
+msgstr ""
+
+msgid "       TVDB SIZE OF BACKDROP"
+msgstr ""
+
+msgid "   FANART"
+msgstr ""
+
+msgid "       FANART SIZE OF BACKDROP"
+msgstr ""
+
+msgid "   TVMOVIE.de"
+msgstr ""
+
+msgid "   GOOGLE"
+msgstr ""
+ 
+msgid "Save position widget"
+msgstr ""
+
+msgid "Primetime with image and hour"
+msgstr ""
+
+msgid "Donwloads..."
+msgstr ""
+
+msgid "Download : "
+msgstr ""
+
+msgid "Downloaded from TVMOVIE.DE... "
+msgstr ""
+
+msgid "Downloaded from TMDB... "
+msgstr ""
+
+msgid "Downloaded from TVDB... "
+msgstr ""
+
+msgid "Downloaded from FANART... "
+msgstr ""
+
+msgid "Downloads finished..."
+msgstr ""
+
+msgid "Downloaded from GOOGLE... "
+msgstr ""
+
+msgid "NOW AND RESTART TO SEARCH AND DOWNLOAD IN BACKGROUND WITH TIMER?"
+msgstr ""
+
+msgid "ACTIVATE TIMER"
+msgstr ""
+
+msgid "Select timer update for events..."
+msgstr ""
+
+msgid "   TIMER (HOURS)"
+msgstr ""
+
+msgid "Select hours to update..."
+msgstr ""
+
+msgid "   SEARCH NEXT EVENTS"
+msgstr ""
+
+msgid "Enter the number of next events..."
+msgstr ""
+
+msgid "   CHOOSE BOUQUET LIST"
+msgstr ""
+
+msgid "(OK) To select bouquet to search..."
+msgstr ""
+
+msgid "(Ok) to select bouquet"
+msgstr ""
+
+msgid "now-next"
+msgstr ""
+
+msgid "This backdrop exists or not found on TMDB... "
+msgstr ""
+
+msgid "This backdrop exists or not found on TVDB... "
+msgstr ""
+
+msgid "This backdrop exists or not found on FANART... "
+msgstr ""
+
+msgid "Choose favorites list to download..."
+msgstr ""
+
+msgid "Press the green button to start downloads..."
+msgstr ""
+
+msgid "'OK' select location downloads..."
+msgstr ""
+
+msgid "Bouquet Selection..."
+msgstr ""
+
+msgid "This backdrop exists or not found on GOOGLE... "
+msgstr ""
+
+msgid "This backdrop exists or not found on TVMOVIE.DE... "
+msgstr ""
+
+msgid "Do you want to restart now, to change location? \nIf you use Timer, you will have to choose bouquet list again on restart."
+msgstr ""
+
+msgid "Bouquet list not found! Before launching search, choose bouquet list!"
+msgstr ""
+
+msgid "Error! There is no Internet conection!"
+msgstr ""
+
+msgid "PermanentEvent Downloads finished!"
+msgstr ""
+
+msgid "PermanentEvent Downloads started!"
+msgstr ""
+
+msgid "   TIMER ALERTS"
+msgstr ""
+
+msgid "Enable Info downloads notification..."
+msgstr ""
+
+msgid "Are you sure you want to delete the images?"
+msgstr ""
+
+msgid "Do you want to restart now, to change widget?"
+msgstr ""
+
+msgid "Shows the event permanent on the screen"
+msgstr ""

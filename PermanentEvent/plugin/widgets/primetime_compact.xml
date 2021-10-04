@@ -1,0 +1,11 @@
+<screen name="Permanent Event" position="0,0" size="880,75" zPosition="-1" flags="wfNoBorder" backgroundColor="#aa2B2926">
+<widget source="session.CurrentService" render="Label" position="340,0" size="534,75" zPosition="4" foregroundColor="#20ffffcc" font="Autumn; 24" valign="bottom" halign="left" transparent="0" backgroundColor="#aa2B2926" noWrap="1">
+<convert type="SpaPrimeTime" /> 
+</widget>
+<widget source="session.CurrentService" render="SpaPrimeTimeBackdrop" position="179,0" size="140,75" zPosition="10" />
+<eLabel name="new eLabel" position="315,0" size="12,75" zPosition="12" backgroundColor="#E7DCBE" />
+<widget source="global.CurrentTime" render="Label" position="0,0" zPosition="15" size="182,65" halign="center" font="EventHD; 45" transparent="0" valign="center" foregroundColor="white" backgroundColor="#aa2B2926">
+<convert type="ClockToText">Format:%H:%M</convert>
+</widget>
+<eLabel name="new eLabel" position="0,65" size="182,10" zPosition="14" backgroundColor="#aa2B2926" />
+</screen>

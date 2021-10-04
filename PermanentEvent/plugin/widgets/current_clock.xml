@@ -1,0 +1,9 @@
+<screen name="Permanent Event" position="0,0" size="775,100" zPosition="-1" flags="wfNoBorder" transparent="0" backgroundColor="transparent">
+<widget source="session.Event_Now" render="Label" position="160,28" size="612,36" zPosition="4" foregroundColor="#20ffffcc" font="Autumn; 26" valign="top" halign="left" transparent="1">
+<convert type="EventName">Name</convert>
+</widget>
+<widget source="global.CurrentTime" render="Label" position="0,0" zPosition="5" size="155,60" halign="center" font="EventHD; 45" transparent="1" valign="center" foregroundColor="white" noWrap="1">
+<convert type="ClockToText">Format:%H:%M</convert>
+</widget>
+<eLabel name="new eLabel" position="160,2" size="338,32" text="You're watching..." font="Regular; 24" valign="top" foregroundColor="white" zPosition="5" transparent="1" />
+</screen>

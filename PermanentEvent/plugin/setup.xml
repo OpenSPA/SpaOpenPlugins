@@ -1,0 +1,28 @@
+<!--suppress XmlUnboundNsPrefix -->
+<setupxml>
+<setup key="downImages" title="PermanentEvent...">
+<item level="0" text="SHOW CONFIG MENU" description="Show/hide Menu Configuration...">config.plugins.PermanentEvent.cnfg</item>
+<item level="1" Q_level="1" text="LOCALIZATION *" description="'OK' select location downloads..." requires= "config.plugins.PermanentEvent.cnfg" >config.plugins.PermanentEvent.loc</item>
+<item level="1" Q_level="1" text="SEARCH LANGUAGE" description="Select search language..." requires= "config.plugins.PermanentEvent.cnfg" >config.plugins.PermanentEvent.searchLang</item>
+<item level="1" Q_level="1" text="ACTIVATE TIMER" description="Select timer update for events..." requires= "config.plugins.PermanentEvent.cnfg" >config.plugins.PermanentEvent.timerMod</item>
+<item level="1" Q_level="1" text="   TIMER (HOURS)" description="Select hours to update..." requires= "config.plugins.PermanentEvent.timerMod" >config.plugins.PermanentEvent.timer</item>
+<item level="1" Q_level="1" text="   TIMER ALERTS" description="Enable Info downloads notification..." requires= "config.plugins.PermanentEvent.timerMod" >config.plugins.PermanentEvent.downalerts</item>
+<item level="1" Q_level="1" text="   SEARCH NEXT EVENTS" description="Enter the number of next events..." requires= "config.plugins.PermanentEvent.timerMod" >config.plugins.PermanentEvent.searchNUMBER</item>
+<item level="1" Q_level="1" text="   CHOOSE BOUQUET LIST" description="(OK) To select bouquet to search..." requires= "config.plugins.PermanentEvent.timerMod" >config.plugins.PermanentEvent.searchbouquet</item>
+<item level="1" Q_level="1" text="DELETE PREVIOUS IMAGES (days)" description="Delete images older than...(Number of days)" requires= "config.plugins.PermanentEvent.cnfg" >config.plugins.PermanentEvent.days</item>
+<item level="1" text="YOUR API'S" description="Enter Your API'S..." requires= "config.plugins.PermanentEvent.cnfg" >config.plugins.PermanentEvent.apis</item>
+<item level="2" Q_level="1" text=" 	 TMDB API" description="Enter your TMDB api key..." requires= "config.plugins.PermanentEvent.apis">config.plugins.PermanentEvent.tmdbAPI</item>
+<item level="2" Q_level="1" text=" 	 TVDB API" description="Enter your TVDB api key..." requires= "config.plugins.PermanentEvent.apis">config.plugins.PermanentEvent.tvdbAPI</item>
+<item level="2" Q_level="1" text=" 	 FANART API" description="Enter your FANART api key..." requires= "config.plugins.PermanentEvent.apis">config.plugins.PermanentEvent.fanartAPI</item>
+<item level="0" text="IMAGE DOWNLOAD SOURCES" description="Activate Images Download">config.plugins.PermanentEvent.backdrop</item>
+<item level="1" Q_level="1" text="   TMDB" description="Source TMDB..." requires= "config.plugins.PermanentEvent.backdrop">config.plugins.PermanentEvent.tmdb</item>
+<item level="2" Q_level="2" text="       TMDB SIZE OF BACKDROP" description="Size of images TMDB" requires= "config.plugins.PermanentEvent.tmdb">config.plugins.PermanentEvent.TMDBbackdropsize</item>
+<item level="1" Q_level="1" text="   TVDB" description="Source TVDB..." requires= "config.plugins.PermanentEvent.backdrop">config.plugins.PermanentEvent.tvdb</item>
+<item level="2" Q_level="2" text="       TVDB SIZE OF BACKDROP" description="Size images TVDB" requires= "config.plugins.PermanentEvent.tvdb">config.plugins.PermanentEvent.TVDBbackdropsize</item>  
+<item level="1" Q_level="1" text="   FANART" description="Source FANART..." requires= "config.plugins.PermanentEvent.backdrop" >config.plugins.PermanentEvent.fanart</item>
+<item level="2" Q_level="2" text="       FANART SIZE OF BACKDROP" description="Size images FANART" requires= "config.plugins.PermanentEvent.fanart">config.plugins.PermanentEvent.FANART_Backdrop_Resize</item>   
+<item level="1" Q_level="1" text="   TVMOVIE.de" description="Source TVMOVIE.de..." requires= "config.plugins.PermanentEvent.backdrop">config.plugins.PermanentEvent.extra</item>
+<!--item level="1" Q_level="1" text="   GOOGLE" description="Source GOOGLE search images..." requires= "config.plugins.PermanentEvent.backdrop">config.plugins.PermanentEvent.extra2</item-->
+</setup>
+</setupxml>
+                                            

@@ -1,0 +1,7 @@
+<screen name="Permanent Event" position="0,0" size="765,100" zPosition="-1" flags="wfNoBorder" transparent="0" backgroundColor="transparent">
+<widget source="session.Event_Now" render="Label" position="147,40" size="617,39" zPosition="4" foregroundColor="#20ffffcc" font="Autumn; 27" valign="top" halign="left" transparent="1">
+<convert type="EventName">Name</convert>
+</widget>
+<eLabel name="new eLabel" position="147,4" size="338,34" text="You're watching..." font="Regular; 25" valign="top" foregroundColor="white" zPosition="5" transparent="1" />
+<widget source="session.Event_Now" render="SpaBackdrop" position="1,4" size="140,75" zPosition="10" />
+</screen>

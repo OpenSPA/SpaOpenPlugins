@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<skin>
+<screen name="PermanentEventMenu" position="center,center" size="620,464" title="Permanent Event Setup" flags="wfNoBorder" transparent="0" backgroundColor="transparent">
+<widget name="list" position="22,70" font="Regular; 24" itemHeight="35" foregroundColor="white" size="577,221" backgroundColor="black" backgroundColorSelected="#8C6900" transparent="1" />
+<widget name="text" position="22,305" size="578,153" font="Regular; 22" foregroundColor="#20ffffcc" transparent="1" backgroundColor="black" />
+<eLabel name="new eLabel" position="109,297" size="400,1" foregroundColor="white" backgroundColor="white" zPosition="1" />
+<widget source="Title" render="Label" position="22,5" size="577,60" font="Autumn; 35" foregroundColor="#c5c5c5" backgroundColor="#23262e" transparent="1" zPosition="0" />
+<ePixmap position="0,0" size="620,464" zPosition="-2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/fondoprincipal.png" transparent="1" />
+</screen>
+<screen name="Primetimehour" position="center,center" size="620,364" backgroundColor="transparent" flags="wfNoBorder">
+<widget source="Title" render="Label" position="22,5" size="577,60" font="Autumn; 35" foregroundColor="#c5c5c5" backgroundColor="#23262e" transparent="1" zPosition="0" />
+<widget name="config" position="22,72" font="Regular; 26" itemHeight="35" size="577,125" backgroundColor="black" backgroundColorSelected="#8C6900" transparent="1" />
+<widget name="text" position="22,208" size="577,139" zPosition="0" halign="left" font="Regular; 26" foregroundColor="#20ffffcc" transparent="1" backgroundColor="black" valign="top" />
+<widget source="key_red" render="Label" position="64,313" size="184,25" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<widget source="key_green" render="Label" position="295,313" size="184,25" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<eLabel name="new eLabel" position="105,205" size="400,1" foregroundColor="white" backgroundColor="white" />
+<ePixmap position="28,310" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttonred.png" alphatest="blend" />
+<ePixmap position="258,310" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttongreen.png" alphatest="blend" />	
+<ePixmap position="0,0" size="620,364" zPosition="-2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/fondoprime.png" transparent="1" />
+</screen>
+<screen name="downImages" position="center,center" size="1920,1080" backgroundColor="transparent">
+<widget name="config" position="40,143" size="1315,809" itemHeight="45" font="Regular;36" foregroundColor="#c5c5c5" scrollbarMode="showOnDemand" transparent="1" backgroundColorSelected="#8C6900" foregroundColorSelected="#ffffff" zPosition="1" backgroundColor="black" />
+<widget name="description" position="484,63" size="864,60" zPosition="0" halign="left" font="Regular; 40" foregroundColor="#FFBF00" transparent="1" backgroundColor="black" />
+<widget source="key_red" render="Label" position="82,1001" size="184,30" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<widget source="key_green" render="Label" position="348,1001" size="212,30" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<widget source="key_yellow" render="Label" position="623,1001" size="284,30" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<widget source="key_blue" render="Label" position="964,1001" size="338,30" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<ePixmap position="48,1001" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttonred.png" alphatest="blend" />
+<ePixmap position="314,1001" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttongreen.png" alphatest="blend" />	
+<ePixmap position="589,1001" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttonyellow.png" alphatest="blend" />
+<ePixmap position="930,1001" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttonblue.png" alphatest="blend" />
+<widget source="Title" render="Label" position="40,53" size="1118,60" font="Autumn; 45" foregroundColor="#c5c5c5" backgroundColor="#23262e" transparent="1" zPosition="0" />
+<widget name="info" position="1400,671" size="492,80" transparent="1" font="Regular; 32" halign="left" valign="top" backgroundColor="black" />
+<widget name="gain" position="1400,751" size="492,80" transparent="1" font="Regular; 32" halign="left" valign="top" backgroundColor="black" />
+<widget name="finalsize" position="1400,831" size="492,77" transparent="1" font="Regular; 32" halign="left" valign="top" backgroundColor="black" />
+<widget name="storage" position="1400,594" size="492,75" transparent="1" font="Regular; 25" foregroundColor="#D9A300" backgroundColor="#663300" valign="top" />
+<widget name="int_statu" position="1463,992" size="40,40" transparent="1" font="Regular; 40" foregroundColor="#1edb76" backgroundColor="#23262e" zPosition="2" halign="center" />
+<eLabel name="int_statu_off" position="1463,992" size="40,40" transparent="1" font="Regular; 40" foregroundColor="#FF2626" backgroundColor="red" zPosition="1" halign="center" text="●" />
+<eLabel name="new eLabel" position="1493,101" size="302,30" text="Credits to Digiteng by XtraEvents" halign="center" font="Regular; 16" transparent="1" noWrap="1" zPosition="2" backgroundColor="black" foregroundColor="#c5c5c5" />
+<widget name="footnote" position="1493,138" size="302,30" halign="center" font="Regular; 20" transparent="1" noWrap="1" backgroundColor="black" zPosition="3" foregroundColor="#D9A300" />
+<eLabel name="new eLabel" position="1787,997" size="100,45" text="INFO" font="Autumn; 32" halign="right" transparent="1" backgroundColor="black" />
+<eLabel name="" text="NET:" position="1357,997" size="150,45" transparent="1" halign="center" font="Autumn; 30" valign="center" backgroundColor="black" />
+<ePixmap position="1383,center" size="518,1027" zPosition="-2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/fondo.png" transparent="1" />
+<ePixmap position="20,center" size="1352,1027" zPosition="-2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/fondo1.png" transparent="1" />
+<eLabel name="new eLabel" position="1469,575" size="350,1" foregroundColor="white" backgroundColor="white" />
+<eLabel name="new eLabel" position="1469,130" size="350,1" foregroundColor="white" backgroundColor="white" />
+<eLabel name="new eLabel" position="1469,915" size="350,1" foregroundColor="white" backgroundColor="white" />
+<widget name="HelpWindow" position="352,804" size="741,276" transparent="0" backgroundColor="black" foregroundColor="white" />
+<widget source="global.CurrentTime" render="Label" position="1787,38" size="100,45" font="Autumn;32" halign="right" backgroundColor="black" transparent="1">
+<convert type="ClockToText">Default</convert>
+</widget>
+</screen>
+<screen name="selectBouquets" position="center,center" size="1920,1080" backgroundColor="transparent">
+<widget name="list" position="40,143" size="1315,816" itemHeight="45" font="Regular;36" foregroundColor="#c5c5c5" scrollbarMode="showOnDemand" transparent="1" backgroundColorSelected="#8C6900" foregroundColorSelected="#ffffff" zPosition="1" backgroundColor="black" />
+<widget name="text" position="519,63" size="864,60" zPosition="0" halign="left" font="Regular; 40" foregroundColor="#FFBF00" transparent="1" backgroundColor="black" />
+<widget source="key_red" render="Label" position="82,1001" size="184,30" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<widget source="key_green" render="Label" position="348,1001" size="212,30" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<widget source="key_yellow" render="Label" position="623,1001" size="284,30" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<widget source="key_blue" render="Label" position="964,1001" size="338,30" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<ePixmap position="48,1001" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttonred.png" alphatest="blend" />
+<ePixmap position="314,1001" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttongreen.png" alphatest="blend" />	
+<ePixmap position="589,1001" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttonyellow.png" alphatest="blend" />
+<ePixmap position="930,1001" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttonblue.png" alphatest="blend" />
+<widget source="Title" render="Label" position="40,53" size="1118,60" font="Autumn; 45" foregroundColor="#c5c5c5" backgroundColor="#23262e" transparent="1" zPosition="0" />
+<widget name="info" position="1400,671" size="492,224" transparent="1" font="Regular; 32" halign="left" valign="top" backgroundColor="black" />
+<widget name="int_statu" position="1463,992" size="40,40" transparent="1" font="Regular; 40" foregroundColor="#1edb76" backgroundColor="#23262e" zPosition="2" halign="center" />
+<eLabel name="int_statu_off" position="1463,992" size="40,40" transparent="1" font="Regular; 40" foregroundColor="#FF2626" backgroundColor="red" zPosition="1" halign="center" text="●" />
+<eLabel name="new eLabel" position="1493,101" size="302,30" text="Credits to Digiteng by XtraEvents" halign="center" font="Regular; 16" transparent="1" noWrap="1" zPosition="2" backgroundColor="black" foregroundColor="#c5c5c5" />
+<eLabel name="" text="NET:" position="1357,997" size="150,45" transparent="1" halign="center" font="Autumn; 30" valign="center" backgroundColor="black" />
+<ePixmap position="1383,center" size="518,1027" zPosition="-2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/fondo.png" transparent="1" />
+<ePixmap position="20,center" size="1352,1027" zPosition="-2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/fondo1.png" transparent="1" />
+<eLabel name="new eLabel" position="1469,575" size="350,1" foregroundColor="white" backgroundColor="white" />
+<eLabel name="new eLabel" position="1469,130" size="350,1" foregroundColor="white" backgroundColor="white" />
+<eLabel name="new eLabel" position="1469,915" size="350,1" foregroundColor="white" backgroundColor="white" />
+<widget name="status" position="1400,604" size="492,61" transparent="1" font="Regular; 30" foregroundColor="#92f1fc" backgroundColor="#23262e" />
+<widget source="global.CurrentTime" render="Label" position="1787,38" size="100,45" font="Autumn;32" halign="right" backgroundColor="black" transparent="1">
+<convert type="ClockToText">Default</convert>
+</widget>
+<eLabel name="new eLabel" position="1493,101" size="302,30" text="Credits to Digiteng by XtraEvents" halign="center" font="Regular; 16" transparent="1" noWrap="1" zPosition="2" backgroundColor="black" foregroundColor="#c5c5c5" />
+</screen>
+<screen name="downloadsback" position="0,0" size="1920,1080" title="downloads..." flags="wfNoBorder" backgroundColor="transparent">
+<widget name="int_statu" position="1463,992" size="40,40" transparent="1" font="Regular; 40" foregroundColor="#1edb76" backgroundColor="#23262e" zPosition="2" halign="center" />
+<eLabel name="int_statu_off" position="1463,992" size="40,40" transparent="1" font="Regular; 40" foregroundColor="#FF2626" backgroundColor="red" zPosition="1" halign="center" text="●" />
+<widget name="progress" position="60,148" size="1100,20" foregroundColor="#8C6900" borderColor="#8C6900" borderWidth="1" backgroundColor="#23262e" />
+<widget name="status" position="60,190" size="1100,44" transparent="1" font="Regular;33" foregroundColor="#D9A300" backgroundColor="#23262e" />
+<widget name="info" position="60,270" size="1217,44" transparent="1" font="Regular;33" foregroundColor="#c5c5c5" backgroundColor="#23262e" />
+<widget name="info2" position="60,350" size="1242,600" transparent="1" font="Regular; 35" foregroundColor="#D9A300" backgroundColor="#23262e" />
+<widget source="key_red" render="Label" position="84,1001" size="186,32" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<widget source="key_green" render="Label" position="350,1001" size="215,32" noWrap="1" zPosition="1" valign="center" font="Regular; 26" halign="left" transparent="1" backgroundColor="black" />
+<eLabel name="new eLabel" position="1469,915" size="350,1" foregroundColor="white" backgroundColor="white" />
+<ePixmap position="48,1001" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttonred.png" alphatest="blend" />
+<ePixmap position="314,1001" size="32,32" transparent="0" zPosition="2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/buttongreen.png" alphatest="blend" />	
+<widget source="global.CurrentTime" render="Label" position="1787,38" size="100,45" font="Autumn;32" halign="right" backgroundColor="black" transparent="1">
+<convert type="ClockToText">Default</convert>
+</widget>
+<ePixmap position="1383,center" size="518,1027" zPosition="-2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/fondo.png" transparent="1" />
+<ePixmap position="20,center" size="1352,1027" zPosition="-2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/images/fondo1.png" transparent="1" />
+<eLabel name="new eLabel" position="1469,575" size="350,1" foregroundColor="white" backgroundColor="white" />
+<eLabel name="" text="NET:" position="1357,997" size="150,45" transparent="1" halign="center" font="Autumn; 30" valign="center" backgroundColor="black" />
+<eLabel name="new eLabel" position="1787,997" size="100,45" text="INFO" font="Autumn; 32" halign="right" transparent="1" backgroundColor="black" />
+<widget source="Title" render="Label" position="40,53" size="1118,73" font="Autumn; 45" foregroundColor="#c5c5c5" backgroundColor="#23262e" transparent="1" zPosition="0" />
+<eLabel name="new eLabel" position="1493,101" size="302,30" text="Credits to Digiteng by XtraEvents" halign="center" font="Regular; 16" transparent="1" noWrap="1" zPosition="2" backgroundColor="black" foregroundColor="#c5c5c5" />
+<eLabel name="new eLabel" position="1469,130" size="350,1" foregroundColor="white" backgroundColor="white" />
+<widget name="infoall" position="1400,671" size="492,80" transparent="1" font="Regular; 32" halign="left" valign="top" backgroundColor="black" />
+<widget name="gain" position="1400,751" size="492,80" transparent="1" font="Regular; 32" halign="left" valign="top" backgroundColor="black" />
+<widget name="finalsize" position="1400,831" size="492,77" transparent="1" font="Regular; 32" halign="left" valign="top" backgroundColor="black" />
+<widget name="storage" position="1400,594" size="492,75" transparent="1" font="Regular; 25" foregroundColor="#D9A300" backgroundColor="#663300" valign="top" />
+<widget name="text" position="359,63" size="943,60" zPosition="0" halign="left" font="Regular; 40" foregroundColor="#FFBF00" transparent="1" backgroundColor="black" />
+</screen>
+</skin>
