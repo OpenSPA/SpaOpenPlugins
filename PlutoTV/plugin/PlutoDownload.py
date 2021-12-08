@@ -124,6 +124,8 @@ class DownloadComponent:
 		self.callbackList.remove(callback)
 
 
+def sort(elem):
+	return elem['number']
 
 def getUUID():
 	return sid1_hex, deviceId1_hex
@@ -148,7 +150,7 @@ def getOndemand():
 	return getURL(BASE_VOD%('sid=%s&deviceId=%s'%(getUUID())), header=buildHeader(), life=datetime.timedelta(hours=1))
 
 def getChannels():
-	return sorted(getURL(BASE_LINEUP%('sid=%s&deviceId=%s'%(getUUID())), header=buildHeader(), life=datetime.timedelta(hours=1)), key=lambda i: i['number'])
+	return sorted(getURL(BASE_LINEUP%('sid=%s&deviceId=%s'%(getUUID())), header=buildHeader(), life=datetime.timedelta(hours=1)), key=sort)
 
 def getURL(url, param={}, header={'User-agent': 'Mozilla/5.0 (Windows NT 6.2; rv:24.0) Gecko/20100101 Firefox/24.0'}, life=datetime.timedelta(minutes=15)):
 	cacheresponse = None
@@ -178,7 +180,7 @@ def getGuidedata(full=False):
 	stop = (datetime.datetime.fromtimestamp(getLocalTime()) + datetime.timedelta(hours=24)).strftime('%Y-%m-%dT%H:00:00Z')
 
 	if full: return getURL(GUIDE_URL %(start,stop,'sid=%s&deviceId=%s'%(getUUID())), life=datetime.timedelta(hours=1))
-	else: return sorted((getURL(BASE_GUIDE %(start,stop,'sid=%s&deviceId=%s'%(getUUID())), life=datetime.timedelta(hours=1))), key=lambda i: i['number'])
+	else: return sorted((getURL(BASE_GUIDE %(start,stop,'sid=%s&deviceId=%s'%(getUUID())), life=datetime.timedelta(hours=1))), key=sort)
 
 def buildM3U(channel):
 	#(number,_id,name,logo,url)
