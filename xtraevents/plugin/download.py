@@ -65,14 +65,15 @@ class downloads(Screen):
 		with open(skin, 'r') as f:
 			self.skin = f.read()
 		self.titles = ""
+		self.setTitle(_("xtraEvent..."))
 		self['status'] = Label()
 		self['info'] = Label()
 		self['info2'] = Label()
 		self['key_red'] = Label(_('Close'))
-		self['key_green'] = Label(_('Download'))
+		self['key_green'] = Label(_("Start"))
 		# self['key_yellow'] = Label(_('Download'))
 		# self['key_blue'] = Label(_('Manuel Search'))
-		self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'cancel': self.close, 'red': self.close, 'ok':self.save,'green':self.save}, -2)
+		self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {'cancel': self.close, 'red': self.close, 'green':self.save}, -2)
 		
 		self['progress'] = ProgressBar()
 		self['progress'].setRange((0, 100))
@@ -90,25 +91,14 @@ class downloads(Screen):
 		ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
 		try:
 			events = epgcache.lookupEvent(['IBDCTSERNX', (ref, 1, -1, -1)])
-			if config.plugins.xtraEvent.searchNUMBER.value == "all epg":
-				n = len(events)
-				titles = []
-				for i in range(int(n)):
-					title = events[i][4]
-					evntNm = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", title).rstrip()
-					titles.append(str(evntNm))
-				self.titles = list(dict.fromkeys(titles))
-				self.download()
-			else:
-				n = config.plugins.xtraEvent.searchNUMBER.value
-				titles = []
-				for i in range(int(n)):
-					title = events[i][4]
-					evntNm = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", title).rstrip()
-					titles.append(str(evntNm))
-				self.titles = list(dict.fromkeys(titles))
-				# threading.Thread(target=self.down, daemon=True).start()
-				self.download()
+			n = len(events)
+			titles = []
+			for i in range(int(n)):
+				title = events[i][4]
+				evntNm = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", title).rstrip()
+				titles.append(str(evntNm))
+			self.titles = list(dict.fromkeys(titles))
+			self.download()
 		except:
 			pass
 
@@ -145,6 +135,10 @@ class downloads(Screen):
 
 ####################################################
 	def down(self):
+		self['key_green'].setText(_("Downloading..."))
+		self['info'].setText(" ")
+		self['info2'].setText(" ")
+		self['status'].setText(" ")
 		self['progress'].setValue(0)
 		now = datetime.now()
 		dt = now.strftime("%d/%m/%Y %H:%M:%S")
@@ -159,8 +153,6 @@ class downloads(Screen):
 			tvdb_backdrop_downloaded = 0
 			fanart_backdrop_downloaded = 0
 			banner_downloaded = 0
-			extra_downloaded = 0
-			extra2_downloaded = 0
 			info_downloaded = 0
 			title = ""
 			n = len(self.titles)
@@ -320,42 +312,6 @@ class downloads(Screen):
 # backdrop() #################################################################
 
 				if config.plugins.xtraEvent.backdrop.value == True:
-					if config.plugins.xtraEvent.extra.value == True:
-						dwnldFile = "{}backdrop/{}.jpg".format(pathLoc, title)
-						if not os.path.exists(dwnldFile):
-							url = "http://capi.tvmovie.de/v1/broadcasts/search?q={}&page=1&rows=1".format(title.replace(" ", "+"))
-							try:
-								url = requests.get(url).json()['results'][0]['images'][0]['filepath']['android-image-320-180']
-							except:
-								pass
-							open(dwnldFile, 'wb').write(requests.get(url, stream=True, allow_redirects=True).content)
-							extra_downloaded += 1
-							downloaded = extra_downloaded
-							self.prgrs(downloaded, n)
-							self['info'].setText(_("{}, backdrop downloaded from EXTRA...".format(title.upper())))
-							self.brokenImageRemove()
-					if config.plugins.xtraEvent.tmdb.value == True:
-						dwnldFile = pathLoc + "backdrop/{}.jpg".format(title)
-						if not os.path.exists(dwnldFile):				
-							srch = "multi"
-							lang = config.plugins.xtraEvent.searchLang.value
-							url_tmdb = "https://api.themoviedb.org/3/search/{}?api_key={}&query={}&language={}".format(srch, tmdb_api, quote(title), lang)
-							try:
-								backdrop = requests.get(url_tmdb).json()['results'][0]['backdrop_path']
-								if backdrop:
-									backdrop_size = config.plugins.xtraEvent.TMDBbackdropsize.value
-									url = "https://image.tmdb.org/t/p/{}{}".format(backdrop_size, backdrop)
-									open(dwnldFile, 'wb').write(requests.get(url, stream=True, allow_redirects=True).content)
-									tmdb_backdrop_downloaded += 1
-									downloaded = tmdb_backdrop_downloaded
-									self.prgrs(downloaded, n)
-									self['info'].setText(_("{}, backdrop downloaded from TMDB...".format(title.upper())))
-									self.brokenImageRemove()
-								else:
-									self['info'].setText(str("TMDB backdrop : exists "+title))
-							except:
-								pass
-
 					if config.plugins.xtraEvent.tvdb.value == True:
 						dwnldFile = pathLoc + "backdrop/{}.jpg".format(title)
 						if not os.path.exists(dwnldFile):
@@ -424,33 +380,6 @@ class downloads(Screen):
 							except:
 								pass
 
-					if config.plugins.xtraEvent.extra2.value == True:
-						dwnldFile = "{}backdrop/{}.jpg".format(pathLoc, title)
-						if not os.path.exists(dwnldFile):
-							# try:
-								# url="https://www.bing.com/search?q={}+poster+jpg".format(title.replace(" ", "+"))
-								# headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
-								# ff = requests.get(url, stream=True, headers=headers).text
-								# p='ihk=\"\/th\?id=(.*?)&'
-								# f= re.findall(p, ff)
-								# url = "https://www.bing.com/th?id="+f[0]
-							# except:
-								# pass
-							try:
-								url = "https://www.google.com/search?q={}&tbm=isch&tbs=sbd:0".format(title.replace(" ", "+"))
-								headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
-								ff = requests.get(url, stream=True, headers=headers).text
-								p = re.findall('"https://(.*?).jpg",(\d*),(\d*)', ff)
-								url = "https://" + p[i+1][0] + ".jpg"
-							except:
-								pass
-							open(dwnldFile, 'wb').write(requests.get(url, stream=True, allow_redirects=True).content)
-							extra2_downloaded += 1
-							downloaded = extra2_downloaded
-							self.prgrs(downloaded, n)
-							self['info'].setText(_("{}, backdrop downloaded from EXTRA2...".format(title.upper())))
-							self.brokenImageRemove()
-
 # infos #################################################################
 				if config.plugins.xtraEvent.info.value == True:
 					info_files = pathLoc + "infos/{}.json".format(title)
@@ -473,15 +402,15 @@ class downloads(Screen):
 			report = "end : {}\
 				\ndownloaded ;\
 				\nposter; tmdb :{}, tvdb :{}, maze :{}, fanart :{}\
-				\nbackdrop; tmdb :{}, tvdb :{}, fanart :{}, extra :{}, extra2 :{}\
+				\nbackdrop; tmdb :{}, tvdb :{}, fanart :{}\
 				\nbanner :{}\
 				\ninfos :{}".format(dt, str(tmdb_poster_downloaded), str(tvdb_poster_downloaded), str(maze_poster_downloaded), str(fanart_poster_downloaded), 
-				str(tmdb_backdrop_downloaded), str(tvdb_backdrop_downloaded), str(fanart_backdrop_downloaded), 
-				str(extra_downloaded), str(extra2_downloaded),
+				str(tmdb_backdrop_downloaded), str(tvdb_backdrop_downloaded), str(fanart_backdrop_downloaded),
 				str(banner_downloaded), 
 				str(info_downloaded))
 			self['info'].setText("downloads finished...")
 			self['info2'].setText(report)
+			self['key_green'].setText(_("Start"))
 			
 			with open("/tmp/up_report", "a+") as f:
 				f.write(report)

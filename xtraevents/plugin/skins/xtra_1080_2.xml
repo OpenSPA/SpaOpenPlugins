@@ -17,7 +17,6 @@
       <convert type="ClockToText">Default</convert>
     </widget>
     <eLabel name="new eLabel" position="1260,975" size="10,45" backgroundColor="#666666" zPosition="2" />
-    <eLabel name="" text=" MENU" position="1260,985" size="150,45" transparent="1" halign="center" font="Console; 30" />
     <eLabel name="new eLabel" position="1725,975" size="10,45" backgroundColor="#666666" zPosition="2" />
     <eLabel name="" text=" INFO" position="1725,985" size="150,45" transparent="1" halign="center" font="Console; 30" />
     <eLabel name="" position="30,30" size="1165,1020" backgroundColor="#30000000" zPosition="-1" />

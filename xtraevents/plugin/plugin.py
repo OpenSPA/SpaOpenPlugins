@@ -8,6 +8,22 @@ import threading
 from . import xtra
 from . import download
 from six.moves import reload_module
+from Components.Language import language
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
+import gettext
+import os
+
+lang = language.getLanguage()
+os.environ["LANGUAGE"] = lang[:2]
+gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
+gettext.textdomain("enigma2")
+gettext.bindtextdomain("xtraEvent", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/xtraEvent/locale/"))
+
+def _(txt):
+	t = gettext.dgettext("xtraEvent", txt)
+	if t == txt:
+		t = gettext.gettext(txt)
+	return t
 
 def ddwn():
 	if config.plugins.xtraEvent.timerMod.value == True:

@@ -9,7 +9,7 @@
     <eLabel name="new eLabel" position="410,640" size="10,30" backgroundColor="#ffd24c" zPosition="2" />
     <eLabel name="new eLabel" position="600,640" size="10,30" backgroundColor="#00a3d9" zPosition="2" />
     <widget source="key_red" render="Label" font="Regular;20" foregroundColor="#ffffff" backgroundColor="30000000" position="65,645" size="150,30" halign="left" transparent="1" zPosition="1" />
-    <widget source="key_green" render="Label" font="Regular;20" foregroundColor="#ffffff" backgroundColor="30000000" position="245,645" size="150,30" halign="left" transparent="1" zPosition="1" />
+    <widget name="key_green" render="Label" font="Regular;20" foregroundColor="#ffffff" backgroundColor="30000000" position="245,645" size="150,30" halign="left" transparent="1" zPosition="1" />
     <widget source="key_yellow" render="Label" font="Regular;20" foregroundColor="#ffffff" backgroundColor="30000000" position="430,645" size="150,30" halign="left" transparent="1" zPosition="1" />
     <widget source="key_blue" render="Label" font="Regular; 20" foregroundColor="#ffffff" backgroundColor="30000000" position="620,645" size="150,30" halign="left" transparent="1" zPosition="1" />
     <eLabel name="" position="30,30" size="770,660" backgroundColor="#30000000" zPosition="-1" />

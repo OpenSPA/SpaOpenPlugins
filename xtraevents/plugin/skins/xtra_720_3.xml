@@ -13,6 +13,5 @@
   <widget source="global.CurrentTime" render="Label" position="839,40" size="400,30" font="Console; 25" valign="center" halign="center" transparent="1" foregroundColor="#c5c5c5" backgroundColor="#23262e" zPosition="2">
     <convert type="ClockToText">Default</convert>
   </widget>
-  <eLabel name="" text=" MENU" position="800,640" size="150,30" transparent="1" halign="center" font="Console; 20" />
   <eLabel name="" text=" INFO" position="1155,640" size="100,30" transparent="1" halign="center" font="Console; 20" />
 </screen>

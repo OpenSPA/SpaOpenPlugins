@@ -6,7 +6,7 @@
 	<widget name="info" position="40,175" size="740,40" transparent="1" font="Regular; 24" foregroundColor="#ffffff" backgroundColor="#23262e" valign="top" />
 	<widget name="info2" position="40,220" size="740,400" transparent="1" font="Regular; 24" foregroundColor="#ffffff" backgroundColor="#23262e" />
 	<widget source="key_red" render="Label" font="Regular;22" foregroundColor="#ffffff" backgroundColor="#23262e" position="45,640" size="170,30" halign="left" transparent="1" zPosition="1" />
-	<widget source="key_green" render="Label" font="Regular;22" foregroundColor="#ffffff" backgroundColor="#23262e" position="235,640" size="170,30" halign="left" transparent="1" zPosition="1" />
+	<widget name="key_green" render="Label" font="Regular;22" foregroundColor="#ffffff" backgroundColor="#23262e" position="235,640" size="170,30" halign="left" transparent="1" zPosition="1" />
 	<widget source="key_yellow" render="Label" font="Regular;22" foregroundColor="#ffffff" backgroundColor="#23262e" position="425,640" size="170,30" halign="left" transparent="1" zPosition="1" />
 	<widget source="key_blue" render="Label" font="Regular; 20" foregroundColor="#ffffff" backgroundColor="#23262e" position="615,640" size="170,30" halign="left" transparent="1" zPosition="1" />
 	<widget source="global.CurrentTime" render="Label" position="839,40" size="400,30" font="Console; 25" valign="center" halign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#23262e" zPosition="2">
