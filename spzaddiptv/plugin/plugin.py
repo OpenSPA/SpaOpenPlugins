@@ -8,7 +8,11 @@ from Components.Sources.StaticText import StaticText
 from Components.ServiceList import ServiceList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from urllib.parse import quote
+import sys 
+if sys.version_info[0] == 3:
+	from urllib.parse import quote
+else:
+	from urllib import quote
 from enigma import eDVBDB, eServiceReference, eServiceCenter, eListboxPythonMultiContent, gFont, BT_SCALE, BT_KEEP_ASPECT_RATIO, RT_HALIGN_RIGHT,RT_HALIGN_LEFT,RT_HALIGN_CENTER
 from Screens.ChannelSelection import ChannelSelectionEdit, ChannelSelectionBase
 from Components.config import config
