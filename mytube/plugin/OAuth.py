@@ -1,8 +1,13 @@
 # This autentification code based on: https://github.com/guyc/py-gaugette/blob/master/gaugette/oauth.py
 # https://developers.google.com/accounts/docs/OAuth2ForDevices
 
-from urllib import urlencode
-from httplib import HTTPSConnection
+from . import py3
+if py3():
+	from urllib.parse import urlencode
+	from http.client import HTTPSConnection
+else:
+	from urllib import urlencode
+	from httplib import HTTPSConnection
 from json import loads
 from time import sleep
 
@@ -45,8 +50,8 @@ class OAuth:
 			self.verification_url = data['verification_url']
 			self.retry_interval = data['interval']
 		else:
-			print(response.status)
-			print(response.read())
+			print((response.status))
+			print((response.read()))
 			return None
 		return self.user_code
 
@@ -91,8 +96,8 @@ class OAuth:
 			self.conn.close()
 			return data['access_token']
 		else:
-			print("Unexpected response %d" % response.status)
-			print(response.read())
+			print(("Unexpected response %d" % response.status))
+			print((response.read()))
 			self.conn.close()
 		return None
 

@@ -1,6 +1,6 @@
 # This code comes from youtube-dl: https://github.com/rg3/youtube-dl/blob/master/youtube_dl/swfinterp.py
 
-from __future__ import unicode_literals
+
 
 import collections
 import io
@@ -10,7 +10,7 @@ import zlib
 
 def _extract_tags(file_contents):
     if file_contents[1:3] != b'WS':
-        print '[SWFInterpreter] Not an SWF file; header is %r' % file_contents[:3]
+        print('[SWFInterpreter] Not an SWF file; header is %r' % file_contents[:3])
     if file_contents[:1] == b'C':
         content = zlib.decompress(file_contents[8:])
     else:
@@ -77,10 +77,10 @@ class _AVMClass(object):
         return '_AVMClass(%s)' % (self.name)
 
     def register_methods(self, methods):
-        self.method_names.update(methods.items())
+        self.method_names.update(list(methods.items()))
         self.method_idxs.update(dict(
             (idx, name)
-            for name, idx in methods.items()))
+            for name, idx in list(methods.items())))
 
 
 class _Multiname(object):
@@ -325,7 +325,7 @@ class SWFInterpreter(object):
                 function_idx = u30()
                 methods[function_idx] = self.multinames[trait_name_idx]
             else:
-                print '[SWFInterpreter] Unsupported trait kind %d' % kind
+                print('[SWFInterpreter] Unsupported trait kind %d' % kind)
                 return None
 
             if attrs & 0x4 != 0:  # Metadata present
@@ -417,7 +417,7 @@ class SWFInterpreter(object):
         try:
             res = self._classes_by_name[class_name]
         except KeyError:
-            print '[SWFInterpreter] Class %r not found' % class_name
+            print('[SWFInterpreter] Class %r not found' % class_name)
             return None
 
         if call_cinit and hasattr(res, 'cinit_idx'):
@@ -437,8 +437,8 @@ class SWFInterpreter(object):
         if func_name in self._classes_by_name:
             return self._classes_by_name[func_name].make_object()
         if func_name not in avm_class.methods:
-            print '[SWFInterpreter] Cannot find function %s.%s' % (
-                avm_class.name, func_name)
+            print('[SWFInterpreter] Cannot find function %s.%s' % (
+                avm_class.name, func_name))
             return None
         m = avm_class.methods[func_name]
 
@@ -531,11 +531,11 @@ class SWFInterpreter(object):
                         if mname == 'String':
                             assert len(args) == 1
                             assert isinstance(args[0], (
-                                int, unicode, _Undefined))
+                                int, str, _Undefined))
                             if args[0] == undefined:
                                 res = 'undefined'
                             else:
-                                res = unicode(args[0])
+                                res = str(args[0])
                             stack.append(res)
                             continue
                         else:
@@ -560,10 +560,10 @@ class SWFInterpreter(object):
                             res = obj[mname]
                         stack.append(res)
                         continue
-                    elif isinstance(obj, unicode):
+                    elif isinstance(obj, str):
                         if mname == 'split':
                             assert len(args) == 1
-                            assert isinstance(args[0], unicode)
+                            assert isinstance(args[0], str)
                             if args[0] == '':
                                 res = list(obj)
                             else:
@@ -586,7 +586,7 @@ class SWFInterpreter(object):
                             continue
                         elif mname == 'join':
                             assert len(args) == 1
-                            assert isinstance(args[0], unicode)
+                            assert isinstance(args[0], str)
                             res = args[0].join(obj)
                             stack.append(res)
                             continue
@@ -712,9 +712,9 @@ class SWFInterpreter(object):
                     pname = self.multinames[index]
                     if pname == 'length':
                         obj = stack.pop()
-                        assert isinstance(obj, (unicode, list))
+                        assert isinstance(obj, (str, list))
                         stack.append(len(obj))
-                    elif isinstance(pname, unicode):  # Member access
+                    elif isinstance(pname, str):  # Member access
                         obj = stack.pop()
                         if isinstance(obj, _AVMClass):
                             res = obj.static_properties[pname]
@@ -750,7 +750,7 @@ class SWFInterpreter(object):
                     # um, yes, it's any value
                     stack.append(value)
                 elif opcode == 133:  # coerce_s
-                    assert isinstance(stack[-1], (type(None), unicode))
+                    assert isinstance(stack[-1], (type(None), str))
                 elif opcode == 147:  # decrement
                     value = stack.pop()
                     assert isinstance(value, int)
@@ -759,7 +759,7 @@ class SWFInterpreter(object):
                     value = stack.pop()
                     return {
                         _Undefined: 'undefined',
-                        unicode: 'String',
+                        str: 'String',
                         int: 'Number',
                         float: 'Number',
                     }[type(value)]

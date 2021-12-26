@@ -1,4 +1,4 @@
-from . import _
+from . import _, esHD
 from Components.AVSwitch import AVSwitch
 from Components.ActionMap import ActionMap
 from Components.Button import Button
@@ -12,9 +12,9 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.List import List
 from Components.Task import Task, Job, job_manager
 from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, getConfigListEntry, ConfigPassword
-#, ConfigIP, ConfigNumber, ConfigLocations
-from MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, MyTubeTasksScreen, MyTubeHistoryScreen
-from MyTubeService import validate_cert, get_rnd, myTubeService
+##, ConfigIP, ConfigNumber, ConfigLocations
+from .MyTubeSearch import ConfigTextWithGoogleSuggestions, MyTubeSettingsScreen, MyTubeTasksScreen, MyTubeHistoryScreen
+from .MyTubeService import myTubeService
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications, InfoBarSeek
@@ -29,8 +29,6 @@ from Tools.Directories import resolveFilename, SCOPE_HDD, SCOPE_CURRENT_PLUGIN, 
 from Tools.Downloader import downloadWithProgress
 from Tools import ASCIItranslit
 
-from __init__ import decrypt_block
-
 from enigma import eTimer, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, gFont, ePicLoad, eServiceReference, iPlayableService, BT_SCALE, BT_KEEP_ASPECT_RATIO
 from os import path as os_path, remove as os_remove
 from twisted.web import client
@@ -38,30 +36,32 @@ from time import sleep
 
 
 #added by openspa
-from skinsmytube import *
-from skinsmytubeHD import *
-from Plugins.Extensions.spazeMenu.plugin import esHD
+from .skinsmytube import *
+from .skinsmytubeHD import *
 
-def rutaskin(nombre):
-	if esHD():
-		nombre=nombre+'HD'
-	return nombre    
+#def rutaskin(nombre):
+#	if esHD():
+#		nombre=nombre+'HD'
+#	return nombre    
 
-class eTPM:
-		TPMD_DT_LEVEL3_CERT = 5
-		TPMD_DT_LEVEL2_CERT = 4
-		def __init__(self):
-			self.TPM = self
-		def getCert(self, *args):
-			return "12345678"
-		def challenge(self, r):
-			return r
-def decrypt_block(a,b):
-		return 80*"-" + a
-def get_rnd():
-		return "12345678"
-def validate_cert(*args):
-		return "12345678"
+#class eTPM:
+#		TPMD_DT_LEVEL3_CERT = 5
+#		TPMD_DT_LEVEL2_CERT = 4
+#		def __init__(self):
+#			self.TPM = self
+#		def getCert(self, *args):
+#			return "12345678"
+#		def challenge(self, r):
+#			return r
+
+#def decrypt_block(a,b):
+#		return 80*"-" + a
+
+#def get_rnd():
+#		return "12345678"
+
+#def validate_cert(*args):
+#		return "12345678"
 
 all_feeds = { 	"most_viewed": _("Most viewed"),
 		"top_rated": _("Top rated"),
@@ -92,8 +92,8 @@ all_feeds = { 	"most_viewed": _("Most viewed"),
 	}
 
 
-etpm = eTPM()
-rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
+#etpm = eTPM()
+#rootkey = ['\x9f', '|', '\xe4', 'G', '\xc9', '\xb4', '\xf4', '#', '&', '\xce', '\xb3', '\xfe', '\xda', '\xc9', 'U', '`', '\xd8', '\x8c', 's', 'o', '\x90', '\x9b', '\\', 'b', '\xc0', '\x89', '\xd1', '\x8c', '\x9e', 'J', 'T', '\xc5', 'X', '\xa1', '\xb8', '\x13', '5', 'E', '\x02', '\xc9', '\xb2', '\xe6', 't', '\x89', '\xde', '\xcd', '\x9d', '\x11', '\xdd', '\xc7', '\xf4', '\xe4', '\xe4', '\xbc', '\xdb', '\x9c', '\xea', '}', '\xad', '\xda', 't', 'r', '\x9b', '\xdc', '\xbc', '\x18', '3', '\xe7', '\xaf', '|', '\xae', '\x0c', '\xe3', '\xb5', '\x84', '\x8d', '\r', '\x8d', '\x9d', '2', '\xd0', '\xce', '\xd5', 'q', '\t', '\x84', 'c', '\xa8', ')', '\x99', '\xdc', '<', '"', 'x', '\xe8', '\x87', '\x8f', '\x02', ';', 'S', 'm', '\xd5', '\xf0', '\xa3', '_', '\xb7', 'T', '\t', '\xde', '\xa7', '\xf1', '\xc9', '\xae', '\x8a', '\xd7', '\xd2', '\xcf', '\xb2', '.', '\x13', '\xfb', '\xac', 'j', '\xdf', '\xb1', '\x1d', ':', '?']
 
 config.plugins.mytube = ConfigSubsection()
 config.plugins.mytube.search = ConfigSubsection()
@@ -223,6 +223,8 @@ config.plugins.mytube.refreshToken = ConfigText(default='')
 #config.plugins.mytube.general.ProxyIP = ConfigIP(default=[0,0,0,0])
 #config.plugins.mytube.general.ProxyPort = ConfigNumber(default=8080)
 
+plugin_path = "/usr/lib/enigma2/python/Plugins/Extensions/MyTube"
+
 def getpluginpath():
 	return plugin_path
 
@@ -252,13 +254,13 @@ class downloadTask(Task):
 		self.progress = int(self.end*recvbytes/float(totalbytes))
 	
 	def http_finished(self, string=""):
-		print "[http_finished]" + str(string)
+		print("[http_finished]" + str(string))
 		Task.processFinished(self, 0)
 	
 	def http_failed(self, failure_instance=None, error_message=""):
 		if error_message == "" and failure_instance is not None:
 			error_message = failure_instance.getErrorMessage()
-			print "[http_failed] " + error_message
+			print("[http_failed] " + error_message)
 			Task.processFinished(self, 1)
 
 
@@ -274,11 +276,11 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	else:
 		skin = skinMyTubePlayerMainScreen    
 		
-	def __init__(self, session, l2key):
+	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		self.l2key = l2key
-		self.l3key = None
+#		self.l2key = l2key
+#		self.l3key = None
 		self.skin_path = plugin_path
 		self.FeedURL = None
 		self.ytfeed = None
@@ -344,11 +346,11 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["feed"] = Label()
 		self["icon"] = Pixmap()
 		self.icon = None
-        	# Get FrameBuffer Scale for ePicLoad()
-        	sc = AVSwitch().getFramebufferScale()
-        	self.picload = ePicLoad()
-        	self.picload.PictureData.get().append(self.showIconPixmap)
-        	self.picload.setPara((85, 85, sc[0], sc[1], 0, 1, "#00e0e0e0"))
+		# Get FrameBuffer Scale for ePicLoad()
+		sc = AVSwitch().getFramebufferScale()
+		self.picload = ePicLoad()
+		self.picload.PictureData.get().append(self.showIconPixmap)
+		self.picload.setPara((85, 85, sc[0], sc[1], 0, 1, "#00e0e0e0"))
 
 
 		self["searchactions"] = ActionMap(["ShortcutActions", "WizardActions", "HelpActions", "MediaPlayerActions", "DirectionActions"],
@@ -443,7 +445,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def __onClose(self):
 		if myTubeService.is_auth() is True and config.plugins.mytube.general.logininit.value is False:
 			if self.icon != None:
-	        		if fileExists(self.icon, 'r'):
+				if fileExists(self.icon, 'r'):
 					os_remove(self.icon)
 
 		myTubeService.resetAuthState()
@@ -464,45 +466,45 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if current[1].help_window.instance is not None:
 			current[1].help_window.instance.hide()
 
-		l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
-		if l3cert is None or l3cert is "":
-			self["videoactions"].setEnabled(False)
-			self["searchactions"].setEnabled(False)
-			self["config_actions"].setEnabled(False)
-			self["historyactions"].setEnabled(False)
-			self["statusactions"].setEnabled(True)
-			self.hideSuggestions()
-			self.statuslist = []
-			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
-			self["feedlist"].style = "state"
-			self['feedlist'].setList(self.statuslist)
-			return
+#		l3cert = etpm.getCert(eTPM.TPMD_DT_LEVEL3_CERT)
+#		if l3cert is None or l3cert is "":
+#			self["videoactions"].setEnabled(False)
+#			self["searchactions"].setEnabled(False)
+#			self["config_actions"].setEnabled(False)
+#			self["historyactions"].setEnabled(False)
+#			self["statusactions"].setEnabled(True)
+#			self.hideSuggestions()
+#			self.statuslist = []
+#			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+#			self["feedlist"].style = "state"
+#			self['feedlist'].setList(self.statuslist)
+#			return
 
-		self.l3key = validate_cert(l3cert, self.l2key)
-		if self.l3key is None:
-			print "l3cert invalid"
-			return
-		rnd = get_rnd()
-		if rnd is None:
-			print "random error"
-			return
+#		self.l3key = validate_cert(l3cert, self.l2key)
+#		if self.l3key is None:
+#			print("l3cert invalid")
+#			return
+#		rnd = get_rnd()
+#		if rnd is None:
+#			print("random error")
+#			return
 
-		val = etpm.challenge(rnd)
-		result = decrypt_block(val, self.l3key)
+#		val = etpm.challenge(rnd)
+#		result = decrypt_block(val, self.l3key)
 
 		self.statuslist = []
-		if result[80:88] == rnd:
+#		if result[80:88] == rnd:
 
-			# we need to login here; startService() is fired too often for external curl
-			if self.tryUserLogin():
-				self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
-				self.Timer.start(200)
-			self["feedlist"].style = "state"
-			self['feedlist'].setList(self.statuslist)
-		else:
-			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
-			self["feedlist"].style = "state"
-			self['feedlist'].setList(self.statuslist)		
+		# we need to login here; startService() is fired too often for external curl
+		if self.tryUserLogin():
+			self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+			self.Timer.start(200)
+		self["feedlist"].style = "state"
+		self['feedlist'].setList(self.statuslist)
+#		else:
+#			self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+#			self["feedlist"].style = "state"
+#			self['feedlist'].setList(self.statuslist)		
 	
 	def TimerFire(self):
 		self.Timer.stop()
@@ -538,7 +540,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				name = self.getuserData()
 				self.statuslist.append(( _("Login OK"), _('Hello') + ' ' + str(name)))
 			except Exception as e:
-				print 'Login-Error: ' + str(e)
+				print('Login-Error: ' + str(e))
 				self.statuslist.append(( _("Login failed"), str(e)))
 				return False
 		else:
@@ -565,23 +567,23 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			#self["videowatch"].setText("%d" % int(coment_count))
 			self["user_uploads"].setText("%d" % int(video_count))
 			self.icon = self.skin_path + "/img/" + img_url.split("/")[-1]
-        		if fileExists(self.icon, 'r'):
-            			self.goticon()
-        		else:
-            			client.downloadPage(img_url, self.icon, agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.0.2) Gecko/2008091620 Firefox/3.0.2").addCallback(self.goticon).addErrback(self.showThumbError)
+			if fileExists(self.icon, 'r'):
+				self.goticon()
+			else:
+				client.downloadPage(img_url.encode("utf-8"), self.icon, agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.0.2) Gecko/2008091620 Firefox/3.0.2").addCallback(self.goticon).addErrback(self.showThumbError)
 			return username
 			
-    	def goticon(self, data=""):
+	def goticon(self, data=""):
 		if self.icon != None:
-        		self.picload.startDecode(str(self.icon))
+			self.picload.startDecode(str(self.icon))
 
-    	def showIconPixmap(self, picInfo=None):
-        	ptr = self.picload.getData()
-        	if ptr != None:
-        	    	self["icon"].instance.setPixmap(ptr.__deref__())
-        	    	self["icon"].show()
+	def showIconPixmap(self, picInfo=None):
+		ptr = self.picload.getData()
+		if ptr != None:
+			self["icon"].instance.setPixmap(ptr.__deref__())
+			self["icon"].show()
 
-    	def showThumbError(self, error):
+	def showThumbError(self, error):
 		pass
 
 	def setState(self,status = None):
@@ -597,50 +599,50 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.statuslist = []
 			self.hideSuggestions()
 			result = None
-			if self.l3key is not None:
-				rnd = get_rnd()
-				if rnd is None:
-					return
-				val = etpm.challenge(rnd)
-				result = decrypt_block(val, self.l3key)
-			if not result or result[80:88] != rnd:
-				self["key_green"].show()
-				self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
-				self["feedlist"].style = "state"
-				self['feedlist'].setList(self.statuslist)
-			else:
-				print "Genuine Dreambox validation passed"
-				if self.FirstRun == True:
-					self.appendEntries = False
+#			if self.l3key is not None:
+#				rnd = get_rnd()
+#				if rnd is None:
+#					return
+#				val = etpm.challenge(rnd)
+#				result = decrypt_block(val, self.l3key)
+#			if not result or result[80:88] != rnd:
+#				self["key_green"].show()
+#				self.statuslist.append(( _("Genuine Dreambox validation failed!"), _("Verify your Dreambox authenticity by running the genuine dreambox plugin!" ) ))
+#				self["feedlist"].style = "state"
+#				self['feedlist'].setList(self.statuslist)
+#			else:
+			print("Genuine Dreambox validation passed")
+			if self.FirstRun == True:
+				self.appendEntries = False
 #					myTubeService.startService()
-					if myTubeService.is_auth():
-						myTubeService.getuserplaylist()
-				if self.HistoryWindow is not None:
-					self.HistoryWindow.deactivate()
-					self.HistoryWindow.instance.hide()
-				if status == 'getFeed':
-					self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
-				elif status == 'getSearchFeed':
-					self.statuslist.append(( _("Fetching search entries"), _("Trying to download the Youtube search results. Please wait..." ) ))
-				elif status == 'Error':
-					self.statuslist.append(( _("An error occured."), _("There was an error getting the feed entries. Please try again." ) ))
-				elif status == 'noVideos':
-					self["key_green"].show()
-					self.statuslist.append(( _("No videos to display"), _("Please select a standard feed or try searching for videos." ) ))
-				elif status == 'byPass':
-					self.statuslist.append(( _("Not fetching feed entries"), _("Please enter your search term." ) ))
-					self["feedlist"].style = "state"
-					self['feedlist'].setList(self.statuslist)
-					self.switchToConfigList()
+				if myTubeService.is_auth():
+					myTubeService.getuserplaylist()
+			if self.HistoryWindow is not None:
+				self.HistoryWindow.deactivate()
+				self.HistoryWindow.instance.hide()
+			if status == 'getFeed':
+				self.statuslist.append(( _("Fetching feed entries"), _("Trying to download the Youtube feed entries. Please wait..." ) ))
+			elif status == 'getSearchFeed':
+				self.statuslist.append(( _("Fetching search entries"), _("Trying to download the Youtube search results. Please wait..." ) ))
+			elif status == 'Error':
+				self.statuslist.append(( _("An error occured."), _("There was an error getting the feed entries. Please try again." ) ))
+			elif status == 'noVideos':
+				self["key_green"].show()
+				self.statuslist.append(( _("No videos to display"), _("Please select a standard feed or try searching for videos." ) ))
+			elif status == 'byPass':
+				self.statuslist.append(( _("Not fetching feed entries"), _("Please enter your search term." ) ))
 				self["feedlist"].style = "state"
 				self['feedlist'].setList(self.statuslist)
-				if self.FirstRun == True:
-					self.FirstRun = False
-					if config.plugins.mytube.general.loadFeedOnOpen.value:
-						self.getFeed(self.BASE_STD_FEEDURL, str(config.plugins.mytube.general.startFeed.value))
+				self.switchToConfigList()
+			self["feedlist"].style = "state"
+			self['feedlist'].setList(self.statuslist)
+			if self.FirstRun == True:
+				self.FirstRun = False
+				if config.plugins.mytube.general.loadFeedOnOpen.value:
+					self.getFeed(self.BASE_STD_FEEDURL, str(config.plugins.mytube.general.startFeed.value))
 
 	def handleHelpWindow(self):
-		print "[handleHelpWindow]"
+		print("[handleHelpWindow]")
 		if self.currList == "configlist":
 			self.hideSuggestions()
 			self.session.openWithCallback(self.ScreenClosed, MyTubeVideoHelpScreen, self.skin_path, wantedinfo = self.searchtext, wantedtitle = _("MyTubePlayer Help") )
@@ -648,7 +650,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.session.openWithCallback(self.ScreenClosed, MyTubeVideoHelpScreen, self.skin_path, wantedinfo = self.feedtext, wantedtitle = _("MyTubePlayer Help") )
 			
 	def handleFirstHelpWindow(self):
-		print "[handleFirstHelpWindow]"
+		print("[handleFirstHelpWindow]")
 		if config.plugins.mytube.general.showHelpOnOpen.value is True:
 			if self.currList == "configlist":
 				self.hideSuggestions()
@@ -735,11 +737,11 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				self.splitTaimer.timeout.callback.append(self.splitTaimerStop)
 				userCode = str(self.oauth.get_user_code())
 				msg = _('Go to %s\nAnd enter the code %s') % (str(self.oauth.verification_url), userCode)
-				print "[YouTube] ", msg
+				print("[YouTube] ", msg)
 				self.mbox = self.session.open(MessageBox, msg, MessageBox.TYPE_INFO)
 				self.splitTaimer.start(9000)
 		if answer == "settings":
-			print "settings selected"
+			print("settings selected")
 			self.session.openWithCallback(self.ScreenClosed,MyTubeSettingsScreen, self.skin_path )
 		elif answer == "related":
 			current = self["feedlist"].getCurrent()[0]
@@ -799,7 +801,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if not refreshToken:
 			self.splitTaimer.start(retryInterval * 1000)
 		else:
-			print "[YouTube] Get refresh token"
+			print("[YouTube] Get refresh token")
 			if self.mbox:
 				self.mbox.close()
 			config.plugins.mytube.refreshToken.value = refreshToken
@@ -822,7 +824,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.session.openWithCallback(self.SearchEntryCallback, VirtualKeyBoard, title = (_("Enter your search term(s)")), text = config.plugins.mytube.search.searchTerm.value)
 
 	def ScreenClosed(self):
-		print "ScreenCLosed, restoring old window state"
+		print("ScreenCLosed, restoring old window state")
 		if self.currList == "historylist":
 			if self.HistoryWindow.status() is False:
 				self.HistoryWindow.activate()
@@ -872,7 +874,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.leavePlayerConfirmed([True, how])
 
 	def leavePlayer(self):
-		print "leavePlayer"
+		print("leavePlayer")
 		if self.HistoryWindow is not None:
 			self.HistoryWindow.deactivate()
 			self.HistoryWindow.instance.hide()
@@ -936,13 +938,13 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.close()
 			
 	def keyOK(self):
-		print "self.currList im KeyOK",self.currList
+		print("self.currList im KeyOK",self.currList)
 		if self.currList == "configlist" or self.currList == "suggestionslist":
 			self["config"].invalidateCurrent()
 			if config.plugins.mytube.search.searchTerm.value != "":
 				self.add2History()
 				searchContext = config.plugins.mytube.search.searchTerm.value
-				print "Search searchcontext",searchContext
+				print("Search searchcontext",searchContext)
 				if isinstance(self["config"].getCurrent()[1], ConfigTextWithGoogleSuggestions) and not self.propagateUpDownNormally:
 					self.propagateUpDownNormally = True
 					self["config"].getCurrent()[1].deactivateSuggestionList()
@@ -951,13 +953,13 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		elif self.currList == "feedlist":
 			current = self[self.currList].getCurrent()
 			if current:
-				print current
+				print(current)
 				myentry = current[0]
 				if myentry is not None:
 					vtype = myentry.getType()
 					if vtype == "youtube#video":
 						myurl = myentry.getVideoUrl()
-						print "Playing URL",myurl
+						print("Playing URL",myurl)
 						if myurl is not None:
 							if myurl == "age":
 								self.session.open(MessageBox, _("Sorry, Video has age restriction!"), MessageBox.TYPE_INFO)
@@ -981,7 +983,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self["config"].invalidateCurrent()
 			if config.plugins.mytube.search.searchTerm.value != "":
 				searchContext = config.plugins.mytube.search.searchTerm.value
-				print "Search searchcontext",searchContext
+				print("Search searchcontext",searchContext)
 				self.setState('getSearchFeed')
 				self.runSearch(searchContext)
 
@@ -996,7 +998,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.show()
 
 	def keyUp(self):
-		print "self.currList im KeyUp",self.currList
+		print("self.currList im KeyUp",self.currList)
 		if self.currList == "suggestionslist":
 			if config.plugins.mytube.search.searchTerm.value != "":
 				if not self.propagateUpDownNormally:
@@ -1009,15 +1011,15 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				self.HistoryWindow.up()
 
 	def keyDown(self):
-		print "self.currList im KeyDown",self.currList
+		print("self.currList im KeyDown",self.currList)
 		if self.currList == "suggestionslist":
 			if config.plugins.mytube.search.searchTerm.value != "":
 				if not self.propagateUpDownNormally:
 					self["config"].getCurrent()[1].suggestionListDown()
 					self["config"].invalidateCurrent()
 		elif self.currList == "feedlist":
-			print self[self.currList].count()
-			print self[self.currList].index
+			print(self[self.currList].count())
+			print(self[self.currList].index)
 			if self[self.currList].index == self[self.currList].count()-1 and myTubeService.getNextFeedEntriesURL() is not None:
 				# load new feeds on last selected item
 				if config.plugins.mytube.general.AutoLoadFeeds.value is False:
@@ -1030,7 +1032,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			if self.HistoryWindow is not None and self.HistoryWindow.shown:
 				self.HistoryWindow.down()
 	def keyRight(self):
-		print "self.currList im KeyRight",self.currList
+		print("self.currList im KeyRight",self.currList)
 		if self.propagateUpDownNormally:
 			ConfigListScreen.keyRight(self)
 		else:
@@ -1043,7 +1045,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self.HistoryWindow.pageDown()
 
 	def keyLeft(self):
-		print "self.currList im kEyLeft",self.currList
+		print("self.currList im kEyLeft",self.currList)
 		if self.propagateUpDownNormally:
 			ConfigListScreen.keyLeft(self)
 		else:
@@ -1092,8 +1094,8 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.session.openWithCallback(self.openStandardFeedClosed, ChoiceBox, title=_("Select new feed to view."), list = menulist)
 
 	def handleSuggestions(self):
-		print "handleSuggestions"
-		print "self.currList",self.currList
+		print("handleSuggestions")
+		print("self.currList",self.currList)
 		if self.currList == "configlist":
 			self.switchToSuggestionsList()
 		elif self.currList == "historylist":
@@ -1101,7 +1103,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				self.HistoryWindow.down()
 
 	def switchToSuggestionsList(self):
-		print "switchToSuggestionsList"
+		print("switchToSuggestionsList")
 		self.currList = "suggestionslist"
 		self["ButtonBlue"].hide()
 		self["VKeyIcon"].hide()	
@@ -1119,7 +1121,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.HistoryWindow.instance.hide()
 	
 	def switchToConfigList(self):
-		print "switchToConfigList"
+		print("switchToConfigList")
 		self.currList = "configlist"
 		self["config_actions"].setEnabled(True)	
 		self["historyactions"].setEnabled(False)
@@ -1147,9 +1149,9 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.handleFirstHelpWindow()
 
 	def switchToFeedList(self, append = False):
-		print "switchToFeedList"
-		print "switching to feedlist from:",self.currList
-		print "len(self.videolist):",len(self.videolist)
+		print("switchToFeedList")
+		print("switching to feedlist from:",self.currList)
+		print("len(self.videolist):",len(self.videolist))
 		if self.HistoryWindow is not None and self.HistoryWindow.shown:
 			self.HistoryWindow.deactivate()
 			self.HistoryWindow.instance.hide()
@@ -1173,11 +1175,11 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 
 
 	def switchToHistory(self):
-		print "switchToHistory"
+		print("switchToHistory")
 		self.oldlist = self.currList
 		self.currList = "historylist"
-		print "switchToHistory currentlist",self.currList
-		print "switchToHistory oldlist",self.oldlist
+		print("switchToHistory currentlist",self.currList)
+		print("switchToHistory oldlist",self.oldlist)
 		self.hideSuggestions()
 		self["ButtonBlue"].hide()
 		self["VKeyIcon"].hide()	
@@ -1196,17 +1198,17 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.HistoryWindow = self.session.instantiateDialog(MyTubeHistoryScreen)
 		if self.currList in ("configlist","feedlist"):
 			if self.HistoryWindow.status() is False:
-				print "status is FALSE,switchToHistory"
+				print("status is FALSE,switchToHistory")
 				self.switchToHistory()
 		elif self.currList == "historylist":
 			self.closeHistory()
 
 	def closeHistory(self):
-		print "closeHistory currentlist",self.currList
-		print "closeHistory oldlist",self.oldlist
+		print("closeHistory currentlist",self.currList)
+		print("closeHistory oldlist",self.oldlist)
 		if self.currList == "historylist":
 			if self.HistoryWindow.status() is True:
-				print "status is TRUE, closing historyscreen"
+				print("status is TRUE, closing historyscreen")
 				self.HistoryWindow.deactivate()
 				self.HistoryWindow.instance.hide()
 				if self.oldlist == "configlist":
@@ -1219,7 +1221,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.History = config.plugins.mytube.general.history.value.split(',')
 		if self.History[0] == '':
 			del self.History[0]
-		print "self.History im add",self.History
+		print("self.History im add",self.History)
 		if config.plugins.mytube.search.searchTerm.value in self.History:
 			self.History.remove((config.plugins.mytube.search.searchTerm.value))
 		self.History.insert(0,(config.plugins.mytube.search.searchTerm.value))
@@ -1227,7 +1229,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.History.pop()
 		config.plugins.mytube.general.history.value = ",".join(self.History)
 		config.plugins.mytube.general.history.save()
-		print "configvalue",config.plugins.mytube.general.history.value
+		print("configvalue",config.plugins.mytube.general.history.value)
 
 	def hideSuggestions(self):
 		current = self["config"].getCurrent()
@@ -1244,7 +1246,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			current = None
 		name = None
 		if current:
-			print current
+			print(current)
 			myentry = current[0]
 			if myentry is not None:
 				name = myentry.getTitle()
@@ -1268,7 +1270,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def getRelatedVideos(self, myentry):
 		if myentry:
 			myurl =  myentry.getTubeId()
-			print "TubeID--->",myurl
+			print("TubeID--->",myurl)
 			if myurl is not None:
 				self.appendEntries = False
 				self.getFeed(myurl, _("Related video entries."))
@@ -1276,7 +1278,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def getResponseVideos(self, myentry):
 		if myentry:
 			myurl =  myentry.getResponseVideos()
-			print "RESPONSEURL--->",myurl
+			print("RESPONSEURL--->",myurl)
 			if myurl is not None:
 				self.appendEntries = False
 				self.getFeed(myurl, _("Response video entries."))
@@ -1284,19 +1286,19 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	def getUserVideos(self, myentry):
 		if myentry:
 			myurl =  myentry.getChannelID()
-			print "ChannelID--->",myurl
+			print("ChannelID--->",myurl)
 			if myurl is not None:
 				self.appendEntries = False
 				self.getFeed(myurl, _("User video entries."))
 
 	def runSearch(self, searchContext = None):
-		print "[MyTubePlayer] runSearch"
+		print("[MyTubePlayer] runSearch")
 		if searchContext is not None:
-			print "[MyTubePlayer] searchDialogClosed: ", searchContext
+			print("[MyTubePlayer] searchDialogClosed: ", searchContext)
 			self.searchFeed(searchContext)
 
 	def searchFeed(self, searchContext, vals = None):
-		print "[MyTubePlayer] searchFeed"		
+		print("[MyTubePlayer] searchFeed")		
 		
 		defaults = {
 			'time': config.plugins.mytube.search.time.value,
@@ -1330,13 +1332,13 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.queryRunning = False
 	
 	def cancelThread(self):
-		print "[MyTubePlayer] cancelThread"
+		print("[MyTubePlayer] cancelThread")
 		if self.queryThread is not None:
 			self.queryThread.cancel()
 		self.queryFinished()
 	
 	def gotFeed(self, feed):
-		print "[MyTubePlayer] gotFeed"
+		print("[MyTubePlayer] gotFeed")
 		self.queryFinished()
 		#if feed is not None:
 		#	self.ytfeed = feed
@@ -1350,7 +1352,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self["result"].setText(text)
 	
 	def gotFeedError(self, exception):
-		print "[MyTubePlayer] gotFeedError"
+		print("[MyTubePlayer] gotFeedError")
 		self.queryFinished()
 		self.setState('Error')
 	
@@ -1381,7 +1383,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					thumbnailUrl = entry.getThumbnailUrl(0)				
 					if thumbnailUrl is not None:
 						self.screenshotList.append((TubeID,thumbnailUrl))
-					if not self.Details.has_key(TubeID):
+					if TubeID not in self.Details:
 						self.Details[TubeID] = { 'thumbnail': None}
 #					if entry.getType() == "youtube#video" or self.ytfeed == "my_subscriptions" or (entry.getType() == "youtube#channel" and entry.getlive() == "upcoming"):
 					self.videolist.append(self.buildEntryComponent(entry, TubeID))
@@ -1405,7 +1407,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					thumbnailUrl = entry.getThumbnailUrl(0)				
 					if thumbnailUrl is not None:
 						self.screenshotList.append((TubeID,thumbnailUrl))
-					if not self.Details.has_key(TubeID):
+					if TubeID not in self.Details:
 						self.Details[TubeID] = { 'thumbnail': None}
 					if entry.getType() == "youtube#video" or self.ytfeed == "my_subscriptions" or (entry.getType() == "youtube#channel" and entry.getlive() == "upcoming"):
 						self.videolist.append(self.buildEntryComponent(entry, TubeID))
@@ -1421,7 +1423,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 					self["feedlist"].selectNext()
 					self.switchToFeedList(True)
 			if not self.timer_startDownload.isActive():
-				print "STARRTDOWNLOADTIMER IM BUILDENTRYLIST"
+				print("STARRTDOWNLOADTIMER IM BUILDENTRYLIST")
 				self.timer_startDownload.start(5)
 		else:
 			self.setState('Error')
@@ -1429,7 +1431,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 	
 	def buildEntryComponent(self, entry,TubeID):
 		Title = entry.getTitle()
-		print "Title-->",Title
+		print("Title-->",Title)
 		Description = entry.getDescription()
 		channel = entry.getAuthor()
 		myTubeID = TubeID
@@ -1446,7 +1448,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				png = self.skin_path + "/img/channelHD.png"
 			else:
 				png = self.skin_path + "/img/channel.png"
-        		if fileExists(png, 'r'):
+			if fileExists(png, 'r'):
 				tpng = LoadPixmap(png)
 
 
@@ -1483,15 +1485,15 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				if myentry:
 					myurl = myentry.getVideoUrl()
 					if myurl is not None:
-						print "Got a URL to stream"
+						print("Got a URL to stream")
 						myreference = eServiceReference(4097,0,myurl)
 						myreference.setName(myentry.getTitle())
 						return myreference,False
 					else:
-						print "NoURL im getNextEntry"
+						print("NoURL im getNextEntry")
 						return None,True
 						
-		print "no more entries to play"
+		print("no more entries to play")
 		return None,False
 
 	def getPrevEntry(self):
@@ -1504,7 +1506,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				if myentry:
 					myurl = myentry.getVideoUrl()
 					if myurl is not None:
-						print "Got a URL to stream"
+						print("Got a URL to stream")
 						myreference = eServiceReference(4097,0,myurl)
 						myreference.setName(myentry.getTitle())
 						return myreference,False
@@ -1522,7 +1524,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			if current:
 				myentry = current[0]
 				if myentry.getType() == "youtube#video":
-					print "Title im showVideoInfo",myentry.getTitle()
+					print("Title im showVideoInfo",myentry.getTitle())
 					videoinfos = myentry.PrintEntryDetails()
 					self.session.open(MyTubeVideoInfoScreen, self.skin_path, videoinfo = videoinfos )
 
@@ -1532,7 +1534,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			thumbnailUrl = entry[1]
 			tubeid = entry[0]
 			thumbnailFile = "/tmp/"+str(tubeid)+".jpg"
-			if self.Details.has_key(tubeid):
+			if tubeid in self.Details:
 				if self.Details[tubeid]["thumbnail"] is None:
 					if thumbnailUrl is not None:
 						if tubeid not in self.pixmaps_to_load:
@@ -1540,18 +1542,18 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 							if (os_path.exists(thumbnailFile) == True):
 								self.fetchFinished(False,tubeid)
 							else:
-								client.downloadPage(thumbnailUrl,thumbnailFile).addCallback(self.fetchFinished,str(tubeid)).addErrback(self.fetchFailed,str(tubeid))
+								client.downloadPage(thumbnailUrl.encode("utf-8"),thumbnailFile).addCallback(self.fetchFinished,str(tubeid)).addErrback(self.fetchFailed,str(tubeid))
 					else:
 						if tubeid not in self.pixmaps_to_load:
 							self.pixmaps_to_load.append(tubeid)
 							self.fetchFinished(False,tubeid, failed = True)
 
 	def fetchFailed(self,string,tubeid):
-		print "thumbnail-fetchFailed for: ",tubeid,string.getErrorMessage()
+		print("thumbnail-fetchFailed for: ",tubeid,string.getErrorMessage())
 		self.fetchFinished(False,tubeid, failed = True)
 
 	def fetchFinished(self,x,tubeid, failed = False):
-		print "thumbnail-fetchFinished for:",tubeid
+		print("thumbnail-fetchFinished for:",tubeid)
 		self.pixmaps_to_load.remove(tubeid)
 		if failed:
 			thumbnailFile = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/MyTube/plugin.png")
@@ -1568,18 +1570,18 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			self.fetchFinished(False,tubeid, failed = True)
 
 	def finish_decode(self,tubeid,info):
-		print "thumbnail finish_decode:", tubeid,info
+		print("thumbnail finish_decode:", tubeid,info)
 		ptr = self.picloads[tubeid].getData()
 		thumbnailFile = "/tmp/"+str(tubeid)+".jpg"
 		if ptr != None:
-			if self.Details.has_key(tubeid):
+			if tubeid in self.Details:
 				self.Details[tubeid]["thumbnail"] = ptr
 			if (os_path.exists(thumbnailFile) == True):
 				os_remove(thumbnailFile)
 			del self.picloads[tubeid]
 		else:
 			del self.picloads[tubeid]
-			if self.Details.has_key(tubeid):
+			if tubeid in self.Details:
 				self.Details[tubeid]["thumbnail"] = None
 		self.timer_thumbnails.start(1)
 
@@ -1591,7 +1593,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			idx = 0
 			for entry in self.videolist:
 				tubeid = entry[3]
-				if self.Details.has_key(tubeid):
+				if tubeid in self.Details:
 					if self.Details[tubeid]["thumbnail"] is not None:
 						thumbnail = entry[4]
 						if thumbnail == None:
@@ -1727,10 +1729,10 @@ class MyTubeVideoInfoScreen(Screen):
 			pass
 
 	def fetchFailed(self, string, index, id):
-		print "[fetchFailed] for index:" + str(index) + "for ThumbID:" + id + string.getErrorMessage()
+		print("[fetchFailed] for index:" + str(index) + "for ThumbID:" + id + string.getErrorMessage())
 
 	def fetchFinished(self, string, index, id):
-		print "[fetchFinished] for index:" + str(index) + " for ThumbID:" + id
+		print("[fetchFinished] for index:" + str(index) + " for ThumbID:" + id)
 		self.decodePic(index)
 
 	def decodePic(self, index):
@@ -1742,19 +1744,19 @@ class MyTubeVideoInfoScreen(Screen):
 				self.index = index
 				thumbnailFile = str(entry[2])
 				if (os_path.exists(thumbnailFile) == True):
-					print "[decodePic] DECODING THUMBNAIL for INDEX:"+  str(self.index) + "and file: " + thumbnailFile
+					print("[decodePic] DECODING THUMBNAIL for INDEX:"+  str(self.index) + "and file: " + thumbnailFile)
 					self.picloads[index].setPara((self["thumbnail"].instance.size().width(), self["thumbnail"].instance.size().height(), sc[0], sc[1], False, 1, "#00000000"))
 					self.picloads[index].startDecode(thumbnailFile)
 				else:
-					print "[decodePic] Thumbnail file NOT FOUND !!!-->:",thumbnailFile
+					print("[decodePic] Thumbnail file NOT FOUND !!!-->:",thumbnailFile)
 
 	def finish_decode(self, picindex = None, picInfo=None):
-		print "finish_decode - of INDEX", picindex
+		print("finish_decode - of INDEX", picindex)
 		ptr = self.picloads[picindex].getData()
 		if ptr != None:
 			self.thumbnails[picindex][3] = ptr
 			if (os_path.exists(self.thumbnails[picindex][2]) == True):
-				print "removing", self.thumbnails[picindex][2]
+				print("removing", self.thumbnails[picindex][2])
 				os_remove(self.thumbnails[picindex][2])
 				del self.picloads[picindex]
 				if len(self.picloads) == 0:
@@ -1860,7 +1862,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.screen_timeout = 5000
 		self.nextservice = None
 
-		print "evEOF=%d" % iPlayableService.evEOF
+		print("evEOF=%d" % iPlayableService.evEOF)
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
 			{
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
@@ -1901,8 +1903,8 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.session.nav.stopService()
 
 	def __evEOF(self):
-		print "evEOF=%d" % iPlayableService.evEOF
-		print "Event EOF"
+		print("evEOF=%d" % iPlayableService.evEOF)
+		print("Event EOF")
 		self.pauseService()
 		self.handleLeave(config.plugins.mytube.general.on_movie_EOF.value)
 
@@ -1954,9 +1956,9 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			self.infoCallback()
 
 	def playNextFile(self):
-		print "playNextFile"
+		print("playNextFile")
 		nextservice,error = self.nextCallback()
-		print "nextservice--->",nextservice
+		print("nextservice--->",nextservice)
 		if nextservice is None:
 			self.handleLeave(config.plugins.mytube.general.on_movie_stop.value, error)
 		else:
@@ -1964,7 +1966,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			self.showInfobar()
 
 	def playPrevFile(self):
-		print "playPrevFile"
+		print("playPrevFile")
 		prevservice,error = self.prevCallback()
 		if prevservice is None:
 			self.handleLeave(config.plugins.mytube.general.on_movie_stop.value, error)
@@ -1973,7 +1975,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			self.showInfobar()
 
 	def playagain(self):
-		print "playagain"
+		print("playagain")
 		if self.state != self.STATE_IDLE:
 			self.stopCurrent()
 		self.play()
@@ -1994,24 +1996,24 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			self.__setHideTimer()
 
 	def stopCurrent(self):
-		print "stopCurrent"
+		print("stopCurrent")
 		self.session.nav.stopService()
 		self.state = self.STATE_IDLE
 
 	def playpauseService(self):
-		print "playpauseService"
+		print("playpauseService")
 		if self.state == self.STATE_PLAYING:
 			self.pauseService()
 		elif self.state == self.STATE_PAUSED:
 			self.unPauseService()
 
 	def pauseService(self):
-		print "pauseService"
+		print("pauseService")
 		if self.state == self.STATE_PLAYING:
 			self.setSeekState(self.STATE_PAUSED)
 		
 	def unPauseService(self):
-		print "unPauseService"
+		print("unPauseService")
 		if self.state == self.STATE_PAUSED:
 			self.setSeekState(self.STATE_PLAYING)
 
@@ -2034,44 +2036,44 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		return True
 
 	def __seekableStatusChanged(self):
-		print "seekable status changed!"
+		print("seekable status changed!")
 		if not self.isSeekable():
 			self["SeekActions"].setEnabled(False)
 			self.setSeekState(self.STATE_PLAYING)
 		else:
 			self["SeekActions"].setEnabled(True)
-			print "seekable"
+			print("seekable")
 
 	def __serviceStarted(self):
 		self.state = self.STATE_PLAYING
 		self.__seekableStatusChanged()
 
 	def setSeekState(self, wantstate, onlyGUI = False):
-		print "setSeekState"
+		print("setSeekState")
 		if wantstate == self.STATE_PAUSED:
-			print "trying to switch to Pause- state:",self.STATE_PAUSED
+			print("trying to switch to Pause- state:",self.STATE_PAUSED)
 		elif wantstate == self.STATE_PLAYING:
-			print "trying to switch to playing- state:",self.STATE_PLAYING
+			print("trying to switch to playing- state:",self.STATE_PLAYING)
 		service = self.session.nav.getCurrentService()
 		if service is None:
-			print "No Service found"
+			print("No Service found")
 			return False
 		pauseable = service.pause()
 		if pauseable is None:
-			print "not pauseable."
+			print("not pauseable.")
 			self.state = self.STATE_PLAYING
 
 		if pauseable is not None:
-			print "service is pausable"
+			print("service is pausable")
 			if wantstate == self.STATE_PAUSED:
-				print "WANT TO PAUSE"
+				print("WANT TO PAUSE")
 				pauseable.pause()
 				self.state = self.STATE_PAUSED
 				if not self.shown:
 					self.hidetimer.stop()
 					self.show()
 			elif wantstate == self.STATE_PLAYING:
-				print "WANT TO PLAY"
+				print("WANT TO PLAY")
 				pauseable.unpause()
 				self.state = self.STATE_PLAYING
 				if self.shown:
@@ -2104,7 +2106,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	def leavePlayerConfirmed(self, answer):
 		answer = answer and answer[1]
 		if answer == "quit":
-			print 'quited'
+			print('quited')
 			self.close()
 		elif answer == "playnext":
 			self.playNextFile()
@@ -2122,24 +2124,24 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 
 
 def MyTubeMain(session, **kwargs):
-	l2 = False
-	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
-	if l2cert is None:
-		print "l2cert not found"
-		return
+#	l2 = False
+#	l2cert = etpm.getCert(eTPM.TPMD_DT_LEVEL2_CERT)
+#	if l2cert is None:
+#		print("l2cert not found")
+#		return
 	
-	l2key = validate_cert(l2cert, rootkey)
-	if l2key is None:
-		print "l2cert invalid"
-		return
-	l2 = True
-	if l2:
-		session.open(MyTubePlayerMainScreen,l2key)
+#	l2key = validate_cert(l2cert, rootkey)
+#	if l2key is None:
+#		print("l2cert invalid")
+#		return
+#	l2 = True
+#	if l2:
+	session.open(MyTubePlayerMainScreen)
 
 
-def Plugins(path, **kwargs):
-	global plugin_path
-	plugin_path = path
+def Plugins(**kwargs):
+#	global plugin_path
+#	plugin_path = path
 	return PluginDescriptor(
 		name=_("My TubePlayer"),
 		description=_("Play YouTube movies"),
