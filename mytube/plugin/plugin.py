@@ -1667,7 +1667,7 @@ class MyTubeVideoInfoScreen(Screen):
 		else:
 			Description = None
 		if Description is not None:
-			self["detailtext"].setText(Description.strip())
+			self["detailtext"].setText(str(Description.strip()))
 
 #		if self.videoinfo["RatingAverage"] is not 0:
 #			ratingStars = int(round(20 * float(self.videoinfo["RatingAverage"]), 0))
@@ -1723,7 +1723,7 @@ class MyTubeVideoInfoScreen(Screen):
 				thumbnailUrl = None
 				thumbnailUrl = entry
 				if thumbnailUrl is not None:
-					client.downloadPage(thumbnailUrl,thumbnailFile).addCallback(self.fetchFinished,currindex,ThumbID).addErrback(self.fetchFailed,currindex,ThumbID)
+					client.downloadPage(thumbnailUrl.encode("utf-8"),thumbnailFile).addCallback(self.fetchFinished,currindex,ThumbID).addErrback(self.fetchFailed,currindex,ThumbID)
 				currindex +=1
 		else:
 			pass
@@ -1774,13 +1774,16 @@ class MyTubeVideoInfoScreen(Screen):
 		Thumbail0 = None
 		Thumbail1 = None
 		Thumbail2 = None
+		Thumbail3 = None
 		if self.thumbnails[0][3] is not None:
 			Thumbail0 = self.thumbnails[0][3]
 		if self.thumbnails[1][3] is not None:
 			Thumbail1 = self.thumbnails[1][3]
 		if self.thumbnails[2][3] is not None:
 			Thumbail2 = self.thumbnails[2][3]
-		self.infolist.append(( Thumbail0, Thumbail1, Thumbail2))
+		if self.thumbnails[3][3] is not None:
+			Thumbail3 = self.thumbnails[2][3]
+		self.infolist.append(( Thumbail0, Thumbail1, Thumbail2, Thumbail3))
 		if len(self.infolist):
 			self["infolist"].style = "default"
 			self["infolist"].disable_callbacks = True
