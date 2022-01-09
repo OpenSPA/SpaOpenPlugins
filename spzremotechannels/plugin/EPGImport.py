@@ -386,7 +386,7 @@ def createBouquetFile(bouquet, name, data, lista):
 			else:
 				request = urllib2.Request(url)
 
-			data = "%s:%s" % (config.plugins.RemoteStreamConverter.username.value,config.plugins.RemoteStreamConverter.password.value)
+			data = "%s:%s" % (user,password)
 			if py3():
 				b64auth = base64.standard_b64encode(data.encode('ascii'))
 				request.add_header("Authorization", "Basic " + b64auth.decode('ascii'))
