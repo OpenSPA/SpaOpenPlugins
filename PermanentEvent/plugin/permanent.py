@@ -489,11 +489,13 @@ class PermanentEventMenu(Screen):
 
 		def skinsCI(self):
 				config.plugins.PermanentEvent.mode_event.value = '2'
-				self.changew()
+				self.newConfig(typewidget=True)
+#				self.changew()
 
 		def skinsNI(self):
 				config.plugins.PermanentEvent.mode_event.value = '3'
-				self.changew()
+				self.newConfig(typewidget=True)
+#				self.changew()
 
 		def skinsP(self):
 				config.plugins.PermanentEvent.mode_event.value = '4'
@@ -501,7 +503,8 @@ class PermanentEventMenu(Screen):
 
 		def skinsPI(self):
 				config.plugins.PermanentEvent.mode_event.value = '5'
-				self.changew()
+				self.newConfig(typewidget=True)
+#				self.changew()
 
 		def skinsC(self):
 				config.plugins.PermanentEvent.mode_event.value = '6'
@@ -513,7 +516,8 @@ class PermanentEventMenu(Screen):
 
 		def skinsPIC(self):
 				config.plugins.PermanentEvent.mode_event.value = '8'
-				self.changew()
+				self.newConfig(typewidget=True)
+#				self.changew()
 
 		def changew(self):
 				self.session.openWithCallback(self.restart, MessageBox, _("Do you want to restart now, to change widget?"), MessageBox.TYPE_YESNO, timeout = 10)
