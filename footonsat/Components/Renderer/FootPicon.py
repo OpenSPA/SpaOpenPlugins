@@ -1,16 +1,18 @@
+from __future__ import print_function
+from __future__ import absolute_import
 import os
 import re 
 import unicodedata
-from Renderer import Renderer
+from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap, eServiceReference
 from ServiceReference import ServiceReference
 #from Tools.Alternatives import GetWithAlternative
 from enigma import eServiceCenter, eServiceReference
 from Tools.Directories import pathExists, resolveFilename
 try :
-    from Tools.Directories import SCOPE_ACTIVE_SKIN
+	from Tools.Directories import SCOPE_ACTIVE_SKIN
 except ImportError:
-    from Tools.Directories import SCOPE_CURRENT_SKIN as SCOPE_ACTIVE_SKIN
+	from Tools.Directories import SCOPE_CURRENT_SKIN as SCOPE_ACTIVE_SKIN
 from Components.Harddisk import harddiskmanager
 import six
 import sys
