@@ -33,7 +33,7 @@ except ImportError:
 import gettext
 import os,sys
 
-plugin_path = '/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/speedtest.pyo'
+plugin_path = '/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/speedtest.py'
 skin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/openSPAnetTest/skins/")
 png_tmp = '/tmp/resultest.png'
 font = resolveFilename(SCOPE_PLUGINS, "Extensions/openSPAnetTest/fonts")
@@ -293,7 +293,7 @@ class serversel(Screen):
 	def showMenu(self):
 		try:
 			import subprocess
-			myfavserv= subprocess.Popen(['python', '/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/speedtest.pyo', '--list'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+			myfavserv= subprocess.Popen(['python', '/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/speedtest.py', '--list'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 			stdout,stderr = myfavserv.communicate()
 			PY3 = (sys.version_info[0] == 3)
 			try:
