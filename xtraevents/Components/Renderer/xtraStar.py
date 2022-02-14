@@ -1,21 +1,46 @@
+# -*- coding: utf-8 -*-
 # by digiteng
-# v1 07.2020
+# v1 07.2020, 11.2021
 
 # <ePixmap pixmap="xtra/star_b.png" position="560,367" size="200,20" alphatest="blend" zPosition="2" transparent="1" />
 # <widget render="xtraStar" source="session.Event_Now" pixmap="xtra/star.png" position="560,367" size="200,20" alphatest="blend" transparent="1" zPosition="3" />
 from __future__ import absolute_import
-from Components.VariableValue import VariableValue
 from Components.Renderer.Renderer import Renderer
+from Components.VariableValue import VariableValue
 from enigma import eSlider
 from Components.config import config
-from Tools.Directories import fileExists
+import os
 import re
 import json
 
 try:
 	pathLoc = config.plugins.xtraEvent.loc.value
 except:
-	pass
+	pathLoc = ""
+
+REGEX = re.compile(
+		r'([\(\[]).*?([\)\]])|'
+		r'(: odc.\d+)|'
+		r'(\d+: odc.\d+)|'
+		r'(\d+ odc.\d+)|(:)|'
+		r'( -(.*?).*)|(,)|'
+		r'!|'
+		r'/.*|'
+		r'\|\s[0-9]+\+|'
+		r'[0-9]+\+|'
+		r'\s\d{4}\Z|'
+		r'([\(\[\|].*?[\)\]\|])|'
+		r'(\"|\"\.|\"\,|\.)\s.+|'
+		r'\"|:|'
+		r'\*|'
+		r'Премьера\.\s|'
+		r'(х|Х|м|М|т|Т|д|Д)/ф\s|'
+		r'(х|Х|м|М|т|Т|д|Д)/с\s|'
+		r'\s(с|С)(езон|ерия|-н|-я)\s.+|'
+		r'\s\d{1,3}\s(ч|ч\.|с\.|с)\s.+|'
+		r'\.\s\d{1,3}\s(ч|ч\.|с\.|с)\s.+|'
+		r'\s(ч|ч\.|с\.|с)\s\d{1,3}.+|'
+		r'\d{1,3}(-я|-й|\sс-н).+|', re.DOTALL)
 
 class xtraStar(VariableValue, Renderer):
 	def __init__(self):
@@ -37,9 +62,9 @@ class xtraStar(VariableValue, Renderer):
 			event = self.source.event
 			if event:
 				evnt = event.getEventName()
-				evntNm = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", evnt).rstrip()
+				evntNm = REGEX.sub('', evnt).strip()
 				rating_json = "{}xtraEvent/infos/{}.json".format(pathLoc, evntNm)
-				if rating_json:
+				if os.path.exists(rating_json):
 					with open(rating_json) as f:
 						rating = json.load(f)['imdbRating']
 					if rating:
