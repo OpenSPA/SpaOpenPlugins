@@ -78,7 +78,7 @@ class FootOnSat(Screen):
 		self.link = link
 		titles = {"today":"Match Today","championsleague":"UEFA Champions League","europaleague":"UEFA Europa League","premierleague":"Premier League"
 					,"laliga":"La Liga Santander","seriea":"Serie A","bundesliga":"Bundesliga","ligue1":"Ligue 1","ConferenceLeague":"UEFA Conference League",
-				"laliga2":"La Liga Smartbank"}
+				"laliga2":"La Liga Smartbank", "nba": "Basketball"}
 		self["counter"] = Label()
 		self["compet"] = Label()
 		self["compet"].setText(_(titles[link]))
@@ -417,7 +417,7 @@ class FootOnSat(Screen):
 			index = self['list2'].getSelectionIndex()
 			freq = self.channelData[index][2].split(' ')[0]
 			symbolrate = self.channelData[index][2].split(' ')[2]
-			pos = self.channelData[index][1].split(' ')[-1].replace('\xc2\xb0', ' ').split(' ')
+			pos = self.channelData[index][1].split(' ')[-1].replace('°', ' ').split(' ')
 			sat = self.getSat(pos)
 			fec = self.channelData[index][2].split(' ')[-1]
 			polarization = 'V' if 'V' in self.channelData[index][2] else 'H'
