@@ -817,7 +817,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		self.hideSuggestions()
 		# fixed by openspa team
 		from Tools.Directories import fileExists
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzVirtualKeyboard.pyo"):
+		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzVirtualKeyboard.pyo") or fileExists("/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzVirtualKeyboard.py") or fileExists("/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzVirtualKeyboard.pyc") or fileExists("/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzVirtualKeyboard.so"):
 			from Plugins.Extensions.spazeMenu.spzVirtualKeyboard import spzVirtualKeyboard
 			self.session.openWithCallback(self.SearchEntryCallback, spzVirtualKeyboard, titulo = _("Enter your search term(s)"), texto = config.plugins.mytube.search.searchTerm.value)
 		else:
