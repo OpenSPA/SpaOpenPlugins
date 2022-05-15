@@ -27,10 +27,12 @@ if dvbreader_available:
 	from Components.Sources.StaticText import StaticText
 	from Components.ScrollLabel import ScrollLabel
 	from Components.Label import Label
-	import time
+	import time, sys
 	import datetime
-	import thread
-
+	if sys.version_info[0] >= 3:
+		import _thread
+	else:
+		import thread as _thread
 
 class Satfinder(ScanSetup, ServiceScan):
 	"""Inherits StaticText [key_red] and [key_green] properties from ScanSetup"""
@@ -347,7 +349,7 @@ class Satfinder(ScanSetup, ServiceScan):
 
 		satfinder_nim_list = []
 		for n in nimmanager.nim_slots:
-			if not any([n.isCompatible(x) for x in "DVB-S", "DVB-T", "DVB-C", "ATSC"]):
+			if not any([n.isCompatible(x) for x in ("DVB-S", "DVB-T", "DVB-C", "ATSC")]):
 				continue
 			if n.config_mode in ("loopthrough", "satposdepends", "nothing"):
 				continue
@@ -385,7 +387,7 @@ class Satfinder(ScanSetup, ServiceScan):
 			if self.satList[index] is None:
 				none_cnt += 1
 			if index == int(v):
-				return index-none_cnt
+				return index - none_cnt
 			index += 1
 		return -1
 
@@ -399,7 +401,7 @@ class Satfinder(ScanSetup, ServiceScan):
 		if self.tuning_type.value == "single_transponder":
 			transponder = (
 				self.scan_cab.frequency.value,
-				self.scan_cab.symbolrate.value*1000,
+				self.scan_cab.symbolrate.value * 1000,
 				self.scan_cab.modulation.value,
 				self.scan_cab.fec.value,
 				self.scan_cab.inversion.value
@@ -457,7 +459,7 @@ class Satfinder(ScanSetup, ServiceScan):
 			return
 		if self.tuning_type.value == "single_transponder":
 			transponder = (
-				self.scan_ats.frequency.value*1000,
+				self.scan_ats.frequency.value * 1000,
 				self.scan_ats.modulation.value,
 				self.scan_ats.inversion.value,
 				self.scan_ats.system.value,
@@ -646,7 +648,7 @@ class SatfinderExtra(Satfinder):
 
 	def dvb_read_stream(self):
 		print("[satfinder][dvb_read_stream] starting")
-		thread.start_new_thread(self.getCurrentTsidOnid, (True,))
+		_thread.start_new_thread(self.getCurrentTsidOnid, (True,))
 
 	def getCurrentTsidOnid(self, from_retune=False):
 		self.currentProcess = currentProcess = datetime.datetime.now()
@@ -668,7 +670,7 @@ class SatfinderExtra(Satfinder):
 			return
 
 		# if tuner loses lock we start again from scratch
-		thread.start_new_thread(self.monitorTunerLock, (currentProcess,))
+		_thread.start_new_thread(self.monitorTunerLock, (currentProcess,))
 
 		adapter = 0
 		demuxer_device = "/dev/dvb/adapter%d/demux%d" % (adapter, self.demux)
@@ -849,12 +851,12 @@ class SatfinderExtra(Satfinder):
 		op = 0
 		bits = 4
 		for i in range(bits):
-			op += ((bcd >> 4*i) & 0x0F) * 10**i
+			op += ((bcd >> 4 * i) & 0x0F) * 10**i
 		if op > 1800:
 			op = (3600 - op) * -1
 		if w_e_flag == 0:
 			op *= -1
-		return "%0.1f%s" % (abs(op)/10., "W" if op < 0 else "E")
+		return "%0.1f%s" % (abs(op) / 10., "W" if op < 0 else "E")
 
 	def tunerLock(self):
 		frontendStatus = {}
@@ -953,8 +955,8 @@ class ServicesFound(Screen):
 			"back": self.close,
 			"red": self.close,
 			"up": self.pageUp,
-			"down":	self.pageDown,
-			"left":	self.pageUp,
+			"down": self.pageDown,
+			"left": self.pageUp,
 			"right": self.pageDown,
 		}, -2)
 
@@ -974,7 +976,7 @@ def SatfinderMain(session, close=None, **kwargs):
 	nims = nimmanager.nim_slots
 	nimList = []
 	for n in nims:
-		if not any([n.isCompatible(x) for x in "DVB-S", "DVB-T", "DVB-C", "ATSC"]):
+		if not any([n.isCompatible(x) for x in ("DVB-S", "DVB-T", "DVB-C", "ATSC")]):
 			continue
 		if n.config_mode in ("loopthrough", "satposdepends", "nothing"):
 			continue
@@ -1002,7 +1004,7 @@ def SatfinderStart(menuid, **kwargs):
 
 
 def Plugins(**kwargs):
-	if any([nimmanager.hasNimType(x) for x in "DVB-S", "DVB-T", "DVB-C", "ATSC"]):
+	if any([nimmanager.hasNimType(x) for x in ("DVB-S", "DVB-T", "DVB-C", "ATSC")]):
 		return PluginDescriptor(name=_("Signal finder"), description=_("Helps setting up your antenna"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=SatfinderStart)
 	else:
 		return []

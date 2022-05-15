@@ -1,21 +1,20 @@
-from __future__ import print_function
-from __future__ import absolute_import
 import os
-import re 
+import re
 import unicodedata
 from Components.Renderer.Renderer import Renderer
-from enigma import ePixmap, eServiceReference
+from enigma import ePixmap, eServiceReference, eEnv
 from ServiceReference import ServiceReference
-#from Tools.Alternatives import GetWithAlternative
+# from Tools.Alternatives import GetWithAlternative
 from enigma import eServiceCenter, eServiceReference
-from Tools.Directories import pathExists, resolveFilename
-try :
+from Tools.Directories import pathExists, resolveFilename, SCOPE_SKIN_IMAGE
+try:
 	from Tools.Directories import SCOPE_ACTIVE_SKIN
 except ImportError:
 	from Tools.Directories import SCOPE_CURRENT_SKIN as SCOPE_ACTIVE_SKIN
 from Components.Harddisk import harddiskmanager
 import six
 import sys
+
 
 def getServiceRef(service):
 	if isinstance(service, eServiceReference):
@@ -25,9 +24,11 @@ def getServiceRef(service):
 	else:
 		return eServiceReference()
 
+
 def getAlternativeChannels(service):
 	alternativeServices = eServiceCenter.getInstance().list(getServiceRef(service))
 	return alternativeServices and alternativeServices.getContent("S", True)
+
 
 def GetWithAlternative(service):
 	service = getServiceRef(service)
@@ -37,13 +38,19 @@ def GetWithAlternative(service):
 			return channels[0]
 	return service.toString()
 
+
 class PiconLocator:
-	def __init__(self, piconDirectories = ['picon', 'picon_220x132', 'Xpicon']):
+	def __init__(self, piconDirectories=['picon', 'picon_220x132']):
 		harddiskmanager.on_partition_list_change.append(self.__onPartitionChange)
 		self.piconDirectories = piconDirectories
 		self.activePiconPath = None
 		self.searchPaths = []
-		for mp in ('/usr/share/enigma2/', '/'):
+		searchPaths = ['/data/', eEnv.resolve('${datadir}/enigma2/'),
+				'/media/cf/',
+				'/media/usb/',
+				'/media/sdcard/',
+				'/',]
+		for mp in searchPaths:
 			self.__onMountpointAdded(mp)
 		for part in harddiskmanager.getMountedPartitions():
 			self.__onMountpointAdded(part.mountpoint)
@@ -94,7 +101,7 @@ class PiconLocator:
 		if pathExists(value):
 			if not value.endswith('/'):
 				value += '/'
-			if not value.startswith('/media/net') and not value.startswith('/media/autofs') and	value not in self.searchPaths:
+			if not value.startswith('/media/net') and not value.startswith('/media/autofs') and value not in self.searchPaths:
 				self.searchPaths.append(value)
 
 	def getPiconName(self, serviceName):
@@ -124,7 +131,7 @@ class PiconLocator:
 			if sys.version_info[0] >= 3:
 				name = six.ensure_str(unicodedata.normalize('NFKD', name).encode('ASCII', 'ignore'))
 			else:
-				name = unicodedata.normalize('NFKD', str(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
+				name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
 			name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 			if len(name) > 0:
 				pngname = self.findPicon(name)
@@ -135,15 +142,21 @@ class PiconLocator:
 					pngname = self.findPicon(series)
 		return pngname
 
+
 piconLocator = None
+
 
 def initPiconPaths():
 	global piconLocator
 	piconLocator = PiconLocator()
+
+
 initPiconPaths()
+
 
 def getPiconName(serviceName):
 	return piconLocator.getPiconName(serviceName)
+
 
 class FootPicon(Renderer):
 	def __init__(self):
@@ -156,7 +169,7 @@ class FootPicon(Renderer):
 		for (attrib, value) in self.skinAttributes:
 			if attrib == "path":
 				piconLocator.addSearchPath(value)
-				attribs.remove((attrib,value))
+				attribs.remove((attrib, value))
 		self.skinAttributes = attribs
 		rc = Renderer.applySkin(self, desktop, parent)
 		self.changed((self.CHANGED_DEFAULT,))
@@ -170,6 +183,8 @@ class FootPicon(Renderer):
 				pngname = piconLocator.getPiconName(self.source.text)
 				if not pathExists(pngname): # no picon for service found
 					pngname = self.defaultpngname
+					if not pathExists(pngname):
+						pngname = resolveFilename(SCOPE_SKIN_IMAGE, "skin_default/picon_default.png")
 				if self.pngname != pngname:
 					if pngname:
 						self.instance.setScale(1)
