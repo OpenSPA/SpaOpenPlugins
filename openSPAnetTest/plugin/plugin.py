@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #original plugin by mfaraj57
-#Code by VillaK 2018-2021
+#Code by VillaK 2018-2022
 #Code Speedtest-cli from source https://github.com/sivel/speedtest-cli
 #This plugin is free software, you can
 #modify it (if you keep the license),
@@ -22,7 +22,7 @@ from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
 from Components.Language import language
 from boxbranding import getBoxType, getMachineBrand, getMachineName
-from enigma import getDesktop, eConsoleAppContainer
+from enigma import getDesktop, eConsoleAppContainer, eTimer
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 from os import path
 from skin import loadSkin
@@ -64,7 +64,7 @@ except Exception as ex:
 	print(ex)
 
 opennetVersion = "2.0"
-opennetabout = _(" Plugin OpenSPAnetTest " +opennetVersion+ "\n MOD by VillaK 2018-2021 OpenSPA Team.\n Credits to mfaraj57 and madhouse. ")
+opennetabout = _(" Plugin OpenSPAnetTest " +opennetVersion+ "\n MOD by VillaK 2018-2022 OpenSPA Team.\n Credits to mfaraj57 and madhouse. ")
 
 class SpeedTestScreen(Screen):
 	def __init__(self, session):
@@ -273,7 +273,8 @@ class serversel(Screen):
 		'down': self.moveDown, 
 		'up': self.moveUp 
 		}, -1)
-		self.showMenu()
+		self.onLayoutFinish.append(self.showwait)
+#		self.showMenu()
 
 	def pageUp(self):
 		self['list'].instance.moveSelection(self['list'].instance.pageUp)
@@ -290,7 +291,16 @@ class serversel(Screen):
 	def exit(self):
 		self.close()
 
+	def showwait(self):
+		self.Timer = eTimer()
+		try:
+			self.Timer_conn = self.Timer.timeout.connect(self.showMenu)
+		except:
+			self.Timer.callback.append(self.showMenu)
+		self.Timer.start(10, True)
+			
 	def showMenu(self):
+		self.Timer.stop()
 		try:
 			import subprocess
 			myfavserv= subprocess.Popen(['python', '/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/speedtest.py', '--list'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -298,9 +308,9 @@ class serversel(Screen):
 			PY3 = (sys.version_info[0] == 3)
 			try:
 				if PY3:
-					results = stdout.decode().split("\n")
+					results = stdout.decode().split("\n")[:-1]
 				else:
-					results = stdout.split("\n")
+					results = stdout.split("\n")[:-1]
 			except:
 				pass
 		except:
