@@ -27,9 +27,9 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 from os import path
 from skin import loadSkin
 try:
-	from urllib.request import urlretrieve
+	from urllib.request import urlopen, Request
 except ImportError:
-	from urllib import urlretrieve
+	from urllib2 import urlopen, Request
 import gettext
 import os,sys
 
@@ -37,7 +37,13 @@ plugin_path = '/usr/lib/enigma2/python/Plugins/Extensions/openSPAnetTest/speedte
 skin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/openSPAnetTest/skins/")
 png_tmp = '/tmp/resultest.png'
 font = resolveFilename(SCOPE_PLUGINS, "Extensions/openSPAnetTest/fonts")
-cmd= 'python ' + plugin_path + ' --no-pre-allocate --share'
+cmd = 'python ' + plugin_path + ' --no-pre-allocate --share'
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+	   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+	   'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+	   'Accept-Encoding': 'none',
+	   'Accept-Language': 'en-US,en;q=0.8',
+	   'Connection': 'keep-alive'}
 
 HD = getDesktop(0).size()
 if HD.width() > 1280:
@@ -77,11 +83,11 @@ class SpeedTestScreen(Screen):
 		self["key_yellow"] = Label(_("Test your favourite server."))
 		self["key_blue"] = Label(_("View last result to share."))
 		self['key_info'] = Label(_("About"))
-		self['actions'] = ActionMap(['WizardActions', 'ColorActions', 'SetupActions','DirectionActions'], 
+		self['actions'] = ActionMap(['WizardActions', 'ColorActions', 'SetupActions','DirectionActions'],
 		{'cancel': self.close,
 		'green': self.speedauto,
-		'back': self.close, 
-		'red': self.favser, 
+		'back': self.close,
+		'red': self.favser,
 		'yellow': self.speedfav,
 		"info": self.about,
 		'blue': self.viewshare
@@ -134,7 +140,7 @@ class SpeedTestScreenauto(Screen):
 		self.container.execute(cmd)
 
 	def testagain(self):
-		if  self.finished==False:
+		if self.finished == False:
 			return
 		self.data=''
 		self['data'].setText(_("Testing internet speed, please wait..."))
@@ -159,8 +165,8 @@ class SpeedTestScreenauto(Screen):
 
 	def dataAvail(self, rstr):
 		if rstr:
-			rstr=str(rstr.decode())
-			self.data=self.data+rstr
+			rstr = str(rstr.decode())
+			self.data = self.data + rstr
 			parts=rstr.split("\n")
 			for part in parts:
 				if 'Hosted by' in part:
@@ -202,10 +208,14 @@ class SpeedTestScreenauto(Screen):
 					self["key_green"].setText(_('Test again'))
 					self["green"].show()
 					try:
-						urlretrieve(self.url_png, png_tmp)
+						request_site = Request(self.url_png, None, headers)
+						speed_image = urlopen(request_site).read()
+						image = open(png_tmp, "wb")
+						image.write(speed_image)
+						image.close()
 					except Exception as e:
-							print(e)
-							self.donwl()
+						print(e)
+						self.donwl()
 					if path.exists(png_tmp):
 						self["key_blue"].setText(_('Show results'))
 						self["blue"].show()
@@ -220,7 +230,11 @@ class SpeedTestScreenauto(Screen):
 
 	def donwl(self):
 		try:
-			urlretrieve(self.url_png, png_tmp)
+			request_site = Request(self.url_png, None, headers)
+			speed_image = urlopen(request_site).read()
+			image = open(png_tmp, "wb")
+			image.write(speed_image)
+			image.close()
 		except Exception as e:
 			print(e)
 		if path.exists(png_tmp):
@@ -229,9 +243,9 @@ class SpeedTestScreenauto(Screen):
 			self["key_yellow"].setText(" ")
 			self["yellow"].hide()
 		else:
-				self['data'].setText(_('Download speedtest.png failed!'))
-				self["key_yellow"].setText(_('Download result'))
-				self["yellow"].show()
+			self['data'].setText(_('Download speedtest.png failed!'))
+			self["key_yellow"].setText(_('Download result'))
+			self["yellow"].show()
 
 	def viewshare(self):
 		if path.exists(png_tmp):
@@ -262,19 +276,18 @@ class serversel(Screen):
 		self['list'] = MenuList(self.resultlist)
 		self["key_red"] = Label(_("Exit"))
 		self["key_green"] = Label(_("Ok"))
-		self['actions'] = ActionMap(['WizardActions', 'ColorActions', 'SetupActions','DirectionActions'], 
+		self['actions'] = ActionMap(['WizardActions', 'ColorActions', 'SetupActions','DirectionActions'],
 		{'cancel': self.exit,
-		'ok': self.okClicked, 
-		'green': self.okClicked, 
-		'back': self.exit, 
-		'red': self.exit, 
-		'left': self.pageUp, 
-		'right': self.pageDown, 
-		'down': self.moveDown, 
-		'up': self.moveUp 
+		'ok': self.okClicked,
+		'green': self.okClicked,
+		'back': self.exit,
+		'red': self.exit,
+		'left': self.pageUp,
+		'right': self.pageDown,
+		'down': self.moveDown,
+		'up': self.moveUp
 		}, -1)
 		self.onLayoutFinish.append(self.showwait)
-#		self.showMenu()
 
 	def pageUp(self):
 		self['list'].instance.moveSelection(self['list'].instance.pageUp)
@@ -298,7 +311,7 @@ class serversel(Screen):
 		except:
 			self.Timer.callback.append(self.showMenu)
 		self.Timer.start(10, True)
-			
+
 	def showMenu(self):
 		self.Timer.stop()
 		try:
@@ -365,7 +378,7 @@ class SpeedTestScreenfav(Screen):
 		self['image'] = Pixmap()
 		self['actions'] = ActionMap(['OkCancelActions','ColorActions'],{'cancel': self.exit,'green': self.testagain, 'blue': self.viewshare, 'yellow': self.donwl},-1)
 		self.server = config.speedtest.server.value
-		cmd='python ' + plugin_path + ' --no-pre-allocate --server %s --share' % (self.server)
+		cmd = 'python ' + plugin_path + ' --no-pre-allocate --server %s --share' % (self.server)
 		self.removepng()
 		self.finished=False
 		self.data=''
@@ -375,9 +388,9 @@ class SpeedTestScreenfav(Screen):
 		self.container.execute(cmd)
 
 	def testagain(self):
-		if  self.finished==False:
+		if self.finished == False:
 			return
-		self.data=''
+		self.data = ''
 		self['data'].setText(_("Testing internet speed, please wait..."))
 		self['ping'].setText(" ")
 		self['host'].setText(" ")
@@ -390,20 +403,20 @@ class SpeedTestScreenfav(Screen):
 		self["yellow"].hide()
 		self['blue'].hide()
 		self["key_blue"].setText(" ")
-		cmd='python ' + plugin_path + ' --no-pre-allocate --server %s --share' % (self.server)
+		cmd = 'python ' + plugin_path + ' --no-pre-allocate --server %s --share' % (self.server)
 		self.removepng()
 		self.container.execute(cmd)
 
 	def action(self, retval):
 		print("retval",retval)
 		print(_("finished test"))
-		self.finished=True
+		self.finished = True
 
 	def dataAvail(self, rstr):
 		if rstr:
-			rstr=str(rstr.decode())
-			self.data=self.data+rstr
-			parts=rstr.split("\n")
+			rstr = str(rstr.decode())
+			self.data = self.data + rstr
+			parts = rstr.split("\n")
 			for part in parts:
 				if 'Hosted by' in part:
 					try:
@@ -444,10 +457,14 @@ class SpeedTestScreenfav(Screen):
 					self["key_green"].setText(_('Test again'))
 					self["green"].show()
 					try:
-						urlretrieve(self.url_png, png_tmp)
+						request_site = Request(self.url_png, None, headers)
+						speed_image = urlopen(request_site).read()
+						image = open(png_tmp, "wb")
+						image.write(speed_image)
+						image.close()
 					except Exception as e:
-							print(e)
-							self.donwl()
+						print(e)
+						self.donwl()
 					if path.exists(png_tmp):
 						self["key_blue"].setText(_('Show results'))
 						self["blue"].show()
@@ -462,7 +479,11 @@ class SpeedTestScreenfav(Screen):
 
 	def donwl(self):
 		try:
-			urlretrieve(self.url_png, png_tmp)
+			request_site = Request(self.url_png, None, headers)
+			speed_image = urlopen(request_site).read()
+			image = open(png_tmp, "wb")
+			image.write(speed_image)
+			image.close()
 		except Exception as e:
 			print(e)
 		if path.exists(png_tmp):
@@ -471,9 +492,9 @@ class SpeedTestScreenfav(Screen):
 			self["key_yellow"].setText(" ")
 			self["yellow"].hide()
 		else:
-				self['data'].setText(_('Download speedtest.png failed!'))
-				self["key_yellow"].setText(_('Download result'))
-				self["yellow"].show()
+			self['data'].setText(_('Download speedtest.png failed!'))
+			self["key_yellow"].setText(_('Download result'))
+			self["yellow"].show()
 
 	def viewshare(self):
 		if path.exists(png_tmp):
