@@ -31,7 +31,7 @@ from .xtraSelectionList import xtraSelectionList, xtraSelectionEntryComponent
 from Plugins.Extensions.xtraEvent.skins.xtraSkins import *
 from threading import Timer
 from datetime import datetime
-version = "v4.9"
+version = "v5.2"
 
 pathLoc = ""
 try:
