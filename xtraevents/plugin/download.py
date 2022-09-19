@@ -13,6 +13,8 @@ from Screens.MessageBox import MessageBox
 import Tools.Notifications
 import requests
 from requests.utils import quote
+import urllib3
+urllib3.disable_warnings()
 import os
 import re
 import json
