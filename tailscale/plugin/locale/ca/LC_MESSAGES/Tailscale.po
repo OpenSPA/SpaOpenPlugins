@@ -1,0 +1,102 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tailscale\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: JR <openspateam@gmail.com>\n"
+"Language-Team: OpenSPA <openspa.info>\n"
+"Language: ca_CA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 3.1.1\n"
+
+msgid "Tailscale Network"
+msgstr "Xarxa Tailscale"
+
+msgid "Tailscale Settings"
+msgstr "Configuració Tailscale"
+
+msgid "Stop"
+msgstr "Parar"
+
+msgid "Start"
+msgstr "Iniciar"
+
+msgid "Disable Daemon"
+msgstr "Desactivar servei"
+
+msgid "Running"
+msgstr "Funcionant"
+
+msgid "Not Running"
+msgstr "Parat"
+
+msgid "Enable Daemon"
+msgstr "Activar servei"
+
+msgid "Setup"
+msgstr "Configuració"
+
+msgid "Tailscale-Daemon: "
+msgstr "Servei Tailscale: "
+
+msgid "Status"
+msgstr "Estat"
+
+msgid "Version"
+msgstr "Versió"
+
+msgid "Device"
+msgstr "Dispositiu"
+
+msgid "Press Menu button and enter Auth Key to register device"
+msgstr "Prem botó menú i entra la teva clau de registre (Auth Key) per a registrar el dispositiu"
+
+msgid "Cancel"
+msgstr "Cancel·lar"
+
+msgid "Load Auth Key"
+msgstr "Carregar clau de registre"
+
+msgid "Keyboard"
+msgstr "Teclat"
+
+msgid "Automatic Start"
+msgstr "Inici automàtic"
+
+msgid "Enable/Disable automatic start when enigma2 boots"
+msgstr "Activar/Desactivar inici automàtic quan arranqui enigma2"
+
+msgid "Auth key"
+msgstr "Clau de registre"
+
+msgid ""
+"Auth key to register your device in Tailscale.\n"
+"Press yellow to load Auth Key from file located at /etc/keys/tailscale.key"
+msgstr ""
+"Clau de registre per a registrar el teu dispositiu a Tailscale.\n"
+"Prem botó groc per carregar la clau des de l'arxiu /etc/keys/tailscale.key"
+
+msgid "Execution finished."
+msgstr "Execució finalitzada."
+
+msgid "True"
+msgstr "Si"
+
+msgid "False"
+msgstr "No"
+
+msgid "Devices in your network"
+msgstr "Dispositius a la teva xarxa"
+
+msgid "Downloading data, please wait..."
+msgstr "Descarregant dades, si us plau esperi..."
+
+msgid "%d Entries"
+msgstr "%d Dispositius"
+
+msgid "Close"
+msgstr "Tancar"

@@ -1,0 +1,102 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tailscale\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: JR <openspateam@gmail.com>\n"
+"Language-Team: OpenSPA <openspa.info>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 3.1.1\n"
+
+msgid "Tailscale Network"
+msgstr "Red Tailscale"
+
+msgid "Tailscale Settings"
+msgstr "Configuración Tailscale"
+
+msgid "Stop"
+msgstr "Parar"
+
+msgid "Start"
+msgstr "Iniciar"
+
+msgid "Disable Daemon"
+msgstr "Desactivar servicio"
+
+msgid "Running"
+msgstr "Funcionando"
+
+msgid "Not Running"
+msgstr "Parado"
+
+msgid "Enable Daemon"
+msgstr "Activar servicio"
+
+msgid "Setup"
+msgstr "Configuración"
+
+msgid "Tailscale-Daemon: "
+msgstr "Servicio Tailscale: "
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Version"
+msgstr "Versión"
+
+msgid "Device"
+msgstr "Dispositivo"
+
+msgid "Press Menu button and enter Auth Key to register device"
+msgstr "Pulsa botón menú y entra tu clave de registro (Auth Key) para registrar el dispositivo"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Load Auth Key"
+msgstr "Cargar clave de registro"
+
+msgid "Keyboard"
+msgstr "Teclado"
+
+msgid "Automatic Start"
+msgstr "Inicio automático"
+
+msgid "Enable/Disable automatic start when enigma2 boots"
+msgstr "Activar/Desactivar inicio automático cuando arranque enigma2"
+
+msgid "Auth key"
+msgstr "Clave de registro"
+
+msgid ""
+"Auth key to register your device in Tailscale.\n"
+"Press yellow to load Auth Key from file located at /etc/keys/tailscale.key"
+msgstr ""
+"Clave de registro para registrar tu dispositivo en Tailscale.\n"
+"Pulsa botón amarillo para cargar la clave desde el archivo /etc/keys/tailscale.key"
+
+msgid "Execution finished."
+msgstr "Ejecución finalizada."
+
+msgid "True"
+msgstr "Si"
+
+msgid "False"
+msgstr "No"
+
+msgid "Devices in your network"
+msgstr "Dispositivos en tu red"
+
+msgid "Downloading data, please wait..."
+msgstr "Descargando datos, por favor espere..."
+
+msgid "%d Entries"
+msgstr "%d Dispositivos"
+
+msgid "Close"
+msgstr "Cerrar"

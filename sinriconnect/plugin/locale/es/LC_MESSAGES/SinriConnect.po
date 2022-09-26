@@ -1,0 +1,213 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SinriConnect\n"
+"POT-Creation-Date: 2022-06-02 14:23+0200\n"
+"PO-Revision-Date: 2022-06-28 19:55+0200\n"
+"Last-Translator: \n"
+"Language-Team: morser - OpenSPA\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: channels.py:43 channels.py:45 plugin.py:270 plugin.py:272
+msgid "*** CHANNEL NOT FOUND ***"
+msgstr "*** CANAL NO ENCONTRADO ***"
+
+#: plugin.py:46
+msgid "Do nothing"
+msgstr "No hacer nada"
+
+#: plugin.py:46
+msgid "Restart Enigma"
+msgstr "Reiniciar Enigma"
+
+#: plugin.py:46
+msgid "Reboot Receiver"
+msgstr "Reiniciar el receptor"
+
+#: plugin.py:46
+msgid "Restart CAMD"
+msgstr "Reiniciar CAMD"
+
+#: plugin.py:46
+msgid "Download EPG"
+msgstr "Descargar el EPG"
+
+#: plugin.py:46
+msgid "Show Actual Event Info"
+msgstr "Ver la información del evento actual"
+
+#: plugin.py:46
+msgid "Show the EPG of the Current Channel"
+msgstr "Ver el EPG del canal actual"
+
+#: plugin.py:46
+msgid "Show EPG Guide"
+msgstr "Ver la Guía de EPG"
+
+#: plugin.py:46
+msgid "Simulate Pressing the Exit Button"
+msgstr "Simular presionar el botón Exit"
+
+#: plugin.py:46
+msgid "Launch script /usr/script/sinric.sh"
+msgstr "Lanzar el script /usr/script/sinric.sh"
+
+#: plugin.py:46
+msgid "Launch Kodi"
+msgstr "Lanzar Kodi"
+
+#: plugin.py:125 plugin.py:151
+msgid "Exit"
+msgstr "Salir"
+
+#: plugin.py:126 plugin.py:152 plugin.py:208
+msgid "Connect"
+msgstr "Conectar"
+
+#: plugin.py:128 plugin.py:153
+msgid "Channels"
+msgstr "Canales"
+
+#: plugin.py:155
+msgid "Connect when starting Enigma"
+msgstr "Conectar cuando inicie Enigma"
+
+#: plugin.py:157
+msgid "See Popup when connecting from start"
+msgstr "Ver Popup cuando se conecte al inicio"
+
+#: plugin.py:159
+msgid "See the volume bar when changing it"
+msgstr "Ver la barra de volumen cuando se cambie"
+
+#: plugin.py:161
+msgid "Add interactions in the log"
+msgstr "Añadir interacciones al log"
+
+#: plugin.py:163
+msgid "Use Custom Channel Table"
+msgstr "Usar tabla personalizada de canales"
+
+#: plugin.py:169 plugin.py:188
+msgid "CHANNEL TABLE"
+msgstr "TABLA DE CANALES"
+
+#: plugin.py:170
+msgid "Back"
+msgstr "Atrás"
+
+#: plugin.py:171
+msgid "Append"
+msgstr "Añadir"
+
+#: plugin.py:176
+#, python-format
+msgid "Channel Number %d  ==>"
+msgstr "Canal número %d ==>"
+
+#: plugin.py:180 plugin.py:188
+msgid "Edit"
+msgstr "Editar"
+
+#: plugin.py:181
+msgid "Remove"
+msgstr "Eliminar"
+
+#: plugin.py:192 plugin.py:193
+msgid "Channel Number"
+msgstr "Número de canal"
+
+#: plugin.py:194
+msgid "Channel (Press Ok to change)"
+msgstr "Canal (Presiona OK para cambiar)"
+
+#: plugin.py:203
+msgid "Connected"
+msgstr "Conectado"
+
+#: plugin.py:207
+msgid "Disconnected"
+msgstr "Desconectado"
+
+#: plugin.py:241
+msgid "Select channel"
+msgstr "Selecciona canal"
+
+#: plugin.py:372 plugin.py:398 plugin.py:403 sinriconnect.py:118
+msgid "SinriConnect"
+msgstr "SinriConnect"
+
+#: plugin.py:372
+msgid "Client is connected"
+msgstr "El cliente se ha conectado"
+
+#: plugin.py:389
+msgid ""
+"The configuration file is not filled in correctly. You must first open an "
+"account at https://sinric.pro/ and create a device of type Tv. The "
+"application key, application secret and device id must be entered in the /"
+"etc/keys/sinric.keys file after the = sign of each key."
+msgstr ""
+"El archivo de configuración no está rellenado correctamente. Primero "
+"debes abrir una cuenta en https://sinric.pro/ y crear un dispositivo de "
+"tipo TV. El aplication key, application secret y device id debe ser "
+"colocado en el archivo /etc/keys/sinric.keys después del signo = de cada "
+"clave."
+
+#: plugin.py:399
+msgid ""
+"Allows you to control the receiver with Alexa or Google Home using Sinric "
+"Pro."
+msgstr ""
+"Permite controlar el receptor con Alexa o Google Home usando Sinric Pro."
+
+#: sinriconnect.py:118
+msgid "Restarting CAMD"
+msgstr "Reiniciando CAMD"
+
+msgid "Bouquets"
+msgstr "Listas FAV"
+
+msgid "Switch All"
+msgstr "Cambiar todo"
+
+msgid "Simulate Pressing the Left Button"
+msgstr "Simular presionar el botón Izquierda"
+
+msgid "Simulate Pressing the Right Button"
+msgstr "Simular presionar el botón Derecha"
+
+msgid "Simulate Pressing the Up Button"
+msgstr "Simular presionar el botón Arriba"
+
+msgid "Simulate Pressing the Down Button"
+msgstr "Simular presionar el botón Abajo"
+
+msgid "Simulate Pressing the OK Button"
+msgstr "Simular presionar el botón OK"
+
+msgid "Simulate Pressing the Menu Button"
+msgstr "Simular presionar el botón Menú"
+
+msgid "Simulate Pressing the Red Button"
+msgstr "Simular presionar el botón Rojo"
+
+msgid "Simulate Pressing the Green Button"
+msgstr "Simular presionar el botón Verde"
+
+msgid "Simulate Pressing the Yellow Button"
+msgstr "Simular presionar el botón Amarillo"
+
+msgid "Simulate Pressing the Blue Button"
+msgstr "Simular presionar el botón Azul"
+
+msgid "Change to the channel programmed search"
+msgstr "Cambiar al canal de búsqueda programada"
