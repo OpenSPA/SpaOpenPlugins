@@ -1,0 +1,8 @@
+
+ SinriConnect needs
+   - Python 3
+   - Python3-sinricpro 2.5.3
+   - Python3-websockets 10.1
+   - Python3-loguru
+   - Python3-asyncio
+   - Python3-multiprocessing
