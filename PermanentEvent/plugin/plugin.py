@@ -54,7 +54,7 @@ def ddwn():
 		t = threading.Timer(3600*int(tmr), ddwn) # 1h=3600
 		t.start()
 if config.plugins.PermanentEvent.timerMod.value == True:
-	threading.Timer(30, ddwn).start()
+	threading.Timer(120, ddwn).start()
 
 def startConfig(session, **kwargs):
 		session.open(permanent.PermanentEventMenu)
