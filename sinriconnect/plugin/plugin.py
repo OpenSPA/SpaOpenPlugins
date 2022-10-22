@@ -57,7 +57,7 @@ def fontHD(nombre):
 		fuente = nombre
 	return fuente
 
-
+INIT = True
 CLIENT = None
 if esHD():
 	ICON_ON = "%s%s/img/connected.png" % (resolveFilename(SCOPE_PLUGINS), "Extensions/SinriConnect")
@@ -182,6 +182,9 @@ class sinriconnectconfig(ConfigListScreen,Screen):
 		self["menu"] = listado(list())
 
 
+		self.timer = eTimer()
+		self.timer.callback.append(self.actualiza)
+
 		self["setupActions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
 			"red": self.salir,
@@ -282,7 +285,10 @@ class sinriconnectconfig(ConfigListScreen,Screen):
 			self['picConn'].instance.setPixmapFromFile(ICON_OFF)
 			self["info"].setText(_("Disconnected"))
 			self["key_green"].setText(_("Connect"))
-	
+			if CLIENT:
+				CLIENT.loop.stop()
+				CLIENT = None
+		self.timer.stop()	
 
 	def salir(self):
 		if self.page == 1:
@@ -428,9 +434,10 @@ class sinriconnectconfig(ConfigListScreen,Screen):
 		appkey, appsecret, tvid = getkeys()
 		global CLIENT
 		if CLIENT is None:
+			self["info"].setText(_("Connecting"))
 			CLIENT = sinriconnect(self.session, appkey, appsecret, tvid, config.plugins.sinric.logintent.value)
 			CLIENT.run()
-		self.actualiza()
+		self.timer.start(4000, True) #temporizacion de 4 segundos
 
 def getkeys():
 	APP_KEY = APP_SECRET = TV_ID = ""
@@ -453,6 +460,8 @@ class startclient(Element):
 	def __init__(self,session,appkey, appsecret, tvid):  
 		self.timer = eTimer()
 		self.timer.callback.append(self.poll)
+		self.timer2 = eTimer()
+		self.timer2.callback.append(self.notification)
 		Element.__init__(self)
 		self.session = session
 		self.appkey = appkey
@@ -464,22 +473,38 @@ class startclient(Element):
 			service = self.source.service
 			serviceref = self.source.serviceref
 			if serviceref is not None and CLIENT is None:
-				self.timer.start(4000, True) #temporizacion de 4 segundos
+				self.timer.start(2000, True) #temporizacion de 2 segundos
 		except:
 			pass
 
 	def poll(self):
-		global CLIENT
-		if CLIENT is None:
+		global CLIENT, INIT
+		if INIT and CLIENT is None:
 			CLIENT = sinriconnect(self.session, self.appkey, self.appsecret, self.tvid, config.plugins.sinric.logintent.value)
 			CLIENT.run()
-			if CLIENT and config.plugins.sinric.viewpopup.value:
+			INIT = False
+			self.timer2.start(3000, True) #temporizacion de 3 segundos
+		self.timer.stop()
+
+	def notification(self):		
+		global CLIENT
+		if CLIENT and CLIENT.isconnected():
+			if config.plugins.sinric.viewpopup.value:
 				try:
 					from Plugins.Extensions.spazeMenu.Popup import Popup
 					self.session.open(Popup, _("SinriConnect"),_("Client is connected"),type=Popup.TYPE_INFO, timeout = 5, picon=resolveFilename(SCOPE_PLUGINS)+"Extensions/SinriConnect/img/logo_sinric.png",enable_fade=True)
 				except:
 					pass
-		self.timer.stop()
+		else:
+			if config.plugins.sinric.viewpopup.value:
+				try:
+					from Plugins.Extensions.spazeMenu.Popup import Popup
+					self.session.open(Popup, _("SinriConnect"),_("Client cannot connect"),type=Popup.TYPE_ALARM, timeout = 5, picon=resolveFilename(SCOPE_PLUGINS)+"Extensions/SinriConnect/img/logo_sinric.png",enable_fade=True)
+				except:
+					pass
+			CLIENT.loop.stop()
+			CLIENT = None
+		self.timer2.stop()	
 
 def autostart(reason, **kwargs):
 	appkey, appsecret, tvid = getkeys()

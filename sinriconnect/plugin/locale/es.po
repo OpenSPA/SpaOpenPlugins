@@ -211,3 +211,9 @@ msgstr "Simular presionar el botón Azul"
 
 msgid "Change to the channel programmed search"
 msgstr "Cambiar al canal de búsqueda programada"
+
+msgid "Connectingh"
+msgstr "Conectando"
+
+msgid "Client cannot connect"
+msgstr "El cliente no se puede conectar"

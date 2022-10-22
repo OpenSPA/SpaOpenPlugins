@@ -210,3 +210,9 @@ msgstr "Simular prèmer el botó Blau"
 
 msgid "Change to the channel programmed search"
 msgstr "Canviar al canal de cerca programada"
+
+msgid "Connectingh"
+msgstr "Connectant"
+
+msgid "Client cannot connect"
+msgstr "El client no es pot connectar"
