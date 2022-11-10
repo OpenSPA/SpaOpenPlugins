@@ -451,6 +451,8 @@ class PlutoTV(Screen):
 			urls = item.get('stitched',{}).get('urls',[])
 			if len(urls)>0:
 				url = urls[0].get('url','')
+			else:
+				url = ""
 
 			if len(itemimgs)>2:
 				itemimage = itemimgs[2].get('url','')
