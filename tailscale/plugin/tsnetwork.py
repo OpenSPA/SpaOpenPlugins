@@ -87,7 +87,7 @@ class TailscaleNetwork(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = ['Tailscale']
-		self['setupActions'] = ActionMap(['SetupActions', 'ColorActions'],
+		self['actions'] = ActionMap(['ColorActions', 'MenuActions', 'OkCancelActions'],
 			{
 				"menu": self.KeyMenu,
 				"cancel": self.keyExit,
