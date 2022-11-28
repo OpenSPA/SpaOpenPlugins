@@ -255,10 +255,11 @@ class Tailscaleuser(Screen):
 			<widget name="lblRed" position="15,707" size="300,40" zPosition="1" font="RegularHD;20" halign="center" valign="center" transparent="1" />
 			<widget source="list" render="Listbox" position="12,68" size="1200,630" scrollbarMode="showOnDemand" enableWrapAround="on">
 				<convert type="TemplatedMultiContent">
-					{ "template": [ MultiContentEntryText(pos=(15,2),size=(1080,45),font=0,text=2),
-					MultiContentEntryText(pos=(15,42),size=(1080,66),font=1,text=1),
-					MultiContentEntryText(pos=(15,72),size=(1080,66),font=1,text=3,color=0xa0a0a0),
-					MultiContentEntryPixmapAlphaBlend(pos=(0,0),size=(1200,3),png=4)],
+					{ "template": [ MultiContentEntryText(pos=(135,2),size=(1080,45),font=0,text=2),
+					MultiContentEntryText(pos=(135,42),size=(1080,66),font=1,text=1),
+					MultiContentEntryText(pos=(135,72),size=(1080,66),font=1,text=3,color=0xa0a0a0),
+					MultiContentEntryPixmapAlphaBlend(pos=(20,15),size=(112,112),png=4),
+					MultiContentEntryPixmapAlphaBlend(pos=(0,0),size=(1200,3),png=5)],
 					"fonts": [gFont("RegularHD",22),gFont("RegularHD",17)],
 					"itemHeight": 112
 					}
@@ -273,10 +274,11 @@ class Tailscaleuser(Screen):
 			<widget name="lblRed" position="10,471" size="200,40" zPosition="1" font="RegularHD;20" halign="center" valign="center" transparent="1" />
 			<widget source="list" render="Listbox" position="8,45" size="800,420" scrollbarMode="showOnDemand" enableWrapAround="on">
 				<convert type="TemplatedMultiContent">
-					{ "template": [ MultiContentEntryText(pos = (10,1),size = (720,30),font=0,text=2),
-					MultiContentEntryText(pos = (10,28),size = (720,44),font=1,text=1),
-					MultiContentEntryText(pos=(10,48),size=(720,44),font=1,text=3,color=0xa0a0a0),
-					MultiContentEntryPixmapAlphaBlend(pos = (0,0),size = (800,2),png=3)],
+					{ "template": [ MultiContentEntryText(pos = (70,1),size = (720,30),font=0,text=2),
+					MultiContentEntryText(pos = (70,28),size = (720,44),font=1,text=1),
+					MultiContentEntryText(pos=(70,48),size=(720,44),font=1,text=3,color=0xa0a0a0),
+					MultiContentEntryPixmapAlphaBlend(pos=(4,4),size=(60,60),png=4),
+					MultiContentEntryPixmapAlphaBlend(pos = (0,0),size = (800,2),png=5)],
 					"fonts": [gFont("Regular",22),gFont("Regular",17)],
 					"itemHeight": 74
 					}
@@ -302,8 +304,11 @@ class Tailscaleuser(Screen):
 		self['picRed'] = Pixmap()
 		self['lblRed'] = Label("Close")
 
-		self.line = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/ZeroTier/images/div-h.png')
-
+		self.line = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/div-h.png')
+		if esHD():
+			self.networkpic = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/network-hd.png')
+		else:
+			self.networkpic = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/network.png')
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
@@ -322,10 +327,11 @@ class Tailscaleuser(Screen):
 		index = self['list'].getIndex()
 		mlist = []
 		for data in self.lista:
+			pic = self.networkpic
 			text0 = '%s: %s' % (_('Device'), data[0])
 			text1 = '%s: %s' % (_('IP'), data[1])
 			text2 = '%s: %s' % (_('Version'), data[2])
-			mlist.append((data, str(text1), str(text0), str(text2),self.line))
+			mlist.append((data, str(text1), str(text0), str(text2),  pic, self.line))
 		self['list'].setList(mlist)
 		self['list'].setIndex(index)
 		return
