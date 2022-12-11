@@ -81,7 +81,7 @@ class FootOnsatLauncher(Screen):
 		if PY3:
 			data = data.decode('UTF-8')
 		compet = re.findall(r'<a\s+href=\"(.*?).json\">', data)
-		ordering = ["today", "championsleague", "europaleague", "ConferenceLeague", "premierleague", "laliga", "seriea",
+		ordering = ["today", "worldCup", "championsleague", "europaleague", "ConferenceLeague", "premierleague", "laliga", "seriea",
 		"bundesliga", "ligue1", "liganos","cafchampions", "afcchampions","championship", "laliga2", "nba"]
 		self.menuList = self.custom_sort(ordering, compet)
 
