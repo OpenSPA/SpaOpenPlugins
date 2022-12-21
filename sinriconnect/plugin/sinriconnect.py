@@ -366,6 +366,8 @@ class sinriconnect():
 		self.timer.callback.append(self.volvoice)
 		self.timer2 = eTimer()
 		self.timer2.callback.append(self.initilize)
+		self.timer3 = eTimer()
+		self.timer3.callback.append(self.closeloop)
 		GSESSION = session
 
 		v = config.audio.volume
@@ -415,9 +417,15 @@ class sinriconnect():
 		ret = self.loop and self.loop.is_running() and self.client.socket.connection and self.client.socket.connection.open
 		if ret==False and self.loop and self.loop.is_running():
 			self.loop.stop()
-			self.loop.close()
+			self.timer3.start(2000,True)
 		return ret
-
+		
+	def closeloop(self):
+		self.timer3.stop()
+		try:
+			self.loop.close()
+		except:
+			pass
 
 	def run(self):
 		global INITIAL

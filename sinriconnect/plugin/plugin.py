@@ -473,7 +473,7 @@ class startclient(Element):
 			service = self.source.service
 			serviceref = self.source.serviceref
 			if serviceref is not None and CLIENT is None:
-				self.timer.start(2000, True) #temporizacion de 2 segundos
+				self.timer.start(3000, True) #temporizacion de 3 segundos
 		except:
 			pass
 
@@ -483,7 +483,7 @@ class startclient(Element):
 			CLIENT = sinriconnect(self.session, self.appkey, self.appsecret, self.tvid, config.plugins.sinric.logintent.value)
 			CLIENT.run()
 			INIT = False
-			self.timer2.start(3000, True) #temporizacion de 3 segundos
+			self.timer2.start(4000, True) #temporizacion de 4 segundos
 		self.timer.stop()
 
 	def notification(self):		
