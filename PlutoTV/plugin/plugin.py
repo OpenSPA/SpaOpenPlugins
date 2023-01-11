@@ -558,13 +558,15 @@ class PlutoTV(Screen):
 			else:
 				name = film[1]
 			sessionid, deviceid = PlutoDownload.getUUID()
-			self.playVOD(name,sid)
+			url = film[9]
+			self.playVOD(name,sid,url)
 		if tipo == "episode":
 			film = self.chapters[_id][index]
 			sid = film[0]
 			name = film[1]
 			sessionid, deviceid = PlutoDownload.getUUID()
-			self.playVOD(name,sid)
+			url = film[9]
+			self.playVOD(name,sid,url)
 			
 
 	def back(self):
@@ -604,12 +606,18 @@ class PlutoTV(Screen):
 			self.titlemenu = histname
 			self["playlist"].setText(self.titlemenu)
 
-	def playVOD(self, name, id):
+	def playVOD(self, name, id, uri=None):
 		data = PlutoDownload.getClips(id)[0]
 		if not data: return
 		url   = (data.get('url','') or data.get('sources',[])[0].get('file',''))
-		str = '4097:0:0:0:0:0:0:0:0:0:%s:%s' % (quote(url), quote(name))
-		reference = eServiceReference(str)
+		url = url.replace('siloh.pluto.tv','dh7tjojp94zlv.cloudfront.net') ## Hack for siloh.pluto.tv not access - siloh.pluto.tv redirect to dh7tjojp94zlv.cloudfront.net
+#		if uri:
+#			uid, did = PlutoDownload.getUUID()
+#			url = uri.replace("deviceModel=","deviceModel=web").replace("deviceMake=","deviceMake=chrome")
+#			url = url + uid
+			
+		string = '4097:0:0:0:0:0:0:0:0:0:%s:%s' % (quote(url), quote(name))
+		reference = eServiceReference(string)
 		if 'm3u8' in url.lower():
 			self.session.openWithCallback(self.returnplayer,Pluto_Player, service=reference, sid = id)
 
