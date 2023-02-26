@@ -444,7 +444,10 @@ class PlutoDownload(Screen):
 			self.session.openWithCallback(self.salirok, MessageBox, _('There is no data, it is possible that Puto TV is not available in your Country'), type=MessageBox.TYPE_ERROR, timeout=10)
 		else:
 			self.keystot = len(ChannelsList)
-			self.subtotal = len(ChannelsList[Categories[0]])
+			if Categories[0] in ChannelsList:
+				self.subtotal = len(ChannelsList[Categories[0]])
+			else:
+				self.subtotal = 0
 			self.key = 0
 			self.chitem = 0
 			[buildGuide(event) for event in guide]
@@ -601,7 +604,10 @@ class DownloadSilent:
 			self.close()
 		else:
 			self.keystot = len(ChannelsList)
-			self.subtotal = len(ChannelsList[Categories[0]])
+			if Categories[0] in ChannelsList:
+				self.subtotal = len(ChannelsList[Categories[0]])
+			else:
+				self.subtotal = 0
 			self.key = 0
 			self.chitem = 0
 			[buildGuide(event) for event in guide]
