@@ -246,11 +246,8 @@ class EPGdownload(Screen):
 						name = channel[6]
 						self["status"].setText(_("Wait for Channel: ")+name)
 
-						try:
-							from Components.Renderer import spaPicon
-						except:
-							from Components.Renderer import Picon as spaPicon
-						pngname = spaPicon.getPiconName(ref)
+						from Components.Renderer import Picon
+						pngname = Picon.getPiconName(ref)
 						if not fileExists(pngname):
 							pngname = resolveFilename(SCOPE_CURRENT_SKIN, "picon_default.png")
 
