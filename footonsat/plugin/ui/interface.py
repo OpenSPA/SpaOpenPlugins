@@ -280,14 +280,15 @@ class FootOnSat(Screen):
 	def getTime(self, match_date):
 		timezone = strftime("%z")
 		if timezone.startswith('+') and timezone != '+0000':
-			dif = int(timezone.replace('+', '').replace('00', ''))
-			calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') + timedelta(hours=dif)).strftime('%H:%M - %Y-%m-%d')
+				dif = int(timezone[:3] + '1') * int(timezone[3:])
+				calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') + timedelta(hours=dif)).strftime('%H:%M - %Y-%m-%d')
 		elif timezone == '+0000':
-			calc = match_date
+				calc = match_date
 		else:
-			dif = int(timezone.replace('-', '').replace('00', ''))
-			calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') - timedelta(hours=dif)).strftime('%H:%M - %Y-%m-%d')
+				dif = int(timezone[:3] + '1') * int(timezone[3:])
+				calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') - timedelta(hours=dif)).strftime('%H:%M - %Y-%m-%d')
 		return calc
+
 
 	def updateCounter(self):
 		if len(self.matches) > 0:
@@ -412,7 +413,7 @@ class FootOnSat(Screen):
 			index = self['list2'].getSelectionIndex()
 			freq = self.channelData[index][2].split(' ')[0]
 			symbolrate = self.channelData[index][2].split(' ')[2]
-			pos = self.channelData[index][1].split(' ')[-1].replace('°', ' ').split(' ')
+			pos = self.channelData[index][1].split(' ')[-1].replace('Â°', ' ').split(' ')
 			sat = self.getSat(pos)
 			fec = self.channelData[index][2].split(' ')[-1]
 			polarization = 'V' if 'V' in self.channelData[index][2] else 'H'
