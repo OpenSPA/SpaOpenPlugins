@@ -122,7 +122,7 @@ config.plugins.PermanentEvent.mode_event = ConfigSelection([('0', _('Current pro
  ('6', _('Current program')),
  ('7', _('Next program')),
  ('8', _('Primetime with image and hour'))], default='6')
-config.plugins.PermanentEvent.loc = ConfigDirectory(default='')
+config.plugins.PermanentEvent.loc = ConfigDirectory(default='/tmp/')
 config.plugins.PermanentEvent.timerMod = ConfigYesNo(default = False)
 config.plugins.PermanentEvent.timer = ConfigSelectionNumber(1, 168, 1, default=1)
 config.plugins.PermanentEvent.searchbouquet =  ConfigSelection([('0', _('(Ok) to select bouquet'))], default='0')

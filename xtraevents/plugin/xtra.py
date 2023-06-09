@@ -117,7 +117,7 @@ config.plugins.xtraEvent.skinSelectColor = ConfigSelection(default = "#3478c1", 
 	("#008B8B","Dark Cyan"),
 	("#2E8B57","SeaGreen"),
 	])
-config.plugins.xtraEvent.loc = ConfigDirectory(default='')
+config.plugins.xtraEvent.loc = ConfigDirectory(default='/tmp/')
 config.plugins.xtraEvent.searchMOD = ConfigSelection(default = lng.get(lang, '14'), choices = [(lng.get(lang, '13')), (lng.get(lang, '14')), (lng.get(lang, '14a'))])
 config.plugins.xtraEvent.searchNUMBER = ConfigSelectionNumber(0, 999, 1, default=0)
 
@@ -136,7 +136,7 @@ config.plugins.xtraEvent.searchMANUELnmbr = ConfigSelectionNumber(0, 999, 1, def
 config.plugins.xtraEvent.searchMANUELyear = ConfigInteger(default = 0, limits=(0, 9999))
 config.plugins.xtraEvent.imgNmbr = ConfigSelectionNumber(0, 999, 1, default=1)
 config.plugins.xtraEvent.searchModManuel = ConfigSelection(default = lng.get(lang, '16'), choices = [(lng.get(lang, '16')), (lng.get(lang, '17'))])
-config.plugins.xtraEvent.EMCloc = ConfigDirectory(default='')
+config.plugins.xtraEvent.EMCloc = ConfigDirectory(default='/tmp/')
 config.plugins.xtraEvent.apis = ConfigYesNo(default = False)
 config.plugins.xtraEvent.tmdbAPI = ConfigText(default="", visible_width=100, fixed_size=False)
 config.plugins.xtraEvent.tvdbAPI = ConfigText(default="", visible_width=100, fixed_size=False)
