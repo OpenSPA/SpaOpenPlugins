@@ -16,7 +16,8 @@ from Components.ServiceList import refreshServiceList
 from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import SystemInfo
 from Components.Pixmap import Pixmap
-from Components.SelectionList import SelectionList, SelectionEntryComponent
+#from Components.SelectionList import SelectionList, SelectionEntryComponent
+from .perSelectionList import perSelectionList, perSelectionEntryComponent
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.InputBox import InputBox
@@ -969,8 +970,8 @@ class selBouquets(Screen):
 		# self.epgcache = eEPGCache.getInstance()
 		self.skinName = ["selectBouquets"]
 		self.setTitle(_("Bouquet Selection..."))
-		self.sources = [SelectionEntryComponent(s[0], s[1], 0, (s[0] in ["sources"])) for s in self.bouquets]
-		self["list"] = SelectionList(self.sources)
+		self.sources = [perSelectionEntryComponent(s[0], s[1], 0, (s[0] in ["sources"])) for s in self.bouquets]
+		self["list"] = perSelectionList(self.sources)
 		self["text"] = ScrollLabel("")
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 			{
