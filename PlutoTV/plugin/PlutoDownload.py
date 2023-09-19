@@ -601,7 +601,8 @@ class DownloadSilent:
 		if len(Categories) == 0:
 			print("[Pluto TV] " + _('There is no data, it is possible that Puto TV is not available in your Country'))
 			self.stop()
-			self.close()
+			os.remove("/etc/Plutotv.timer")
+			self.start()
 		else:
 			self.keystot = len(ChannelsList)
 			if Categories[0] in ChannelsList:
