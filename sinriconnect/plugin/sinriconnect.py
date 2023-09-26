@@ -43,13 +43,13 @@ def set_volume(device_id, volume):
 		vctrl.volumeDialog.setValue(volume)
 		vctrl.hideVolTimer.start(3000, True)
 	INITIAL = False
+	VOLVOICE = True
 	return True, volume
 
 
 def adjust_volume(device_id, volume):
 	print('[SinriConnect] Adjust Volume to: ', volume)
 	global VOLVOICE, INITIAL
-	VOLVOICE = True
 	vctrl = VolumeControl.instance
 	vctrl.volctrl.setVolume(volume, volume)
 	vctrl.volSave()
@@ -59,6 +59,7 @@ def adjust_volume(device_id, volume):
 		vctrl.volumeDialog.show()
 	vctrl.volumeDialog.setValue(volume)
 	vctrl.hideVolTimer.start(3000, True)
+	VOLVOICE = True
 	return True, volume
 	
 def set_Mute(device_id, mute):
