@@ -21,6 +21,7 @@ def _(txt):
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
+localeInit()
 language.addCallback(localeInit())
 
 def bin2long(s):
