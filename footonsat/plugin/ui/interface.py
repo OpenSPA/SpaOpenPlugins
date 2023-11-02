@@ -278,17 +278,30 @@ class FootOnSat(Screen):
 				return True
 
 	def getTime(self, match_date):
-		timezone = strftime("%z")
-		if timezone.startswith('+') and timezone != '+0000':
-				dif = int(timezone[:3] + '1') * int(timezone[3:])
-				calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') + timedelta(hours=dif)).strftime('%H:%M - %Y-%m-%d')
-		elif timezone == '+0000':
-				calc = match_date
-		else:
-				dif = int(timezone[:3] + '1') * int(timezone[3:])
-				calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') - timedelta(hours=dif)).strftime('%H:%M - %Y-%m-%d')
-		return calc
+		current_time = datetime.now()
+		last_saturday_march = current_time.replace(month=3, day=31, hour=0, minute=0, second=0, microsecond=0)
+		while last_saturday_march.weekday() != 5:  # Find the last Saturday in March
+				last_saturday_march -= timedelta(days=1)
 
+		last_saturday_october = current_time.replace(month=10, day=31, hour=0, minute=0, second=0, microsecond=0)
+		while last_saturday_october.weekday() != 5:  # Find the last Saturday in October
+				last_saturday_october -= timedelta(days=1)
+
+		if current_time >= last_saturday_march and current_time < last_saturday_october:
+				# Estamos en horario de verano, restar 1 hora
+				timezone = strftime("%z")
+				dif = int(timezone[:3] + '1') * int(timezone[3:])
+				calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') - timedelta(hours=1 + dif)).strftime('%H:%M - %Y-%m-%d')
+		else:
+				# Estamos en horario estándar de invierno, sumar 1 hora
+				timezone = strftime("%z")
+				if timezone == '+0000':
+						calc = match_date
+				else:
+						dif = int(timezone[:3] + '1') * int(timezone[3:])
+						calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') + timedelta(hours=1 + dif)).strftime('%H:%M - %Y-%m-%d')
+
+		return calc
 
 	def updateCounter(self):
 		if len(self.matches) > 0:
