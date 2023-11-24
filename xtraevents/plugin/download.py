@@ -96,6 +96,7 @@ REGEX = re.compile(
 		r'(\d+ odc.\d+)|(:)|'
 		r'( -(.*?).*)|(,)|'
 		r'!|'
+		r'[^\w\s.-]'
 		r'/.*|'
 		r'\|\s[0-9]+\+|'
 		r'[0-9]+\+|'
@@ -104,6 +105,7 @@ REGEX = re.compile(
 		r'(\"|\"\.|\"\,|\.)\s.+|'
 		r'\"|:|'
 		r'\*|'
+		r'[\(\[\|\?¿\]\]\|]'
 		r'Премьера\.\s|'
 		r'(х|Х|м|М|т|Т|д|Д)/ф\s|'
 		r'(х|Х|м|М|т|Т|д|Д)/с\s|'
@@ -680,7 +682,6 @@ class downloads(Screen):
 								pass
 						if not os.path.exists(dwnldFile):	
 							srch = "multi"
-						 
 							url_tmdb = "https://api.themoviedb.org/3/search/{}?api_key={}&query={}".format(srch, tmdb_api, quote(title))
 							if config.plugins.xtraEvent.searchLang.value:
 								url_tmdb += "&language={}".format(self.searchLanguage())
@@ -982,13 +983,18 @@ class downloads(Screen):
 					info_files = "{}infos/{}.json".format(pathLoc, title)
 					if config.plugins.xtraEvent.omdbAPI.value:
 						omdb_apis = config.plugins.xtraEvent.omdbAPI.value
+						if not isinstance(omdb_apis, list):
+							omdb_apis = [omdb_apis]
 					else:
-						omdb_apis = ["6a4c9432", "a8834925", "550a7c40", "8ec53e6b"]
+						omdb_apis = ["42d86ce4", "550a7c40", "5a7216eb", "8ec53e6b"]
 					if not os.path.exists(info_files):
 						try:
+							print("omdb_apis antes for:", omdb_apis)
 							for omdb_api in omdb_apis:
 								try:
+									print("omdbAPI value después for" , omdb_api)
 									url = "http://www.omdbapi.com/?apikey={}&t={}".format(omdb_api, title)
+									print(url)
 									info_omdb = requests.get(url, timeout=5)
 									if info_omdb.status_code == 200:
 										Title = info_omdb.json()["Title"]
@@ -1007,8 +1013,9 @@ class downloads(Screen):
 										imdbRating = info_omdb.json()["imdbRating"]
 										imdbID = info_omdb.json()["imdbID"]
 										Type = info_omdb.json()["Type"]
-								except:
-									pass
+								except Exception as e:
+									print(f"Error al obtener información de IMDb: {str(e)}")
+									print(f"Contenido de la respuesta de OMDB: {info_omdb.text}")
 
 							url_find = 'https://m.imdb.com/find?q={}'.format(title)
 							ff = requests.get(url_find).text
@@ -1016,6 +1023,9 @@ class downloads(Screen):
 							imdbID = rc.search(ff).group(1)
 							url= "https://m.imdb.com/title/{}/?ref_=fn_al_tt_0".format(imdbID)
 							ff = requests.get(url).text
+						except Exception as err:
+							with open("/tmp/xtraEvent.log", "a+") as f:
+								f.write("infos, %s, %s\n" % (title, err))
 							try:
 								rtng = re.findall('"aggregateRating":{(.*?)}',ff)[0] #ratingValue":8.4
 								imdbRating = rtng.partition('ratingValue":')[2].partition('}')[0].strip()
@@ -1081,8 +1091,11 @@ class downloads(Screen):
 							"imdbID": imdbID,
 							}
 							js = json.dumps(data, ensure_ascii=False)
-							with open(info_files, "w") as f:
-								f.write(js)
+							try:
+								with open(info_files, "w") as f:
+									f.write(js)
+							except:
+								pass
 
 							if os.path.exists(info_files):
 								info_downloaded += 1
