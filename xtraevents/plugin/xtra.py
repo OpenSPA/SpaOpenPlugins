@@ -1201,19 +1201,19 @@ class manuelSearch(Screen, ConfigListScreen):
 							downloaded += 1
 							self.prgrs(downloaded, n)
 						except Exception as e:
-								print(f"Error al descargar la imagen {i+1}: {e}")
+							print(f"Error al descargar la imagen {i+1}: {e}")
 
 					config.plugins.xtraEvent.imgNmbr.value = 0
 
 				else:
-						print(f"Error en la solicitud a la API: {response.status_code}")
+					print(f"Error en la solicitud a la API: {response.status_code}")
 
 			except Exception as e:
-					print(f"Error al realizar la búsqueda en la API de Google: {e}")
+				print(f"Error al realizar la búsqueda en la API de Google: {e}")
 
 		except Exception as err:
-				self['status'].setText(_(str(err)))
-				return
+			self['status'].setText(_(str(err)))
+			return
 
 	def prgrs(self, downloaded, n):
 		self['status'].setText("Download : {} / {}".format(downloaded, n))
