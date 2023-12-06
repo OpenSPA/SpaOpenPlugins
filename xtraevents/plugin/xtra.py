@@ -1174,32 +1174,46 @@ class manuelSearch(Screen, ConfigListScreen):
 
 	def google(self):
 		try:
-			url = "https://www.google.com/search?q={}&tbm=isch&tbs=sbd:0".format(self.title.replace(" ", "+"))
-			if config.plugins.xtraEvent.PB.value == "posters":
-				url += "+poster"
-			else:
-				url += "+backdrop"
-			headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
+			query = self.title.replace(" ", "+")
+			search_type = "poster" if config.plugins.xtraEvent.PB.value == "posters" else "backdrop"
+
+			api_key = "AIzaSyCayBp5fi66ZaUQOhHa5d9P7RPCYvvSnJ4"
+			cx = "04bc415f3e6ff4572"
+
+			url = f"https://www.googleapis.com/customsearch/v1?q={query}+{search_type}&key={api_key}&cx={cx}&searchType=image"
+			headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
+
 			try:
-				ff = requests.get(url, stream=True, headers=headers).text
-				p = re.findall('\],\["https://(.*?)",\d+,\d+]', ff)
-			except:
-				pass
-			n = 9
-			downloaded = 0
-			for i in range(n):
-				try:
-					url = "https://{}".format(p[i+1])
-					dwnldFile = "{}mSearch/{}-{}-{}.jpg".format(pathLoc, self.title, config.plugins.xtraEvent.PB.value, i+1)
-					open(dwnldFile, 'wb').write(requests.get(url, stream=True, allow_redirects=True).content)
-					downloaded += 1
-					self.prgrs(downloaded, n)
-				except:
-					pass
-			config.plugins.xtraEvent.imgNmbr.value = 0
+				response = requests.get(url, headers=headers)
+
+				if response.status_code == 200:
+					items = response.json().get("items", [])
+					image_links = [item["link"] for item in items]
+					n = 9
+					downloaded = 0
+
+					for i in range(n):
+						try:
+							image_url = image_links[i]
+							download_file = f"{pathLoc}/mSearch/{self.title}-{config.plugins.xtraEvent.PB.value}-{i+1}.jpg"
+
+							open(download_file, 'wb').write(requests.get(image_url, stream=True, allow_redirects=True).content)
+							downloaded += 1
+							self.prgrs(downloaded, n)
+						except Exception as e:
+								print(f"Error al descargar la imagen {i+1}: {e}")
+
+					config.plugins.xtraEvent.imgNmbr.value = 0
+
+				else:
+						print(f"Error en la solicitud a la API: {response.status_code}")
+
+			except Exception as e:
+					print(f"Error al realizar la búsqueda en la API de Google: {e}")
+
 		except Exception as err:
-			self['status'].setText(_(str(err)))
-			return
+				self['status'].setText(_(str(err)))
+				return
 
 	def prgrs(self, downloaded, n):
 		self['status'].setText("Download : {} / {}".format(downloaded, n))
