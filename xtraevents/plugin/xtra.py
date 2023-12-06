@@ -154,7 +154,7 @@ config.plugins.xtraEvent.fanart = ConfigYesNo(default = False)
 config.plugins.xtraEvent.bing = ConfigYesNo(default = False)
 config.plugins.xtraEvent.extra = ConfigYesNo(default = False)
 config.plugins.xtraEvent.extra2 = ConfigYesNo(default = False)
-config.plugins.xtraEvent.extra3 = ConfigYesNo(default = False)
+#config.plugins.xtraEvent.extra3 = ConfigYesNo(default = False)
 config.plugins.xtraEvent.poster = ConfigYesNo(default = False)
 config.plugins.xtraEvent.banner = ConfigYesNo(default = False)
 config.plugins.xtraEvent.backdrop = ConfigYesNo(default = False)
@@ -433,7 +433,7 @@ class xtra(Screen, ConfigListScreen):
 			# if config.plugins.xtraEvent.info.value == True:
 				# list.append(getConfigListEntry("\tOMDB", config.plugins.xtraEvent.infoOmdb, _(" ")))
 				# list.append(getConfigListEntry("\tIMDB", config.plugins.xtraEvent.infoImdb, _(" ")))
-			list.append(getConfigListEntry("EXTRA-3", config.plugins.xtraEvent.extra3, _(lng.get(lang, '64'))))
+		# list.append(getConfigListEntry("EXTRA-3", config.plugins.xtraEvent.extra3, _(lng.get(lang, '64'))))
 			list.append(getConfigListEntry("_"*100))
 		else:
 			list.append(getConfigListEntry("{}◙ \\c00?????? {}".format(off_color, lng.get(lang, '0')), config.plugins.xtraEvent.onoff, _(lng.get(lang, '0'))))
