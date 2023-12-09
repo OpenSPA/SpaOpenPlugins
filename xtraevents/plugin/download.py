@@ -794,7 +794,7 @@ class downloads(Screen):
 							try:
 								open(dwnldFile, 'wb').write(requests.get(url, stream=True, allow_redirects=True).content)
 								if os.path.exists(dwnldFile):
-									self['info'].setText("►  {}, EXTRA2, BACKDROP".format(title.upper()))
+									self['info'].setText("►  {}, BING, BACKDROP".format(title.upper()))
 									extra2_downloaded += 1
 									downloaded = extra2_downloaded
 									self.prgrs(downloaded, n)
@@ -804,14 +804,14 @@ class downloads(Screen):
 										img.verify()
 									except Exception as err:
 										with open("/tmp/xtraEvent.log", "a+") as f:
-											f.write("deleted extra2 backdrop: %s.jpg\n"%title)
+											f.write("deleted Bing backdrop: %s.jpg\n"%title)
 										try:
 											os.remove(dwnldFile)
 										except:
 											pass
 							except Exception as err:
 								with open("/tmp/xtraEvent.log", "a+") as f:
-									f.write("extra2 backdrop, %s, %s\n"%(title, err))							
+									f.write("bing backdrop, %s, %s\n"%(title, err))							
 	# banner() #################################################################	
 				if config.plugins.xtraEvent.banner.value == True:
 					dwnldFile = "{}banner/{}.jpg".format(pathLoc, title)				
@@ -1110,7 +1110,7 @@ class downloads(Screen):
 			dt = now.strftime("%d/%m/%Y %H:%M:%S")
 			report = "\n\nSTART : {}\nEND : {}\
 				\nPOSTER; Tmdb :{}, Tvdb :{}, Maze :{}, Fanart :{}\
-				\nBACKDROP; Tmdb :{}, Tvdb :{}, Fanart :{}, Extra :{}, Extra2 :{}\
+				\nBACKDROP; Tmdb :{}, Tvdb :{}, Fanart :{}, Extra :{}, Bing :{}\
 				\nBANNER :{}\
 				\nINFOS :{}\
 				\nEXTRA3 ; Poster :{}, Info :{}".format(st, dt, 

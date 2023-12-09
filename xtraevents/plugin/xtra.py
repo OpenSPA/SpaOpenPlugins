@@ -426,7 +426,7 @@ class xtra(Screen, ConfigListScreen):
 				if config.plugins.xtraEvent.fanart.value:
 					list.append(getConfigListEntry("\t	Fanart Backdrop {}".format(lng.get(lang, '49')), config.plugins.xtraEvent.FANART_Backdrop_Resize, _(" ")))
 				list.append(getConfigListEntry("\tEXTRA", config.plugins.xtraEvent.extra, _(lng.get(lang, '30'))))
-				list.append(getConfigListEntry("\tEXTRA-2", config.plugins.xtraEvent.extra2, _(lng.get(lang, '31'))))
+				list.append(getConfigListEntry("\tBING", config.plugins.xtraEvent.extra2, _(lng.get(lang, '31'))))
 				list.append(getConfigListEntry("_"*100))
 	# info___________________________________________________________________________________________________________________
 			list.append(getConfigListEntry("INFO", config.plugins.xtraEvent.info, _(lng.get(lang, '32'))))
@@ -1178,7 +1178,7 @@ class manuelSearch(Screen, ConfigListScreen):
 			search_type = "poster" if config.plugins.xtraEvent.PB.value == "posters" else "backdrop"
 
 			api_key = "AIzaSyCayBp5fi66ZaUQOhHa5d9P7RPCYvvSnJ4"
-			cx = "04bc415f3e6ff4572"
+			cx = "d4ac56566a5fc488c"
 
 			url = f"https://www.googleapis.com/customsearch/v1?q={query}+{search_type}&key={api_key}&cx={cx}&searchType=image"
 			headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
