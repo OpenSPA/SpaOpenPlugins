@@ -66,6 +66,10 @@ try:
 		fanart_api = config.plugins.xtraEvent.fanartAPI.value
 	else:
 		fanart_api = "6d231536dea4318a88cb2520ce89473b"
+	if config.plugins.xtraEvent.googleAPI.value != "":
+		google_api = config.plugins.xtraEvent.googleAPI.value
+	else:
+		google_api = "AIzaSyCayBp5fi66ZaUQOhHa5d9P7RPCYvvSnJ4"
 except:
 	pass
 
@@ -142,6 +146,7 @@ config.plugins.xtraEvent.tmdbAPI = ConfigText(default="", visible_width=100, fix
 config.plugins.xtraEvent.tvdbAPI = ConfigText(default="", visible_width=100, fixed_size=False)
 config.plugins.xtraEvent.omdbAPI = ConfigText(default="", visible_width=100, fixed_size=False)
 config.plugins.xtraEvent.fanartAPI = ConfigText(default="", visible_width=100, fixed_size=False)
+config.plugins.xtraEvent.googleAPI = ConfigText(default="", visible_width=100, fixed_size=False)
 config.plugins.xtraEvent.searchMANUEL_EMC = ConfigText(default="movies name", visible_width=100, fixed_size=False)
 config.plugins.xtraEvent.searchMANUEL = ConfigText(default="event name", visible_width=100, fixed_size=False)
 # config.plugins.xtraEvent.searchLang = ConfigText(default="", visible_width=100, fixed_size=False)
@@ -371,6 +376,7 @@ class xtra(Screen, ConfigListScreen):
 					list.append(getConfigListEntry("	TVDB API", config.plugins.xtraEvent.tvdbAPI, _(lng.get(lang, '23'))))
 					list.append(getConfigListEntry("	OMDB API", config.plugins.xtraEvent.omdbAPI, _(lng.get(lang, '23'))))
 					list.append(getConfigListEntry("	FANART API", config.plugins.xtraEvent.fanartAPI, _(lng.get(lang, '23'))))
+					list.append(getConfigListEntry("	GOOGLE API", config.plugins.xtraEvent.googleAPI, _(lng.get(lang, '23'))))
 				list.append(getConfigListEntry("—"*100))
 				list.append(getConfigListEntry(lng.get(lang, '8'), config.plugins.xtraEvent.searchMOD, _(lng.get(lang, '24'))))		
 				list.append(getConfigListEntry(lng.get(lang, '9'), config.plugins.xtraEvent.searchNUMBER, _(lng.get(lang, '25'))))
@@ -1177,10 +1183,11 @@ class manuelSearch(Screen, ConfigListScreen):
 			query = self.title.replace(" ", "+")
 			search_type = "poster" if config.plugins.xtraEvent.PB.value == "posters" else "backdrop"
 
-			api_key = "AIzaSyCayBp5fi66ZaUQOhHa5d9P7RPCYvvSnJ4"
+#			api_key = "AIzaSyCayBp5fi66ZaUQOhHa5d9P7RPCYvvSnJ4"
 			cx = "d4ac56566a5fc488c"
 
-			url = f"https://www.googleapis.com/customsearch/v1?q={query}+{search_type}&key={api_key}&cx={cx}&searchType=image"
+			url = f"https://www.googleapis.com/customsearch/v1?q={query}+{search_type}&key={google_api}&cx={cx}&searchType=image"
+			print("APIKEYUSADA", url)
 			headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
 
 			try:
