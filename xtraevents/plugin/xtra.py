@@ -12,6 +12,7 @@ from Screens.Standby import TryQuitMainloop
 import Tools.Notifications
 import os
 import re
+import json
 from Components.config import config, configfile, ConfigYesNo, ConfigSubsection, \
 getConfigListEntry, ConfigSelection, ConfigText, ConfigInteger, ConfigSelectionNumber, \
 ConfigDirectory, ConfigClock, NoSave
@@ -674,7 +675,7 @@ class manuelSearch(Screen, ConfigListScreen):
 		list = []
 		ConfigListScreen.__init__(self, list, session=session)
 		self.setTitle(_(lng.get(lang, '18')))
-		self["key_red"] = StaticText(_("Geri"))
+		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_(lng.get(lang, '40')))
 		self["key_yellow"] = StaticText(_(lng.get(lang, '65')))
 		self["key_blue"] = StaticText(_("Keyboard"))
@@ -864,14 +865,17 @@ class manuelSearch(Screen, ConfigListScreen):
 			if config.plugins.xtraEvent.srcs.value == "Google":
 				start_new_thread(self.google, ())
 
+
 	def picShow(self):
 		self["Picture2"].hide()
 		try:
 			self.iNmbr = config.plugins.xtraEvent.imgNmbr.value
+			sanitized_title = self.title.replace(":", "")
+			self.path = "{}mSearch/{}-{}-{}.jpg".format(pathLoc, sanitized_title, config.plugins.xtraEvent.PB.value, self.iNmbr)
 			
-			self.path = "{}mSearch/{}-{}-{}.jpg".format(pathLoc, self.title, config.plugins.xtraEvent.PB.value, self.iNmbr)
 			if config.plugins.xtraEvent.srcs.value == "IMDB(poster)":
-				self.path = "{}mSearch/{}-poster-1.jpg".format(pathLoc, self.title)
+				self.path = "{}mSearch/{}-poster-1.jpg".format(pathLoc, sanitized_title)
+			
 			self["Picture"].instance.setPixmap(loadJPG(self.path))
 			self["Picture"].instance.setScale(1)
 			self["Picture"].show()
@@ -924,46 +928,55 @@ class manuelSearch(Screen, ConfigListScreen):
 		try:
 			self.title = self.title
 			filepath = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent"
+			targetp = ""
+			sanitized_title = self.title.replace(":", "")
+
 			if config.plugins.xtraEvent.PB.value == "posters":
 				if config.plugins.xtraEvent.srcs.value == "bing":
-					target = "{}poster/{}.jpg".format(pathLoc, self.title)
+					target = "{}poster/{}.jpg".format(pathLoc, sanitized_title)
 				if config.plugins.xtraEvent.searchModManuel.value == lng.get(lang, '16'):
-					target = "{}poster/{}.jpg".format(pathLoc, self.title)
+					target = "{}poster/{}.jpg".format(pathLoc, sanitized_title)
 				else:
-					target = "{}EMC/{}-poster.jpg".format(pathLoc, self.title)
+					target = "{}EMC/{}-poster.jpg".format(pathLoc, sanitized_title)
 			else:
 				if config.plugins.xtraEvent.searchModManuel.value == lng.get(lang, '16'):
-					target = "{}backdrop/{}.jpg".format(pathLoc, self.title)
+					target = "{}backdrop/{}.jpg".format(pathLoc, sanitized_title)
 					if os.path.exists(filepath):
 						pathperma = config.plugins.PermanentEvent.loc.value
-						targetp = "{}PermanentEvent/backdrop/{}.jpg".format(pathperma, self.title)
+						targetp = "{}PermanentEvent/backdrop/{}.jpg".format(pathperma, sanitized_title)
 					if config.plugins.xtraEvent.srcs.value == "bing":
-						evntNm = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!|\*", "", self.title).rstrip()
+						evntNm = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!|\*", "", sanitized_title).rstrip()
 						target = "{}backdrop/{}.jpg".format(pathLoc, evntNm)
 						if os.path.exists(filepath):
 							pathperma = config.plugins.PermanentEvent.loc.value
 							targetp = "{}PermanentEvent/backdrop/{}.jpg".format(pathperma, evntNm)
 				else:
-					target = "{}EMC/{}-backdrop.jpg".format(pathLoc, self.title)
-					
+					target = "{}EMC/{}-backdrop.jpg".format(pathLoc, sanitized_title)
+					if os.path.exists(filepath):
+						pathperma = config.plugins.PermanentEvent.loc.value
+						targetp = "{}PermanentEvent/backdrop/{}.jpg".format(pathperma, sanitized_title)
+
 			import shutil
 			if os.path.exists(self.path):
+				print(f"Copiando archivo desde {self.path} a {target}")
 				shutil.copyfile(self.path, target)
 				if os.path.exists(target):
-					if config.plugins.xtraEvent.PB.value == "backdrops":
-						if not config.plugins.xtraEvent.searchModManuel.value == lng.get(lang, '16'):
-							im1 = Image.open(target) 
-							im1 = im1.resize((1280,720))
-							im1 = im1.save(target)
-							if os.path.exists(target):
-								im1 = Image.open(target)
-								im2 = Image.open("/usr/lib/enigma2/python/Plugins/Extensions/xtraEvent/pic/emc_background.jpg")
-								mask = Image.new("L", im1.size, 80)
-								im = Image.composite(im1, im2, mask)
-								im.save(target)
-				if os.path.exists(filepath):
-					shutil.copyfile(self.path, targetp)
-		except:
+					print(f"Archivo copiado exitosamente a {target}")
+
+					if config.plugins.xtraEvent.PB.value == "backdrops" and not config.plugins.xtraEvent.searchModManuel.value == lng.get(lang, '16'):
+						print(f"Procesando imagen para {target}")
+
+			if targetp and os.path.exists(filepath):
+				print(f"Copiando archivo desde {self.path} a {targetp}")
+				shutil.copyfile(self.path, targetp)
+				print(f"Archivo copiado exitosamente a {targetp}")
+
+			self['status'].setText("Imagen copiada exitosamente...")
+			if os.path.exists(filepath):
+				self['status'].setText("Imagen copiada exitosamente...")
+
+		except Exception as e:
+			print(f"Error en la función append: {e}")
 			return
 
 	def tmdb(self):
@@ -1131,24 +1144,36 @@ class manuelSearch(Screen, ConfigListScreen):
 		downloaded = 0
 		try:
 			from requests.utils import quote
-			url_find = 'https://m.imdb.com/find?q={}'.format(quote(self.title))
-			ff = requests.get(url_find).text
-			p = 'src=\"https://(.*?)._V1_UX75_CR0,0,75,109_AL_.jpg'
-			pstr = re.findall(p, ff)[0]
-			if config.plugins.xtraEvent.PB.value == "posters":
-				url = "https://{}._V1_UX{}_AL_.jpg".format(pstr, config.plugins.xtraEvent.imdb_Poster_size.value)
+			sanitized_title = self.title.replace(":", "")
 
-				if url:
-					dwnldFile = "{}mSearch/{}-poster-1.jpg".format(pathLoc, self.title)
-					open(dwnldFile, 'wb').write(requests.get(url, stream=True, allow_redirects=True).content)
-					downloaded += 1
-					n = 1
-					self.prgrs(downloaded, n)
-				else:
-					self['status'].setText(_("Download : No"))
-				config.plugins.xtraEvent.imgNmbr.value = 0
-		except:
-			pass
+			url_find = 'https://m.imdb.com/find?q={}'.format(quote(sanitized_title))
+			print(f"URL_FIND: {url_find}")
+			headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"}
+			response = requests.get(url_find, headers=headers)
+			response.raise_for_status()
+			ff = response.text
+
+			start_index = ff.find('"url":"')
+			end_index = ff.find('"', start_index + 7)
+
+			json_fragment = ff[start_index + 7:end_index]
+			print(f"JSON_FRAGMENT: {json_fragment}")
+
+			url = json_fragment
+
+			if config.plugins.xtraEvent.PB.value == "posters" and url:
+				dwnldFile = "{}mSearch/{}-poster-1.jpg".format(pathLoc, sanitized_title)
+				open(dwnldFile, 'wb').write(requests.get(url, stream=True, allow_redirects=True).content)
+				downloaded += 1
+				n = 1
+				self.prgrs(downloaded, n)
+			else:
+				self['status'].setText(_("Download : No"))
+			config.plugins.xtraEvent.imgNmbr.value = 0
+		except requests.exceptions.RequestException as e:
+			print(f"Error al realizar la solicitud: {e}")
+			with open("/tmp/xtraEvent.log", "a+") as f:
+				f.write("imdb, %s, %s, %s\n" % (sanitized_title, url_find, e))
 
 	def bing(self):
 		try:
