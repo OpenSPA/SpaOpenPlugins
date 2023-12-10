@@ -1117,7 +1117,7 @@ class downloads(Screen):
 				str(tmdb_backdrop_downloaded), str(tvdb_backdrop_downloaded), str(fanart_backdrop_downloaded), 
 				str(extra_downloaded), str(extra2_downloaded),
 				str(banner_downloaded), 
-				str(info_downloaded), 
+				str(info_downloaded)) 
 #				str(extra3_poster_downloaded), str(extra3_info_downloaded))
 			self['info2'].setText(report)
 			self.report = report
