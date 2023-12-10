@@ -1174,6 +1174,7 @@ class manuelSearch(Screen, ConfigListScreen):
 			print(f"Error al realizar la solicitud: {e}")
 			with open("/tmp/xtraEvent.log", "a+") as f:
 				f.write("imdb, %s, %s, %s\n" % (sanitized_title, url_find, e))
+			self['status'].setText(_("No se encuentra imagen..."))
 
 	def bing(self):
 		try:

@@ -1112,14 +1112,13 @@ class downloads(Screen):
 				\nPOSTER; Tmdb :{}, Tvdb :{}, Maze :{}, Fanart :{}\
 				\nBACKDROP; Tmdb :{}, Tvdb :{}, Fanart :{}, Extra :{}, Bing :{}\
 				\nBANNER :{}\
-				\nINFOS :{}\
-				\nEXTRA3 ; Poster :{}, Info :{}".format(st, dt, 
+				\nINFOS :{}".format(st, dt, 
 				str(tmdb_poster_downloaded), str(tvdb_poster_downloaded), str(maze_poster_downloaded), str(fanart_poster_downloaded), 
 				str(tmdb_backdrop_downloaded), str(tvdb_backdrop_downloaded), str(fanart_backdrop_downloaded), 
 				str(extra_downloaded), str(extra2_downloaded),
 				str(banner_downloaded), 
 				str(info_downloaded), 
-				str(extra3_poster_downloaded), str(extra3_info_downloaded))
+#				str(extra3_poster_downloaded), str(extra3_info_downloaded))
 			self['info2'].setText(report)
 			self.report = report
 			try:
