@@ -822,7 +822,7 @@ class manuelSearch(Screen, ConfigListScreen):
 			if config.plugins.xtraEvent.searchModManuel.value == lng.get(lang, '17'):
 				self.title = config.plugins.xtraEvent.searchMANUEL_EMC.value
 				self.title = self.title.split('-')[-1].split(".")[0].strip()
-			self['status'].setText(_("Search : {}".format(str(self.title))))
+			self['status'].setText(_("Buscar : {}".format(str(self.title))))
 		else:
 			config.plugins.xtraEvent.searchMANUEL = ConfigText(default="{}".format(self.evnt), visible_width=100, fixed_size=False)
 			config.plugins.xtraEvent.searchMANUEL_EMC = ConfigText(default="{}".format(self.evnt), visible_width=100, fixed_size=False)
@@ -831,7 +831,7 @@ class manuelSearch(Screen, ConfigListScreen):
 			if config.plugins.xtraEvent.searchModManuel.value == lng.get(lang, '17'):
 				self.title = config.plugins.xtraEvent.searchMANUEL_EMC.value
 				self.title = self.title.split('-')[-1].split(".")[0].strip()
-			self['status'].setText(_("Search : {}".format(str(self.title))))
+			self['status'].setText(_("Buscar : {}".format(str(self.title))))
 
 	def mnlSrch(self):
 		try:
@@ -1016,11 +1016,12 @@ class manuelSearch(Screen, ConfigListScreen):
 						downloaded += 1
 						self.prgrs(downloaded, n)
 			else:
-				self['status'].setText(_("Download : 0"))
+				self['status'].setText(_("No se encuentra imagen..."))
 			config.plugins.xtraEvent.imgNmbr.value = 0
 		except Exception as err:
 			with open("/tmp/xtraEvent.log", "a+") as f:
 				f.write("Manuel Search tmdb , %s, %s\n"%(self.title, err))
+			self['status'].setText(_("No se encuentra imagen..."))
 
 	def tvdb(self):
 		self['progress'].setValue(0)
@@ -1039,12 +1040,19 @@ class manuelSearch(Screen, ConfigListScreen):
 				keyType = "fanart"
 			url = 'https://api.thetvdb.com/series/{}/images/query?keyType={}'.format(series_id, keyType)
 			if config.plugins.xtraEvent.searchLang.value:
-				u = requests.get(url, headers={"Accept-Language":"{}".format(lang)})
+				try:
+					u = requests.get(url, headers={"Accept-Language":"{}".format(lang)})
+					u.raise_for_status()  # Esto generará una excepción si hay un código de estado HTTP de error
+					print(u.text)  # Imprime el contenido de la respuesta
+				except Exception as e:
+					print(f"Error en la solicitud a {url}: {e}")
+					self['status'].setText(_("Error al obtener información de imágenes..."))
+					return
 			try:
 				pb_no = u.json()["data"]
 				n = len(pb_no)
 			except:
-				self['status'].setText(_("Download : No"))
+				self['status'].setText(_("No se encuentra imagen..."))
 				return
 			if n > 0:
 				downloaded = 0
@@ -1059,14 +1067,17 @@ class manuelSearch(Screen, ConfigListScreen):
 					downloaded += 1
 					self.prgrs(downloaded, n)
 			else:
-				self['status'].setText(_("Download : No"))
+				self['status'].setText(_("No se encuentra imagen..."))
 			config.plugins.xtraEvent.imgNmbr.value = 0
-		except:
+		except Exception as err:
+			print(f"Error en la función tvdb: {err}")
+			self['status'].setText(_("No se encuentra imagen..."))
 			return
 
 	def fanart(self):
 		id = "-"
 		from requests.utils import quote
+		image_found = False
 		if config.plugins.xtraEvent.FanartSearchType.value == "tv":
 			try:
 				url_maze = "http://api.tvmaze.com/singlesearch/shows?q={}".format(quote(self.title))
@@ -1104,7 +1115,7 @@ class manuelSearch(Screen, ConfigListScreen):
 					pb_no = fjs['moviebackground']
 					n = len(pb_no)
 			if n > 0:
-				downloaded = 0				
+				downloaded = 0
 				for i in range(int(n)):
 					try:
 						if config.plugins.xtraEvent.PB.value == "posters":
@@ -1130,15 +1141,19 @@ class manuelSearch(Screen, ConfigListScreen):
 							scl = config.plugins.xtraEvent.FANART_Backdrop_Resize.value
 						im1 = im.resize((im.size[0] // int(scl), im.size[1] // int(scl)), Image.ANTIALIAS)
 						im1.save(dwnldFile)
+						image_found = True
 					except Exception as err:
 						with open("/tmp/xtraEvent.log", "a+") as f:
-							f.write("fanart man.search save, %s, %s\n"%(self.title, err))						
-			else:
+							f.write("fanart man.search save, %s, %s\n"%(self.title, err))
 				self['status'].setText(_(lng.get(lang, '56')))
 			config.plugins.xtraEvent.imgNmbr.value = 0
 		except Exception as err:
 			with open("/tmp/xtraEvent.log", "a+") as f:
 				f.write("fanart man.search2, %s, %s\n"%(self.title, err))
+		if image_found:
+			self['status'].setText(_("¡Imagen encontrada!"))
+		else:
+			self['status'].setText(_("No se encuentra imagen..."))
 
 	def imdb(self):
 		downloaded = 0
@@ -1249,7 +1264,7 @@ class manuelSearch(Screen, ConfigListScreen):
 			return
 
 	def prgrs(self, downloaded, n):
-		self['status'].setText("Download : {} / {}".format(downloaded, n))
+		self['status'].setText("Descarga : {} / {}".format(downloaded, n))
 		self['progress'].setValue(int(100*downloaded//n))
 
 
