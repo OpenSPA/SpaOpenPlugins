@@ -32,7 +32,7 @@ from .xtraSelectionList import xtraSelectionList, xtraSelectionEntryComponent
 from Plugins.Extensions.xtraEvent.skins.xtraSkins import *
 from threading import Timer
 from datetime import datetime
-version = "v5.2"
+version = "v5.3"
 
 pathLoc = ""
 try:
@@ -930,7 +930,6 @@ class manuelSearch(Screen, ConfigListScreen):
 			filepath = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent"
 			targetp = ""
 			sanitized_title = self.title.replace(":", "")
-
 			if config.plugins.xtraEvent.PB.value == "posters":
 				if config.plugins.xtraEvent.srcs.value == "bing":
 					target = "{}poster/{}.jpg".format(pathLoc, sanitized_title)
@@ -955,26 +954,21 @@ class manuelSearch(Screen, ConfigListScreen):
 					if os.path.exists(filepath):
 						pathperma = config.plugins.PermanentEvent.loc.value
 						targetp = "{}PermanentEvent/backdrop/{}.jpg".format(pathperma, sanitized_title)
-
 			import shutil
 			if os.path.exists(self.path):
 				print(f"Copiando archivo desde {self.path} a {target}")
 				shutil.copyfile(self.path, target)
 				if os.path.exists(target):
 					print(f"Archivo copiado exitosamente a {target}")
-
 					if config.plugins.xtraEvent.PB.value == "backdrops" and not config.plugins.xtraEvent.searchModManuel.value == lng.get(lang, '16'):
 						print(f"Procesando imagen para {target}")
-
 			if targetp and os.path.exists(filepath):
 				print(f"Copiando archivo desde {self.path} a {targetp}")
 				shutil.copyfile(self.path, targetp)
 				print(f"Archivo copiado exitosamente a {targetp}")
-
 			self['status'].setText("Imagen copiada exitosamente...")
 			if os.path.exists(filepath):
 				self['status'].setText("Imagen copiada exitosamente...")
-
 		except Exception as e:
 			print(f"Error en la función append: {e}")
 			return
@@ -986,18 +980,15 @@ class manuelSearch(Screen, ConfigListScreen):
 			self.year = config.plugins.xtraEvent.searchMANUELyear.value
 			from requests.utils import quote
 			url = "https://api.themoviedb.org/3/search/{}?api_key={}&query={}".format(self.srch, tmdb_api, quote(self.title))
-
 			if self.year != "0":
 				if config.plugins.xtraEvent.searchType.value == "tv":
 					url += "&first_air_date_year={}".format(self.year)
 				elif config.plugins.xtraEvent.searchType.value == "movie":
 					url += "&year={}".format(self.year)
-			
 			id = requests.get(url).json()['results'][0]['id']
 			url = "https://api.themoviedb.org/3/{}/{}?api_key={}&append_to_response=images".format(self.srch, int(id), tmdb_api)
 			if config.plugins.xtraEvent.searchLang.value:
 				url += "&language={}".format(lang)
-
 			if config.plugins.xtraEvent.PB.value == "posters":
 				sz = config.plugins.xtraEvent.TMDBpostersize.value
 			else:
@@ -1042,11 +1033,11 @@ class manuelSearch(Screen, ConfigListScreen):
 			if config.plugins.xtraEvent.searchLang.value:
 				try:
 					u = requests.get(url, headers={"Accept-Language":"{}".format(lang)})
-					u.raise_for_status()  # Esto generará una excepción si hay un código de estado HTTP de error
-					print(u.text)  # Imprime el contenido de la respuesta
+					u.raise_for_status()
+#					print(u.text)
 				except Exception as e:
 					print(f"Error en la solicitud a {url}: {e}")
-					self['status'].setText(_("Error al obtener información de imágenes..."))
+					self['status'].setText(_("No se encuentra imagen..."))
 					return
 			try:
 				pb_no = u.json()["data"]
@@ -1151,7 +1142,7 @@ class manuelSearch(Screen, ConfigListScreen):
 			with open("/tmp/xtraEvent.log", "a+") as f:
 				f.write("fanart man.search2, %s, %s\n"%(self.title, err))
 		if image_found:
-			self['status'].setText(_("¡Imagen encontrada!"))
+			self.prgrs(downloaded, n)
 		else:
 			self['status'].setText(_("No se encuentra imagen..."))
 
@@ -1160,22 +1151,17 @@ class manuelSearch(Screen, ConfigListScreen):
 		try:
 			from requests.utils import quote
 			sanitized_title = self.title.replace(":", "")
-
 			url_find = 'https://m.imdb.com/find?q={}'.format(quote(sanitized_title))
 			print(f"URL_FIND: {url_find}")
 			headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"}
 			response = requests.get(url_find, headers=headers)
 			response.raise_for_status()
 			ff = response.text
-
 			start_index = ff.find('"url":"')
 			end_index = ff.find('"', start_index + 7)
-
 			json_fragment = ff[start_index + 7:end_index]
-			print(f"JSON_FRAGMENT: {json_fragment}")
-
+#			print(f"JSON_FRAGMENT: {json_fragment}")
 			url = json_fragment
-
 			if config.plugins.xtraEvent.PB.value == "posters" and url:
 				dwnldFile = "{}mSearch/{}-poster-1.jpg".format(pathLoc, sanitized_title)
 				open(dwnldFile, 'wb').write(requests.get(url, stream=True, allow_redirects=True).content)
@@ -1186,7 +1172,7 @@ class manuelSearch(Screen, ConfigListScreen):
 				self['status'].setText(_("Download : No"))
 			config.plugins.xtraEvent.imgNmbr.value = 0
 		except requests.exceptions.RequestException as e:
-			print(f"Error al realizar la solicitud: {e}")
+#			print(f"Error al realizar la solicitud: {e}")
 			with open("/tmp/xtraEvent.log", "a+") as f:
 				f.write("imdb, %s, %s, %s\n" % (sanitized_title, url_find, e))
 			self['status'].setText(_("No se encuentra imagen..."))
@@ -1223,42 +1209,31 @@ class manuelSearch(Screen, ConfigListScreen):
 		try:
 			query = self.title.replace(" ", "+")
 			search_type = "poster" if config.plugins.xtraEvent.PB.value == "posters" else "backdrop"
-
-#			api_key = "AIzaSyCayBp5fi66ZaUQOhHa5d9P7RPCYvvSnJ4"
 			cx = "d4ac56566a5fc488c"
-
 			url = f"https://www.googleapis.com/customsearch/v1?q={query}+{search_type}&key={google_api}&cx={cx}&searchType=image"
 			print("APIKEYUSADA", url)
 			headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
-
 			try:
 				response = requests.get(url, headers=headers)
-
 				if response.status_code == 200:
 					items = response.json().get("items", [])
 					image_links = [item["link"] for item in items]
 					n = 9
 					downloaded = 0
-
 					for i in range(n):
 						try:
 							image_url = image_links[i]
 							download_file = f"{pathLoc}/mSearch/{self.title}-{config.plugins.xtraEvent.PB.value}-{i+1}.jpg"
-
 							open(download_file, 'wb').write(requests.get(image_url, stream=True, allow_redirects=True).content)
 							downloaded += 1
 							self.prgrs(downloaded, n)
 						except Exception as e:
 							print(f"Error al descargar la imagen {i+1}: {e}")
-
 					config.plugins.xtraEvent.imgNmbr.value = 0
-
 				else:
 					print(f"Error en la solicitud a la API: {response.status_code}")
-
 			except Exception as e:
 				print(f"Error al realizar la búsqueda en la API de Google: {e}")
-
 		except Exception as err:
 			self['status'].setText(_(str(err)))
 			return
@@ -1266,8 +1241,6 @@ class manuelSearch(Screen, ConfigListScreen):
 	def prgrs(self, downloaded, n):
 		self['status'].setText("Descarga : {} / {}".format(downloaded, n))
 		self['progress'].setValue(int(100*downloaded//n))
-
-
 
 class selBouquets(Screen):
 	def __init__(self, session):
