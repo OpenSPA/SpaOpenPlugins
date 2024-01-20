@@ -1695,7 +1695,6 @@ class MyTubePlayerService():
 				order=self.order,
 				videoCategoryId=self.videoCategoryId,
 				pageToken=self.pageToken,
-				relatedToVideoId=self.relatedToVideoId,
 				channelId=self.channelId,
 				safeSearch=self.safeSearch,
 				q = self.q,
