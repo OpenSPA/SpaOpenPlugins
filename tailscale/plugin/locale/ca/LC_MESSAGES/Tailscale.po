@@ -100,3 +100,12 @@ msgstr "%d Dispositius"
 
 msgid "Close"
 msgstr "Tancar"
+
+msgid "Update Tailscale"
+msgstr "Actualitzar Tailscale"
+
+msgid "New version found.\nCurrent version: %s\nNew version: %s\nDo you want to install?"
+msgstr "Nova versió trobada.\nVersió actual: %s\nVersió nova: %s\n¿Vols instal·lar?"
+
+msgid "Last version installed"
+msgstr "Ja tens la darrera versió instal·lada"

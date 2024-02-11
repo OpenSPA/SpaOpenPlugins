@@ -8,12 +8,20 @@ from Components.Pixmap import Pixmap
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, configfile, getConfigListEntry, ConfigText
 from Components.Input import Input
+from Components.About import about
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Components.Language import language
 from Plugins.Extensions.spazeMenu.plugin import esHD
 from Plugins.Extensions.Tailscale.__init__ import _
+from Plugins.Extensions.Tailscale.tsnetwork import getData
+from Screens.Standby import TryQuitMainloop
+from enigma import eTimer
 import gettext
+import process
+import json
 import os
+import requests
+import shutil
 
 class TailscaleSetup(Screen, ConfigListScreen):
 	if esHD():
@@ -52,13 +60,15 @@ class TailscaleSetup(Screen, ConfigListScreen):
 		self["HelpWindow"].hide()
 		self['key_red'] = StaticText(_('Cancel'))
 		self['key_green'] = StaticText(_('OK'))
-		self['key_yellow'] = StaticText(_('Load Auth Key'))
+		self['key_yellow'] = StaticText(_('Update Tailscale'))
 		self['key_blue'] = StaticText(_('Keyboard'))
 		self["description"] = Label("")
 
 		list = []
 		list.append(getConfigListEntry(_('Automatic Start'), config.tailscale.autostart, _('Enable/Disable automatic start when enigma2 boots')))
 		list.append(getConfigListEntry(_('Auth key'), config.tailscale.apikey, _('Auth key to register your device in Tailscale.\nPress yellow to load Auth Key from file located at /etc/keys/tailscale.key')))
+		self.UpdateTimer = eTimer()
+		self.UpdateTimer.timeout.get().append(self.mover)
 
 		ConfigListScreen.__init__(self, list, session=session, on_change=self.changedEntry)
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -66,6 +76,7 @@ class TailscaleSetup(Screen, ConfigListScreen):
 	def layoutFinished(self):
 		self.setTitle(self.setup_title)
 		self.Getinfo()
+		self.loadKey()
 		if isinstance(self["config"].getCurrent()[1], ConfigText):
 			if "HelpWindow" in self:
 				if self["config"].getCurrent()[1].help_window and self["config"].getCurrent()[1].help_window.instance is not None:
@@ -135,6 +146,47 @@ class TailscaleSetup(Screen, ConfigListScreen):
 		self.close()
 
 	def keyYellow(self):
+		self.arq=about.getCPUArch()
+		print('arquitectura: ', self.arq)
+		web="https://pkgs.tailscale.com/stable/#static"
+		soup=requests.get(web).content
+		self.version = soup.decode().split('<li>386: <a href="tailscale_')[1].split("_386")[0]
+		print('versio: ', self.version)
+		p = process.ProcessList()
+		tailscale_process = str(p.named('tailscaled')).strip('[]')
+		if tailscale_process:
+			networks = json.loads(getData())
+			version_actual=networks.get('Version').split("-")[0]
+			if self.version!=version_actual:
+				self.session.openWithCallback(self.actualizar, MessageBox, _(('New version found.\nCurrent version: %s\nNew version: %s\nDo you want to install?') %(version_actual,self.version)), MessageBox.TYPE_YESNO)
+			else:
+				self.session.open(MessageBox, _('Last version installed'), MessageBox.TYPE_INFO, timeout=5)
+
+	def actualizar(self, raw):
+		if raw:
+			url = "https://pkgs.tailscale.com/stable/tailscale_%s_%s.tgz" % (self.version, self.arq.lower())
+			self.tmpath = '/tmp/tailscale.tgz'
+			os.system("wget -qO '"+self.tmpath+"' '"+str(url)+"'")
+			os.system("sleep 5&&cd /tmp&&tar xvf /tmp/tailscale.tgz --strip-components=1 tailscale_%s_%s/tailscale tailscale_%s_%s/tailscaled" % (self.version, self.arq.lower(), self.version, self.arq.lower()))
+			self.pararT()
+		else:
+			self.close()
+
+	def pararT(self):
+		p = process.ProcessList()
+		tailscale_process = str(p.named('tailscaled')).strip('[]')
+		if tailscale_process:
+			os.system('/etc/init.d/tailscale-daemon stop')
+		else:
+			os.system('/etc/init.d/tailscale-daemon start')
+		self.UpdateTimer.start(5000, True)
+
+	def mover(self):
+		shutil.move('/tmp/tailscaled', '/usr/sbin/tailscaled')
+		shutil.move('/tmp/tailscale', '/usr/bin/tailscale')
+		self.session.open(TryQuitMainloop, 2, timeout=5)
+
+	def loadKey(self):
 		filekey = '/etc/keys/tailscale.key'
 		f = open(filekey, 'r')
 		authkey = f.read()

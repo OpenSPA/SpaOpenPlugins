@@ -232,6 +232,8 @@ class TailscaleNetwork(Screen):
 
 	def get_devices(self):
 		self.api_key = open('/etc/keys/tailscale_api.key','r').read().replace("\n","")
+		if len(int(self.api_key))<5:
+			return ""
 		self.base_url = 'https://api.tailscale.com/api/v2'
 		self._auth = HTTPBasicAuth(self.api_key, '')
 		self._headers = {
