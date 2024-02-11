@@ -147,6 +147,8 @@ class TailscaleSetup(Screen, ConfigListScreen):
 
 	def keyYellow(self):
 		self.arq=about.getCPUArch()
+		if self.arq=="Mipsel":
+			self.arq="mipsle"
 		print('arquitectura: ', self.arq)
 		web="https://pkgs.tailscale.com/stable/#static"
 		soup=requests.get(web).content
