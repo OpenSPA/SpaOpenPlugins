@@ -1702,6 +1702,7 @@ class MyTubePlayerService():
 				maxResults="25",
 				type=self.stype
 				)
+
 		
 		queryThread = YoutubeQueryThread(request, url, self.gotFeed, self.gotFeedError, callback, errorback)
 		#queryThread = YoutubeQueryThread(ytservice, url, self.gotFeed, self.gotFeedError, callback, errorback)	
