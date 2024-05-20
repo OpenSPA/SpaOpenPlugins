@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from twisted.internet.ssl import ClientContextFactory
+from twisted.internet._sslverify import ClientTLSOptions
 from Screens.Screen import Screen
 from Components.MenuList import MenuList
 from Components.Label import Label
@@ -21,9 +23,15 @@ from datetime import datetime, timedelta
 from twisted.web.client import getPage, downloadPage
 from sqlite3 import connect
 from enigma import getDesktop
-from sys import version_info
 import gettext
 import os
+from sys import version_info
+try:
+	from urllib.parse import urlparse
+except ImportError:
+	from urlparse import urlparse
+
+PY3 = version_info[0] == 3
 
 lang = language.getLanguage()
 os.environ["LANGUAGE"] = lang[:2]
@@ -37,9 +45,6 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PY3 = version_info[0] == 3
-
-
 DB_PATH = '/usr/lib/enigma2/python/Plugins/Extensions/FootOnSat/db/footonsat.db'
 
 def isHD():
@@ -52,6 +57,17 @@ def readFromFile(filename):
 	_file = resolveFilename(SCOPE_PLUGINS, "Extensions/FootOnSat/{}".format(filename))
 	with open(_file, 'r') as f:
 		return f.read()
+
+class WebClientContextFactory(ClientContextFactory):
+	def __init__(self, url=None):
+		domain = urlparse(url).netloc
+		self.hostname = domain
+
+	def getContext(self, hostname=None, port=None):
+		ctx = ClientContextFactory.getContext(self)
+		if self.hostname and ClientTLSOptions is not None: # workaround for TLS SNI
+			ClientTLSOptions(self.hostname, ctx)
+		return ctx
 
 class FootOnSat(Screen):
 
@@ -278,29 +294,16 @@ class FootOnSat(Screen):
 				return True
 
 	def getTime(self, match_date):
-		current_time = datetime.now()
-		last_saturday_march = current_time.replace(month=3, day=31, hour=0, minute=0, second=0, microsecond=0)
-		while last_saturday_march.weekday() != 5:  # Find the last Saturday in March
-				last_saturday_march -= timedelta(days=1)
-
-		last_saturday_october = current_time.replace(month=10, day=31, hour=0, minute=0, second=0, microsecond=0)
-		while last_saturday_october.weekday() != 5:  # Find the last Saturday in October
-				last_saturday_october -= timedelta(days=1)
-
-		if current_time >= last_saturday_march and current_time < last_saturday_october:
-				# Estamos en horario de verano, restar 1 hora
-				timezone = strftime("%z")
-				dif = int(timezone[:3] + '1') * int(timezone[3:])
-				calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') - timedelta(hours=1 + dif)).strftime('%H:%M - %Y-%m-%d')
+		timezone = strftime("%z")
+		if timezone.startswith('+') and timezone != '+0000':
+			dif = int(timezone.replace('+', '').replace('00', ''))
+			calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') + timedelta(hours=dif)).strftime('%H:%M - %Y-%m-%d')
+		elif timezone == '+0000':
+			calc = match_date
 		else:
-				# Estamos en horario estándar de invierno, sumar 1 hora
-				timezone = strftime("%z")
-				if timezone == '+0000':
-						calc = match_date
-				else:
-						dif = int(timezone[:3] + '1') * int(timezone[3:])
-						calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') + timedelta(hours=1 + dif)).strftime('%H:%M - %Y-%m-%d')
-
+			dif = int(timezone.replace('-', '').replace('00', ''))
+			calc = (datetime.strptime(match_date, '%H:%M - %Y-%m-%d') - timedelta(hours=dif)).strftime('%H:%M - %Y-%m-%d')
+		return calc
 		return calc
 
 	def updateCounter(self):
@@ -321,8 +324,9 @@ class FootOnSat(Screen):
 		return resolveFilename(SCOPE_PLUGINS, "Extensions/FootOnSat/assets/compet/default/FHD/{}.png".format(banner))
 
 	def callAPI(self):
-		url = 'http://tunisia01.selfip.com/footonsat/api/{}.json'.format(self.link)
-		getPage(str.encode(url)).addCallback(self.getData).addErrback(self.error)
+		url = 'https://raw.githubusercontent.com/zKhadiri/footonsat-api/main/{}.json'.format(self.link)
+		sniFactory = WebClientContextFactory(url)
+		getPage(str.encode(url), contextFactory=sniFactory).addCallback(self.getData).addErrback(self.error)
 
 	def error(self, error=None):
 		if error:
@@ -458,11 +462,29 @@ class FootOnSat(Screen):
 			return nimList[0]
 
 	def getSat(self, pos):
-		if pos[-1] == 'w':
-			sat = int(float(pos[0]) * -1 * 10 + 3600)
+		# Asumiendo que pos es una lista, obtenemos el primer elemento que contiene la posición
+		position_str = pos[0] if isinstance(pos, list) and pos else ""
+		
+		if not position_str:
+				raise ValueError("Position string is empty or invalid")
+
+		# Separar la parte numérica de la dirección (e/w)
+		numeric_part = position_str[:-1].replace('°', '')
+		direction = position_str[-1]
+		
+		try:
+				sat_pos = float(numeric_part)
+		except ValueError:
+				raise ValueError(f"Could not convert string to float: '{position_str}'")
+		
+		# Calcular la posición del satélite
+		if direction == 'w':
+				sat = int(sat_pos * -10 + 3600)
 		else:
-			sat = int(float(pos[0]) * 10)
+				sat = int(sat_pos * 10)
+		
 		return sat
+
 
 	def exit(self, ret=None):
 		self.close()
@@ -517,7 +539,7 @@ class FootOnsatNotifScreen(Screen):
 						first_notif = datetime.strptime(row[5], "%H:%M - %Y-%m-%d")
 						live_notif = datetime.strptime(row[2], "%H:%M - %Y-%m-%d")
 						if first_notif == now and row[6] == 'Waiting':
-							cur.execute("UPDATE LIVE_NOTIF set FIRST_NOTIF_STATUS = ?  WHERE FIRST_NOTIF = ? and MATCH = ?", ("Done", row[5], row[0],))
+							cur.execute("UPDATE LIVE_NOTIF set FIRST_NOTIF_STATUS = ?	WHERE FIRST_NOTIF = ? and MATCH = ?", ("Done", row[5], row[0],))
 							self.notify(row[0].strip(), row[1], row[3], row[4], row[8])
 						if live_notif == now and row[7] == 'Waiting':
 							cur.execute("DELETE FROM LIVE_NOTIF WHERE DATE = ? and MATCH = ?", (row[2], row[0],))
