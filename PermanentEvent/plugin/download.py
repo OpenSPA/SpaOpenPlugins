@@ -8,7 +8,6 @@ from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.ScrollLabel import ScrollLabel
-from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from ServiceReference import ServiceReference
 from Screens.MessageBox import MessageBox
@@ -21,22 +20,9 @@ from . import permanent
 import Tools.Notifications
 import requests
 import os, re, random, json
-import gettext
 import socket
 import threading
-
-PluginLanguageDomain = "PermanentEvent"
-PluginLanguagePath = "Extensions/PermanentEvent/locale/"
-
-def localeInit():
-	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
-
-def _(txt):
-	t = gettext.dgettext(PluginLanguageDomain, txt)
-	if t == txt:
-		t = gettext.gettext(txt)
-	return t
-language.addCallback(localeInit())
+from . import _
 
 if config.plugins.PermanentEvent.tmdbAPI.value != "":
 	tmdb_api = config.plugins.PermanentEvent.tmdbAPI.value
@@ -50,11 +36,13 @@ if config.plugins.PermanentEvent.fanartAPI.value != "":
 	fanart_api = config.plugins.PermanentEvent.fanartAPI.value
 else:
 	fanart_api = "c87124eab6648e21d2439590af418d83"
-	
+
 epgcache = eEPGCache.getInstance()
 pathLoc = config.plugins.PermanentEvent.loc.value + "PermanentEvent/"
 
 help_txt = _("Press the green button to start downloads...")
+
+
 class downloads(Screen):
 	def __init__(self, session):
 		self.session = session
@@ -356,7 +344,7 @@ class downloads(Screen):
 			for i in b:
 				bb = pathLoc + "{}/".format(i)
 				fc = os.path.isdir(bb)
-				if fc != False:	
+				if fc != False:
 					for f in os.listdir(bb):
 						if f.endswith('.jpg'):
 							try:
@@ -370,4 +358,3 @@ class downloads(Screen):
 									pass
 		except:
 			pass
-			
