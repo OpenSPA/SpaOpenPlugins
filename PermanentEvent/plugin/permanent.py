@@ -5,7 +5,6 @@
 from Components.ActionMap import ActionMap
 from Components.config import config, ConfigInteger, ConfigSubsection, ConfigYesNo, ConfigSelection, ConfigSelectionNumber, getConfigListEntry, configfile, ConfigText, ConfigDirectory, ConfigPassword, ConfigNothing
 from Components.ConfigList import ConfigListScreen
-from Components.Language import language
 from Components.MenuList import MenuList
 from Components.Input import Input
 from Components.ScrollLabel import ScrollLabel
@@ -31,29 +30,17 @@ from enigma import ePoint, getDesktop, addFont, eTimer, eLabel, eSize, ePoint, e
 from GlobalActions import globalActionMap
 from keymapparser import readKeymap, removeKeymap
 from PIL import Image
-import gettext
 import xml.etree.cElementTree
 import os, re, datetime
 import socket
 import threading
 import six
+from . import _
 
 setup_path = resolveFilename(SCOPE_PLUGINS, "Extensions/PermanentEvent/")
-PluginLanguageDomain = "PermanentEvent"
-PluginLanguagePath = "Extensions/PermanentEvent/locale/"
-
-def localeInit():
-	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
-
-def _(txt):
-	t = gettext.dgettext(PluginLanguageDomain, txt)
-	if t == txt:
-		t = gettext.gettext(txt)
-	return t
-language.addCallback(localeInit())
-
 _session = None
 epgcache = eEPGCache.getInstance()
+
 
 def setupdom(plugin=None):
 	setupfile = open( setup_path + 'setup.xml', 'r')
@@ -61,11 +48,13 @@ def setupdom(plugin=None):
 	setupfile.close()
 	return setupfiledom
 
+
 def getConfigMenuItem(configElement):
 	for item in setupdom().getroot().findall('./setup/item/.'):
 		if item.text == configElement:
 			return _(item.attrib["text"]), eval(configElement)
 	return "", None
+
 
 class SetupError(Exception):
 	def __init__(self, message):
@@ -73,6 +62,7 @@ class SetupError(Exception):
 
 	def __str__(self):
 		return self.msg
+
 
 class SetupSummary(Screen):
 	def __init__(self, session, parent):
@@ -152,17 +142,17 @@ config.plugins.PermanentEvent.backdrop = ConfigYesNo(default = True)
 config.plugins.PermanentEvent.cnfg = ConfigYesNo(default = False)
 config.plugins.PermanentEvent.days = ConfigSelectionNumber (default = 30, stepwidth = 1, min = 00, max = 30, wraparound = True)
 config.plugins.PermanentEvent.TMDBbackdropsize = ConfigSelection(default="w300", choices = [
-	("w300", "300x170"), 
-	("w780", "780x440"), 
+	("w300", "300x170"),
+	("w780", "780x440"),
 	("w1280", "1280x720"),
 	("original", "ORIGINAL")])
 
 config.plugins.PermanentEvent.TVDBbackdropsize = ConfigSelection(default="thumbnail", choices = [
-	("thumbnail", "640x360"), 
+	("thumbnail", "640x360"),
 	("fileName", "original(1920x1080)")])
 
 config.plugins.PermanentEvent.FANART_Backdrop_Resize = ConfigSelection(default="1", choices = [
-	("2", "original/2"), 
+	("2", "original/2"),
 	("1", "original")])
 
 SKINCC = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/widgets/current_clock.xml"
@@ -174,6 +164,7 @@ SKINNI = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/widgets/next
 SKINP = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/widgets/primetime.xml"
 SKINPI = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/widgets/primetime_image.xml"
 SKINPIC = "/usr/lib/enigma2/python/Plugins/Extensions/PermanentEvent/widgets/primetime_compact.xml"
+
 
 ##########################################################EVENTS###########################################################
 class PermanentEventNewScreen(Screen):
@@ -213,6 +204,7 @@ class PermanentEventNewScreen(Screen):
 		def movePosition(self):
 				if self.instance:
 						self.instance.move(ePoint(config.plugins.PermanentEvent.position_x.value, config.plugins.PermanentEvent.position_y.value))
+
 
 class PermanentEvent():
 
@@ -279,6 +271,7 @@ class PermanentEvent():
 						self.dialog.hide()
 
 pEvent = PermanentEvent()
+
 
 class PermanentEventPositioner(Screen):
 
@@ -388,6 +381,8 @@ class PermanentEventPositioner(Screen):
 				self.close()
 
 genhelp_txt = _('Activate Permanent Event, choose the widget you like the most, if you choose primetime widget, choose the time of maximum audience, and finally, place the widget where you like the most!')
+
+
 class PermanentEventMenu(Screen):
 		def __init__(self, session):
 				self.session = session
@@ -455,7 +450,7 @@ class PermanentEventMenu(Screen):
 						self.session.openWithCallback(self.setupFinished, Primetimehour)
 				if sel == _(' Config Images for Events'):
 						self.session.openWithCallback(self.setupFinished, downImages, "downImages")
-					
+
 				return
 
 		def setupFinished(self,index=None, entry = None):
@@ -533,6 +528,8 @@ class PermanentEventMenu(Screen):
 #####################################################################HOUR PRIME#########################################
 
 help_txthour = _("Pick the time for primetime...(+20 minutes tolerance)")
+
+
 class Primetimehour(Screen, ConfigListScreen):
 	def __init__(self, session):
 		self.session = session
@@ -569,6 +566,7 @@ class Primetimehour(Screen, ConfigListScreen):
 			i[1].save()
 			configfile.save()
 			self.close()
+
 
 ##########################################################DOWNLOAD IMAGES#######################################################################
 class downImages(ConfigListScreen, Screen):
@@ -794,7 +792,7 @@ class downImages(ConfigListScreen, Screen):
 				self['storage'].setText(_("Storage folder...") + "\n{}".format (filepath))
 				self['info'].setText(_("Total Removed Images : ") + "{}".format(str(rmvd)))
 				self['gain'].setText(_("Gain : ") + "{}MB. ↪️ {}MB.".format (finalsize,old_size))
-				self['finalsize'].setText(_("Final Size : ") + "{}MB".format (new_size)) 
+				self['finalsize'].setText(_("Final Size : ") + "{}MB".format (new_size))
 			except:
 				pass
 		else:
@@ -944,7 +942,7 @@ class downImages(ConfigListScreen, Screen):
 					if not meets:
 						continue
 
-			
+
 				item_text = _(six.ensure_str(x.get("text", "??")))
 				item_description = _(six.ensure_str(x.get("description", " ")))
 				item_text = item_text.replace("%s %s", "%s %s" % (getMachineBrand(), getMachineName()))
@@ -962,6 +960,8 @@ class downImages(ConfigListScreen, Screen):
 ##############################################################BOUQUET CONF################################################################
 
 help_txt = _("Choose favorites list to download...")
+
+
 class selBouquets(Screen):
 	def __init__(self, session):
 		self.session = session
@@ -1059,19 +1059,19 @@ class selBouquets(Screen):
 							n = 50
 							for i in range(int(n)):
 								title = events[i][4]
-								evntNm = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", title).rstrip()
+								evntNm = re.sub(r"([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", title).rstrip()
 								eventlist.append(evntNm)
 						elif config.plugins.PermanentEvent.searchNUMBER.value == _("now-next"):
 							n = 20
 							for i in range(int(n)):
 								title = events[i][4]
-								evntNm = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", title).rstrip()
+								evntNm = re.sub(r"([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", title).rstrip()
 								eventlist.append(evntNm)
 						else:
 							n = config.plugins.PermanentEvent.searchNUMBER.value
 							for i in range(int(n)):
 								title = events[i][4]
-								evntNm = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", title).rstrip()
+								evntNm = re.sub(r"([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", title).rstrip()
 								eventlist.append(evntNm)
 					except:
 						pass
@@ -1114,6 +1114,7 @@ class selBouquets(Screen):
 		except:
 			pass
 
+
 #####################################################PATHLOC###############################################################
 class pathLocation():
 	def __init__(self):
@@ -1138,6 +1139,7 @@ class pathLocation():
 		return pathLoc
 pathLoc = pathLocation().location()
 
+
 def bqtList():
 	bouquets = []
 	serviceHandler = eServiceCenter.getInstance()
@@ -1150,7 +1152,8 @@ def bqtList():
 			if info:
 				bouquets.append((info.getName(bqt), bqt))
 		return bouquets
-	return 
+	return
+
 
 def chList(bqtNm):
 	channels = []
@@ -1171,6 +1174,7 @@ def chList(bqtNm):
 					channels.append((chhh.toString()))
 		return channels
 	return
+
 
 def sessionstart(reason, **kwargs):
 		global _session

@@ -8,23 +8,20 @@
 # source code of your modifications.
 
 from Plugins.Plugin import PluginDescriptor
-from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
-from Components.Language import language
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Components.config import config
 from boxbranding import getImageDistro
 from enigma import addFont, getDesktop
 from skin import loadSkin
-import gettext
 import threading
 from . import permanent
 from . import download
+from . import _
 
 skin_path = resolveFilename(SCOPE_PLUGINS, "Extensions/PermanentEvent/skins/")
 font = resolveFilename(SCOPE_PLUGINS, "Extensions/PermanentEvent/font")
-PluginLanguageDomain = "PermanentEvent"
-PluginLanguagePath = "Extensions/PermanentEvent/locale/"
-
 HD = getDesktop(0).size()
+
 if HD.width() > 1280:
 	loadSkin(skin_path + 'permanent_fhd.xml')
 else:
@@ -36,16 +33,6 @@ try:
 except Exception as ex:
 	print(ex)
 
-def localeInit():
-	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
-
-def _(txt):
-	t = gettext.dgettext(PluginLanguageDomain, txt)
-	if t == txt:
-		t = gettext.gettext(txt)
-	return t
-localeInit()
-language.addCallback(localeInit())
 
 def ddwn():
 	if config.plugins.PermanentEvent.timerMod.value == True:
@@ -54,11 +41,14 @@ def ddwn():
 		tmr = config.plugins.PermanentEvent.timer.value
 		t = threading.Timer(3600*int(tmr), ddwn) # 1h=3600
 		t.start()
+
 if config.plugins.PermanentEvent.timerMod.value == True:
 	threading.Timer(120, ddwn).start()
 
+
 def startConfig(session, **kwargs):
 		session.open(permanent.PermanentEventMenu)
+
 
 def main(menuid):
 		if menuid != 'system':
@@ -68,12 +58,13 @@ def main(menuid):
 			'permanent_event',
 			None)]
 
+
 def Plugins(**kwargs):
-		if getImageDistro() in ('openspa'):
-				return [
-				PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=permanent.sessionstart), 
-				PluginDescriptor(name=_('Permanent Event'), description=_('Shows the event permanent on the screen'), where=PluginDescriptor.WHERE_MENU, fnc=main)]
-		else:
-				return [
-				PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=permanent.sessionstart), 
-				PluginDescriptor(name=_('Permanent Event'), description=_('Shows the event permanent on the screen'), where=[PluginDescriptor.WHERE_PLUGINMENU], icon='event.png', fnc=startConfig)]
+	if getImageDistro() in ('openspa'):
+		return [
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=permanent.sessionstart),
+		PluginDescriptor(name=_('Permanent Event'), description=_('Shows the event permanent on the screen'), where=PluginDescriptor.WHERE_MENU, fnc=main)]
+	else:
+		return [
+		PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=permanent.sessionstart),
+		PluginDescriptor(name=_('Permanent Event'), description=_('Shows the event permanent on the screen'), where=[PluginDescriptor.WHERE_PLUGINMENU], icon='event.png', fnc=startConfig)]
