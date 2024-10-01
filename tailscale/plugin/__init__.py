@@ -5,7 +5,7 @@ from os import environ
 import gettext
 
 PluginLanguageDomain = "Tailscale"
-PluginLanguagePath = "Extensions/Tailscale/locale/"
+PluginLanguagePath = "Extensions/Tailscale/locale"
 
 def localeInit():
 	lang = language.getLanguage()
@@ -23,4 +23,4 @@ def _(txt):
 	return t
 
 localeInit()
-language.addCallback(localeInit())
+language.addCallback(localeInit)
