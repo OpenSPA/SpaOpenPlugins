@@ -13,6 +13,9 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 3.1.1\n"
 
+msgid "Actived"
+msgstr "Activado"
+
 msgid "Tailscale Network"
 msgstr "Red Tailscale"
 
@@ -28,11 +31,8 @@ msgstr "Iniciar"
 msgid "Disable Daemon"
 msgstr "Desactivar servicio"
 
-msgid "Running"
-msgstr "Funcionando"
-
-msgid "Not Running"
-msgstr "Parado"
+msgid "Not Actived"
+msgstr "No Activado"
 
 msgid "Enable Daemon"
 msgstr "Activar servicio"
@@ -53,7 +53,7 @@ msgid "Device"
 msgstr "Dispositivo"
 
 msgid "Press Menu button and enter Auth Key to register device"
-msgstr "Pulsa botón menú y entra tu clave de registro (Auth Key) para registrar el dispositivo"
+msgstr "Pulsa botón menú y entra tu clave de registro (Auth Key) para autenticar el dispositivo"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -71,14 +71,10 @@ msgid "Enable/Disable automatic start when enigma2 boots"
 msgstr "Activar/Desactivar inicio automático cuando arranque enigma2"
 
 msgid "Auth key"
-msgstr "Clave de registro"
+msgstr "Clave de autenticación"
 
-msgid ""
-"Auth key to register your device in Tailscale.\n"
-"Press yellow to load Auth Key from file located at /etc/keys/tailscale.key"
-msgstr ""
-"Clave de registro para registrar tu dispositivo en Tailscale.\n"
-"Pulsa botón amarillo para cargar la clave desde el archivo /etc/keys/tailscale.key"
+msgid "Auth key to register your device in Tailscale."
+msgstr "Clave de autenticación para registrar su dispositivo en Tailscale."
 
 msgid "Execution finished."
 msgstr "Ejecución finalizada."
@@ -107,5 +103,17 @@ msgstr "Actualizar Tailscale"
 msgid "New version found.\nCurrent version: %s\nNew version: %s\nDo you want to install?"
 msgstr "Nueva versión encontrada.\nVersión actual: %s\nVersión nueva: %s\n¿Quieres instalar?"
 
+msgid "NeedsLogin"
+msgstr "Necesita iniciar sesión"
+
 msgid "Last version installed"
 msgstr "Ya tienes la última versión instalada"
+
+msgid "Could not get the list of devices on your network."
+msgstr "No se pudo obtener la lista de dispositivos de su red."
+
+msgid "1. Enter your key by pressing BLUE or entering it manually in the file /etc/keys/tailscale.key\n2. Press YELLOW button.\n3. Press \"OK\"."
+msgstr "1. Ingrese su clave pulsando AZUL o ingresándola manualmente en el archivo /etc/keys/tailscale.key\n2. Pulse el botón AMARILLO.\n3. Pulse \"OK\"."
+
+msgid "Running"
+msgstr "Funcionando"

@@ -9,7 +9,7 @@ from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.Input import Input
 from Tools.BoundFunction import boundFunction
-from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
+from Tools.Directories import fileContains, fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 from enigma import eTimer
 from time import time
@@ -20,10 +20,11 @@ from Plugins.Extensions.spazeMenu.spzVirtualKeyboard import spzVirtualKeyboard
 from Plugins.Extensions.Tailscale.__init__ import _
 from requests.auth import HTTPBasicAuth
 import json
-import gettext
 import process
+import subprocess
 import requests
 import os
+
 
 def getData():
 	dato = os.popen("tailscale status --json")
@@ -102,12 +103,13 @@ class TailscaleNetwork(Screen):
 		self['picRed'] = Pixmap()
 		self['lblRed'] = Label(_('Stop'))
 		self['picGreen'] = Pixmap()
-		self['lblGreen'] = Label(_('Start'))
+		self['lblGreen'] = Label('')
 		self['picYellow'] = Pixmap()
 		self['lblYellow'] = Label(_('Devices'))
 		self['picBlue'] = Pixmap()
 		self['lblBlue'] = Label(_('Disable Daemon'))
 
+		self.checkLogin()
 		self.line = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/div-h.png')
 		if esHD():
 			self.networkpic = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/network-hd.png')
@@ -134,13 +136,14 @@ class TailscaleNetwork(Screen):
 		p = process.ProcessList()
 		tailscale_process = str(p.named('tailscaled')).strip('[]')
 		if tailscale_process:
-			stat = _('Running')
+			stat = _('Actived')
 			self['picGreen'].show()
-			self['lblGreen'].show()
+			if fileContains("/tmp/tailscale.log", "key"):
+				self['lblGreen'].setText(_('Start'))
 			self['lblBlue'].show()
 			self['lblBlue'].setText(_('Disable Daemon'))
 		else:
-			stat = _('Not Running')
+			stat = _('Not Actived')
 			self['picGreen'].hide()
 			self['lblGreen'].hide()
 			self['picRed'].hide()
@@ -183,7 +186,7 @@ class TailscaleNetwork(Screen):
 			text0 = '%s: %s ' % (_('Device'), networks.get('Self')['HostName'])
 			text0 = text0 + '                                    %s: %s ' % (_('Version'), networks.get('Version').split("-")[0])
 			text1 = '%s: %s\n' % (_('Status'), _(networks.get('BackendState')))
-			if networks.get('BackendState')=="NeedsLogin" or networks.get('AuthURL')!="":
+			if networks.get('BackendState') == "NeedsLogin" or networks.get('AuthURL') != "":
 				text1 += _("Press Menu button and enter Auth Key to register device")
 			else:
 				text1 += '%s: %s' % ('IP', networks.get('TailscaleIPs')[0])
@@ -196,12 +199,23 @@ class TailscaleNetwork(Screen):
 			self['list'].setList(mlist)
 			return
 
+	def checkLogin(self):
+		command = 'tailscale lock'
+		processout = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, text=True)
+		output = processout.communicate()
+		with open("/tmp/tailscale.log", "w") as fw:
+			fw.write(output[0])
+
 	def keyGreen(self):
+		self.checkLogin()
 		p = process.ProcessList()
 		tailscale_process = str(p.named('tailscaled')).strip('[]')
-		if tailscale_process:
-			os.system("tailscale up")
-			self.UpdateTimer.start(2000, True)
+		if not fileContains("/tmp/tailscale.log", "key"):
+			return
+		else:
+			if tailscale_process:
+				os.system("tailscale up")
+				self.UpdateTimer.start(2000, True)
 
 	def keyRed(self):
 		p = process.ProcessList()
@@ -219,7 +233,7 @@ class TailscaleNetwork(Screen):
 				devicelist.append((device['hostname'], device['addresses'][0], device['clientVersion'].split('-')[0]))
 			self.session.open(Tailscaleuser, devicelist)
 		except:
-			self.session.open(MessageBox, _('Something goes wrong, check your api key'), MessageBox.TYPE_INFO, timeout=5)
+			self.session.open(MessageBox, _('Could not get the list of devices on your network.'), MessageBox.TYPE_ERROR, timeout=8)
 
 	def keyBlue(self):
 		p = process.ProcessList()
@@ -232,12 +246,12 @@ class TailscaleNetwork(Screen):
 
 	def get_devices(self):
 		self.api_key = open('/etc/keys/tailscale_api.key','r').read().replace("\n","")
-		if len(int(self.api_key))<5:
+		if len(int(self.api_key)) < 5:
 			return ""
 		self.base_url = 'https://api.tailscale.com/api/v2'
 		self._auth = HTTPBasicAuth(self.api_key, '')
 		self._headers = {
-		    'Accept':'application/json'
+			'Accept':'application/json'
 		}
 		p = process.ProcessList()
 		tailscale_process = str(p.named('tailscaled')).strip('[]')
@@ -293,7 +307,7 @@ class Tailscaleuser(Screen):
 		Screen.__init__(self, session)
 		self.skinName = ['TailscaleUser']
 		self.lista = lista
-		
+
 		self['actions'] = ActionMap(['SetupActions','ColorActions'],
 		{
 			'cancel': self.KeyExit,
@@ -304,7 +318,7 @@ class Tailscaleuser(Screen):
 
 		self['lblStatus'] = Label()
 		self['picRed'] = Pixmap()
-		self['lblRed'] = Label("Close")
+		self['lblRed'] = Label(_("Close"))
 
 		self.line = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/div-h.png')
 		if esHD():
