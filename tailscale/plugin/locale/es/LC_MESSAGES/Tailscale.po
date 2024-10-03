@@ -31,7 +31,7 @@ msgstr "Iniciar"
 msgid "Disable Daemon"
 msgstr "Desactivar servicio"
 
-msgid "Not Actived"
+msgid "Not Running"
 msgstr "No Activado"
 
 msgid "Enable Daemon"
@@ -112,8 +112,11 @@ msgstr "Ya tienes la última versión instalada"
 msgid "Could not get the list of devices on your network."
 msgstr "No se pudo obtener la lista de dispositivos de su red."
 
-msgid "1. Enter your key by pressing BLUE or entering it manually in the file /etc/keys/tailscale.key\n2. Press YELLOW button.\n3. Press \"OK\"."
-msgstr "1. Ingrese su clave pulsando AZUL o ingresándola manualmente en el archivo /etc/keys/tailscale.key\n2. Pulse el botón AMARILLO.\n3. Pulse \"OK\"."
+msgid "1. Enter your key by pressing BLUE or entering it manually in the file /etc/keys/tailscale.key\n2. Press YELLOW button.\n3. Press \"OK\".\nWait a few seconds until it shows \"Running\"."
+msgstr "1. Ingrese su clave pulsando AZUL o ingresándola manualmente en el archivo /etc/keys/tailscale.key\n2. Pulse el botón AMARILLO.\n3. Pulse \"OK\".\nEspere unos segundos hasta que muestre \"Funcionando\"."
 
 msgid "Running"
 msgstr "Funcionando"
+
+msgid "Your receiver needs to reboot\nDo you want to do it now?"
+msgstr "Su receptor necesita reiniciar\n¿Quieres hacerlo ahora?"

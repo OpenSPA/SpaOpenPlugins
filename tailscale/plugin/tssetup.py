@@ -66,8 +66,8 @@ class TailscaleSetup(Screen, ConfigListScreen):
 
 		list = []
 		if not fileContains("/tmp/tailscale.log", "key"):
-			list.append(getConfigListEntry(_('Automatic Start'), config.tailscale.autostart, _('1. Enter your key by pressing BLUE or entering it manually in the file /etc/keys/tailscale.key\n2. Press YELLOW button.\n3. Press \"OK\".')))
-			list.append(getConfigListEntry(_('Auth key'), config.tailscale.apikey, _('1. Enter your key by pressing BLUE or entering it manually in the file /etc/keys/tailscale.key\n2. Press YELLOW button.\n3. Press \"OK\".')))
+			list.append(getConfigListEntry(_('Automatic Start'), config.tailscale.autostart, _('1. Enter your key by pressing BLUE or entering it manually in the file /etc/keys/tailscale.key\n2. Press YELLOW button.\n3. Press \"OK\".\nWait a few seconds until it shows \"Running\".')))
+			list.append(getConfigListEntry(_('Auth key'), config.tailscale.apikey, _('1. Enter your key by pressing BLUE or entering it manually in the file /etc/keys/tailscale.key\n2. Press YELLOW button.\n3. Press \"OK\".\nWait a few seconds until it shows \"Running\".')))
 		else:
 			list.append(getConfigListEntry(_('Automatic Start'), config.tailscale.autostart, _('Enable/Disable automatic start when enigma2 boots')))
 			list.append(getConfigListEntry(_('Auth key'), config.tailscale.apikey, _('Auth key to register your device in Tailscale.')))
@@ -200,7 +200,11 @@ class TailscaleSetup(Screen, ConfigListScreen):
 	def mover(self):
 		shutil.move('/tmp/tailscaled', '/usr/sbin/tailscaled')
 		shutil.move('/tmp/tailscale', '/usr/bin/tailscale')
-		self.session.open(TryQuitMainloop, 2, timeout=5)
+		self.session.openWithCallback(self.reboot, MessageBox, _('Your receiver needs to reboot\nDo you want to do it now?'), type=MessageBox.TYPE_YESNO)
+
+	def reboot(self, answer):
+		if answer:
+			self.session.open(TryQuitMainloop, 2)
 
 	def loadKey(self):
 		filekey = '/etc/keys/tailscale.key'

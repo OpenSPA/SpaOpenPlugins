@@ -143,7 +143,7 @@ class TailscaleNetwork(Screen):
 			self['lblBlue'].show()
 			self['lblBlue'].setText(_('Disable Daemon'))
 		else:
-			stat = _('Not Actived')
+			stat = _('Not Running')
 			self['picGreen'].hide()
 			self['lblGreen'].hide()
 			self['picRed'].hide()
