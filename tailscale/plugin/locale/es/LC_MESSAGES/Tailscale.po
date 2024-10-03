@@ -109,8 +109,8 @@ msgstr "Necesita iniciar sesión"
 msgid "Last version installed"
 msgstr "Ya tienes la última versión instalada"
 
-msgid "Could not get the list of devices on your network."
-msgstr "No se pudo obtener la lista de dispositivos de su red."
+msgid "Could not get the list of devices on your network.\n\nTo display the devices in your Tailscale network you must:\n1. Click in \"Generate access token\" in your Tailscale web session\n2. Enter your generated key in /etc/keys/tailscale_api.key"
+msgstr "No se pudo obtener la lista de dispositivos en su red.\n\nPara mostrar los dispositivos en su red Tailscale:\n1. Click en \"Generate access token\" en su sesión web Tailscale.\n2. Ingrese su clave generada en /etc/keys/tailscale_api.key"
 
 msgid "1. Enter your key by pressing BLUE or entering it manually in the file /etc/keys/tailscale.key\n2. Press YELLOW button.\n3. Press \"OK\".\nWait a few seconds until it shows \"Running\"."
 msgstr "1. Ingrese su clave pulsando AZUL o ingresándola manualmente en el archivo /etc/keys/tailscale.key\n2. Pulse el botón AMARILLO.\n3. Pulse \"OK\".\nEspere unos segundos hasta que muestre \"Funcionando\"."
