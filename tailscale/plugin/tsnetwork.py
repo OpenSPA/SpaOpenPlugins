@@ -233,7 +233,7 @@ class TailscaleNetwork(Screen):
 				devicelist.append((device['hostname'], device['addresses'][0], device['clientVersion'].split('-')[0]))
 			self.session.open(Tailscaleuser, devicelist)
 		except:
-			self.session.open(MessageBox, _('Could not get the list of devices on your network.'), MessageBox.TYPE_ERROR, timeout=8)
+			self.session.open(MessageBox, _('Could not get the list of devices on your network.\n\nTo display the devices in your Tailscale network you must:\n1. Click in \"Generate access token\" in your Tailscale web session\n2. Enter your generated key in /etc/keys/tailscale_api.key'), MessageBox.TYPE_INFO, simple=True)
 
 	def keyBlue(self):
 		p = process.ProcessList()
