@@ -226,14 +226,18 @@ class TailscaleNetwork(Screen):
 
 	def keyYellow(self):
 		devicelist = []
-		try:
-			info = json.loads(self.get_devices().text)
-			devices = info.get('devices')
-			for device in devices:
-				devicelist.append((device['hostname'], device['addresses'][0], device['clientVersion'].split('-')[0]))
-			self.session.open(Tailscaleuser, devicelist)
-		except:
-			self.session.open(MessageBox, _('Could not get the list of devices on your network.\n\nTo display the devices in your Tailscale network you must:\n1. Click in \"Generate access token\" in your Tailscale web session\n2. Enter your generated key in /etc/keys/tailscale_api.key'), MessageBox.TYPE_INFO, simple=True)
+		if not fileContains("/etc/keys/tailscale_api.key", "tskey"):
+			self.session.open(MessageBox, _('1. Click in \"Generate access token\" in your Tailscale web session.\n2. Enter your generated key in /etc/keys/tailscale_api.key'), MessageBox.TYPE_INFO, simple=True)
+			return
+		else:
+			try:
+				info = json.loads(self.get_devices().text)
+				devices = info.get('devices')
+				for device in devices:
+					devicelist.append((device['hostname'], device['addresses'][0], device['clientVersion'].split('-')[0]))
+				self.session.open(Tailscaleuser, devicelist)
+			except:
+				self.session.open(MessageBox, _('Could not get the list of devices on your network.\n\nTo display the devices in your Tailscale network you must:\n1. Delete if an old key exists in your Tailscale web session\n2. Click in \"Generate access token\" in your Tailscale web session\n3. Enter your generated key in /etc/keys/tailscale_api.key\n4. NOTE: If you still see this message after following these steps, delete the current API key from your token and generate a new one.'), MessageBox.TYPE_INFO, simple=True)
 
 	def keyBlue(self):
 		p = process.ProcessList()
@@ -246,8 +250,6 @@ class TailscaleNetwork(Screen):
 
 	def get_devices(self):
 		self.api_key = open('/etc/keys/tailscale_api.key','r').read().replace("\n","")
-		if len(int(self.api_key)) < 5:
-			return ""
 		self.base_url = 'https://api.tailscale.com/api/v2'
 		self._auth = HTTPBasicAuth(self.api_key, '')
 		self._headers = {
