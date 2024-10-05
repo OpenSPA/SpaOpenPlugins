@@ -1,4 +1,4 @@
-from sinric import SinricPro 
+from sinric import SinricPro
 import asyncio
 import threading
 from Components.Element import Element
@@ -11,7 +11,6 @@ from enigma import eActionMap, eServiceReference, iServiceInformation, eTimer
 from os import system
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
 from ServiceReference import ServiceReference
-
 
 VOLVOICE = False
 INITIAL = True
@@ -27,7 +26,7 @@ def power_state(device_id, state):
 	if state == "On" and Standby.inStandby:
 		Standby.inStandby.Power()
 	elif state == "Off" and not Standby.inStandby:
-		Notifications.AddNotification(Standby.Standby)    
+		Notifications.AddNotification(Standby.Standby)
 	return True, state
 
 
@@ -64,7 +63,8 @@ def adjust_volume(device_id, volume):
 	vctrl.hideVolTimer.start(3000, True)
 	VOLVOICE = True
 	return True, volume
-	
+
+
 def set_Mute(device_id, mute):
 	print('[SinriConnect] Change Mute to: ', mute)
 	vctrl = VolumeControl.instance
@@ -113,8 +113,8 @@ def select_input(device_id, sinput):
 				InfoBar.instance.showTv()
 		except:
 			pass
-		
-	elif "input" in sinput or "hdmi" in sinput:				
+
+	elif "input" in sinput or "hdmi" in sinput:
 		s = sinput.replace("input","").replace("hdmi","").replace(" ","")
 		i = 0
 		try:
@@ -132,7 +132,7 @@ def select_input(device_id, sinput):
 		if accion == "epgdownload":
 			#descarga epg
 			try:
-				from Plugins.Extensions.spazeMenu.spzPlugins.mhw2Timer.tstasker import tsTasker	
+				from Plugins.Extensions.spazeMenu.spzPlugins.mhw2Timer.tstasker import tsTasker
 				tsTasker.ejecuta(False)
 			except:
 				pass
@@ -247,7 +247,7 @@ def select_input(device_id, sinput):
 			amap.keyPressed(remotetype, 401, 0)
 			amap.keyPressed(remotetype, 401, 1)
 		elif accion == "guide":
-			#guia		
+			#guia
 			try:
 				from Plugins.Extensions.spazeMenu.spzPlugins.openSPATVGuide.plugin import main
 				servicelist = InfoBar.instance.servicelist
@@ -272,7 +272,7 @@ def select_input(device_id, sinput):
 						ch = channels()
 						found = None
 						for n in ch.services:
-							
+
 							if x in n[3].toString():
 								found = n
 								break
@@ -355,7 +355,7 @@ class CheckInit(Element):
 	def changed(self, *args, **kwargs):
 		val = self.source.boolean
 		self.func(not val)
-		
+
 
 class sinriconnect():
 	def __init__(self, session, key="", secret="", did="", log=False):
@@ -383,7 +383,7 @@ class sinriconnect():
 		self.timer4.start(500,False)
 
 		CheckInit(self.status, session).connect(session.screen["Standby"])
-		
+
 
 		self.callbacks = {
 			'powerState': power_state,
@@ -419,11 +419,11 @@ class sinriconnect():
 					self.client.event_handler.raiseEvent(self.tvid, 'setVolume',data={'volume': value})
 					VOL = self.vctrl.volctrl.getVolume()
 				self.timer.start(2000,True)
+
 	def volvoice(self):
 		global VOLVOICE
 		VOLVOICE = True
 		self.timer.stop()
-
 
 	def isconnected(self):
 		ret = self.loop and self.loop.is_running() and self.client.socket.connection and self.client.socket.connection.open
@@ -431,7 +431,7 @@ class sinriconnect():
 			self.loop.stop()
 			self.timer3.start(2000,True)
 		return ret
-		
+
 	def closeloop(self):
 		self.timer3.stop()
 		try:
@@ -448,20 +448,15 @@ class sinriconnect():
 				t = threading.Thread(target=self.connect)
 				t.start()
 				self.timer2.start(3000,True)
-					
-	def initilize(self):	
-		self.timer2.stop()	
+
+	def initilize(self):
+		self.timer2.stop()
 		if self.isconnected():
 			vctrl = VolumeControl.instance
 			vol = vctrl.volctrl.getVolume()
 			self.status(not Standby.inStandby)
 			self.volume(vol)
 
-
 	def connect(self):
 		self.client = SinricPro(self.key, [self.tvid], self.callbacks, enable_log=self.log, restore_states=False, secretKey=self.secret)
 		self.loop.run_until_complete(self.client.connect())
-		
-
-	
-
