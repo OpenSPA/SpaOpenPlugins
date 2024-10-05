@@ -5,7 +5,6 @@ from Components.Element import Element
 from Screens import Standby
 from Components.VolumeControl import VolumeControl
 from Tools import Notifications
-from Screens.Volume import Volume
 from Components.config import config
 from .channels import channels
 from enigma import eActionMap, eServiceReference, iServiceInformation, eTimer
@@ -17,6 +16,7 @@ from ServiceReference import ServiceReference
 VOLVOICE = False
 INITIAL = True
 GSESSION = None
+VOL = -1
 
 tipos = {"DVB-T":4, "DVB-C":3, "DVB-S":2,"IPTV":1}
 resol = {"UHD":3, "HD":2, "SD":1}
@@ -33,15 +33,16 @@ def power_state(device_id, state):
 
 def set_volume(device_id, volume):
 	print('[SinriConnect] Set Volume to: ', volume)
-	global VOLVOICE, INITIAL
+	global VOLVOICE, INITIAL, VOL
+	vctrl = VolumeControl.instance
 	if VOLVOICE:
-		vctrl = VolumeControl.instance
 		vctrl.volctrl.setVolume(volume, volume)
 		vctrl.volSave()
 		if not INITIAL and config.plugins.sinric.viewvolbar.value:
 			vctrl.volumeDialog.show()
 		vctrl.volumeDialog.setValue(volume)
 		vctrl.hideVolTimer.start(3000, True)
+		VOL = volume
 	INITIAL = False
 	VOLVOICE = True
 	return True, volume
@@ -49,10 +50,12 @@ def set_volume(device_id, volume):
 
 def adjust_volume(device_id, volume):
 	print('[SinriConnect] Adjust Volume to: ', volume)
-	global VOLVOICE, INITIAL
+	global VOLVOICE, INITIAL, VOL
 	vctrl = VolumeControl.instance
-	vctrl.volctrl.setVolume(volume, volume)
-	vctrl.volSave()
+	if volume != vctrl.volctrl.getVolume():
+		vctrl.volctrl.setVolume(volume, volume)
+		vctrl.volSave()
+		VOL = volume
 	if INITIAL:
 		INITIAL = False
 	elif config.plugins.sinric.viewvolbar.value:
@@ -370,14 +373,15 @@ class sinriconnect():
 		self.timer3 = eTimer()
 		self.timer3.callback.append(self.closeloop)
 		GSESSION = session
+		VOLVOICE = True
 
-		v = config.audio.volume
-		def changevol(configElement):
-			vol=configElement.value
-			VOLVOICE = False
-			self.volume(vol)
-		v.addNotifier(changevol,immediate_feedback=True, call_on_save_or_cancel=True)
-		
+		self.vctrl = VolumeControl.instance
+		self.vol = -1
+		self.volcontrol()
+		self.timer4 = eTimer()
+		self.timer4.callback.append(self.volcontrol)
+		self.timer4.start(500,False)
+
 		CheckInit(self.status, session).connect(session.screen["Standby"])
 		
 
@@ -392,6 +396,12 @@ class sinriconnect():
 			'setMute': set_Mute
 		}
 
+	def volcontrol(self):
+		global VOLVOICE
+		if VOL != self.vctrl.volctrl.getVolume():
+			VOLVOICE = False
+			self.volume(self.vctrl.volctrl.getVolume())
+
 	def status(self, value):
 		if self.isconnected():
 			if value:
@@ -400,14 +410,15 @@ class sinriconnect():
 				self.client.event_handler.raiseEvent(self.tvid, 'setPowerState',data={'state': 'Off'})
 
 	def volume(self, value):
-		global VOLVOICE
+		global VOLVOICE, VOL
 		if VOLVOICE:
 			VOLVOICE = False
 		else:
 			if self.isconnected():
-				self.client.event_handler.raiseEvent(self.tvid, 'setVolume',data={'volume': value})
+				if VOL != self.vctrl.volctrl.getVolume():
+					self.client.event_handler.raiseEvent(self.tvid, 'setVolume',data={'volume': value})
+					VOL = self.vctrl.volctrl.getVolume()
 				self.timer.start(2000,True)
-
 	def volvoice(self):
 		global VOLVOICE
 		VOLVOICE = True
