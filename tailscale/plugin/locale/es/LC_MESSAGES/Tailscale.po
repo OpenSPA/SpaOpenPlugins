@@ -109,8 +109,11 @@ msgstr "Necesita iniciar sesión"
 msgid "Last version installed"
 msgstr "Ya tienes la última versión instalada"
 
-msgid "Could not get the list of devices on your network.\n\nTo display the devices in your Tailscale network you must:\n1. Click in \"Generate access token\" in your Tailscale web session\n2. Enter your generated key in /etc/keys/tailscale_api.key"
-msgstr "No se pudo obtener la lista de dispositivos en su red.\n\nPara mostrar los dispositivos en su red Tailscale:\n1. Click en \"Generate access token\" en su sesión web Tailscale.\n2. Ingrese su clave generada en /etc/keys/tailscale_api.key"
+msgid "1. Click in \"Generate access token\" in your Tailscale web session.\n2. Enter your generated key in /etc/keys/tailscale_api.key"
+msgstr "1. Haga clic en "Generate access token" en su sesión web de Tailscale.\n2. Ingrese la clave generada en /etc/keys/tailscale_api.key"
+
+msgid "Could not get the list of devices on your network.\n\nTo display the devices in your Tailscale network you must:\n1. Delete if an old key exists in your Tailscale web session\n2. Click in \"Generate access token\" in your Tailscale web session\n3. Enter your generated key in /etc/keys/tailscale_api.key\n4. NOTE: If you still see this message after following these steps, delete the current API key from your token and generate a new one."
+msgstr "No se pudo obtener la lista de dispositivos en su red.\n\nPara visualizar los dispositivos en su red de Tailscale, debe:\n1. Eliminar si existe una clave antigua en su sesión web de Tailscale\n2. Hacer clic en \"Generate access token\" en su sesión web de Tailscale\n3. Ingresar la clave generada en /etc/keys/tailscale_api.key\n4. NOTA: Si aún ve este mensaje después de seguir estos pasos, elimine la clave API actual de su token y genere una nueva."
 
 msgid "1. Enter your key by pressing BLUE or entering it manually in the file /etc/keys/tailscale.key\n2. Press YELLOW button.\n3. Press \"OK\".\nWait a few seconds until it shows \"Running\"."
 msgstr "1. Ingrese su clave pulsando AZUL o ingresándola manualmente en el archivo /etc/keys/tailscale.key\n2. Pulse el botón AMARILLO.\n3. Pulse \"OK\".\nEspere unos segundos hasta que muestre \"Funcionando\"."
