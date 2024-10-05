@@ -113,7 +113,6 @@ def select_input(device_id, sinput):
 				InfoBar.instance.showTv()
 		except:
 			pass
-
 	elif "input" in sinput or "hdmi" in sinput:
 		s = sinput.replace("input","").replace("hdmi","").replace(" ","")
 		i = 0
