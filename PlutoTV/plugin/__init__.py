@@ -1,10 +1,10 @@
 #
 #   Copyright (C) 2021 Team OpenSPA
 #   https://openspa.info/
-# 
+#
 #   SPDX-License-Identifier: GPL-2.0-or-later
 #   See LICENSES/README.md for more information.
-# 
+#
 #   PlutoTV is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
@@ -24,7 +24,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
 from os import environ
 import gettext
-import sys 
+import sys
 
 PluginLanguageDomain = "PlutoTV"
 PluginLanguagePath = "Extensions/PlutoTV/locale"
@@ -42,8 +42,10 @@ def _(txt):
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
 
+
 localeInit()
 language.addCallback(localeInit)
+
 
 def esHD():
 	if getDesktop(0).size().width() > 1400:
