@@ -20,9 +20,11 @@ def _(txt):
 	else:
 		print("[" + PluginLanguageDomain + "] fallback to default translation for " + txt)
 		return gettext.gettext(txt)
+		
 
 localeInit()
 language.addCallback(localeInit)
+
 
 def bin2long(s):
 	return reduce( lambda x,y:(x<<8)+y, list(map(ord, s)))
