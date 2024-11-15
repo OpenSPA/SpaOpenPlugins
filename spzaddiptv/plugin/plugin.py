@@ -5,10 +5,9 @@ from Components.MenuList import MenuList
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
-from Components.ServiceList import ServiceList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-import sys 
+import sys
 if sys.version_info[0] == 3:
 	from urllib.parse import quote
 else:
@@ -152,7 +151,7 @@ class liveStreamingFromFile(Screen):
 		self.list= []
 		self["menu"] = m3uList([])
 		self.mutableList = None
-		self.servicelist = ServiceList(None)
+		self.servicelist = None
 		self.playing = False
 
 		self.m3u = []
@@ -165,7 +164,7 @@ class liveStreamingFromFile(Screen):
 		self.list=[]
 		for x in self.m3u:
 			self.list.append(m3ulistentry(x[0],x[1],x[2],x[3]))
-		self["menu"].setList(self.list)		
+		self["menu"].setList(self.list)
 
 
 
@@ -185,9 +184,9 @@ class liveStreamingFromFile(Screen):
 				for x in tmpList:
 					'''
 					#EXTINF:0,Aljazera Sporte +10
-http://2m4u.com/index2.php?q=aHR0cDovLzE3My4xOTMuNDguMTM3OjkwMDAvSlNDMTA%2FaWQ9MDA6MUQ6OTI6RjE6NUE6NkEmaXA9MTc2LjMxLjI1MS44NiZhdXRoPTU3YzRiZmVhNWE2MjgwNWE0ZGY5NzU0YzJmMWExM2Yy&hl=2ed 
+http://2m4u.com/index2.php?q=aHR0cDovLzE3My4xOTMuNDguMTM3OjkwMDAvSlNDMTA%2FaWQ9MDA6MUQ6OTI6RjE6NUE6NkEmaXA9MTc2LjMxLjI1MS44NiZhdXRoPTU3YzRiZmVhNWE2MjgwNWE0ZGY5NzU0YzJmMWExM2Yy&hl=2ed
 					#EXTINF:0, MATV
-rtmp://$OPT:rtmp-raw=rtmp://202.1.2.52:80/live/ pageUrl=http://livetvstreaming.ucoz.com live=1 playpath=BoyaboLive 
+rtmp://$OPT:rtmp-raw=rtmp://202.1.2.52:80/live/ pageUrl=http://livetvstreaming.ucoz.com live=1 playpath=BoyaboLive
 					'''
 					if name != "":
 						url = x.replace("\n","").replace(chr(13),"")
@@ -200,7 +199,7 @@ rtmp://$OPT:rtmp-raw=rtmp://202.1.2.52:80/live/ pageUrl=http://livetvstreaming.u
 							for ch in self.services:
 								nservice = ServiceReference(ch[1])
 								ref = nservice.ref.toString()
-								if ref.split(":")[10] == nser.ref.toString().split(":")[10]: 
+								if ref.split(":")[10] == nser.ref.toString().split(":")[10]:
 									yaesta = True
 									continue
 							self.m3u.append([name,url,False,yaesta])
@@ -256,7 +255,7 @@ rtmp://$OPT:rtmp-raw=rtmp://202.1.2.52:80/live/ pageUrl=http://livetvstreaming.u
 	def keyCancel(self):
 		service = self.session.nav.getCurrentlyPlayingServiceReference()
 		#if service != self.cur:
-		if self.playing:		
+		if self.playing:
 			self.session.nav.stopService()
 			try:
 				self.session.nav.playService(self.cur)
@@ -372,7 +371,7 @@ class spzAddIPTV(Screen):
 		self.list= []
 		self["menu"] = MenuList(self.list)
 		self.mutableList = None
-		self.servicelist = ServiceList(None)
+		self.servicelist = None
 
 		self.onLayoutFinish.append(self.createTopMenu)
 
@@ -418,7 +417,7 @@ class spzAddIPTV(Screen):
 
 	def keyYellow(self):
 		if fileExists(FILE_M3U):
-			self.session.openWithCallback(self.FileaddCallback, liveStreamingFromFile, self.list[self["menu"].getSelectedIndex()])			
+			self.session.openWithCallback(self.FileaddCallback, liveStreamingFromFile, self.list[self["menu"].getSelectedIndex()])
 
 	def FileaddCallback(self, res):
 		pass
