@@ -186,7 +186,7 @@ class TailscaleNetwork(Screen):
 			text0 = '%s: %s ' % (_('Device'), networks.get('Self')['HostName'])
 			text0 = text0 + '                                    %s: %s ' % (_('Version'), networks.get('Version').split("-")[0])
 			text1 = '%s: %s\n' % (_('Status'), _(networks.get('BackendState')))
-			if networks.get('BackendState') == "NeedsLogin" or networks.get('AuthURL') != "":
+			if networks.get('BackendState') == "NeedsLogin" or networks.get('AuthURL') != "" or not networks.get('TailscaleIPs'):
 				text1 += _("Press Menu button and enter Auth Key to register device")
 			else:
 				text1 += '%s: %s' % ('IP', networks.get('TailscaleIPs')[0])
