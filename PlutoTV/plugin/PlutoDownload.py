@@ -29,6 +29,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Tools.Directories import fileExists
 from Components.Pixmap import Pixmap
+from Components.Renderer.Picon import searchPaths
 
 from enigma import eDVBDB, eEPGCache, eServiceCenter, eServiceReference, eConsoleAppContainer, eTimer
 from Screens.MessageBox import MessageBox
@@ -77,13 +78,8 @@ class DownloadComponent:
 
 	def startCmd(self, cmd):
 		rute = 'wget'
-		try:
-			picon_path = config.misc.picon_path.value
-		except:
-			picon_path = '/usr/share/enigma2/picon'
-		if not os.path.isdir(picon_path):
-			os.mkdir(picon_path)
-		filename = os.path.join(picon_path, self.ref.replace(":","_") + ".png")
+		picon_path = searchPaths[0]
+		filename = os.path.join(picon_path, self.ref.replace(":","_")+".png")
 		if filename:
 			rute = rute + ' -O '+filename
 			self.filename = filename
@@ -218,7 +214,7 @@ def buildService():
 		bqt.write("#SERVICE 1:64:%s:0:0:0:0:0:0:0::%s\n#DESCRIPTION %s\n" % (tid,key,key))
 		tid = tid+1
 		for channel in ChannelsList[key]:
-			bqt.write("#SERVICE 4097:0:1:%s:0:0:0:0:0:0:%s:%s\n#DESCRIPTION %s\n" % (channel[0],quote(channel[4]),channel[2],channel[2]))
+			bqt.write("#SERVICE 4097:0:19:%s:%s:0:0:0:0:0:%s:%s\n#DESCRIPTION %s\n" % (channel[0],channel[1][-4:],quote(channel[4]),channel[2],channel[2]))
 	bqt.close()
 	bouquets = open("/etc/enigma2/bouquets.tv","r").read()
 	if not BOUQUET in bouquets:
@@ -492,16 +488,18 @@ class PlutoDownload(Screen):
 
 
 						channel = ChannelsList[key][self.chitem]
-						sref = "#SERVICE 4097:0:1:%s:0:0:0:0:0:0:%s:%s" % (channel[0],quote(channel[4]),channel[2])
+						idhex = "%x" % int(channel[1][-4:],16)
+						idhex = idhex.upper()
+						sref = "#SERVICE 4097:0:19:%s:%s:0:0:0:0:0:%s:%s" % (channel[0],idhex,quote(channel[4]),channel[2])
 						self.fd.write("%s\n#DESCRIPTION %s\n" % (sref,channel[2]))
 						self.chitem = self.chitem + 1
 
 						if py3():
-							ref = "4097:0:1:%s:0:0:0:0:0:0" % channel[0]
+							ref = "4097:0:19:%s:%s:0:0:0:0:0" % (channel[0],idhex)
 							name = channel[2]
 							self["status"].setText(_("Wait for Channel: ")+name)
 						else:
-							ref = "4097:0:1:%s:0:0:0:0:0:0" % channel[0].encode("utf-8")
+							ref = "4097:0:19:%s:%s:0:0:0:0:0" % (channel[0].encode("utf-8"),idhex)
 							name = channel[2]
 							self["status"].setText(_("Wait for Channel: ")+name.encode("utf-8"))
 
@@ -645,14 +643,16 @@ class DownloadSilent:
 
 
 						channel = ChannelsList[key][self.chitem]
-						sref = "#SERVICE 4097:0:1:%s:0:0:0:0:0:0:%s:%s" % (channel[0],quote(channel[4]),channel[2])
+						idhex = "%x" % int(channel[1][-4:],16)
+						idhex = idhex.upper()
+						sref = "#SERVICE 4097:0:19:%s:%s:0:0:0:0:0:%s:%s" % (channel[0],idhex,quote(channel[4]),channel[2])
 						self.fd.write("%s\n#DESCRIPTION %s\n" % (sref,channel[2]))
 						self.chitem = self.chitem + 1
 
 						if py3():
-							ref = "4097:0:1:%s:0:0:0:0:0:0" % channel[0]
+							ref = "4097:0:19:%s:%s:0:0:0:0:0" % (channel[0],idhex)
 						else:
-							ref = "4097:0:1:%s:0:0:0:0:0:0" % channel[0].encode("utf-8")
+							ref = "4097:0:19:%s:%s:0:0:0:0:0" % (channel[0].encode("utf-8"),idhex)
 						name = channel[2]
 
 
