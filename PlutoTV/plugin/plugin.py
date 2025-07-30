@@ -2,10 +2,10 @@
 #
 #   Copyright (C) 2021 Team OpenSPA
 #   https://openspa.info/
-# 
+#
 #   SPDX-License-Identifier: GPL-2.0-or-later
 #   See LICENSES/README.md for more information.
-# 
+#
 #   PlutoTV is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
@@ -75,7 +75,7 @@ if not FOLDER:
 if not pathExists(FOLDER):
 	os.system("mkdir " + FOLDER)
 
-	
+
 def fhd(num, factor=1.5):
 	if esHD():
 		prod=num*factor
@@ -93,7 +93,7 @@ def setResumePoint(session, sid=None):
 	global resumePointCacheLast, resumePointCache
 	service = session.nav.getCurrentService()
 	ref = session.nav.getCurrentlyPlayingServiceReference()
-	if (service is not None) and (ref is not None): 
+	if (service is not None) and (ref is not None):
 		seek = service.seek()
 		if seek:
 			pos = seek.getPlayPosition()
@@ -164,7 +164,7 @@ class DownloadPosters:
 			rute = rute + ' -O '+filename
 		else:
 			return
-		
+
 		self.filename = filename
 		rute = rute + ' ' + url
 
@@ -227,7 +227,7 @@ def listentry(name, data, _id, epid=0):
 		if fileExists(picture):
 			png = LoadPixmap(picture)
 			res.append(MultiContentEntryPixmapAlphaBlend(pos=(fhd(7), fhd(9)), size=(fhd(20), fhd(20)), png=png, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
-		
+
 	return res
 
 
@@ -252,10 +252,10 @@ class PlutoTV(Screen):
 		<widget name="help" position="70,980" size="615,48" font="Regular; 25" backgroundColor="#00000000" foregroundColor="#009B9B9B" transparent="0" halign="center"/>
 		<eLabel position="770,956" size="30,85" backgroundColor="#00FF0000" />
 		<eLabel position="1100,956" size="30,85" backgroundColor="#00ffff00" />
-		<eLabel position="1430,956" size="30,85" backgroundColor="#0032cd32" /> 
+		<eLabel position="1430,956" size="30,85" backgroundColor="#0032cd32" />
 		<widget name="red" position="810,956" size="290,85" valign="center" font="Regular; 30" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
 		<widget name="yellow" position="1140,956" size="290,85" valign="center" font="Regular; 30" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
-		<widget name="green" position="1470,956" size="425,85" valign="center" font="Regular; 30" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" /> 
+		<widget name="green" position="1470,956" size="425,85" valign="center" font="Regular; 30" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" />
 		</screen>"""
 	else:
 		skin = """
@@ -277,10 +277,10 @@ class PlutoTV(Screen):
 		<widget name="help" position="47,653" size="410,32" font="Regular; 17" backgroundColor="#00000000" foregroundColor="#009B9B9B" transparent="0" halign="center"/>
 		<eLabel position="513,637" size="20,57" backgroundColor="#00FF0000" />
 		<eLabel position="733,637" size="20,57" backgroundColor="#00ffff00" />
-		<eLabel position="953,637" size="20,57" backgroundColor="#0032cd32" /> 
+		<eLabel position="953,637" size="20,57" backgroundColor="#0032cd32" />
 		<widget name="red" position="540,637" size="193,57" valign="center" font="Regular; 20" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
 		<widget name="yellow" position="760,637" size="193,57" valign="center" font="Regular; 20" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="1" />
-		<widget name="green" position="980,637" size="283,55" valign="center" font="Regular; 20" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" /> 
+		<widget name="green" position="980,637" size="283,55" valign="center" font="Regular; 20" backgroundColor="#00000000" foregroundColor="#00ffffff" transparent="0" />
 		</screen>"""
 
 
@@ -535,7 +535,7 @@ class PlutoTV(Screen):
 			self.titlemenu = name + " - " + _("Seasons")
 			self["playlist"].setText(self.titlemenu)
 			self.history.append((index,menuact))
-			self["feedlist"].moveToIndex(0)			
+			self["feedlist"].moveToIndex(0)
 		if tipo == "seasons":
 			for key in self.chapters[_id]:
 				if py3():
@@ -567,7 +567,7 @@ class PlutoTV(Screen):
 			sessionid, deviceid = PlutoDownload.getUUID()
 			url = film[9]
 			self.playVOD(name,sid,url)
-			
+
 
 	def back(self):
 		index, name, tipo, _id = self.getSelection()
@@ -614,7 +614,7 @@ class PlutoTV(Screen):
 		if url:
 			uid, did = PlutoDownload.getUUID()
 			url = url.replace("deviceModel=","deviceModel=web").replace("deviceMake=","deviceMake=chrome") + uid
-			
+
 		if url and name:
 			string = '4097:0:0:0:0:0:0:0:0:0:%s:%s' % (quote(url), quote(name))
 			reference = eServiceReference(string)
@@ -704,27 +704,31 @@ class Pluto_Player(MoviePlayer):
 		self.session = session
 		self.mpservice = service
 		self.id = sid
-		MoviePlayer.__init__(self, self.session, service, sid)
+		MoviePlayer.__init__(self, session, service)
 		self.end = False
 		self.started = False
-		self.skinName = ["MoviePlayer" ]
+		self.skinName = ["MoviePlayer"]
 
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(
+			screen=self,
+			eventmap={
 				iPlayableService.evStart: self.__serviceStarted,
-#				iPlayableService.evBuffering: self.__serviceStarted,
-#				iPlayableService.evVideoSizeChanged: self.__serviceStarted,
+				iPlayableService.evBuffering: self.__serviceStarted,
+				iPlayableService.evVideoSizeChanged: self.__serviceStarted,
 				iPlayableService.evEOF: self.__evEOF,
-			})
+			},
+		)
 
-
-		self["actions"] = ActionMap(["MoviePlayerActions", "OkCancelActions","NumberActions","EPGSelectActions"],
-		{
-			"cancel": self.leavePlayer,
-			"exit": self.leavePlayer,
-			"leavePlayer": self.leavePlayer, 
-			"ok":self.toggleShow,
-		}, -3)
+		self["actions"] = ActionMap(
+			["MoviePlayerActions", "OkCancelActions", "NumberActions", "EPGSelectActions"],
+			{
+				"cancel": self.leavePlayer,
+				"exit": self.leavePlayer,
+				"leavePlayer": self.leavePlayer,
+				"ok": self.toggleShow,
+			},
+			-3,
+		)
 		self.session.nav.playService(self.mpservice)
 
 	def up(self):
@@ -742,26 +746,34 @@ class Pluto_Player(MoviePlayer):
 	def __serviceStarted(self):
 		service = self.session.nav.getCurrentService()
 		seekable = service.seek()
-		self.started = True
-		ref = self.session.nav.getCurrentlyPlayingServiceReference()
 		last, length = getResumePoint(self.id)
 		if last is None:
 			return
 		if seekable is None:
 			return
-		length = seekable.getLength() or (None,0)
+		length = seekable.getLength() or (None, 0)
 		print("seekable.getLength() returns:", length)
 		# Hmm, this implies we don't resume if the length is unknown...
-		if (last > 900000) and (not length[1]  or (last < length[1] - 900000)):
+		if (last > 900000) and (not length[1] or (last < length[1] - 900000)):
 			self.resume_point = last
 			l = last / 90000
-			Notifications.AddNotificationWithCallback(self.playLastCB, MessageBox, _("Do you want to resume this playback?") + "\n" + (_("Resume position at %s") % ("%d:%02d:%02d" % (l/3600, l%3600/60, l%60))), timeout=10, default="yes" in config.usage.on_movie_start.value)
+			if not self.started:
+				self.started = True
+				Notifications.AddNotificationWithCallback(
+					self.playLastCB,
+					MessageBox,
+					_("Do you want to resume this playback?")
+					+ "\n"
+					+ (_("Resume position at %s") % ("%d:%02d:%02d" % (l / 3600, l % 3600 / 60, l % 60))),
+					timeout=10,
+					default="yes" in config.usage.on_movie_start.value,
+				)
 
 	def leavePlayer(self):
 		laref=_("Stop play and exit to list movie?")
 		try:
 			dei = self.session.openWithCallback(self.callbackexit,MessageBox, laref, MessageBox.TYPE_YESNO)
-			dei.setTitle(_("Stop play"))				
+			dei.setTitle(_("Stop play"))
 		except:
 			self.callbackexit(True)
 
@@ -770,7 +782,7 @@ class Pluto_Player(MoviePlayer):
 			self.is_closing = True
 			setResumePoint(self.session,self.id)
 			self.close()
-			
+
 	def leavePlayerConfirmed(self, answer):
 		pass
 
@@ -793,5 +805,5 @@ def Plugins(**kwargs):
 	list = []
 	list.append(PluginDescriptor(name=_("PlutoTV"), where = PluginDescriptor.WHERE_PLUGINMENU, icon="plutotv.png", description=_("View Pluto TV VOD & Download Bouquet for LiveTV Channels"), fnc=system))
 	list.append(PluginDescriptor(name=_("Download PlutoTV Bouquet, picons & EPG"), where = PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=Download_PlutoTV))
-	list.append(PluginDescriptor(name=_("Silent Download PlutoTV"), where = PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart)) 
+	list.append(PluginDescriptor(name=_("Silent Download PlutoTV"), where = PluginDescriptor.WHERE_SESSIONSTART, fnc=autostart))
 	return list
