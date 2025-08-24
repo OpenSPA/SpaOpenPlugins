@@ -11,12 +11,10 @@ from Components.Input import Input
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileContains, fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
-from enigma import eTimer
+from enigma import eTimer, getDesktop
 from time import time
 from datetime import datetime
 from Components.Language import language
-from Plugins.Extensions.spazeMenu.plugin import esHD
-from Plugins.Extensions.spazeMenu.spzVirtualKeyboard import spzVirtualKeyboard
 from Plugins.Extensions.Tailscale.__init__ import _
 from requests.auth import HTTPBasicAuth
 import json
@@ -25,6 +23,8 @@ import subprocess
 import requests
 import os
 
+screenWidth = getDesktop(0).size().width()
+
 
 def getData():
 	dato = os.popen("tailscale status --json")
@@ -32,17 +32,17 @@ def getData():
 	return data
 
 class TailscaleNetwork(Screen):
-	if esHD():
+	if screenWidth == 1920:
 		skin = """
 		<screen name="Tailscale" position="center,120" size="1230,780" title=" ">
 			<widget name="picRed" pixmap="buttons/red_HD.png" position="60,707" size="210,60" alphatest="blend" transparent="1" />
 			<widget name="picGreen" pixmap="buttons/green_HD.png" position="360,707" size="210,60" alphatest="blend" transparent="1" />
 			<widget name="picYellow" pixmap="buttons/yellow_HD.png" position="660,707" size="210,60" alphatest="blend" transparent="1" />
 			<widget name="picBlue" pixmap="buttons/blue_HD.png" position="960,707" size="210,60" alphatest="blend" transparent="1" />
-			<widget name="lblRed" position="15,707" size="300,60" zPosition="1" font="RegularHD;20" halign="center" valign="center" transparent="1" />
-			<widget name="lblGreen" position="315,707" size="300,60" zPosition="1" font="RegularHD;20" halign="center" valign="center" transparent="1" />
-			<widget name="lblYellow" position="615,707" size="300,60" zPosition="1" font="RegularHD;20" halign="center" valign="center" transparent="1" />
-			<widget name="lblBlue" position="915,707" size="300,60" zPosition="1" font="RegularHD;20" halign="center" valign="center" transparent="1" />
+			<widget name="lblRed" position="15,707" size="300,60" zPosition="1" font="RegularHD;17" halign="center" valign="center" transparent="1" />
+			<widget name="lblGreen" position="315,707" size="300,60" zPosition="1" font="RegularHD;17" halign="center" valign="center" transparent="1" />
+			<widget name="lblYellow" position="615,707" size="300,60" zPosition="1" font="RegularHD;17" halign="center" valign="center" transparent="1" />
+			<widget name="lblBlue" position="915,707" size="300,60" zPosition="1" font="RegularHD;17" halign="center" valign="center" transparent="1" />
 			<widget source="list" render="Listbox" position="12,68" size="1200,630" scrollbarMode="showOnDemand" enableWrapAround="on">
 				<convert type="TemplatedMultiContent">
 					{ "template": [ MultiContentEntryText(pos=(135,2),size=(1080,45),font=0,text=4),
@@ -55,7 +55,7 @@ class TailscaleNetwork(Screen):
 					}
 				</convert>
 			</widget>
-			<eLabel name="menu" text="Menu" position="1101,15" size="200,45" font="RegularHD;18" zPosition="2"/>
+			<eLabel name="menu" text="Menu" position="1050,15" size="100,45" font="RegularHD;18" backgroundColor="key_back" zPosition="2"/>
 			<widget name="picMenu" position="1060,20" size="75,37" pixmap="buttons/key_menu.png" transparent="1" alphatest="blend" />
 			<widget name="lblStatus" position="19,9" size="1100,51" font="RegularHD;20" zPosition="2" transparent="1"/>
 		</screen>"""
@@ -111,7 +111,7 @@ class TailscaleNetwork(Screen):
 
 		self.checkLogin()
 		self.line = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/div-h.png')
-		if esHD():
+		if screenWidth == 1920:
 			self.networkpic = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/network-hd.png')
 		else:
 			self.networkpic = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/network.png')
@@ -266,7 +266,7 @@ class TailscaleNetwork(Screen):
 		return ""
 
 class Tailscaleuser(Screen):
-	if esHD():
+	if screenWidth == 1920:
 		skin = """
 		<screen name="TailscaleUser" position="center,120" size="1230,780" title=" ">
 			<widget name="picRed" pixmap="buttons/red_HD.png" position="60,707" size="210,60" alphatest="blend" transparent="1" />
@@ -323,7 +323,7 @@ class Tailscaleuser(Screen):
 		self['lblRed'] = Label(_("Close"))
 
 		self.line = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/div-h.png')
-		if esHD():
+		if screenWidth == 1920:
 			self.networkpic = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/network-hd.png')
 		else:
 			self.networkpic = LoadPixmap('/usr/lib/enigma2/python/Plugins/Extensions/Tailscale/images/network.png')

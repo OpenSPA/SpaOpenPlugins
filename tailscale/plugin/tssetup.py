@@ -11,7 +11,7 @@ from Components.Input import Input
 from Components.About import about
 from Tools.Directories import fileExists, fileContains, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Components.Language import language
-from Plugins.Extensions.spazeMenu.plugin import esHD
+from .tsnetwork import screenWidth
 from Plugins.Extensions.Tailscale.__init__ import _
 from Plugins.Extensions.Tailscale.tsnetwork import getData
 from Screens.Standby import TryQuitMainloop
@@ -23,19 +23,21 @@ import os
 import requests
 import shutil
 
+
+
 class TailscaleSetup(Screen, ConfigListScreen):
-	if esHD():
+	if screenWidth == 1920:
 		skin="""<screen name="TailscaleSetup" position="center,120" size="1230,780">
 			<eLabel name="" position="10,700" size="30,30" backgroundColor="red" />
 			<eLabel name="" position="285,700" size="30,30" backgroundColor="green" />
 			<eLabel name="" position="480,700" size="30,30" backgroundColor="yellow" />
 			<eLabel name="" position="900,700" size="30,30" backgroundColor="blue" />
-			<widget source="key_red" render="Label" position="50,695" size="230,45" zPosition="2" font="RegularHD; 20" halign="left" />
-			<widget source="key_green" render="Label" position="325,695" size="100,45" zPosition="2" font="RegularHD; 22" halign="left" transparent="1" />
-			<widget source="key_yellow" render="Label" position="520,695" size="350,45" zPosition="2" font="RegularHD; 20" halign="left" />
-			<widget source="key_blue" render="Label" position="940,695" size="410,45" zPosition="2" font="RegularHD; 22" halign="left" transparent="1" />
+			<widget source="key_red" render="Label" position="50,700" size="230,45" zPosition="2" font="RegularHD; 18" halign="left" />
+			<widget source="key_green" render="Label" position="325,700" size="100,45" zPosition="2" font="RegularHD; 18" halign="left" transparent="1" />
+			<widget source="key_yellow" render="Label" position="520,700" size="350,45" zPosition="2" font="RegularHD; 18" halign="left" />
+			<widget source="key_blue" render="Label" position="940,700" size="410,45" zPosition="2" font="RegularHD; 18" halign="left" transparent="1" />
 			<widget name="config" position="10,10" size="1210,218" itemHeight="40" scrollbarMode="showNever" transparent="1" font="RegularHD; 22" />
-			<widget name="description" position="20,500" size="1200,120" transparent="1" font="RegularHD; 20" />
+			<widget name="description" position="20,500" size="1200,145" transparent="1" font="RegularHD; 20" />
 			<widget name="HelpWindow" position="350,400" size="1,1" transparent="1" />
 			</screen>"""
 	def __init__(self, session):
@@ -153,12 +155,13 @@ class TailscaleSetup(Screen, ConfigListScreen):
 		if not fileContains("/tmp/tailscale.log", "key"):
 			self.keyDown()
 			filekey = '/etc/keys/tailscale.key'
-			f = open(filekey, 'r')
-			authkey = f.read()
-			f.close()
-			config.tailscale.apikey.value = authkey
-			self.saveAll()
-			self.keyUp()
+			if os.path.exists(filekey):
+				f = open(filekey, 'r')
+				authkey = f.read()
+				f.close()
+				config.tailscale.apikey.value = authkey
+				self.saveAll()
+				self.keyUp()
 		else:
 			self.arq=about.getCPUArch()
 			if self.arq=="Mipsel":
@@ -208,11 +211,12 @@ class TailscaleSetup(Screen, ConfigListScreen):
 
 	def loadKey(self):
 		filekey = '/etc/keys/tailscale.key'
-		f = open(filekey, 'r')
-		authkey = f.read()
-		f.close()
-		config.tailscale.apikey.value = authkey
-		self.saveAll()
+		if os.path.exists(filekey):
+			f = open(filekey, 'r')
+			authkey = f.read()
+			f.close()
+			config.tailscale.apikey.value = authkey
+			self.saveAll()
 
 	def openKeyboard(self):
 		self.session.openWithCallback(self.CallbackInput, VirtualKeyBoard, title=(_("Enter your Auth Key")), text=config.tailscale.apikey.getValue())

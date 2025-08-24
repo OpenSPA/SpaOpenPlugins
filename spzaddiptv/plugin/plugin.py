@@ -109,7 +109,7 @@ def m3ulistentry (name, url, select=False, append=False):
 	res.append(MultiContentEntryPixmapAlphaBlend(pos=(5, 3), size=(20, 20), png = png, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
 	#res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 5, 3, 20, 20, png))
 	res.append(MultiContentEntryText(pos=(30, 1.6), size=(600, 30), font=0, text=name, color=color))
-	res.append(MultiContentEntryText(pos=(30, 22), size=(600, 30), font=1, text=url, color=0x666666))
+	res.append(MultiContentEntryText(pos=(30, 1.6), size=(600, 30), font=1, text=url, color=0x666666))
 	return res
 
 class m3uList(MenuList):
