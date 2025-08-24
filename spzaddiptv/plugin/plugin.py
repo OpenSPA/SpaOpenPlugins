@@ -12,7 +12,7 @@ if sys.version_info[0] == 3:
 	from urllib.parse import quote
 else:
 	from urllib import quote
-from enigma import eDVBDB, eServiceReference, eServiceCenter, eListboxPythonMultiContent, gFont, BT_SCALE, BT_KEEP_ASPECT_RATIO, RT_HALIGN_RIGHT,RT_HALIGN_LEFT,RT_HALIGN_CENTER
+from enigma import eDVBDB, eServiceReference, eServiceCenter, eListboxPythonMultiContent, gFont, BT_SCALE, BT_KEEP_ASPECT_RATIO, RT_HALIGN_RIGHT,RT_HALIGN_LEFT,RT_HALIGN_CENTER, getDesktop
 from Screens.ChannelSelection import ChannelSelectionEdit, ChannelSelectionBase
 from Components.config import config
 from Tools.LoadPixmap import LoadPixmap
@@ -23,24 +23,23 @@ from os import environ
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 import gettext
 
-from Plugins.Extensions.spazeMenu.plugin import esHD, fhd, fontHD
-
+screenWidth = getDesktop(0).size().width()
 service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
 FILE_M3U = '/etc/streams.m3u'
 
-if esHD():
+if screenWidth == 1920:
 	skin = """
 	<screen position="340,150" size="975,715" title="">
-		<widget name="menu" font="RegularHD;19" position="15,7" size="945,525" scrollbarMode="showOnDemand" />
+		<widget name="menu" font="RegularHD;19" position="15,7" size="950,535" scrollbarMode="showOnDemand" />
 		<widget source="statusbar" render="Label" position="15,550" zPosition="10" size="945,75" halign="center" valign="center" font="RegularHD;18" foregroundColor="#666666" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/imgvk/hdredcor.png" position="15,617" size="225,60" alphatest="blend" />
-		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/imgvk/hdgreencor.png" position="255,617" size="225,60" alphatest="blend" />
-		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/imgvk/hdyellowcor.png" position="495,617" size="225,60" alphatest="blend" />
-		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/imgvk/hdbluecor.png" position="735,617" size="225,60" alphatest="blend" />
-		<widget source="key_red" render="Label" position="15,617" zPosition="1" size="225,87" font="RegularHD;20" halign="center" valign="center" transparent="1" />
-		<widget source="key_green" render="Label" position="255,617" zPosition="1" size="225,87" font="RegularHD;20" halign="center" valign="center" transparent="1" />
-		<widget source="key_yellow" render="Label" position="495,617" zPosition="1" size="225,87" font="RegularHD;20" halign="center" valign="center" transparent="1" />
-		<widget source="key_blue" render="Label" position="735,617" zPosition="1" size="225,87" font="RegularHD;20" halign="center" valign="center" transparent="1" />
+		<ePixmap pixmap="/usr/share/enigma2/skin_fallback_1080/buttons/red.png" position="15,617" size="210,60" alphatest="blend" />
+		<ePixmap pixmap="/usr/share/enigma2/skin_fallback_1080/buttons/green.png" position="255,617" size="210,60" alphatest="blend" />
+		<ePixmap pixmap="/usr/share/enigma2/skin_fallback_1080/buttons/yellow.png" position="495,617" size="210,60" alphatest="blend" />
+		<ePixmap pixmap="/usr/share/enigma2/skin_fallback_1080/buttons/blue.png" position="735,617" size="210,60" alphatest="blend" />
+		<widget source="key_red" render="Label" position="15,600" zPosition="1" size="225,87" font="RegularHD;17" halign="center" valign="center" transparent="1" />
+		<widget source="key_green" render="Label" position="255,600" zPosition="1" size="225,87" font="RegularHD;17" halign="center" valign="center" transparent="1" />
+		<widget source="key_yellow" render="Label" position="495,600" zPosition="1" size="225,87" font="RegularHD;17" halign="center" valign="center" transparent="1" />
+		<widget source="key_blue" render="Label" position="730,600" zPosition="1" size="225,87" font="RegularHD;17" halign="center" valign="center" transparent="1" />
 		</screen>"""
 else:
 	skin = """
@@ -107,18 +106,18 @@ def m3ulistentry (name, url, select=False, append=False):
 		else:
 			png = LoadPixmap("/usr/lib/enigma2/python/Plugins/SystemPlugins/spzAddIPTV/images/tv.png")
 			color = 0xffffff
-	res.append(MultiContentEntryPixmapAlphaBlend(pos=(fhd(5), fhd(3)), size=(fhd(20), fhd(20)), png = png, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
+	res.append(MultiContentEntryPixmapAlphaBlend(pos=(5, 3), size=(20, 20), png = png, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
 	#res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 5, 3, 20, 20, png))
-	res.append(MultiContentEntryText(pos=(fhd(30,1.6), 0), size=(fhd(600), fhd(30)), font=0, text=name, color=color))
-	res.append(MultiContentEntryText(pos=(fhd(30,1.6), fhd(22)), size=(fhd(600), fhd(30)), font=1, text=url, color=0x666666))
+	res.append(MultiContentEntryText(pos=(30, 1.6), size=(600, 30), font=0, text=name, color=color))
+	res.append(MultiContentEntryText(pos=(30, 22), size=(600, 30), font=1, text=url, color=0x666666))
 	return res
 
 class m3uList(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setItemHeight(fhd(50))
-		self.l.setFont(0, gFont(fontHD("Regular"), 20))
-		self.l.setFont(1, gFont(fontHD("Regular"), 18))
+		self.l.setItemHeight(50)
+		self.l.setFont(0, gFont("Regular"), 20)
+		self.l.setFont(1, gFont("Regular"), 18)
 
 
 class liveStreamingFromFile(Screen):
@@ -305,7 +304,7 @@ rtmp://$OPT:rtmp-raw=rtmp://202.1.2.52:80/live/ pageUrl=http://livetvstreaming.u
 
 
 class LiveStreamingLinksHeader(Screen):
-	if esHD():
+	if screenWidth == 1920:
 		skin = """
 			<screen position="585,390" size="450,300" title="">
 			<widget name="menu" position="15,15" size="1590,1065" scrollbarMode="showOnDemand" itemHeight="38" />
@@ -433,7 +432,7 @@ class spzAddIPTV(Screen):
 		tmpList = []
 		self.list = self.getBouquetList()
 		self["menu"].setList(self.list)
-		if esHD():
+		if screenWidth == 1920:
 			self["menu"].instance.setItemHeight(42)
 
 	def getBouquetList(self):
