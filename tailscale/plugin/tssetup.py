@@ -28,16 +28,16 @@ import shutil
 class TailscaleSetup(Screen, ConfigListScreen):
 	if screenWidth == 1920:
 		skin="""<screen name="TailscaleSetup" position="center,120" size="1230,780">
-			<eLabel name="" position="10,700" size="30,30" backgroundColor="red" />
-			<eLabel name="" position="285,700" size="30,30" backgroundColor="green" />
-			<eLabel name="" position="480,700" size="30,30" backgroundColor="yellow" />
-			<eLabel name="" position="900,700" size="30,30" backgroundColor="blue" />
-			<widget source="key_red" render="Label" position="50,700" size="230,45" zPosition="2" font="RegularHD; 18" halign="left" />
-			<widget source="key_green" render="Label" position="325,700" size="100,45" zPosition="2" font="RegularHD; 18" halign="left" transparent="1" />
-			<widget source="key_yellow" render="Label" position="520,700" size="350,45" zPosition="2" font="RegularHD; 18" halign="left" />
-			<widget source="key_blue" render="Label" position="940,700" size="410,45" zPosition="2" font="RegularHD; 18" halign="left" transparent="1" />
+			<eLabel name="" position="10,715" size="30,30" backgroundColor="red" />
+			<eLabel name="" position="285,715" size="30,30" backgroundColor="green" />
+			<eLabel name="" position="480,715" size="30,30" backgroundColor="yellow" />
+			<eLabel name="" position="900,715" size="30,30" backgroundColor="blue" />
+			<widget source="key_red" render="Label" position="50,715" size="230,45" zPosition="2" font="RegularHD; 18" halign="left" />
+			<widget source="key_green" render="Label" position="325,715" size="100,45" zPosition="2" font="RegularHD; 18" halign="left" transparent="1" />
+			<widget source="key_yellow" render="Label" position="520,715" size="350,45" zPosition="2" font="RegularHD; 18" halign="left" />
+			<widget source="key_blue" render="Label" position="940,715" size="410,45" zPosition="2" font="RegularHD; 18" halign="left" transparent="1" />
 			<widget name="config" position="10,10" size="1210,218" itemHeight="40" scrollbarMode="showNever" transparent="1" font="RegularHD; 22" />
-			<widget name="description" position="20,500" size="1200,145" transparent="1" font="RegularHD; 20" />
+			<widget name="description" position="20,500" size="1200,200" transparent="1" font="RegularHD; 20" />
 			<widget name="HelpWindow" position="350,400" size="1,1" transparent="1" />
 			</screen>"""
 	def __init__(self, session):
