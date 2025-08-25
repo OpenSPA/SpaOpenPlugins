@@ -38,7 +38,7 @@ class TailscaleSetup(Screen, ConfigListScreen):
 			<widget source="key_blue" render="Label" position="940,715" size="410,45" zPosition="2" font="RegularHD; 18" halign="left" transparent="1" />
 			<widget name="config" position="10,10" size="1210,218" itemHeight="40" scrollbarMode="showNever" transparent="1" font="RegularHD; 22" />
 			<widget name="description" position="20,500" size="1200,200" transparent="1" font="RegularHD; 20" />
-			<widget name="HelpWindow" position="350,400" size="1,1" transparent="1" />
+			<widget name="HelpWindow" position="350,360" size="1,1" transparent="1" />
 			</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
