@@ -38,7 +38,7 @@ if screenWidth == 1920:
 		<ePixmap pixmap="/usr/share/enigma2/skin_fallback_1080/buttons/blue.png" position="735,617" size="210,60" alphatest="blend" />
 		<widget source="key_red" render="Label" position="15,600" zPosition="1" size="225,87" font="RegularHD;17" halign="center" valign="center" transparent="1" />
 		<widget source="key_green" render="Label" position="255,600" zPosition="1" size="225,87" font="RegularHD;17" halign="center" valign="center" transparent="1" />
-		<widget source="key_yellow" render="Label" position="495,600" zPosition="1" size="225,87" font="RegularHD;17" halign="center" valign="center" transparent="1" />
+		<widget source="key_yellow" render="Label" position="495,600" zPosition="1" size="225,87" font="RegularHD;17" backgroundColor="#00a58b01" halign="center" valign="center" transparent="1" />
 		<widget source="key_blue" render="Label" position="730,600" zPosition="1" size="225,87" font="RegularHD;17" halign="center" valign="center" transparent="1" />
 		</screen>"""
 else:
