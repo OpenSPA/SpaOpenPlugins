@@ -41,7 +41,7 @@ class TailscaleNetwork(Screen):
 			<widget name="picBlue" pixmap="buttons/blue_HD.png" position="960,707" size="210,60" alphatest="blend" transparent="1" />
 			<widget name="lblRed" position="15,707" size="300,60" zPosition="1" font="RegularHD;17" halign="center" valign="center" transparent="1" />
 			<widget name="lblGreen" position="315,707" size="300,60" zPosition="1" font="RegularHD;17" halign="center" valign="center" transparent="1" />
-			<widget name="lblYellow" position="615,707" size="300,60" zPosition="1" font="RegularHD;17" halign="center" valign="center" transparent="1" />
+			<widget name="lblYellow" position="615,707" size="300,60" zPosition="1" font="RegularHD;17" backgroundColor="#00a58b01" halign="center" valign="center" transparent="1" />
 			<widget name="lblBlue" position="915,707" size="300,60" zPosition="1" font="RegularHD;17" halign="center" valign="center" transparent="1" />
 			<widget source="list" render="Listbox" position="12,68" size="1200,630" scrollbarMode="showOnDemand" enableWrapAround="on">
 				<convert type="TemplatedMultiContent">
@@ -55,7 +55,7 @@ class TailscaleNetwork(Screen):
 					}
 				</convert>
 			</widget>
-			<eLabel name="menu" text="Menu" position="1050,15" size="100,45" font="RegularHD;18" backgroundColor="key_back" zPosition="2"/>
+			<eLabel name="menu" text="Menu" position="1050,15" size="100,45" font="RegularHD;18" halign="center" valign="center" backgroundColor="key_back" zPosition="2"/>
 			<widget name="picMenu" position="1060,20" size="75,37" pixmap="buttons/key_menu.png" transparent="1" alphatest="blend" />
 			<widget name="lblStatus" position="19,9" size="1100,51" font="RegularHD;20" zPosition="2" transparent="1"/>
 		</screen>"""
