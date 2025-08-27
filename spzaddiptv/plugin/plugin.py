@@ -106,18 +106,29 @@ def m3ulistentry (name, url, select=False, append=False):
 		else:
 			png = LoadPixmap("/usr/lib/enigma2/python/Plugins/SystemPlugins/spzAddIPTV/images/tv.png")
 			color = 0xffffff
-	res.append(MultiContentEntryPixmapAlphaBlend(pos=(5, 3), size=(20, 20), png = png, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
-	#res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 5, 3, 20, 20, png))
-	res.append(MultiContentEntryText(pos=(30, 1.6), size=(600, 30), font=0, text=name, color=color))
-	res.append(MultiContentEntryText(pos=(30, 1.6), size=(600, 30), font=1, text=url, color=0x666666))
+	if screenWidth > 1400:
+		res.append(MultiContentEntryPixmapAlphaBlend(pos=(8, 5), size=(30, 30), png = png, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
+		#res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 5, 3, 20, 20, png))
+		res.append(MultiContentEntryText(pos=(48, 0), size=(900, 45), font=0, text=name, color=color))
+		res.append(MultiContentEntryText(pos=(48, 33), size=(900, 45), font=1, text=url, color=0x666666))
+	else:
+		res.append(MultiContentEntryPixmapAlphaBlend(pos=(5, 3), size=(20, 20), png = png, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
+		#res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, 5, 3, 20, 20, png))
+		res.append(MultiContentEntryText(pos=(30, 0), size=(600, 30), font=0, text=name, color=color))
+		res.append(MultiContentEntryText(pos=(30, 22), size=(600, 30), font=1, text=url, color=0x666666))
 	return res
 
 class m3uList(MenuList):
 	def __init__(self, list, enableWrapAround=False):
 		MenuList.__init__(self, list, enableWrapAround, eListboxPythonMultiContent)
-		self.l.setItemHeight(50)
-		self.l.setFont(0, gFont("Regular"), 20)
-		self.l.setFont(1, gFont("Regular"), 18)
+		if screenWidth > 1400:
+			self.l.setItemHeight(75)
+			font = "RegularHD"
+		else:
+			self.l.setItemHeight(50)
+			font = "Regular"
+		self.l.setFont(0, gFont(font, 20))
+		self.l.setFont(1, gFont(font, 18))
 
 
 class liveStreamingFromFile(Screen):
