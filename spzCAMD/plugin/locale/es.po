@@ -1,0 +1,149 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-10 16:35+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
+"Language-Team: openspa.info\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: /home/mpiero/Plugins/spazeMenu\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-SearchPath-0: /home/mpiero/Plugins/spazeMenu\n"
+
+msgid "CAMD"
+msgstr "CAMD"
+
+msgid "CAMD start after boot"
+msgstr "Iniciar CAMD en el arranque"
+
+msgid "COMPLETED"
+msgstr "COMPLETADO"
+
+msgid "Check every (seg)"
+msgstr "Comprobar cada (seg.)"
+
+msgid "Configuring..."
+msgstr "Configurando..."
+
+msgid "Daily AutoRestart end time"
+msgstr "Hora fin de autoreinicio diario"
+
+msgid "Daily AutoRestart start time"
+msgstr "Hora comienzo de autoreinicio diario"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Do you want to install?"
+msgstr "Desea instalar este archivo?"
+
+msgid "Download"
+msgstr "Descargar"
+
+msgid "Downloading"
+msgstr "Descargando"
+
+msgid "Downloads"
+msgstr "Descargas"
+
+msgid "Enable Daily AutoRestart"
+msgstr "Activar autoreinicio diario"
+
+msgid "Error downloading"
+msgstr "Error en la descarga"
+
+msgid "Error reading remote file"
+msgstr "Error leyendo el archivo remoto"
+
+msgid "File(s)"
+msgstr "Archivo(s)"
+
+msgid "Finish..."
+msgstr "Finalizando..."
+
+msgid "Finished"
+msgstr "FINALIZADA la instalación"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Information"
+msgstr "Información"
+
+msgid "Installation"
+msgstr "Instalación"
+
+msgid "Installation Completed"
+msgstr "Instalación finalizada"
+
+msgid "Installing..."
+msgstr "Instalando..."
+
+msgid "Nothing"
+msgstr "Ninguna"
+
+msgid "Press [OK] to retry"
+msgstr "Pulse [OK] para reintentar"
+
+msgid "Press any key to back"
+msgstr "Pulse [OK] o [EXIT] para volver"
+
+msgid "Press any key to go back"
+msgstr "Pulse [OK] o [Exit] para volver"
+
+msgid "Restart CAMD after accidental closure"
+msgstr "Reiniciar CAMD después de una caida accidental"
+
+msgid "Show CCcam Info in extensions menu"
+msgstr "Mostrar CCcam Info en menú extensiones"
+
+msgid "Show OSCam Info in extensions menu"
+msgstr "Mostrar OSCam Info en menú extensiones"
+
+msgid "Show NCam Info in extensions menu"
+msgstr "Mostrar NCam Info en menú extensiones"
+
+msgid "Start Camd..."
+msgstr "Iniciando Camd..."
+
+msgid "Start Camd:"
+msgstr "Iniciando Camd:"
+
+msgid "Start/Restart"
+msgstr "[Re] Iniciar"
+
+msgid "Stop"
+msgstr "Parar"
+
+msgid "Stop Camd:"
+msgstr "Parando Camd:"
+
+msgid "URL Request error. Check internet conection."
+msgstr "Error en la URL. Verifique que está conectado a internet."
+
+msgid "View message"
+msgstr "Ver mensaje"
+
+msgid "Wait..."
+msgstr "Espere..."
+
+msgid "immediately"
+msgstr "Inmediatamente"
+
+msgid "not working"
+msgstr "no está trabajando."
+
+msgid "spazeTeam Download"
+msgstr "Descarga OpenSPA"
+
+msgid "spazeTeam Downloads"
+msgstr "Descargas OpenSPA"
+
+msgid "when a service starts"
+msgstr "Cuando se inicie un servicio"

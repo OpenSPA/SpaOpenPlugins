@@ -1,0 +1,147 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-10 16:35+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
+"Language-Team: OpenSPA <openspa.info>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "CAMD"
+msgstr "CAMD"
+
+msgid "CAMD start after boot"
+msgstr "Iniciar CAMD en engegar"
+
+msgid "COMPLETED"
+msgstr "COMPLETAT"
+
+msgid "Check every (seg)"
+msgstr "Comprovar cada (seg.)"
+
+msgid "Configuring..."
+msgstr "Configurant..."
+
+msgid "Daily AutoRestart end time"
+msgstr "Hora final de l'autoreinici diari"
+
+msgid "Daily AutoRestart start time"
+msgstr "Hora d'inici de l'autoreinici diari"
+
+msgid "Description"
+msgstr "Descripció"
+
+msgid "Do you want to install?"
+msgstr "Voleu instal·lar aquest arxiu?"
+
+msgid "Download"
+msgstr "Descarregar"
+
+msgid "Downloading"
+msgstr "Descarregant"
+
+msgid "Downloads"
+msgstr "Descàrregues"
+
+msgid "Enable Daily AutoRestart"
+msgstr "Activar autoreinici diari"
+
+msgid "Error downloading"
+msgstr "Error en la descàrrega"
+
+msgid "Error reading remote file"
+msgstr "Error en llegir l'arxiu remot"
+
+msgid "File(s)"
+msgstr "Arxiu(s)"
+
+msgid "Finish..."
+msgstr "Acabant..."
+
+msgid "Finished"
+msgstr "Instal·lació finalitzada"
+
+msgid "Home"
+msgstr "Inici"
+
+msgid "Information"
+msgstr "Informació"
+
+msgid "Installation"
+msgstr "Instal·lació"
+
+msgid "Installation Completed"
+msgstr "Instal·lació finalitzada"
+
+msgid "Installing..."
+msgstr "Instal·lant..."
+
+msgid "Nothing"
+msgstr "Cap"
+
+msgid "Press [OK] to retry"
+msgstr "Premeu [OK] per reintentar-ho"
+
+msgid "Press any key to back"
+msgstr "Premeu [OK] o [EXIT] per tornar"
+
+msgid "Press any key to go back"
+msgstr "Premeu [OK] o [Exit] per tornar"
+
+msgid "Restart CAMD after accidental closure"
+msgstr "Reiniciar CAMD després d'una caiguda accidental"
+
+msgid "Show CCcamInfo in extensions menu?"
+msgstr "Mostrar CCcamInfo al menú extensions?"
+
+msgid "Show OScamInfo in extensions menu?"
+msgstr "Mostrar OScamInfo al menú extensions?"
+
+msgid "Show NcamInfo in extensions menu?"
+msgstr "Mostrar NcamInfo al menú extensions?"
+
+msgid "Start Camd..."
+msgstr "Iniciant la camd..."
+
+msgid "Start Camd:"
+msgstr "Iniciant la camd:"
+
+msgid "Start/Restart"
+msgstr "[Re] Iniciar"
+
+msgid "Stop"
+msgstr "Aturar"
+
+msgid "Stop Camd:"
+msgstr "Aturant la camd:"
+
+msgid "URL Request error. Check internet conection."
+msgstr "Error a la URL. Verifiqueu que esteu connectat a internet."
+
+msgid "View message"
+msgstr "Veure missatge"
+
+msgid "Wait..."
+msgstr "Espereu..."
+
+msgid "immediately"
+msgstr "Inmediatament"
+
+msgid "not working"
+msgstr "no està funcionant."
+
+msgid "spazeTeam Download"
+msgstr "Descàrrega openSPA"
+
+msgid "spazeTeam Downloads"
+msgstr "Descàrregues openSPA"
+
+msgid "when a service starts"
+msgstr "Quan s'iniciï un canal"
