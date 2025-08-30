@@ -554,29 +554,44 @@ class MyTubeFeedEntry():
 		video_id = str(self.getTubeId())
 		url = 'https://www.youtube.com/watch?v=%s&gl=US&hl=en&has_verified=1&bpctr=9999999999' % video_id
 
-#		if fileExists("/usr/lib/python3.9/site-packages/youtube_dl/YoutubeDL.pyo") or fileExists("/usr/lib/python3.9/site-packages/youtube_dl/YoutubeDL.py"):
-		res=None		
+		res=None
+
 		try:
-			from youtube_dl import YoutubeDL
-			with YoutubeDL({}) as ydl:
+			import yt_dlp
+			with yt_dlp.YoutubeDL({}) as ydl:
+				ydl.cache.remove()
 				res=ydl.extract_info(url, download=False)
-		except:
-			res = ""
+		except Exception as err:
+			if "0m " in str(err):
+				err = "ERROR: " + str(err).split("0m ")[1]
+			else:
+				err = str(err)
+			return err,None
 
 		if res != None:
 			if res != "":
 				formats = res['formats']
-				last_id=10
+#				last_id=10
 				video_url=None
+				vcodec=None
+				acodec=None
+				vformat=None
+				width=0
 				for fmt in formats:
-					if str(fmt['format_id']) in VIDEO_FMT_PRIORITY_MAP:
-						if VIDEO_FMT_PRIORITY_MAP[str(fmt['format_id'])]<last_id:
-							last_id = VIDEO_FMT_PRIORITY_MAP[str(fmt['format_id'])]
-							video_url = fmt['url']
+#					if str(fmt['format_id']) in VIDEO_FMT_PRIORITY_MAP:
+#						if VIDEO_FMT_PRIORITY_MAP[str(fmt['format_id'])]<last_id:
+#							last_id = VIDEO_FMT_PRIORITY_MAP[str(fmt['format_id'])]
+#							video_url = fmt['url']
+					if fmt.get('vcodec','none') != 'none' and fmt.get('acodec','none')!= 'none' and fmt.get('width',0)>width:
+						width = fmt.get('width')
+						vcodec=fmt.get('vcodec')
+						acodec=fmt.get('acodec')
+						vformat=fmt.get('format').split("-")[1].strip() if "-" in fmt.get('format') else fmt.get('format')
+						video_url=fmt.get('url')
 				if video_url:
-					return str(video_url)
+					return video_url,vformat
 			else:
-				return "unavailable"
+				return "unavailable",None
 
 
 		# Get video webpage
@@ -1688,6 +1703,8 @@ class MyTubePlayerService():
 			self.stype = 'video'
 			self.order = config.plugins.mytube.search.orderBy.value
 
+		if self.q==None:
+			self.q = "a|e|i|o|u"
 
 		if self.feedname != "my_favorites" and self.feedname != "my_history" and self.feedname != "my_watch_later" and self.feedname != "my_uploads" and self.feedname != "my_subscriptions" and self.feedname != "my_likes":
 			request = youtube.search().list(
