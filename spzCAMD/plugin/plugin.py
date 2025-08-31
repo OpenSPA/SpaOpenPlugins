@@ -139,18 +139,20 @@ class spzCAMD(ConfigListScreen, Screen):
 			BoxInfo.setItem("ShowOscamInfo", False)
 			BoxInfo.setItem("ShowNcamInfo", False)
 			self.list.append(getConfigListEntry(_("Show CCcam Info in extensions menu"), config.cccaminfo.showInExtensions, None, None ))
-		if getSysSoftcam() in ("oscam", "ncam+", "ncam"):
+		if getSysSoftcam() in ("oscam", "ncam+", "ncam "):
 			BoxInfo.setItem("ShowCccamInfo", False)
 			if getSysSoftcam() == "oscam":
 				BoxInfo.setItem("ShowOscamInfo", True)
 				BoxInfo.setItem("ShowNcamInfo", False)
 				self.list.append(getConfigListEntry(_("Show OSCam Info in extensions menu"), config.oscaminfo.showInExtensions, None, None ))
+				config.ncaminfo.showInExtensions.value = False
+				config.oscaminfo.showInExtensions.save()
 			else:
 				BoxInfo.setItem("ShowNcamInfo", True)
 				BoxInfo.setItem("ShowOscamInfo", False)
 				self.list.append(getConfigListEntry(_("Show NCam Info in extensions menu"), config.ncaminfo.showInExtensions, None, None ))
 				config.oscaminfo.showInExtensions.value = False
-				config.oscaminfo.showInExtensions.save()
+				config.ncaminfo.showInExtensions.save()
 		if not getSysSoftcam():
 			BoxInfo.setItem("ShowOscamInfo", False)
 			BoxInfo.setItem("ShowNcamInfo", False)
