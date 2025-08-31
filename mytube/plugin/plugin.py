@@ -22,6 +22,8 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.LoadPixmap import LoadPixmap
+from Components.Label import Label
+
 
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_HDD, SCOPE_CURRENT_PLUGIN, fileExists
@@ -783,7 +785,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				if current:
 					myentry = current[0]
 					if myentry:
-						myurl = myentry.getVideoUrl()
+						myurl, vformat = myentry.getVideoUrl()
 						filename = str(config.plugins.mytube.general.videodir.value)+ ASCIItranslit.legacyEncode(str(myentry.getTitle()).strip()) + '.mp4'
 						job_manager.AddJob(downloadJob(myurl,filename, str(myentry.getTitle())[:30]))
 		elif answer == "downview":
@@ -839,7 +841,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 		if callback is not None and len(callback):
 			config.plugins.mytube.search.searchTerm.value = callback
 			ConfigListScreen.keyOK(self)
-			self["config"].getCurrent()[1].getSuggestions()
+#			self["config"].getCurrent()[1].getSuggestions()
 		current = self["config"].getCurrent()
 		if current[1].help_window.instance is not None:
 			current[1].help_window.instance.show()	
@@ -958,7 +960,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 				if myentry is not None:
 					vtype = myentry.getType()
 					if vtype == "youtube#video":
-						myurl = myentry.getVideoUrl()
+						myurl, vformat = myentry.getVideoUrl()
 						print("Playing URL",myurl)
 						if myurl is not None:
 							if myurl == "age":
@@ -967,10 +969,12 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 								self.session.open(MessageBox, _("Sorry, video is not available!"), MessageBox.TYPE_INFO)
 							elif myurl == "format":
 								self.session.open(MessageBox, _("Sorry, No supported formats found in video info!"), MessageBox.TYPE_INFO)
+							elif "ERROR" in myurl:
+								self.session.open(MessageBox, myurl, MessageBox.TYPE_INFO)
 							else:
 								myreference = eServiceReference(4097,0,myurl)
 								myreference.setName(myentry.getTitle())
-								self.session.openWithCallback(self.onPlayerClosed, MyTubePlayer, myreference, self.lastservice, infoCallback = self.showVideoInfo, nextCallback = self.getNextEntry, prevCallback = self.getPrevEntry )
+								self.session.openWithCallback(self.onPlayerClosed, MyTubePlayer, myreference, self.lastservice, infoCallback = self.showVideoInfo, nextCallback = self.getNextEntry, prevCallback = self.getPrevEntry, vformat = vformat )
 						else:
 							self.session.open(MessageBox, _("Sorry, video is not available!"), MessageBox.TYPE_INFO)
 					elif vtype == "youtube#channel":
@@ -1483,7 +1487,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			if current:
 				myentry = current[0]
 				if myentry:
-					myurl = myentry.getVideoUrl()
+					myurl, vformat = myentry.getVideoUrl()
 					if myurl is not None:
 						print("Got a URL to stream")
 						myreference = eServiceReference(4097,0,myurl)
@@ -1504,7 +1508,7 @@ class MyTubePlayerMainScreen(Screen, ConfigListScreen):
 			if current:
 				myentry = current[0]
 				if myentry:
-					myurl = myentry.getVideoUrl()
+					myurl, vformat = myentry.getVideoUrl()
 					if myurl is not None:
 						print("Got a URL to stream")
 						myreference = eServiceReference(4097,0,myurl)
@@ -1853,7 +1857,7 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 	else:
 		skin = skinMyTubePlayer
 
-	def __init__(self, session, service, lastservice, infoCallback = None, nextCallback = None, prevCallback = None):
+	def __init__(self, session, service, lastservice, infoCallback = None, nextCallback = None, prevCallback = None, vformat = None):
 		Screen.__init__(self, session)
 		InfoBarNotifications.__init__(self)
 		InfoBarSeek.__init__(self)
@@ -1864,6 +1868,10 @@ class MyTubePlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.prevCallback = prevCallback
 		self.screen_timeout = 5000
 		self.nextservice = None
+		self['format'] = Label()
+		if vformat:
+			self['format'].setText(vformat)
+
 
 		print("evEOF=%d" % iPlayableService.evEOF)
 		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =

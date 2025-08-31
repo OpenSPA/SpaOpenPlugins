@@ -107,7 +107,7 @@ class ConfigTextWithGoogleSuggestions(ConfigText):
 		self.suggestionsThread = SuggestionsQueryThread(self.suggestions, self.value, self.propagateSuggestions, self.gotSuggestionsError)
 		self.suggestionsThread.start()
 
-	def handleKey(self, key):
+	def handleKey(self, key, callback=None):
 		if not self.suggestionsListActivated:
 			ConfigText.handleKey(self, key)
 			if key in [KEY_DELETE, KEY_BACKSPACE, KEY_ASCII, KEY_TIMEOUT]:

@@ -210,6 +210,7 @@ skinMyTubeVideoHelpScreenHD = """
 skinMyTubePlayerHD = """<screen name="MyTubePlayer" flags="wfNoBorder" position="0,870" size="1921,231" title="MyTube - Player" backgroundColor="#ff000000">
  	<eLabel name="lineafondo" position="0,31" size="1921,1" backgroundColor="#00444444" zPosition="11" />
      <ePixmap position="1749,46" size="105,40" zPosition="4" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MyTube/img/youtubevHD-fs8.png" alphatest="blend" transparent="1" name="youtubelogo" />
+     <widget name="format" position="1000,150" size="854,36" font="RegularHD;20" backgroundColor="#00ffffff" foregroundColor="#00990000" transparent="1" zPosition="5" halign="right" />
      <widget source="session.CurrentService" zPosition="5" render="Label" position="160,42" size="1408,36" font="RegularHD;20" backgroundColor="#00ffffff" foregroundColor="#00990000" transparent="1">
        <convert type="ServiceName">Name</convert>
      </widget>

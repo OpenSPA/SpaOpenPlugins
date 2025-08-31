@@ -1,0 +1,149 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-10 16:35+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
+"Language-Team: openspa.info\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: /home/mpiero/Plugins/spazeMenu\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-SearchPath-0: /home/mpiero/Plugins/spazeMenu\n"
+
+msgid "CAMD"
+msgstr ""
+
+msgid "CAMD start after boot"
+msgstr ""
+
+msgid "COMPLETED"
+msgstr ""
+
+msgid "Check every (seg)"
+msgstr ""
+
+msgid "Configuring..."
+msgstr ""
+
+msgid "Daily AutoRestart end time"
+msgstr ""
+
+msgid "Daily AutoRestart start time"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Do you want to install?"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Downloading"
+msgstr ""
+
+msgid "Downloads"
+msgstr ""
+
+msgid "Enable Daily AutoRestart"
+msgstr ""
+
+msgid "Error downloading"
+msgstr ""
+
+msgid "Error reading remote file"
+msgstr ""
+
+msgid "File(s)"
+msgstr ""
+
+msgid "Finish..."
+msgstr ""
+
+msgid "Finished"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Information"
+msgstr ""
+
+msgid "Installation"
+msgstr ""
+
+msgid "Installation Completed"
+msgstr ""
+
+msgid "Installing..."
+msgstr ""
+
+msgid "Nothing"
+msgstr ""
+
+msgid "Press [OK] to retry"
+msgstr ""
+
+msgid "Press any key to back"
+msgstr ""
+
+msgid "Press any key to go back"
+msgstr ""
+
+msgid "Restart CAMD after accidental closure"
+msgstr ""
+
+msgid "Show CCcamInfo in extensions menu?"
+msgstr ""
+
+msgid "Show OScamInfo in extensions menu?"
+msgstr ""
+
+msgid "Show NcamInfo in extensions menu?"
+msgstr ""
+
+msgid "Start Camd..."
+msgstr ""
+
+msgid "Start Camd:"
+msgstr ""
+
+msgid "Start/Restart"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Stop Camd:"
+msgstr ""
+
+msgid "URL Request error. Check internet conection."
+msgstr ""
+
+msgid "View message"
+msgstr ""
+
+msgid "Wait..."
+msgstr ""
+
+msgid "immediately"
+msgstr ""
+
+msgid "not working"
+msgstr ""
+
+msgid "spazeTeam Download"
+msgstr ""
+
+msgid "spazeTeam Downloads"
+msgstr ""
+
+msgid "when a service starts"
+msgstr ""

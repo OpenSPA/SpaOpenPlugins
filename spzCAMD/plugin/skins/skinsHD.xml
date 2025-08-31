@@ -1,0 +1,17 @@
+<skin>
+<screen name="spzCAMD" position="center,center" size="870,795" title="">
+	<widget itemHeight="38" name="config" position="15,82" scrollbarMode="showOnDemand" size="802,352" font="RegularHD;18"/>
+	<ePixmap alphatest="on" name="linea" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzPlugins/spzCAMD/images/barra.png" position="15,435" size="840,9" transparent="1" zPosition="2" />
+	<widget alphatest="on" name="check" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzPlugins/spzCAMD/images/checkok.png" position="825,82" size="36,36" transparent="1" zPosition="2" />
+	<widget font="RegularHD;18" foregroundColor="#ffffff" halign="left" name="info" position="7,450" size="825,337" transparent="1" valign="center" zPosition="4" />
+	<ePixmap alphatest="on" name="red" pixmap="skin_default/buttons/red_HD.png" position="15,0" size="210,60" transparent="1" zPosition="2" />
+	<ePixmap alphatest="on" name="green" pixmap="skin_default/buttons/green_HD.png" position="225,0" size="210,60" transparent="1" zPosition="2" />
+	<ePixmap alphatest="on" name="yellow" pixmap="skin_default/buttons/yellow_HD.png" position="435,0" size="210,60" transparent="1" zPosition="2" /> 
+	<ePixmap alphatest="on" name="blue" pixmap="skin_default/buttons/blue_HD.png" position="645,0" size="210,60" transparent="1" zPosition="2" /> 
+	<widget font="RegularHD;20" foregroundColor="white" halign="center" name="key_red" position="15,0" shadowColor="#25062748" shadowOffset="-2,-2" size="210,60" transparent="1" valign="center" zPosition="4" /> 
+	<widget font="RegularHD;20" foregroundColor="white" halign="center" name="key_green" position="225,0" shadowColor="#25062748" shadowOffset="-2,-2" size="210,60" transparent="1" valign="center" zPosition="4" /> 
+	<widget font="RegularHD;20" foregroundColor="white" halign="center" name="key_yellow" position="435,0" shadowColor="#25062748" shadowOffset="-2,-2" size="210,60" transparent="1" valign="center" zPosition="4" />
+	<widget font="RegularHD;20" foregroundColor="white" halign="center" name="key_blue" position="645,0" shadowColor="background" shadowOffset="-2,-2" size="210,60" transparent="1" valign="center" zPosition="4" />
+</screen>
+</skin>
+
