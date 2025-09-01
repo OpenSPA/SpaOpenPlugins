@@ -67,16 +67,17 @@ class spzCAMD(ConfigListScreen, Screen):
 			"red": self.stop,
 			"green": self.action,
 			"yellow": self.showInfoCam,
-			# "blue": self.downloads
+			 "blue": self.downloads
 
 		}, -1)
 		self["key_red"] = StaticText("")
 		self["key_yellow"] = StaticText()
 		self["key_green"] = StaticText("")
-		# self["key_blue"] = StaticText("")
+		self["key_blue"] = StaticText("")
 		self["key_red"].setText(_("Stop") if getSysSoftcam() else "")
 		self["key_green"].setText(_("Start/Restart"))
 		self["key_yellow"].setText(_("OSCam Info") if getSysSoftcam() == "oscam" else _("NCam Info") if getSysSoftcam() in ("ncam+", "ncam") else ("CCcam Info") if getSysSoftcam() == "cccam" else "")
+		self["key_blue"].setText(_("Download"))
 		self["check"] = Pixmap()
 
 		self["info"] = Label()
@@ -369,10 +370,13 @@ class spzCAMD(ConfigListScreen, Screen):
 
 		return lastcam
 
-#	def downloads(self):
-		# self.session.openWithCallback(self.comprueba,descargasSPZ)
-#		from Plugins.Extensions.spazeMenu.spzPlugins.descargasSPZ.plugin import descargasSPZ
-#		self.session.openWithCallback(self.comprueba,descargasSPZ,categoria="10",nombrecategoria="Camd & Emulation")
+	def downloads(self):
+		try:
+			from Plugins.Extensions.spazeMenu.spzPlugins.descargasSPZ.plugin import descargasSPZ
+			self.session.openWithCallback(self.comprueba,descargasSPZ,categoria="10",nombrecategoria="Camd & Emulation")
+		except:
+			from Screens.PluginBrowser import PackageAction
+			self.session.openWithCallback(self.comprueba, PackageAction, mode=5)
 
 	def showInfoCam(self):
 		if getSysSoftcam() in ("oscam", "ncam+", "ncam"):
