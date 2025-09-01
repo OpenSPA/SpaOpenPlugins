@@ -524,26 +524,26 @@ def autostart(reason, **kwargs):
 			session = kwargs["session"]
 			tsTasker.Initialize(gSession)
 
-		if config.plugins.spzCAMD.autostart.value == "2":
-			session.screen["service"] = CurrentService(session.nav)
-			startcamd(session).connect(session.screen["service"])
-		elif config.plugins.spzCAMD.autostart.value == "1":
-			print("[spzCAMD] Started")
-			try:
-				if not fileExists("/tmp/.spzCAMD") and fileExists("/etc/.CamdStart.sh"):
-					system("sleep 2")
-					system("sh /etc/.CamdStart.sh")
-					system("echo '' > /tmp/.spzCAMD")
-			except:
-				pass
-		elif config.plugins.spzCAMD.autostart.value == "0":
-			try:
-				if not fileExists("/tmp/.spzCAMD"):
-					system("rm /etc/.CamdStart.sh")
-					system("rm /etc/.CamdReStart.sh")
-					system("rm /etc/.ActiveCamd")
-			except:
-				pass
+			if config.plugins.spzCAMD.autostart.value == "2":
+				session.screen["service"] = CurrentService(session.nav)
+				startcamd(session).connect(session.screen["service"])
+			elif config.plugins.spzCAMD.autostart.value == "1":
+				print("[spzCAMD] Started")
+				try:
+					if not fileExists("/tmp/.spzCAMD") and fileExists("/etc/.CamdStart.sh"):
+						system("sleep 2")
+						system("sh /etc/.CamdStart.sh")
+						system("echo '' > /tmp/.spzCAMD")
+				except:
+					pass
+			elif config.plugins.spzCAMD.autostart.value == "0":
+				try:
+					if not fileExists("/tmp/.spzCAMD"):
+						system("rm /etc/.CamdStart.sh")
+						system("rm /etc/.CamdReStart.sh")
+						system("rm /etc/.ActiveCamd")
+				except:
+					pass
 
 	else:
 		pass
