@@ -12,7 +12,7 @@ from Screens.Console import Console
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
 from Components.Pixmap import Pixmap
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.SystemInfo import BoxInfo, getSysSoftcam
 from Components.Label import Label
 from Tools.LoadPixmap import LoadPixmap
@@ -64,15 +64,19 @@ class spzCAMD(ConfigListScreen, Screen):
 			"cancel": self.close_w,
 			"left": self.keyleft,
 			"right": self.keyright,
-			"green": self.action,
 			"red": self.stop,
-#			"blue": self.downloads,
-			"yellow": self.ecm
+			"green": self.action,
+			"yellow": self.showInfoCam,
+			# "blue": self.downloads
+
 		}, -1)
-		self["key_green"] = Button(_("Start/Restart"))
-#		self["key_blue"] = Button(_("Download"))
-		self["key_red"] = Button(_("Stop"))
-		self["key_yellow"] = Button(_(" "))
+		self["key_red"] = StaticText("")
+		self["key_yellow"] = StaticText()
+		self["key_green"] = StaticText("")
+		# self["key_blue"] = StaticText("")
+		self["key_red"].setText(_("Stop") if getSysSoftcam() else "")
+		self["key_green"].setText(_("Start/Restart"))
+		self["key_yellow"].setText(_("OSCam Info") if getSysSoftcam() == "oscam" else _("NCam Info") if getSysSoftcam() in ("ncam+", "ncam") else ("CCcam Info") if getSysSoftcam() == "cccam" else "")
 		self["check"] = Pixmap()
 
 		self["info"] = Label()
@@ -159,6 +163,8 @@ class spzCAMD(ConfigListScreen, Screen):
 			BoxInfo.setItem("ShowCccamInfo", False)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
+		self["key_red"].setText(_("Stop") if getSysSoftcam() else "")
+		self["key_yellow"].setText(_("OSCam Info") if getSysSoftcam() == "oscam" else _("NCam Info") if getSysSoftcam() in ("ncam+", "ncam") else ("CCcam Info") if getSysSoftcam() == "cccam" else "")
 
 	def getLastIndex(self):
 		a = 0
@@ -368,6 +374,14 @@ class spzCAMD(ConfigListScreen, Screen):
 #		from Plugins.Extensions.spazeMenu.spzPlugins.descargasSPZ.plugin import descargasSPZ
 #		self.session.openWithCallback(self.comprueba,descargasSPZ,categoria="10",nombrecategoria="Camd & Emulation")
 
+	def showInfoCam(self):
+		if getSysSoftcam() in ("oscam", "ncam+", "ncam"):
+			from Screens.OScamInfo import OSCamInfo
+			self.session.open(OSCamInfo)
+		elif getSysSoftcam() == "cccam":
+			from Screens.CCcamInfo import CCcamInfoMain
+			self.session.open(CCcamInfoMain)
+
 	def comprueba(self, retval=True):
 		if retval:
 			self.readScripts()
@@ -544,7 +558,6 @@ def autostart(reason, **kwargs):
 						system("rm /etc/.ActiveCamd")
 				except:
 					pass
-
 	else:
 		pass
 
