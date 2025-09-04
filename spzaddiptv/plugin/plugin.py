@@ -363,8 +363,9 @@ class spzAddIPTV(Screen):
 		Screen.__init__(self, session)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Append"))
+		self["key_yellow"] = StaticText("")		
 		if fileExists(FILE_M3U):
-			self["key_yellow"] = StaticText(_("From file"))
+			self["key_yellow"].setText(_("From file"))
 		self["key_blue"] = StaticText(_("New bouquet"))
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
