@@ -197,7 +197,7 @@ class downloads(Screen):
 		events = None
 		import NavigationInstance
 		ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
-		events = epgcache.lookupEvent(['IBDCTSERNX', (ref, 1, -1, -1)])
+		events = epgcache.lookupEvent(['RIBDTW', (ref, 1, -1, -1)])
 		if events:
 			try:
 				n = config.plugins.xtraEvent.searchNUMBER.value
@@ -226,7 +226,7 @@ class downloads(Screen):
 			for i in range(nl):
 				ref = refs[i]
 				try:
-					events = epgcache.lookupEvent(['IBDCTSERNX', (ref, 1, -1, -1)])
+					events = epgcache.lookupEvent(['RIBDTW', (ref, 1, -1, -1)])
 					n = config.plugins.xtraEvent.searchNUMBER.value
 					for i in range(int(n)):
 						title = events[i][4]

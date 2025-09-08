@@ -395,7 +395,7 @@ class xtra(Screen, ConfigListScreen):
 			list.append(getConfigListEntry(" ▀ {}".format(lng.get(lang, '28'))))
 			list.append(getConfigListEntry("_"*100))
 	# poster__________________________________________________________________________________________________________________
-			list.append(getConfigListEntry("POSTER", config.plugins.xtraEvent.poster, _("...")))
+			list.append(getConfigListEntry("POSTER", config.plugins.xtraEvent.poster, _("...") if config.skin.primary_skin.value != "OctEtFHD/skin.xml" else _(lng.get(lang, '76'))))
 			if config.plugins.xtraEvent.poster.value == True:
 				list.append(getConfigListEntry("\tTMDB", config.plugins.xtraEvent.tmdb, _(" "),))
 				if config.plugins.xtraEvent.tmdb.value :

@@ -76,6 +76,7 @@
 73 = Delete All Pictures
 74 = All Pictures Deleted!.
 75 = Update
+76 = Enable POSTER and BACKDROP with TMDB, along with Search Type to MOVIE.\nThis will give you covers on this skin.
 
 [tr]
 0 = Açık/Kapalı
@@ -155,6 +156,7 @@
 73 = Tüm Resimleri Sil
 74 = Tüm Resimler Silindi !..
 75 = Güncelle
+76 = POSTER ve BACKDROP'u TMDB ile etkinleştirin ve Arama Türünü MOVIE olarak ayarlayın.\nBu size bu ciltte kapaklar verecektir.
 
 [ru]
 0 = Включение плагина
@@ -234,6 +236,7 @@
 73 = Удалить все картинки
 74 = Все картинки удалены!
 75 = Обновить
+76 = Включить ПОСТЕР и ЗАДНИЕ ФОНА с TMDB, а также тип поиска ФИЛЬМ.\nЭто даст вам обложки для этого скина.
 
 [ar]
 0 = إيقاف البرنامج المساعد
@@ -313,6 +316,7 @@
 73 = حذف كل الصور
 74 = تم حذف كل الصور !.
 75 = تحديث
+76 = قم بتمكين POSTER وBACKDROP باستخدام TMDB، إلى جانب نوع البحث إلى MOVIE.\nسيؤدي هذا إلى توفير أغلفة لهذا الجلد.
 
 [de]
 0 = ein/aus
@@ -392,6 +396,7 @@
 73 = Alle Bilder löschen
 74 = Alle Bilder gelöscht!.
 75 = Aktualisieren
+76 = Aktivieren Sie POSTER und BACKDROP mit TMDB, zusammen mit dem Suchtyp MOVIE.\nDadurch erhalten Sie Cover für dieses Skin.
 
 [fr]
 0 = Marche/Arrêt
@@ -471,6 +476,7 @@
 73 = Supprimer toutes les images
 74 = Toutes les images supprimées !.
 75 = Mise à jour
+76 = Activez POSTER et BACKDROP avec TMDB, ainsi que le type de recherche sur MOVIE.\nCela vous donnera des couvertures sur ce skin.
 
 [es]
 0 = Encendido / Apagado
@@ -550,6 +556,7 @@
 73 = Eliminar todas las imágenes
 74 = ¡Todas las imágenes borradas !.
 75 = Actualizar
+76 = Habilita POSTER y BACKDROP con TMDB, junto con Tipo de búsqueda a MOVIE.\nAsí tendrá carátulas en este skin.
 
 [it]
 0 = On/Off
@@ -629,6 +636,7 @@
 73 = Elimina tutte le immagini
 74 = Tutte le immagini eliminate!.
 75 = Aggiorna
+76 = Abilita POSTER e SFONDO con TMDB, insieme al tipo di ricerca su FILM.\nQuesto ti fornirà le copertine per questa skin.
 
 [pt]
 0 = Ligado / Desligado
@@ -708,6 +716,7 @@
 73 = Excluir todas as imagens
 74 = Todas as imagens excluídas !.
 75 = Atualizar
+76 = Active POSTER e BACKDROP com TMDB, juntamente com Search Type para MOVIE.\nIsto dar-lhe-á capas para esta skin.
 
 [pl]
 0 = wł./wył.
@@ -787,6 +796,7 @@
 73 = Usuń wszystkie zdjęcia
 74 = Wszystkie zdjęcia usunięte!.
 75 = Aktualizacja
+76 = Włącz opcję POSTER i BACKDROP w TMDB, a także wybierz opcję Search Type jako MOVIE (Film).\nSpowoduje to wyświetlenie okładek dla tej skórki.
 
 [el]
 0 = On/Off
@@ -866,3 +876,4 @@
 73 = Διαγραφή όλων των εικόνων
 74 = Όλες οι εικόνες διαγράφηκαν!.
 75 = Ενημέρωση
+76 = Ενεργοποιήστε το POSTER και το BACKDROP με το TMDB, μαζί με τον τύπο αναζήτησης για ΤΑΙΝΙΑ.\nΑυτό θα σας δώσει καλύμματα σε αυτό το skin.
