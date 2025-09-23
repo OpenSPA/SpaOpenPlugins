@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 16:27+0430\n"
+"PO-Revision-Date: 2019-07-23 17:34+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Add"
+msgstr "Añadir"
+
+msgid "Back"
+msgstr "Atrás"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "City"
+msgstr "Ciudad"
+
+msgid "City or Postal Code"
+msgstr "Ciudad o código postal"
+
+#, python-format
+msgid "Current: %s"
+msgstr "Actual: %s"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "DNS lookup failed: weather.service.msn.com."
+msgstr "Error en la búsqueda de DNS: weather.service.msn.com."
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Edit Locality"
+msgstr "Editar Localidad"
+
+msgid "Feels like %s"
+msgstr "Sensación térmica %s"
+
+msgid "Getting weather information..."
+msgstr "Obteniendo información meteorológica..."
+
+msgid "Humidity: %s %%"
+msgstr "Humedad: %s %%"
+
+msgid "imperial system"
+msgstr "sistema imperial"
+
+msgid "Language"
+msgstr "Lenguaje"
+
+msgid "List of Localities"
+msgstr "Lista de Localidades"
+
+msgid "Location code"
+msgstr "Código de ubicación"
+
+msgid "Maxima"
+msgstr "Máxima"
+
+msgid "metric system"
+msgstr "sistema métrico"
+
+msgid "Minimum"
+msgstr "Mínima"
+
+msgid "Location search result"
+msgstr "Resultado de la búsqueda de ubicación"
+
+msgid "No locations defined...\nPress 'Menu' to do that."
+msgstr "No hay ubicaciones definidas...\nPulse 'Menú' para hacerlo."
+
+msgid "Observation time: %s"
+msgstr "Hora observación: %s"
+
+msgid "Observation point: %s"
+msgstr "Punto observación: %s"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Please enter a valid city name."
+msgstr "Ingrese un nombre de ciudad válido."
+
+msgid "Please enter a valid location code for the city."
+msgstr "Ingrese un código de ubicación válido para la ciudad."
+
+msgid "Really delete this locality?"
+msgstr "¿Quieres eliminar esta localidad?"
+
+msgid "Show Weather Forecast"
+msgstr "Mostrar pronóstico del tiempo"
+
+msgid "Search Code"
+msgstr "Buscar Código"
+
+msgid "System"
+msgstr "Sistema"
+
+msgid "User timeout caused connection failure."
+msgstr "El tiempo de espera del usuario provocó un error en la conexión."
+
+msgid "Weather Plugin"
+msgstr "Weather Plugin"
+
+msgid "Weather Report"
+msgstr "Informe Meteorológico"
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr "Debe ingresar un nombre de ciudad válido antes de poder buscar el código de ubicación."
+
+msgid "1. Press TEXT to enter your location.\n2. Press YELLOW to find your code.\n3. Press GREEN twice until finished."
+msgstr "1. Pulse TEXT para escribir su localidad.\n2. Pulse AMARILLO para encontrar su código.\n3. Pulse VERDE dos veces hasta finalizar."

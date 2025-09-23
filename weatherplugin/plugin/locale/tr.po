@@ -1,0 +1,107 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Hasan Kiran <sunder67@hotmail.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"PO-Revision-Date: 2015-10-18 10:16+0300\n"
+"Last-Translator: Hasan Kiran <Sunder67@hotmail.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Add"
+msgstr "Ekle"
+
+msgid "Back"
+msgstr "Geri"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "City"
+msgstr "Şehir"
+
+msgid "Delete"
+msgstr "Sil"
+
+msgid "Edit"
+msgstr "Düzenle"
+
+#, python-format
+msgid "Feels like %s"
+msgstr "%s hissediliyor"
+
+msgid "Getting weather information..."
+msgstr "Hava durumu bilgileri alınıyor..."
+
+#, python-format
+msgid "Humidity: %s %%"
+msgstr "Nem: %% %s"
+
+msgid "Location code"
+msgstr "Konum kodu"
+
+msgid "MSN location search result"
+msgstr "MSN konum arama sonucu"
+
+msgid ""
+"No locations defined...\n"
+"Press 'Menu' to do that."
+msgstr ""
+"Konum tanımlanmadı...\n"
+"Bunu yapmak için 'Menü'ye basın."
+
+msgid "OK"
+msgstr "TAMAM"
+
+#, python-format
+msgid "Observation point: %s"
+msgstr "Gözlem noktası: %s"
+
+#, python-format
+msgid "Observation time: %s"
+msgstr "Gözlem zamanı: %s"
+
+msgid "Please enter a valid city name."
+msgstr "Geçerli bir şehir adı girin."
+
+msgid "Please enter a valid location code for the city."
+msgstr "Şehir için geçerli bir konum kodunu girin."
+
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Hava durumu eklenti girişlerini gerçekten silmek istiyor musun?"
+
+msgid "Search Code"
+msgstr "Arama Kodu"
+
+msgid "Show Weather Forecast"
+msgstr "Hava Durumunu Göster"
+
+msgid "System"
+msgstr "Sistem"
+
+msgid "Weather Plugin"
+msgstr "Hava Durumu Eklentisi"
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr "Hava Durumu Eklentisi: Girişi Düzenle"
+
+msgid "WeatherPlugin: List of Entries"
+msgstr "Hava Durumu Eklentisi: Girişlerin Listesi"
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr ""
+
+msgid "imperial system"
+msgstr "emperyalist sistem"
+
+msgid "metric system"
+msgstr "metrik sistem"

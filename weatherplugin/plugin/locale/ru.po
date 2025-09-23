@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:06+0430\n"
+"PO-Revision-Date: \n"
+"Last-Translator: litvcom\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Add"
+msgstr "Добавить"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "City"
+msgstr "Город"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Edit"
+msgstr "Изменить"
+
+#, python-format
+msgid "Feels like %s"
+msgstr "Ощущается как %s"
+
+msgid "Getting weather information..."
+msgstr "Получение информации о погоде..."
+
+#, python-format
+msgid "Humidity: %s %%"
+msgstr "Влажность: %% %s"
+
+msgid "Location code"
+msgstr "Код местоположения"
+
+msgid "MSN location search result"
+msgstr "Результаты поиска местоположения"
+
+msgid ""
+"No locations defined...\n"
+"Press 'Menu' to do that."
+msgstr ""
+"Местоположение не определено...\n"
+"Нажмите 'Menu', чтобы сделать это."
+
+msgid "OK"
+msgstr "OK"
+
+#, python-format
+msgid "Observation point: %s"
+msgstr "Пункт: %s"
+
+#, python-format
+msgid "Observation time: %s"
+msgstr "Время наблюдения: %s"
+
+msgid "Please enter a valid city name."
+msgstr "Введите правильное название города."
+
+msgid "Please enter a valid location code for the city."
+msgstr "Введите правильный код местоположения."
+
+msgid "Really delete this WeatherPlugin Entry?"
+msgstr "Действительно удалить эту запись?"
+
+msgid "Search Code"
+msgstr "Поиск кода"
+
+msgid "Show Weather Forecast"
+msgstr "Показать прогноз погоды"
+
+msgid "System"
+msgstr "Система"
+
+msgid "Weather Plugin"
+msgstr "Плагин погоды"
+
+msgid "WeatherPlugin: Edit Entry"
+msgstr "Изменить запись"
+
+msgid "WeatherPlugin: List of Entries"
+msgstr "Список записей"
+
+msgid "You need to enter a valid city name before you can search for the location code."
+msgstr "Прежде чем найти код местонахождения, необходимо ввести действительное название города."
+
+msgid "imperial system"
+msgstr "английская система"
+
+msgid "metric system"
+msgstr "метрическая система"
