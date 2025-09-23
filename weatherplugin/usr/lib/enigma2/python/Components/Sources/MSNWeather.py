@@ -21,8 +21,10 @@
 #
 
 import time
+from glob import glob
 from Components.Sources.Source import Source
 from Components.WeatherMSN import weathermsn
+from Components.config import config
 
 
 class MSNWeather(Source):
@@ -39,7 +41,10 @@ class MSNWeather(Source):
 		if weathermsn.weatherData.city:
 			return weathermsn.weatherData.city
 		else:
-			return _("Weather Report") + " " + _("Not configured")
+			try:
+				return _("Weather Report") + " " + _("Not configured") if glob(config.plugins.xtraEvent.loc.value + 'xtraEvent/poster/*.jpg*') else _("Weather Report") + " " + _("Not configured") + "\n" + _("Posters") + " " + _("Not configured") + " (xtraEvent)"
+			except Exception:
+				pass
 
 	def getObservationPoint(self):
 		skey = "-1"

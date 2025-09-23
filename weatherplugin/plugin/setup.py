@@ -21,6 +21,8 @@
 #
 
 # for localized messages
+from . import _
+
 from enigma import eListboxPythonMultiContent, getDesktop, gFont, RT_HALIGN_LEFT, \
 	RT_VALIGN_CENTER
 from Screens.Screen import Screen

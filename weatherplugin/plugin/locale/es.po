@@ -98,7 +98,7 @@ msgid "Please enter a valid city name."
 msgstr "Ingrese un nombre de ciudad válido."
 
 msgid "Please enter a valid location code for the city."
-msgstr "Ingrese un código de ubicación válido para la ciudad."
+msgstr "Ingrese un código de ubicación válido para la ciudad.\nPulse AMARILLO \"Buscar Código\"."
 
 msgid "Really delete this locality?"
 msgstr "¿Quieres eliminar esta localidad?"
