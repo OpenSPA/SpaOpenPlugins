@@ -42,7 +42,7 @@ class MSNWeather(Source):
 			return weathermsn.weatherData.city
 		else:
 			try:
-				return _("Weather Report") + " " + _("Not configured") if glob(config.plugins.xtraEvent.loc.value + 'xtraEvent/poster/*.jpg*') else _("Weather Report") + " " + _("Not configured") + "\n" + _("Posters") + " " + _("Not configured") + " (xtraEvent)"
+				return _("Weather Report") + " " + _("Not configured") if glob(str(config.plugins.xtraEvent.loc.value) + 'xtraEvent/poster/*.jpg*') else _("Weather Report") + " " + _("Not configured") + "\n" + _("Posters") + " " + _("Not configured") + " (xtraEvent)"
 			except Exception:
 				pass
 
