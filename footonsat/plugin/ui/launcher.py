@@ -75,7 +75,8 @@ class FootOnsatLauncher(Screen):
 		self.onLayoutFinish.append(self.callAPI)
 
 	def callAPI(self):
-		url = 'https://raw.githubusercontent.com/zKhadiri/footonsat-api/main/api.json'
+#		url = 'https://raw.githubusercontent.com/zKhadiri/footonsat-api/main/api.json'
+		url = 'https://raw.githubusercontent.com/fairbird/footonsat-api/main/api.json'
 		sniFactory = WebClientContextFactory(url)
 		getPage(str.encode(url), contextFactory=sniFactory).addCallback(self.getData).addErrback(self.error)
 

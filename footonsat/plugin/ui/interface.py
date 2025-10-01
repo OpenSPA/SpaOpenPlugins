@@ -324,7 +324,8 @@ class FootOnSat(Screen):
 		return resolveFilename(SCOPE_PLUGINS, "Extensions/FootOnSat/assets/compet/default/FHD/{}.png".format(banner))
 
 	def callAPI(self):
-		url = 'https://raw.githubusercontent.com/zKhadiri/footonsat-api/main/{}.json'.format(self.link)
+#		url = 'https://raw.githubusercontent.com/zKhadiri/footonsat-api/main/{}.json'.format(self.link)
+		url = 'https://raw.githubusercontent.com/fairbird/footonsat-api/main/{}.json'.format(self.link)
 		sniFactory = WebClientContextFactory(url)
 		getPage(str.encode(url), contextFactory=sniFactory).addCallback(self.getData).addErrback(self.error)
 
