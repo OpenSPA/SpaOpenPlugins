@@ -23,7 +23,7 @@ from Components.config import config
 from Screens.MessageBox import MessageBox
 from time import localtime, sleep, strftime, time
 from Screens import Standby
-from os import system, popen
+from os import popen
 from Screens.Console import Console
 from Tools.Directories import fileExists
 
@@ -120,7 +120,7 @@ class timerScriptTasker:
 
 	def ejecuta(self):
 		if fileExists("/etc/.CamdReStart.sh") is True :
-			system("sh /etc/.CamdReStart.sh")
+			eConsoleAppContainer().execute("sh /etc/.CamdReStart.sh")
 			cam = config.plugins.spzCAMD.camd.value
 			self.session.openWithCallback(self.callback, MessageBox, _("Restart Camd: "+cam+"..."), type = 1, timeout = 9)
 
@@ -168,7 +168,7 @@ class timerScriptTasker:
 					caido = True
 
 			if caido:
-				system("sh /etc/.CamdReStart.sh")
+				eConsoleAppContainer().execute("sh /etc/.CamdReStart.sh")
 				try:
 					clist = open("/etc/.ActiveCamd", "r")
 				except:

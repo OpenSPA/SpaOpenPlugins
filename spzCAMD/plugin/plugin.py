@@ -17,10 +17,10 @@ from Components.SystemInfo import BoxInfo, getSysSoftcam
 from Components.Label import Label
 from Tools.LoadPixmap import LoadPixmap
 
-from enigma import eTimer
+from enigma import eTimer, eConsoleAppContainer
 from Tools.Directories import fileExists
 from .prog import tsTasker
-from os import listdir, system, walk, path as os_path, popen
+from os import listdir, walk, path as os_path, popen
 from Components.Element import Element
 from Components.Sources.CurrentService import CurrentService
 
@@ -206,9 +206,9 @@ class spzCAMD(ConfigListScreen, Screen):
 				self.cmd3 = "sh /usr/script/" + self.sclist[var] + " stop"
 				cmdcam.write(self.cmd1)
 				cmdcam.close()
-				system("chmod 755 /etc/Camdcmd.sh &")
-				system("sleep 1")
-				system("sh /etc/Camdcmd.sh")
+				eConsoleAppContainer().execute("chmod 755 /etc/Camdcmd.sh &")
+				eConsoleAppContainer().execute("sleep 1")
+				eConsoleAppContainer().execute("sh /etc/Camdcmd.sh")
 				self.session.openWithCallback(self.callback, MessageBox, _("Stop Camd:") + " " + str(self.namelist[last][0]) + "\n" + _("Start Camd:") + " " + str(self.namelist[var][0]), type = MessageBox.TYPE_INFO, timeout = 8)
 			else:
 				try:
@@ -217,15 +217,15 @@ class spzCAMD(ConfigListScreen, Screen):
 					cmdcam = open("/etc/Camdcmd.sh", "w")
 					cmdcam.write("#!/bin/sh\n" + self.cmd1)
 					cmdcam.close()
-					system("chmod 755 /etc/Camdcmd.sh &")
-					system("sleep 1")
-					system("sh /etc/Camdcmd.sh")
+					eConsoleAppContainer().execute("chmod 755 /etc/Camdcmd.sh &")
+					eConsoleAppContainer().execute("sleep 1")
+					eConsoleAppContainer().execute("sh /etc/Camdcmd.sh")
 					self.session.openWithCallback(self.callback, MessageBox, _("Start Camd:") + " " + str(self.namelist[var][0]), type = MessageBox.TYPE_INFO, timeout = 8)
 				except:
 					self.close()
 
 			if fileExists("/etc/Camdcmd.sh") is True :
-				system("rm \"/etc/Camdcmd.sh\"")
+				eConsoleAppContainer().execute("rm \"/etc/Camdcmd.sh\"")
 
 			if last != var:
 				try:
@@ -270,14 +270,14 @@ class spzCAMD(ConfigListScreen, Screen):
 		rstcam = open("/etc/.CamdReStart.sh", "w")
 		rstcam.write("#!/bin/sh\n" + self.cmd3 + "\nsleep 2\n" + self.cmd1)
 		rstcam.close()
-		system("chmod 755 /etc/.CamdReStart.sh")
+		eConsoleAppContainer().execute("chmod 755 /etc/.CamdReStart.sh")
 
 		stcam = open("/etc/.CamdStart.sh", "w")
 		stcam.write("#!/bin/sh\n" + self.cmd1)
 		stcam.close()
-		system("chmod 755 /etc/.CamdStart.sh")
+		eConsoleAppContainer().execute("chmod 755 /etc/.CamdStart.sh")
 		if not fileExists("/tmp/.spzCAMD"):
-			system("echo '' > /tmp/.spzCAMD")
+			eConsoleAppContainer().execute("echo '' > /tmp/.spzCAMD")
 
 	def stop(self):
 		last = self.getLastIndex()
@@ -285,18 +285,18 @@ class spzCAMD(ConfigListScreen, Screen):
 		if last > -1:
 			self.session.nav.playService(None)
 			self.cmd1 = "/usr/script/" + self.sclist[last] + " stop"
-			system(self.cmd1)
+			eConsoleAppContainer().execute(self.cmd1)
 			self.session.openWithCallback(self.callback, MessageBox, _("Stop Camd:") + " " + str(self.namelist[last][0]), type = MessageBox.TYPE_INFO, timeout = 8)
 		else:
 			return
 
 		try:
-			system("rm /etc/.CamdStart.sh")
-			system("rm /etc/.CamdReStart.sh")
-			system("rm /etc/.ActiveCamd")
+			eConsoleAppContainer().execute("rm /etc/.CamdStart.sh")
+			eConsoleAppContainer().execute("rm /etc/.CamdReStart.sh")
+			eConsoleAppContainer().execute("rm /etc/.ActiveCamd")
 		except:
 			pass
-		system("sleep 4")
+		eConsoleAppContainer().execute("sleep 4")
 		self.TimerTemp.stop()
 		self["info"].setText(" ")
 		self.session.nav.playService(self.oldService)
@@ -314,7 +314,7 @@ class spzCAMD(ConfigListScreen, Screen):
 		nliste = []
 		path = "/usr/script/"
 		if not os_path.exists(path):
-			system("mkdir " + str(path))
+			eConsoleAppContainer().execute("mkdir " + str(path))
 
 		for root, dirs, files in walk(path):
 			for name in files:
@@ -467,8 +467,8 @@ class spzCAMD(ConfigListScreen, Screen):
 			icount = icount+1
 		myfile.close()
 		myfile2.close()
-		system("rm /etc/autocam.txt")
-		system("cp /etc/autocam2.txt /etc/autocam.txt")
+		eConsoleAppContainer().execute("rm /etc/autocam.txt")
+		eConsoleAppContainer().execute("cp /etc/autocam2.txt /etc/autocam.txt")
 
 class startcamd(Element):
 	def __init__(self,session):
@@ -500,8 +500,8 @@ class startcamd(Element):
 					lastcam = line
 				clist.close()
 
-			system("sh /etc/.CamdStart.sh")
-			system("echo '' > /tmp/.spzCAMD")
+			eConsoleAppContainer().execute("sh /etc/.CamdStart.sh")
+			eConsoleAppContainer().execute("echo '' > /tmp/.spzCAMD")
 			self.timer.stop()
 
 ###################################
@@ -549,17 +549,17 @@ def autostart(reason, **kwargs):
 				print("[spzCAMD] Started")
 				try:
 					if not fileExists("/tmp/.spzCAMD") and fileExists("/etc/.CamdStart.sh"):
-						system("sleep 2")
-						system("sh /etc/.CamdStart.sh")
-						system("echo '' > /tmp/.spzCAMD")
+						eConsoleAppContainer().execute("sleep 2")
+						eConsoleAppContainer().execute("sh /etc/.CamdStart.sh")
+						eConsoleAppContainer().execute("echo '' > /tmp/.spzCAMD")
 				except:
 					pass
 			elif config.plugins.spzCAMD.autostart.value == "0":
 				try:
 					if not fileExists("/tmp/.spzCAMD"):
-						system("rm /etc/.CamdStart.sh")
-						system("rm /etc/.CamdReStart.sh")
-						system("rm /etc/.ActiveCamd")
+						eConsoleAppContainer().execute("rm /etc/.CamdStart.sh")
+						eConsoleAppContainer().execute("rm /etc/.CamdReStart.sh")
+						eConsoleAppContainer().execute("rm /etc/.ActiveCamd")
 				except:
 					pass
 	else:
