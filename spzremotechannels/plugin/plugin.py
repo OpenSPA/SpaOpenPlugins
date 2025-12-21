@@ -346,7 +346,7 @@ class StreamingChannelFromServerScreen(Screen):
 			self.readBouquetList(list, '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.radio" ORDER BY bouquet')
 		if len(list) > 0:
 			for x in list:
-				if item in x:
+				if item in x and not ".del" in x:
 					return True
 		return False
 
@@ -375,7 +375,7 @@ class StreamingChannelFromServerScreen(Screen):
 
 			line = "%s|%d|%s|%s|%d|%s|%d|%d" % (ip,port,user,password,auth,stype,streamport,streamaut)
 
-			if not self.checkBouquetAllreadyInList(bouquet,".tv"):
+			if not self.checkBouquetAllreadyInList(".tv", bouquet):
 				addBouquet(bouquet, name)
 
 			createBouquetFile(bouquet, name, line, [])
