@@ -124,12 +124,12 @@ class TailscaleNetwork(Screen):
 
 		self['list'].onSelectionChanged.append(self.selectionChanged)
 		self.onLayoutFinish.append(self.layoutFinished)
-		if os.path.exists('/etc/keys/tailscale_api.key'):
+		if fileContains('/etc/keys/tailscale_api.key', 'tskey-api'):
 			with open('/etc/keys/tailscale_api.key', 'r') as fd:
 				for line in fd.readlines():
-					if 'tskey-api' in line:
+					if 'tskey-api' in line and ' ' in line or 'tskey-api' in line and '\n' in line:
 						with open('/etc/keys/tailscale_api.key', 'w') as fw:
-							fw.write(line.replace('\n', '').replace('   ', '').replace('  ', '').replace(' ', ''))
+							fw.write(line.replace('\n', '').split(' ', 1)[0] if ' ' in line else line.replace('\n', ''))
 
 	def layoutFinished(self):
 		self.UpdateTitle()
