@@ -124,6 +124,12 @@ class TailscaleNetwork(Screen):
 
 		self['list'].onSelectionChanged.append(self.selectionChanged)
 		self.onLayoutFinish.append(self.layoutFinished)
+		if os.path.exists('/etc/keys/tailscale_api.key'):
+			with open('/etc/keys/tailscale_api.key', 'r') as fd:
+				for line in fd.readlines():
+					if 'tskey-api' in line:
+						with open('/etc/keys/tailscale_api.key', 'w') as fw:
+							fw.write(line.replace('\n', '').replace('   ', '').replace('  ', '').replace(' ', ''))
 
 	def layoutFinished(self):
 		self.UpdateTitle()
@@ -236,8 +242,8 @@ class TailscaleNetwork(Screen):
 				for device in devices:
 					devicelist.append((device['hostname'], device['addresses'][0], device['clientVersion'].split('-')[0]))
 				self.session.open(Tailscaleuser, devicelist)
-			except:
-				self.session.open(MessageBox, _('Could not get the list of devices on your network.\n\nTo display the devices in your Tailscale network you must:\n1. Delete if an old key exists in your Tailscale web session\n2. Click in \"Generate access token\" in your Tailscale web session\n3. Enter your generated key in /etc/keys/tailscale_api.key\n4. NOTE: If you still see this message after following these steps, delete the current API key from your token and generate a new one.'), MessageBox.TYPE_INFO, simple=True)
+			except Exception:
+				self.session.open(MessageBox, _('Could not get the list of devices on your network.\n\nTo display the devices in your Tailscale network you must:\n1. Delete if an old key exists in your Tailscale web session\n2. Click in \"Generate access token\" in your Tailscale web session\n3. Enter your generated key in /etc/keys/tailscale_api.key.'), MessageBox.TYPE_INFO, simple=True)
 
 	def keyBlue(self):
 		p = process.ProcessList()
@@ -249,20 +255,26 @@ class TailscaleNetwork(Screen):
 		self.UpdateTimer.start(5000, True)
 
 	def get_devices(self):
-		self.api_key = open('/etc/keys/tailscale_api.key','r').read().replace("\n","")
-		self.base_url = 'https://api.tailscale.com/api/v2'
-		self._auth = HTTPBasicAuth(self.api_key, '')
-		self._headers = {
-			'Accept':'application/json'
-		}
-		p = process.ProcessList()
-		tailscale_process = str(p.named('tailscaled')).strip('[]')
-		if tailscale_process:
-			networks = json.loads(getData())
-			self.tailnet = networks.get("CurrentTailnet")['Name']
-			url = f'{self.base_url}/tailnet/{self.tailnet}/devices'
-			response = requests.get(url, auth=self._auth)
-			return response
+		tskey_api = None
+		if fileContains('/etc/keys/tailscale_api.key', 'tskey-api'):
+			with open('/etc/keys/tailscale_api.key', 'r') as fd:
+				for line in fd.readlines():
+					if "tskey-api" in line:
+						tskey_api = line
+		if tskey_api:
+			self.base_url = 'https://api.tailscale.com/api/v2'
+			self._auth = HTTPBasicAuth(tskey_api , 'password')
+			self._headers = {
+				'Accept':'application/json'
+			}
+			p = process.ProcessList()
+			tailscale_process = str(p.named('tailscaled')).strip('[]')
+			if tailscale_process:
+				networks = json.loads(getData())
+				self.tailnet = networks.get("CurrentTailnet")['Name']
+				url = f'{self.base_url}/tailnet/{self.tailnet}/devices'
+				response = requests.get(url, auth=self._auth)
+				return response
 		return ""
 
 class Tailscaleuser(Screen):
