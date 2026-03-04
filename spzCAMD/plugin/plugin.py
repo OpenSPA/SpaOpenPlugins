@@ -23,7 +23,6 @@ from .prog import tsTasker
 from os import listdir, walk, path as os_path, popen
 from Components.Element import Element
 from Components.Sources.CurrentService import CurrentService
-from process import ProcessList
 
 # Configuration
 from Components.ConfigList import ConfigListScreen
@@ -46,24 +45,22 @@ config.plugins.spzCAMD.oscaminfo = ConfigYesNo(default = False)
 config.plugins.spzCAMD.ncaminfo = ConfigYesNo(default = False)
 
 session = None
+camdbin = None
+catpmtserver = False
 
 
 def restartUIWithSoftCSA():
-	catpmtserver = False
-	camdbin = ""
+	global camdbin, catpmtserver
 	for camdconfigfolder in [x for x in listdir('/etc/tuxbox/config') if getSysSoftcam() in x]:
-		for binary in [x for x in listdir('/usr/bin') if getSysSoftcam() in x]:
-			camdbin = binary
 		for camdconffile in [x for x in listdir('/etc/tuxbox/config/' + camdconfigfolder) if ".conf" in x and ".conf.bak" not in x]:
 			with open('/etc/tuxbox/config/' + camdconfigfolder + "/" + camdconffile, "r") as file:
 				for line in file.readlines():
-					if "pmt" in line and "6" in line:
+					if "pmt_mode" in line and "6" in line:
 						catpmtserver = True
 						break
-	camd = str(ProcessList().named(camdbin)).strip("[]")
-	if camd and catpmtserver is True:
-		createspzCAMD = ' ; echo '' > /tmp/.spzCAMD' if not fileExists("/tmp/.spzCAMD") else ""
-		eConsoleAppContainer().execute(f'killall -9 {camdbin} ; sleep 2 ; sh /etc/.CamdStart.sh' + createspzCAMD)
+	for binary in [x for x in listdir('/usr/bin') if getSysSoftcam() in x or "CCcam" in x]:
+		camdbin = binary
+		break
 
 
 class spzCAMD(ConfigListScreen, Screen):
@@ -502,11 +499,14 @@ class startcamd(Element):
 			service = self.source.service
 			serviceref = self.source.serviceref
 			if serviceref is not None and service is not None and not fileExists("/tmp/.spzCAMD") and fileExists("/etc/.CamdStart.sh"):
-				self.timer.start(2000, True) #temporizacion de 2 segundos
+				self.timer.start(2000, True)  # temporizacion de 2 segundos
+			elif serviceref is not None and service is not None and fileExists("/etc/.CamdStart.sh"):
+				self.timer.start(2000, True)  # chequee camd.
 		except:
 			pass
 
 	def poll(self):
+		global camdbin
 		if fileExists("/etc/.ActiveCamd"):
 			print("[spzCAMD] Started")
 			try:
@@ -519,10 +519,13 @@ class startcamd(Element):
 				for line in clist:
 					lastcam = line
 				clist.close()
-
-			eConsoleAppContainer().execute("sh /etc/.CamdStart.sh")
-			eConsoleAppContainer().execute("echo '' > /tmp/.spzCAMD")
-			self.timer.stop()
+			if not fileExists("/tmp/.spzCAMD"):
+				eConsoleAppContainer().execute("sh /etc/.CamdStart.sh")
+				eConsoleAppContainer().execute("echo '' > /tmp/.spzCAMD")
+				self.timer.stop()
+			elif not fileExists("/tmp/ecm.info"):  # chequee camd.
+				eConsoleAppContainer().execute(f'killall -9 {camdbin} ; sh /etc/.CamdStart.sh')
+				self.timer.stop()
 
 ###################################
 ###################################
@@ -554,7 +557,7 @@ def autostart(reason, **kwargs):
 			sfile.close()
 			if nambin != "":
 				open("/etc/.BinCamd","w").write(nambin[:-1])
-	global session
+	global session, camdbin, catpmtserver
 	if reason == 0:
 		restartUIWithSoftCSA()
 		if "session" in kwargs:
@@ -562,15 +565,22 @@ def autostart(reason, **kwargs):
 			gSession = kwargs["session"]
 			session = kwargs["session"]
 			tsTasker.Initialize(gSession)
-
 			if config.plugins.spzCAMD.autostart.value == "2":
-				session.screen["service"] = CurrentService(session.nav)
-				startcamd(session).connect(session.screen["service"])
+				if catpmtserver is False or catpmtserver is True and not fileExists("/tmp/.spzCAMD"):
+					session.screen["service"] = CurrentService(session.nav)
+					startcamd(session).connect(session.screen["service"])
+				else:
+					eConsoleAppContainer().execute(f'killall -9 {camdbin} ; sh /etc/.CamdStart.sh')
 			elif config.plugins.spzCAMD.autostart.value == "1":
 				print("[spzCAMD] Started")
 				try:
 					if not fileExists("/tmp/.spzCAMD") and fileExists("/etc/.CamdStart.sh"):
-						eConsoleAppContainer().execute("sleep 3 ; sh /etc/.CamdStart.sh ; echo '' > /tmp/.spzCAMD")
+						eConsoleAppContainer().execute("sleep 2 ; sh /etc/.CamdStart.sh ; echo '' > /tmp/.spzCAMD")
+					elif fileExists("/etc/.CamdStart.sh") and catpmtserver is False:
+						session.screen["service"] = CurrentService(session.nav)
+						startcamd(session).connect(session.screen["service"])
+					elif fileExists("/etc/.CamdStart.sh"):
+						eConsoleAppContainer().execute(f'killall -9 {camdbin} ; sh /etc/.CamdStart.sh')
 				except:
 					pass
 			elif config.plugins.spzCAMD.autostart.value == "0":
