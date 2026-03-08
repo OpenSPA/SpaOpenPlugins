@@ -607,13 +607,8 @@ class PlutoTV(Screen):
 			self["playlist"].setText(self.titlemenu)
 
 	def playVOD(self, name, id, url=None):
-#		data = PlutoDownload.getClips(id)[0]
-#		if not data: return
-#		url   = (data.get('url','') or data.get('sources',[])[0].get('file',''))
-#		url = url.replace('siloh.pluto.tv','dh7tjojp94zlv.cloudfront.net') ## Hack for siloh.pluto.tv not access - siloh.pluto.tv redirect to dh7tjojp94zlv.cloudfront.net
 		if url:
-			uid, did = PlutoDownload.getUUID()
-			url = url.replace("deviceModel=","deviceModel=web").replace("deviceMake=","deviceMake=chrome") + uid
+			url = PlutoDownload.plutoAuth.buildVodStreamURL(url)
 
 		if url and name:
 			string = '4097:0:0:0:0:0:0:0:0:0:%s:%s' % (quote(url), quote(name))
@@ -791,6 +786,10 @@ class Pluto_Player(MoviePlayer):
 
 
 def autostart(reason, session):
+	if hasattr(session.nav, "playServiceExtensions") and PlutoDownload.plutoAuth.playServiceExtension not in session.nav.playServiceExtensions:
+		session.nav.playServiceExtensions.append(PlutoDownload.plutoAuth.playServiceExtension)
+	if hasattr(session.nav, "recordServiceExtensions") and PlutoDownload.plutoAuth.recordServiceExtension not in session.nav.recordServiceExtensions:
+		session.nav.recordServiceExtensions.append(PlutoDownload.plutoAuth.recordServiceExtension)
 	PlutoDownload.Silent.init(session)
 
 def Download_PlutoTV(session, **kwargs):

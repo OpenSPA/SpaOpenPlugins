@@ -30,11 +30,13 @@ from Components.ProgressBar import ProgressBar
 from Tools.Directories import fileExists
 from Components.Pixmap import Pixmap
 from Components.Renderer.Picon import searchPaths
+from re import sub
 
 from enigma import eDVBDB, eEPGCache, eServiceCenter, eServiceReference, eConsoleAppContainer, eTimer
 from Screens.MessageBox import MessageBox
 import os, datetime, uuid, time
-import json, collections, requests
+import json, collections
+from requests import get, Session
 if py3():
 	from urllib.parse import quote
 else:
@@ -59,6 +61,131 @@ deviceId1_hex = str(uuid.uuid4().hex)
 service_types_tv = '1:7:1:0:0:0:0:0:0:0:(type == 1) || (type == 17) || (type == 22) || (type == 25) || (type == 134) || (type == 195)'
 
 
+class PlutoAuth:
+	BOOT_URL = "https://boot.pluto.tv/v4/start"
+	STITCHER_BASE = "https://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv"
+
+	# for URL insertion at runtime
+	PLUTO_PATTERN = "PLUTO_SID_"
+	PLUTO_PLACEHOLDER = f"https://{{{PLUTO_PATTERN}%s}}.m3u8"
+
+	def __init__(self):
+		self.session = Session()
+		self.client_id = str(uuid.uuid4())
+		self.cache = {}
+
+	@staticmethod
+	def _tokenExpiry(token):
+		try:
+			from json import loads
+			from base64 import urlsafe_b64decode
+			payload = token.split(".")[1]
+			padding = 4 - len(payload) % 4
+			if padding != 4:
+				payload += "=" * padding
+			return loads(urlsafe_b64decode(payload)).get("exp", 0)
+		except Exception:
+			return 0
+
+	def boot(self, ipAddress=""):
+		cacheKey = ipAddress or "default"
+		cached = self.cache.get(cacheKey)
+		if cached and time.time() < cached["exp"] - 60:
+			return cached["response"]
+		headers = {
+			"authority": "boot.pluto.tv",
+			"accept": "*/*",
+			"accept-language": "en-US,en;q=0.9",
+			"origin": "https://pluto.tv",
+			"referer": "https://pluto.tv/",
+			"sec-ch-ua": '"Chromium";v="122", "Not(A:Brand";v="24", "Google Chrome";v="122"',
+			"sec-ch-ua-mobile": "?0",
+			"sec-ch-ua-platform": '"Linux"',
+			"sec-fetch-dest": "empty",
+			"sec-fetch-mode": "cors",
+			"sec-fetch-site": "same-site",
+			"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+		}
+		params = {
+			"appName": "web",
+			"appVersion": "8.0.0-111b2b9dc00bd0bea9030b30662159ed9e7c8bc6",
+			"deviceVersion": "122.0.0",
+			"deviceModel": "web",
+			"deviceMake": "chrome",
+			"deviceType": "web",
+			"clientID": self.client_id,
+			"clientModelNumber": "1.0.0",
+			"serverSideAds": "false",
+			"drmCapabilities": "widevine:L3",
+			"blockingMode": "",
+		}
+		if ipAddress:
+			headers["X-Forwarded-For"] = ipAddress
+		try:
+			response = self.session.get(self.BOOT_URL, headers=headers, params=params, timeout=10)
+			response.raise_for_status()
+			resp = response.json()
+			token = resp.get("sessionToken", "")
+			exp = self._tokenExpiry(token)
+			self.cache[cacheKey] = {"response": resp, "exp": exp}
+			print(f"[PlutoTV] New token for {cacheKey}, expires {exp}")
+			return resp
+		except Exception as e:
+			print(f"[PlutoTV] boot error: {e}")
+			return {}
+
+	def _apiHeaders(self, ipAddress=""):
+		token = self.boot(ipAddress).get("sessionToken", "")
+		headers = {
+			"accept": "application/json, text/javascript, */*; q=0.01",
+			"authorization": f"Bearer {token}",
+			"origin": "https://pluto.tv",
+			"referer": "https://pluto.tv/",
+			"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+		}
+		if ipAddress:
+			headers["X-Forwarded-For"] = ipAddress
+		return headers
+
+	def buildStreamURL(self, channel_id, ipAddress=""):
+		boot_resp = self.boot(ipAddress)
+		token = boot_resp.get("sessionToken", "")
+		stitcherParams = boot_resp.get('stitcherParams', '')
+		if stitcherParams:
+			stitcherParams = f"&{stitcherParams}"
+		return (
+			f"{self.STITCHER_BASE}/v2/stitch/hls/channel/{channel_id}/master.m3u8"
+			f"?jwt={token}&masterJWTPassthrough=true{stitcherParams}"
+		)
+
+	def buildVodStreamURL(self, vod_url, ipAddress=""):
+		boot_resp = self.boot(ipAddress)
+		token = boot_resp.get("sessionToken", "")
+		path = vod_url.split("?")[0]
+		path = sub(r"^https?://[^/]+", "", path)
+		stitcherParams = boot_resp.get('stitcherParams', '')
+		if stitcherParams:
+			stitcherParams = f"&{stitcherParams}"
+		if path.startswith("/stitch/"):
+			path = "/v2" + path
+		return (
+			f"{self.STITCHER_BASE}{path}"
+			f"?jwt={token}&masterJWTPassthrough=true{stitcherParams}"
+		)
+
+	def playServiceExtension(self, nav, sref, *args, **kwargs):
+		return self.recordServiceExtension(nav, sref), False
+
+	def recordServiceExtension(self, nav, sref, *args, **kwargs):
+		parts = sref.toString().split(":")
+		if len(parts) > 10 and self.PLUTO_PATTERN in parts[10]:
+			_id = parts[10].split(self.PLUTO_PATTERN)[1].split("}")[0].strip()
+			parts[10] = self.buildStreamURL(_id).replace(":", "%3a")
+			sref = eServiceReference(":".join(parts))
+		return sref
+
+
+plutoAuth = PlutoAuth()
 
 class DownloadComponent:
 	EVENT_DOWNLOAD = 0
@@ -127,14 +254,7 @@ def getUUID():
 	return sid1_hex, deviceId1_hex
 
 def buildHeader():
-	header_dict               = {}
-	header_dict['Accept']     = 'application/json, text/javascript, */*; q=0.01'
-	header_dict['Host']       = 'api.pluto.tv'
-	header_dict['Connection'] = 'keep-alive'
-	header_dict['Referer']    = 'http://pluto.tv/'
-	header_dict['Origin']     = 'http://pluto.tv'
-	header_dict['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.2; rv:24.0) Gecko/20100101 Firefox/24.0'
-	return header_dict
+	return plutoAuth._apiHeaders()
 
 def getClips(epid):
 	return getURL(BASE_CLIPS%(epid), header=buildHeader(), life=datetime.timedelta(hours=1))
@@ -152,7 +272,7 @@ def getURL(url, param={}, header={'User-agent': 'Mozilla/5.0 (Windows NT 6.2; rv
 	cacheresponse = None
 	if not cacheresponse:
 		try:
-			req = requests.get(url, param, headers=header)
+			req = get(url, param, headers=header)
 			cacheresponse = req.json()
 			req.close()
 		except Exception as e: 
@@ -180,9 +300,6 @@ def getGuidedata(full=False):
 
 def buildM3U(channel):
 	#(number,_id,name,logo,url)
-	logo  = (channel.get('logo',{}).get('path',None) or None)
-
-	logo = (channel.get('solidLogoPNG',{}).get('path',None) or None) #blancos
 	logo = (channel.get('colorLogoPNG',{}).get('path',None) or None)
 	group = channel.get('category','')
 	_id = channel['_id']
@@ -191,8 +308,7 @@ def buildM3U(channel):
 	if len(urls) == 0: 
 		return False
 
-	if isinstance(urls, list):
-		urls = [url['url'].replace('deviceType=&','deviceType=web&').replace('deviceMake=&','deviceMake=Chrome&').replace('deviceModel=&','deviceModel=Chrome&').replace('appName=&','appName=web&') for url in urls if url['type'].lower() == 'hls'][0] # todo select quality
+	url = plutoAuth.buildStreamURL(_id)
 
 	if group not in list(ChannelsList.keys()):
 		ChannelsList[group] = []
@@ -203,7 +319,7 @@ def buildM3U(channel):
 	else:
 		number = channel['number']
 
-	ChannelsList[group].append((str(number),_id,channel['name'],logo,urls))
+	ChannelsList[group].append((str(number),_id,channel['name'],logo,url))
 	return True
 
 def buildService():
@@ -490,7 +606,7 @@ class PlutoDownload(Screen):
 						channel = ChannelsList[key][self.chitem]
 						idhex = "%x" % int(channel[1][-4:],16)
 						idhex = idhex.upper()
-						sref = "#SERVICE 4097:0:19:%s:%s:0:0:0:0:0:%s:%s" % (channel[0],idhex,quote(channel[4]),channel[2])
+						sref = "#SERVICE 4097:0:19:%s:%s:0:0:0:0:0:%s:%s" % (channel[0],idhex,(plutoAuth.PLUTO_PLACEHOLDER % channel[1]).replace(":", "%3a"),channel[2])
 						self.fd.write("%s\n#DESCRIPTION %s\n" % (sref,channel[2]))
 						self.chitem = self.chitem + 1
 
@@ -645,7 +761,7 @@ class DownloadSilent:
 						channel = ChannelsList[key][self.chitem]
 						idhex = "%x" % int(channel[1][-4:],16)
 						idhex = idhex.upper()
-						sref = "#SERVICE 4097:0:19:%s:%s:0:0:0:0:0:%s:%s" % (channel[0],idhex,quote(channel[4]),channel[2])
+						sref = "#SERVICE 4097:0:19:%s:%s:0:0:0:0:0:%s:%s" % (channel[0],idhex,(plutoAuth.PLUTO_PLACEHOLDER % channel[1]).replace(":", "%3a"),channel[2])
 						self.fd.write("%s\n#DESCRIPTION %s\n" % (sref,channel[2]))
 						self.chitem = self.chitem + 1
 
