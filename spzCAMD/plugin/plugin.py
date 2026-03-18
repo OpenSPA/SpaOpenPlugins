@@ -23,7 +23,6 @@ from .prog import tsTasker
 from os import listdir, walk, path as os_path, popen
 from Components.Element import Element
 from Components.Sources.CurrentService import CurrentService
-from process import ProcessList
 
 # Configuration
 from Components.ConfigList import ConfigListScreen
@@ -46,25 +45,6 @@ config.plugins.spzCAMD.oscaminfo = ConfigYesNo(default = False)
 config.plugins.spzCAMD.ncaminfo = ConfigYesNo(default = False)
 
 session = None
-
-
-def softCSA():
-	softcsa = False
-	catpmt = False
-	for camdconfigfolder in [x for x in listdir('/etc/tuxbox/config') if getSysSoftcam() in x]:
-		for camdconffile in [x for x in listdir('/etc/tuxbox/config/' + camdconfigfolder) if ".conf" in x and ".conf.bak" not in x]:
-			with open('/etc/tuxbox/config/' + camdconfigfolder + "/" + camdconffile, "r") as file:
-				for line in file.readlines():
-					if "pmt" in line and "6" in line:
-						catpmt = True
-					if "extended_cw_api" in line and "1" in line and catpmt is True:
-						softcsa = True
-						break
-	camd = str(ProcessList().named(getSysSoftcam())).strip("[]")
-	if camd and softcsa is True:
-		createspzCAMD = ' ; echo '' > /tmp/.spzCAMD' if not fileExists("/tmp/.spzCAMD") else ""
-		eConsoleAppContainer().execute(f'killall -9 {getSysSoftcam()} ; sleep 2 ; sh /etc/.CamdStart.sh' + createspzCAMD)
-
 
 class spzCAMD(ConfigListScreen, Screen):
 
@@ -562,7 +542,6 @@ def autostart(reason, **kwargs):
 			session = kwargs["session"]
 			tsTasker.Initialize(gSession)
 
-			softCSA()
 			if config.plugins.spzCAMD.autostart.value == "2":
 				session.screen["service"] = CurrentService(session.nav)
 				startcamd(session).connect(session.screen["service"])
@@ -570,7 +549,9 @@ def autostart(reason, **kwargs):
 				print("[spzCAMD] Started")
 				try:
 					if not fileExists("/tmp/.spzCAMD") and fileExists("/etc/.CamdStart.sh"):
-						eConsoleAppContainer().execute("sleep 3 ; sh /etc/.CamdStart.sh ; echo '' > /tmp/.spzCAMD")
+						eConsoleAppContainer().execute("sleep 2")
+						eConsoleAppContainer().execute("sh /etc/.CamdStart.sh")
+						eConsoleAppContainer().execute("echo '' > /tmp/.spzCAMD")
 				except:
 					pass
 			elif config.plugins.spzCAMD.autostart.value == "0":
