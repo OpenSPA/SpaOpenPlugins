@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <keymap>
+        <map context="InfobarActions">
+            <key id="KEY_TEXT" mapto="showRecentStarts" flags="m" />
+        </map>
+        <map context="InfobarRecentStartsActions">
+            <key id="KEY_TEXT" mapto="showRecentStarts" flags="m" />
+        </map>
+    </keymap>
