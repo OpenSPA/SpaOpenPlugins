@@ -1,0 +1,138 @@
+# RecentEventsGo translation template
+# Copyright (C) VillaK
+# This file is distributed under the same license as the RecentEventsGo plugin.
+#
+# Para traducir: copia este archivo a locale/XX/LC_MESSAGES/RecentEventsGo.po
+# donde XX es el código de idioma (es, de, fr, it, nl, pl, pt...)
+# Rellena los msgstr vacíos con la traducción y compila con:
+#   msgfmt RecentEventsGo.po -o RecentEventsGo.mo
+#
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+msgid "RecentEventsGo"
+msgstr ""
+
+msgid "Select Bouquets"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Mark/Unmark"
+msgstr ""
+
+msgid "RecentEventsGo - Configuration"
+msgstr ""
+
+msgid "Bouquets: "
+msgstr ""
+
+msgid "Choose Bouquets"
+msgstr ""
+
+msgid "Minutes from start (threshold):"
+msgstr ""
+
+msgid "CHANNEL"
+msgstr ""
+
+msgid "PROGRAM"
+msgstr ""
+
+msgid "START"
+msgstr ""
+
+msgid "DURATION"
+msgstr ""
+
+msgid "%d channel(s)"
+msgstr ""
+
+msgid "Recently Started Broadcasts"
+msgstr ""
+
+msgid "Last %d min  —  %s"
+msgstr ""
+
+msgid "No recent broadcasts"
+msgstr ""
+
+msgid "Total %d channel(s)  ·  OK = tune  ·  INFO = EPG"
+msgstr ""
+
+msgid "(no title)"
+msgstr ""
+
+msgid "%d min ago"
+msgstr ""
+
+msgid "now"
+msgstr ""
+
+msgid "Recently started broadcasts"
+msgstr ""
+
+msgid "Please configure bouquets first in Menu > Plugins > RecentEventsGo."
+msgstr ""
+
+msgid "Recently started broadcasts from configured bouquets"
+msgstr ""
+
+msgid "(none)"
+msgstr ""
+
+msgid "RecentEventsGo - Configuration"
+msgstr ""
+
+msgid "Configure RecentEventsGo"
+msgstr ""
+
+msgid "Hotkey in InfoBar:"
+msgstr ""
+
+msgid "Teletext"
+msgstr ""
+
+msgid "Green"
+msgstr ""
+
+msgid "Yellow"
+msgstr ""
+
+msgid "Blue"
+msgstr ""
+
+msgid "Red"
+msgstr ""
+
+msgid "Info"
+msgstr ""
+
+msgid "EPG"
+msgstr ""
+
+msgid "Audio"
+msgstr ""
+
+msgid "Subtitle"
+msgstr ""
+
+msgid "F1"
+msgstr ""
+
+msgid "F2"
+msgstr ""
+
+msgid "F3"
+msgstr ""
+
+msgid "F4"
+msgstr ""
+

@@ -1,0 +1,172 @@
+<skin>
+    <colors>
+        <color name="REGAccent"     value="#ffef97" />
+        <color name="REGBackground" value="#1c000000" />
+        <color name="REGBlue"       value="#00bfff" />
+    </colors>
+
+    <screen backgroundColor="transparent" flags="wfNoBorder" name="RecentStartsScreen" position="center,center" size="1920,1080" title="Emisiones Recien Comenzadas">
+        <eLabel position="75,22" size="1771,88" zPosition="-10" backgroundColor="black" />
+        <widget source="Title" transparent="1" render="Label" zPosition="2" font="Regular;40" backgroundColor="black" position="95,36" size="1132,60" valign="center" foregroundColor="REGBlue" />
+        <widget backgroundColor="black" font="Regular;35" halign="left" position="1480,40" render="Label" size="131,45" source="global.CurrentTime" transparent="1" valign="center" foregroundColor="darkgrey" text="00:00">
+            <convert type="ClockToText">Default</convert>
+        </widget>
+        <widget backgroundColor="black" font="Regular;35" foregroundColor="darkgrey" halign="right" position="1326,40" render="Label" size="145,45" source="global.CurrentTime" transparent="1" valign="center" text="1 ago">
+            <convert type="ClockToText">Format:%e %b</convert>
+        </widget>
+        <ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/openstar.png" position="1601,45" size="222,44" zPosition="1" />
+        <eLabel position="75,131" size="1771,927" zPosition="-10" backgroundColor="REGBackground" transparent="0" />
+        <widget name="header" position="95,147" size="1700,50" font="Regular;28" halign="center" foregroundColor="REGAccent" backgroundColor="REGBackground" valign="center" />
+        <eLabel position="95,202" size="1700,1" backgroundColor="grey" />
+        <widget name="col_header" position="95,204" size="1700,38" scrollbarMode="showNever" backgroundColor="REGBackground" backgroundColorSelected="REGBackground" transparent="0" />
+        <eLabel position="95,242" size="1700,1" backgroundColor="grey" />
+        <widget name="list" position="95,246" size="1700,747" scrollbarMode="showNever" backgroundColor="REGBackground" backgroundColorSelected="REGBackground" foregroundColor="white" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/sepmen.png" itemHeight="75" zPosition="12" transparent="1" />
+        <widget name="status" position="95,991" size="1700,50" font="Regular;26" halign="center" backgroundColor="REGBackground" foregroundColor="REGAccent" valign="center" />
+    </screen>
+	<screen name="BouquetSelectScreen" position="center,center" size="1920,1080"
+            title="Seleccionar Bouquets" backgroundColor="transparent" flags="wfNoBorder">
+
+        <!-- Cabecera negra -->
+        <eLabel position="75,22" size="1771,88" zPosition="-10" backgroundColor="black" />
+
+        <!-- Título -->
+        <widget source="Title" transparent="1" render="Label" zPosition="2"
+                font="Regular;40" foregroundColor="REGBlue" backgroundColor="black"
+                position="95,36" size="1132,60" valign="center" />
+
+        <!-- Reloj -->
+        <widget backgroundColor="black" font="Regular;35" halign="left"
+                position="1480,40" render="Label" size="131,45"
+                source="global.CurrentTime" transparent="1" valign="center"
+                foregroundColor="darkgrey" text="00:00">
+            <convert type="ClockToText">Default</convert>
+        </widget>
+        <widget backgroundColor="black" font="Regular;35" foregroundColor="darkgrey"
+                halign="right" position="1326,40" render="Label" size="145,45"
+                source="global.CurrentTime" transparent="1" valign="center" text="1 ago">
+            <convert type="ClockToText">Format:%e %b</convert>
+        </widget>
+
+        <!-- Logo -->
+        <ePixmap alphatest="blend"
+                 pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/openstar.png"
+                 position="1601,45" size="222,44" zPosition="1" />
+
+        <!-- Fondo contenido -->
+        <eLabel position="75,131" size="1771,927" zPosition="-10"
+                backgroundColor="REGBackground" transparent="0" />
+
+        <!-- Lista bouquets con checklist -->
+        <widget name="list"
+                position="132,176" size="1036,764"
+                itemHeight="55"
+                selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/sep45.png"
+                scrollbarMode="showNever" enableWrapAround="1"
+                backgroundColorSelected="REGBackground"
+                backgroundColor="REGBackground"
+                transparent="1"
+                foregroundColor="white"
+                font="Regular;28"
+                zPosition="2" />
+
+        <!-- Icono decorativo derecha -->
+        <ePixmap alphatest="blend"
+                 pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/icon256.png"
+                 position="1350,center" size="256,256" transparent="1" zPosition="2" />
+        <ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/div800.png" position="1230,177" size="1,800" zPosition="1" />
+        <!-- Botones -->
+        <ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/red.png"    position="131,986" size="34,34" />
+        <ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/green.png"  position="426,986" size="34,34" />
+        <ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/yellow.png" position="721,986" size="34,34" />
+        <widget name="key_red"
+                backgroundColor="black" font="Regular;24" halign="left"
+                position="170,986" render="Label" size="240,34"
+                source="key_red" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+        <widget name="key_green"
+                backgroundColor="black" font="Regular;24" halign="left"
+                position="465,986" render="Label" size="240,34"
+                source="key_green" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+        <widget name="key_yellow"
+                backgroundColor="black" font="Regular;24" halign="left"
+                position="760,986" render="Label" size="240,34"
+                source="key_yellow" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+    </screen>
+    <screen name="RecentStartsConfig" position="center,center" size="1920,1080"
+            title="RecentEventsGo - Configuracion" backgroundColor="transparent" flags="wfNoBorder">
+
+        <!-- Cabecera negra -->
+        <eLabel position="75,22" size="1771,88" zPosition="-10" backgroundColor="black" />
+
+        <!-- Título -->
+        <widget source="Title" transparent="1" render="Label" zPosition="2"
+                font="Regular;40" foregroundColor="REGBlue" backgroundColor="black"
+                position="95,36" size="1132,60" valign="center" />
+
+        <!-- Reloj -->
+        <widget backgroundColor="black" font="Regular;35" halign="left"
+                position="1480,40" render="Label" size="131,45"
+                source="global.CurrentTime" transparent="1" valign="center"
+                foregroundColor="darkgrey" text="00:00">
+            <convert type="ClockToText">Default</convert>
+        </widget>
+        <widget backgroundColor="black" font="Regular;35" foregroundColor="darkgrey"
+                halign="right" position="1326,40" render="Label" size="145,45"
+                source="global.CurrentTime" transparent="1" valign="center" text="1 ago">
+            <convert type="ClockToText">Format:%e %b</convert>
+        </widget>
+
+        <!-- Logo -->
+        <ePixmap alphatest="blend"
+                 pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/openstar.png"
+                 position="1601,45" size="222,44" zPosition="1" />
+
+        <!-- Fondo contenido -->
+        <eLabel position="75,131" size="1771,927" zPosition="-10"
+                backgroundColor="REGBackground" transparent="0" />
+
+        <!-- Config list -->
+        <widget name="config"
+                position="132,176" size="1036,500"
+                itemHeight="55"
+                selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/sep45.png"
+                scrollbarMode="showNever" enableWrapAround="1"
+                backgroundColorSelected="REGBackground"
+                backgroundColor="REGBackground"
+                transparent="1"
+                foregroundColor="white"
+                font="Regular;28"
+                zPosition="2" />
+
+        <!-- Separador -->
+        <eLabel position="132,690" size="1036,1" backgroundColor="grey" />
+
+        <!-- Bouquet label -->
+        <widget name="bouquet_label"
+                position="132,700" size="1036,155"
+                font="Regular;26" halign="left" valign="top"
+                foregroundColor="REGAccent"
+                backgroundColor="REGBackground" />
+
+        <!-- Icono decorativo derecha -->
+        <ePixmap alphatest="blend"
+                 pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/icon256.png"
+                 position="1350,center" size="256,256" transparent="1" zPosition="2" />
+         <ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/div800.png" position="1230,177" size="1,800" zPosition="1" />
+        <!-- Botones -->
+        <ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/red.png"    position="131,986" size="34,34" />
+        <ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/green.png"  position="426,986" size="34,34" />
+        <ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/yellow.png" position="721,986" size="34,34" />
+        <widget name="key_red"
+                backgroundColor="black" font="Regular;24" halign="left"
+                position="170,986" render="Label" size="240,34"
+                source="key_red" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+        <widget name="key_green"
+                backgroundColor="black" font="Regular;24" halign="left"
+                position="465,986" render="Label" size="240,34"
+                source="key_green" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+        <widget name="key_yellow"
+                backgroundColor="black" font="Regular;24" halign="left"
+                position="760,986" render="Label" size="240,34"
+                source="key_yellow" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+    </screen>
+</skin>
