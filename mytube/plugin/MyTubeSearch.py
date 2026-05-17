@@ -20,7 +20,7 @@ from .ThreadQueue import ThreadQueue
 from xml.etree.cElementTree import fromstring as cet_fromstring
 from io import StringIO
 if py3():
-	from urllib.request import FancyURLopener
+	from urllib.request import build_opener
 else:
 	from urllib import FancyURLopener
 
@@ -33,8 +33,17 @@ def rutaskin(nombre):
         nombre=nombre+'HD'
     return nombre    
 
-class MyOpener(FancyURLopener):
-	version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
+if py3():
+	class MyOpener:
+		version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
+
+		def open(self, url):
+			opener = build_opener()
+			opener.addheaders = [('User-Agent', self.version)]
+			return opener.open(url)
+else:
+	class MyOpener(FancyURLopener):
+		version = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12'
 
 class SuggestionsQueryThread(Thread):
 	def __init__(self, query, param, callback, errorback):
