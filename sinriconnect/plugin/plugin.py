@@ -22,6 +22,8 @@ from enigma import eTimer, eServiceReference, eListboxPythonMultiContent, gFont,
 from ServiceReference import ServiceReference
 from Screens.ChannelSelection import SimpleChannelSelection
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
+import asyncio
+import threading
 
 ##############################################
 
@@ -285,9 +287,6 @@ class sinriconnectconfig(ConfigListScreen,Screen):
 			self['picConn'].instance.setPixmapFromFile(ICON_OFF)
 			self["info"].setText(_("Disconnected"))
 			self["key_green"].setText(_("Connect"))
-			if CLIENT:
-				CLIENT.loop.stop()
-				CLIENT = None
 		self.timer.stop()	
 
 	def salir(self):
@@ -406,7 +405,7 @@ class sinriconnectconfig(ConfigListScreen,Screen):
 			
 					
 	def green(self):
-		if self.page ==1:
+		if self.page ==1 and (not CLIENT or (CLIENT and not CLIENT.isconnected())):
 			self.connect()
 		elif self.page ==2:
 			self.index = config.plugins.sinric.channelscount.value
@@ -436,7 +435,12 @@ class sinriconnectconfig(ConfigListScreen,Screen):
 		if CLIENT is None:
 			self["info"].setText(_("Connecting"))
 			CLIENT = sinriconnect(self.session, appkey, appsecret, tvid, config.plugins.sinric.logintent.value)
-			CLIENT.run()
+			if CLIENT:
+				loop = asyncio.new_event_loop()
+				threading.Thread(target=start_loop, daemon=True).start()
+				loop.call_soon_threadsafe(
+					lambda: loop.create_task(CLIENT.run())
+				)
 		self.timer.start(4000, True) #temporizacion de 4 segundos
 
 def getkeys():
@@ -478,11 +482,20 @@ class startclient(Element):
 			pass
 
 	def poll(self):
+		def start_loop():
+			asyncio.set_event_loop(loop)
+			loop.run_forever()
+
 		global CLIENT, INIT
 		if INIT and CLIENT is None:
 			CLIENT = sinriconnect(self.session, self.appkey, self.appsecret, self.tvid, config.plugins.sinric.logintent.value)
-			CLIENT.run()
-			INIT = False
+			if CLIENT:
+				loop = asyncio.new_event_loop()
+				threading.Thread(target=start_loop, daemon=True).start()
+				loop.call_soon_threadsafe(
+					lambda: loop.create_task(CLIENT.run())
+				)
+				INIT = False
 			self.timer2.start(4000, True) #temporizacion de 4 segundos
 		self.timer.stop()
 
@@ -502,7 +515,6 @@ class startclient(Element):
 					self.session.open(Popup, _("SinriConnect"),_("Client cannot connect"),type=Popup.TYPE_ALARM, timeout = 5, picon=resolveFilename(SCOPE_PLUGINS)+"Extensions/SinriConnect/img/logo_sinric.png",enable_fade=True)
 				except:
 					pass
-			CLIENT.loop.stop()
 			CLIENT = None
 		self.timer2.stop()	
 
@@ -519,7 +531,6 @@ def main(session, **kwargs):
 	appkey, appsecret, tvid = getkeys()
 	if len(appkey)==0 or len(appsecret)==0 or len(tvid)==0:
 		session.open(MessageBox, _("The configuration file is not filled in correctly. You must first open an account at https://sinric.pro/ and create a device of type Tv. The application key, application secret and device id must be entered in the /etc/keys/sinric.keys file after the = sign of each key."), MessageBox.TYPE_INFO, timeout=10)
-		#El archivo de configuracion no esta correctamente rellenado. Primero debes abrir una cuenta en https://sinric.pro/ y crear un dispositivo de tipo Tv. La clave de aplicacion, secreto de aplicacion y id del dispositivos debes introducirlas en el archivo /etc/keys/sinric.keys despues del signo = de cada clave.
 	else:
 		session.open(sinriconnectconfig)
 
