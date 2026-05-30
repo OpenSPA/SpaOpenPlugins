@@ -1,4 +1,4 @@
-# ChannelFinder – Plugin para Enigma2
+# ChannelFinder – Plugin para Enigma2 by OpenSPA
 
 Busca el nombre de un canal en los bouquets de TV que tú elijas.
 Compatible con Dreambox, VU+, Vu+ y cualquier receptor con **Enigma2**.
