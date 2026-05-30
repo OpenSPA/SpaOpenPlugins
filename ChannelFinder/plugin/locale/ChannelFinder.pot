@@ -1,0 +1,216 @@
+# ChannelFinder – Translation file
+# Copyright (C) VillaK
+# Plugin version: 1.5
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ChannelFinder 1.5\n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# ── formatEventTime ──────────────────────────
+
+msgid "Today %s"
+msgstr ""
+
+msgid "Tomorrow %s"
+msgstr ""
+
+# ── Menú principal ───────────────────────────
+
+msgid "ChannelFinder — What do you want to do?"
+msgstr ""
+
+msgid "  Search channel by name "
+msgstr ""
+
+msgid "  Search event in EPG "
+msgstr ""
+
+msgid "  My zap timers "
+msgstr ""
+
+# ── ZapTimerListScreen ───────────────────────
+
+msgid "Delete"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "ChannelFinder – My zap timers"
+msgstr ""
+
+msgid "No timers scheduled"
+msgstr ""
+
+msgid "(empty list)"
+msgstr ""
+
+msgid "Delete timer?\n\"%s\"  at %s"
+msgstr ""
+
+# Singular y Plural para "scheduled"
+msgid "%d timer scheduled"
+msgid_plural "%d timers scheduled"
+msgstr[0] ""
+msgstr[1] ""
+
+# ── BouquetSelectionScreen ───────────────────
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "All / None"
+msgstr ""
+
+msgid "ChannelFinder – Bouquets"
+msgstr ""
+
+msgid "⚠ Select at least one bouquet."
+msgstr ""
+
+# ── ChannelResultsScreen ─────────────────────
+
+msgid "no EPG"
+msgstr ""
+
+msgid "No EPG information"
+msgstr ""
+
+msgid "Now playing..."
+msgstr ""
+
+msgid "%s \u2013 %s  (%d min remaining)"
+msgstr ""
+
+msgid "Could not tune to channel:\n%s"
+msgstr ""
+
+msgid "Search Channel: %s"
+msgstr ""
+
+
+# Singular y Plural para Títulos
+msgid "ChannelFinder – %d channel"
+msgid_plural "ChannelFinder – %d channels"
+msgstr[0] ""
+msgstr[1] ""
+
+# ── EPGResultsScreen ─────────────────────────
+
+msgid "Watch / Timer"
+msgstr ""
+
+msgid "▶  NOW ON %s..."
+msgstr ""
+
+msgid "%s – %s  (%d min remaining)"
+msgstr ""
+
+msgid "Starts in %s (at %s–%s)\nNow on %s..."
+msgstr ""
+
+msgid "until %s  (%d min remaining)"
+msgstr ""
+
+msgid "Starts in %s  (at %s – %s)"
+msgstr ""
+
+msgid "No information for current programme"
+msgstr ""
+
+msgid "⚠  Could not tune to channel:\n%s"
+msgstr ""
+
+msgid "⏱  Timer already scheduled:\n\"%s\"  at %s\n\nCancel it?"
+msgstr ""
+
+msgid "\"%s\"\nStarts at %s and ends at %s.\n\nAdd zap timer?"
+msgstr ""
+
+msgid "✔  Timer saved:\n\"%s\"  at %s"
+msgstr ""
+
+msgid "⚠  Timer already exists for:\n\"%s\"  at %s"
+msgstr ""
+
+msgid "⏱  Timer cancelled:\n\"%s\"  at %s"
+msgstr ""
+
+msgid "Search EPG: %s"
+msgstr ""
+
+msgid "ChannelFinder – %d event in EPG"
+msgid_plural "ChannelFinder – %d events in EPG"
+msgstr[0] ""
+msgstr[1] ""
+
+# ── BaseSearchScreen ─────────────────────────
+
+msgid "Back"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Bouquets"
+msgstr ""
+
+msgid "Keyboard"
+msgstr ""
+
+msgid "Enter text to search:"
+msgstr ""
+
+msgid "⚠  No TV bouquets found."
+msgstr ""
+
+msgid "(⚠  none — press Yellow to choose)"
+msgstr ""
+
+msgid "⚠  First enter the text to search (OK or Blue)."
+msgstr ""
+
+msgid "⚠  Choose at least one bouquet (Yellow button)."
+msgstr ""
+
+msgid "Search channels and EPG event and program zaptimers for IPTV channels"
+msgstr ""
+
+# ── ChannelSearchScreen ──────────────────────
+
+msgid "Channel to search  (OK = keyboard):"
+msgstr ""
+
+msgid "ChannelFinder – Search channel"
+msgstr ""
+
+msgid "⚠  Channel \"%s\" not found."
+msgstr ""
+
+
+# ── EPGSearchScreen ──────────────────────────
+
+msgid "EPG event to search  (OK = keyboard):"
+msgstr ""
+
+msgid "ChannelFinder – Search in EPG"
+msgstr ""
+
+msgid "⚠  \"%s\" not found in EPG."
+msgstr ""
+
+
+
+
+

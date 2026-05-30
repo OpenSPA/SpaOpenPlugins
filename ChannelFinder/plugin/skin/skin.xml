@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+
+    <!-- Selección de Bouquets -->
+<screen name="BouquetSelectionScreen" position="center,center" size="1920,1080" title="ChannelFinder – Bouquets" backgroundColor="transparent" transparent="0">
+	<widget name="list" position="center,178" size="1680,786" font="Regular;26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/sep45.png" scrollbarMode="showNever" itemHeight="45" transparent="1" foregroundColorSelected="#0000bfff" />
+	<!-- colores keys  rojo verde amarillo azul-->
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/red.png" position="131,1001" size="34,34" />
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/green.png" position="426,1001" size="34,34" />
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/blue.png" position="721,1001" size="34,34" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="465,1001" size="240,34" name="key_green" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="170,1001" size="240,34" name="key_red" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="760,1001" size="440,34" name="key_blue" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<!-- fin colores keys -->
+	<eLabel position="center,129" size="1771,927" zPosition="-10" backgroundColor="#1c000000" transparent="0" />
+	<widget source="Title" transparent="1" render="Label" zPosition="2" font="Regular; 40" foregroundColor="#0000bfff" backgroundColor="black" position="95,36" size="1132,60" valign="center" />
+	<!--  /* ClockWidget  -->
+	<eLabel backgroundColor="darkgrey" name="new eLabel2" position="1584,42" size="2,42" noWrap="1" />
+	<widget backgroundColor="black" font="Regular; 35" halign="left" position="1480,40" render="Label" size="131,45" source="global.CurrentTime" transparent="1" valign="center" foregroundColor="darkgrey" text="00:00">
+	<convert type="ClockToText">Default</convert>
+	</widget>
+	<widget backgroundColor="black" font="Regular; 35" foregroundColor="darkgrey" halign="right" position="1326,40" render="Label" size="145,45" source="global.CurrentTime" transparent="1" valign="center" text="1 ago">
+	<convert type="ClockToText">Format:%e %b</convert>
+	</widget>
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/openstar.png" position="1601,45" size="222,44" zPosition="1" />
+	<!-- ClockWidget */ -->
+	<eLabel position="75,22" size="1771,88" zPosition="-10" backgroundColor="black" /> 
+</screen>
+
+    <!-- Pantalla búsqueda canal -->
+<screen name="ChannelSearchScreen" position="center,center" size="1520,397" title="ChannelFinder – Buscar canal">
+	<widget name="lab_search" position="20,45" size="1480,36" font="Regular;28" halign="left" valign="center" foregroundColor="#00ffef97" />
+	<widget name="query_display" position="40,91" size="1460,70" font="Regular;38" halign="left" valign="center" backgroundColor="#1a1a2e" foregroundColor="#e0e0ff" zPosition="10" />
+	<eLabel position="20,91" size="1480,70" backgroundColor="#1a1a2e" foregroundColor="#e0e0ff" zPosition="0" />	
+	<widget name="lab_bouquets" position="20,195" size="1480,34" font="Regular;26" halign="left" valign="center" />
+	<widget name="bouquet_info" position="20,235" size="1480,66" font="Regular;24" halign="left" valign="top" foregroundColor="#0000bfff" />
+	<!-- colores keys  rojo verde amarillo azul-->
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/red.png" position="21,325" size="34,34" />
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/green.png" position="316,325" size="34,34" />
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/yellow.png" position="611,325" size="34,34" />
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/blue.png" position="901,325" size="34,34" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="355,325" size="240,34" name="key_green" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="60,325" size="240,34" name="key_red" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="650,325" size="240,34" name="key_yellow" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="940,325" size="371,34" name="key_blue" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<!-- fin colores keys -->   
+</screen>
+
+    <!-- Pantalla búsqueda EPG -->
+<screen name="EPGSearchScreen" position="center,center" size="1520,397" title="ChannelFinder – Buscar en EPG">
+	<widget name="lab_search" position="20,45" size="1480,36" font="Regular;28" halign="left" valign="center" foregroundColor="#00ffef97" />
+	<widget name="query_display" position="40,91" size="1460,70" font="Regular;38" halign="left" valign="center" backgroundColor="#1a1a2e" foregroundColor="#e0e0ff" zPosition="10" />
+	<eLabel position="20,91" size="1480,70" backgroundColor="#1a1a2e" foregroundColor="#e0e0ff" zPosition="0" />	
+	<widget name="lab_bouquets" position="20,195" size="1480,34" font="Regular;26" halign="left" valign="center" />
+	<widget name="bouquet_info" position="20,235" size="1480,66" font="Regular;24" halign="left" valign="top" foregroundColor="#0000bfff" />
+	<!-- colores keys  rojo verde amarillo azul-->
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/red.png" position="21,325" size="34,34" />
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/green.png" position="316,325" size="34,34" />
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/yellow.png" position="611,325" size="34,34" />
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/blue.png" position="901,325" size="34,34" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="355,325" size="240,34" name="key_green" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="60,325" size="240,34" name="key_red" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="650,325" size="240,34" name="key_yellow" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="940,325" size="371,34" name="key_blue" transparent="1" zPosition="1" foregroundColor="darkgrey" />
+	<!-- fin colores keys -->      
+</screen>
+
+    <!-- Resultados – Canales -->
+<screen name="ChannelResultsScreen" position="center,center" size="1920,1080" title="ChannelFinder – EPG" transparent="0" backgroundColor="transparent">
+	<widget name="list" position="center,158" size="1680,628" font="Regular;28" foregroundColorSelected="#0000bfff" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/sep45.png" scrollbarMode="showNever" itemHeight="45" transparent="1" />
+	<widget name="lab_now" position="120,786" size="1680,66" font="Regular; 24" halign="left" valign="center" foregroundColor="#00ffef97" />
+	<widget name="now_title" position="120,853" size="1680,42" font="Regular; 32" halign="left" valign="center" foregroundColor="#0000bfff" />
+	<widget name="now_times" position="center,900" size="1680,30" font="Regular; 24" halign="left" valign="center" foregroundColor="#aaaaaa" />
+	<widget name="progress" position="center,944" size="1680,18" foregroundColor="#0000bfff" backgroundColor="#333333"  />
+	<widget name="info" position="900,982" size="900,40" font="Regular;22" halign="right" valign="center" foregroundColor="#00ffef97" />
+	<eLabel position="center,129" size="1771,927" zPosition="-10" backgroundColor="#1c000000" transparent="0" />
+	<widget source="Title" transparent="1" render="Label" zPosition="2" font="Regular; 40" foregroundColor="#0000bfff" backgroundColor="black" position="95,36" size="1132,60" valign="center" />
+	<!--  /* ClockWidget  -->
+	<eLabel backgroundColor="darkgrey" name="new eLabel2" position="1584,42" size="2,42" noWrap="1" />
+	<widget backgroundColor="black" font="Regular; 35" halign="left" position="1480,40" render="Label" size="131,45" source="global.CurrentTime" transparent="1" valign="center" foregroundColor="darkgrey" text="00:00">
+	<convert type="ClockToText">Default</convert>
+	</widget>
+	<widget backgroundColor="black" font="Regular; 35" foregroundColor="darkgrey" halign="right" position="1326,40" render="Label" size="145,45" source="global.CurrentTime" transparent="1" valign="center" text="1 ago">
+	<convert type="ClockToText">Format:%e %b</convert>
+	</widget>
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/openstar.png" position="1601,45" size="222,44" zPosition="1" />
+	<!-- ClockWidget */ -->
+	<eLabel position="75,22" size="1771,88" zPosition="-10" backgroundColor="black" /> 
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/red.png" position="120,986" size="34,34" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="160,985" render="Label" size="240,34" transparent="1" zPosition="1" foregroundColor="darkgrey" name="key_red" />
+</screen>
+
+    <!-- Resultados – EPG -->
+<screen name="EPGResultsScreen" position="center,center" size="1920,1080" title="ChannelFinder – EPG" transparent="0" backgroundColor="transparent">
+	<widget name="list" position="center,158" size="1680,628" font="Regular;28" foregroundColorSelected="#0000bfff" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/sep45.png" scrollbarMode="showNever" itemHeight="45" transparent="1" />
+	<widget name="lab_now" position="120,786" size="1680,66" font="Regular; 24" halign="left" valign="center" foregroundColor="#00ffef97" />
+	<widget name="now_title" position="120,853" size="1680,42" font="Regular; 32" halign="left" valign="center" foregroundColor="#0000bfff" />
+	<widget name="now_times" position="center,900" size="1680,30" font="Regular; 24" halign="left" valign="center" foregroundColor="#aaaaaa" />
+	<widget name="progress" position="center,944" size="1680,18" foregroundColor="#0000bfff" backgroundColor="#333333" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/sep45.png" />
+	<widget name="info" position="900,982" size="900,40" font="Regular;22" halign="right" valign="center" foregroundColor="#00ffef97" />
+	<eLabel position="center,129" size="1771,927" zPosition="-10" backgroundColor="#1c000000" transparent="0" />
+	<widget source="Title" transparent="1" render="Label" zPosition="2" font="Regular; 40" foregroundColor="#0000bfff" backgroundColor="black" position="95,36" size="1132,60" valign="center" />
+	<!--  /* ClockWidget  -->
+	<eLabel backgroundColor="darkgrey" name="new eLabel2" position="1584,42" size="2,42" noWrap="1" />
+	<widget backgroundColor="black" font="Regular; 35" halign="left" position="1480,40" render="Label" size="131,45" source="global.CurrentTime" transparent="1" valign="center" foregroundColor="darkgrey" text="00:00">
+	<convert type="ClockToText">Default</convert>
+	</widget>
+	<widget backgroundColor="black" font="Regular; 35" foregroundColor="darkgrey" halign="right" position="1326,40" render="Label" size="145,45" source="global.CurrentTime" transparent="1" valign="center" text="1 ago">
+	<convert type="ClockToText">Format:%e %b</convert>
+	</widget>
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/openstar.png" position="1601,45" size="222,44" zPosition="1" />
+	<!-- ClockWidget */ -->
+	<eLabel position="75,22" size="1771,88" zPosition="-10" backgroundColor="black" /> 
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/red.png" position="120,986" size="34,34" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="160,985" render="Label" size="240,34" transparent="1" zPosition="1" foregroundColor="darkgrey" name="key_red" />
+</screen>
+
+    <!-- Pantalla Timers programados -->
+ <screen name="ZapTimerListScreen" position="center,center" size="1920,1080" title="ChannelFinder – EPG" transparent="0" backgroundColor="transparent">
+	<widget name="list" position="center,158" size="1680,782" font="Regular;28" foregroundColorSelected="#0000bfff" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/sep45.png" scrollbarMode="showNever" itemHeight="45" transparent="1" />
+	<widget name="info" position="900,982" size="900,40" font="Regular;22" halign="right" valign="center" foregroundColor="#00ffef97" />
+	<eLabel position="center,129" size="1771,927" zPosition="-10" backgroundColor="#1c000000" transparent="0" />
+	<widget source="Title" transparent="1" render="Label" zPosition="2" font="Regular; 40" foregroundColor="#0000bfff" backgroundColor="black" position="95,36" size="1132,60" valign="center" />
+	<!--  /* ClockWidget  -->
+	<eLabel backgroundColor="darkgrey" name="new eLabel2" position="1584,42" size="2,42" noWrap="1" />
+	<widget backgroundColor="black" font="Regular; 35" halign="left" position="1480,40" render="Label" size="131,45" source="global.CurrentTime" transparent="1" valign="center" foregroundColor="darkgrey" text="00:00">
+	<convert type="ClockToText">Default</convert>
+	</widget>
+	<widget backgroundColor="black" font="Regular; 35" foregroundColor="darkgrey" halign="right" position="1326,40" render="Label" size="145,45" source="global.CurrentTime" transparent="1" valign="center" text="1 ago">
+	<convert type="ClockToText">Format:%e %b</convert>
+	</widget>
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/openstar.png" position="1601,45" size="222,44" zPosition="1" />
+	<!-- ClockWidget */ -->
+	<eLabel position="75,22" size="1771,88" zPosition="-10" backgroundColor="black" /> 
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/red.png" position="120,986" size="34,34" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="160,985" render="Label" size="240,34" transparent="1" zPosition="1" foregroundColor="darkgrey" name="key_red" />
+	<ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/ChannelFinder/images/green.png" position="420,986" size="34,34" />
+	<widget backgroundColor="black" font="Regular; 24" halign="left" position="460,985" render="Label" size="240,34" transparent="1" zPosition="1" foregroundColor="darkgrey" name="key_green" />
+</screen>
+</skin>
