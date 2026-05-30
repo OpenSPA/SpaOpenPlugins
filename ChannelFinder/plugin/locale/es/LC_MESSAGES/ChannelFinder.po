@@ -1,0 +1,259 @@
+# ChannelFinder – Translation file
+# Copyright (C) VillaK
+# Plugin version: 1.5
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ChannelFinder 1.5\n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-05-26 21:57+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+
+# ── formatEventTime ──────────────────────────
+msgid "Today %s"
+msgstr "Hoy %s"
+
+msgid "Tomorrow %s"
+msgstr "Mañana %s"
+
+# ── Menú principal ───────────────────────────
+msgid "ChannelFinder — What do you want to do?"
+msgstr "ChannelFinder — ¿Qué quieres hacer?"
+
+msgid "  Search channel by name "
+msgstr "  Buscar canal por nombre "
+
+msgid "  Search event in EPG "
+msgstr "  Buscar evento en la EPG "
+
+msgid "  My zap timers "
+msgstr "  Mis temporizadores de zap "
+
+# ── ZapTimerListScreen ───────────────────────
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "ChannelFinder – My zap timers"
+msgstr "ChannelFinder – Mis temporizadores de zap"
+
+msgid "No timers scheduled"
+msgstr "No hay temporizadores programados"
+
+msgid "(empty list)"
+msgstr "(lista vacía)"
+
+msgid ""
+"Delete timer?\n"
+"\"%s\"  at %s"
+msgstr ""
+"¿Eliminar temporizador?\n"
+"\"%s\"  a las %s"
+
+# Singular y Plural para "scheduled"
+msgid "%d timer scheduled"
+msgid_plural "%d timers scheduled"
+msgstr[0] "%d temporizador programado"
+msgstr[1] "%d temporizadores programados"
+
+# ── BouquetSelectionScreen ───────────────────
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "All / None"
+msgstr "Todos / Ninguno"
+
+msgid "ChannelFinder – Bouquets"
+msgstr "ChannelFinder – Listas de canales"
+
+msgid "⚠ Select at least one bouquet."
+msgstr "⚠ Selecciona al menos una lista de canales."
+
+# ── ChannelResultsScreen ─────────────────────
+msgid "no EPG"
+msgstr "sin EPG"
+
+msgid "No EPG information"
+msgstr "Sin información EPG"
+
+msgid "Now playing..."
+msgstr "Emitiendo ahora..."
+
+msgid "%s \\u2013 %s  (%d min remaining)"
+msgstr "%s \\u2013 %s  (%d min restantes)"
+
+msgid ""
+"Could not tune to channel:\n"
+"%s"
+msgstr ""
+"No se pudo sintonizar el canal:\n"
+"%s"
+
+msgid "Search Channel: %s"
+msgstr "Canal a buscar: %s"
+
+# Singular y Plural para Títulos
+msgid "ChannelFinder – %d channel"
+msgid_plural "ChannelFinder – %d channels"
+msgstr[0] "ChannelFinder – %d canal encontrado"
+msgstr[1] "ChannelFinder – %d canales encontrados"
+
+# ── EPGResultsScreen ─────────────────────────
+msgid "Watch / Timer"
+msgstr "Ver / Temporizador"
+
+msgid "▶  NOW ON %s..."
+msgstr "▶  AHORA EN %s..."
+
+msgid "%s – %s  (%d min remaining)"
+msgstr "%s – %s  (%d min restantes)"
+
+msgid ""
+"Starts in %s (at %s–%s)\n"
+"Now on %s..."
+msgstr ""
+"Empieza en %s (a las %s–%s)\n"
+"Ahora en %s..."
+
+msgid "until %s  (%d min remaining)"
+msgstr "hasta las %s  (%d min restantes)"
+
+msgid "Starts in %s  (at %s – %s)"
+msgstr "Empieza en %s  (a las %s – %s)"
+
+msgid "No information for current programme"
+msgstr "Sin información del programa actual"
+
+msgid ""
+"⚠  Could not tune to channel:\n"
+"%s"
+msgstr ""
+"⚠  No se pudo sintonizar el canal:\n"
+"%s"
+
+msgid ""
+"⏱  Timer already scheduled:\n"
+"\"%s\"  at %s\n"
+"\n"
+"Cancel it?"
+msgstr ""
+"⏱  Temporizador ya programado:\n"
+"%s»  a las %s\n"
+"\n"
+"¿Lo quieres cancelar?"
+
+msgid ""
+"\"%s\"\n"
+"Starts at %s and ends at %s.\n"
+"\n"
+"Add zap timer?"
+msgstr ""
+"\"%s\"\n"
+"Empieza a las %s y termina a las %s.\n"
+"\n"
+"¿Añadir temporizador de zap?"
+
+msgid ""
+"✔  Timer saved:\n"
+"\"%s\"  at %s"
+msgstr ""
+"✔  Temporizador guardado:\n"
+"\"%s\"  a las %s"
+
+msgid ""
+"⚠  Timer already exists for:\n"
+"\"%s\"  at %s"
+msgstr ""
+"⚠  Ya existe un temporizador para:\n"
+"\"%s\"  a las %s"
+
+msgid ""
+"⏱  Timer cancelled:\n"
+"\"%s\"  at %s"
+msgstr ""
+"⏱  Temporizador cancelado:\n"
+"%s»  a las %s"
+
+msgid "Search EPG: %s"
+msgstr "Evento a buscar: %s"
+
+msgid "ChannelFinder – %d event in EPG"
+msgid_plural "ChannelFinder – %d events in EPG"
+msgstr[0] "ChannelFinder – %d evento encontrado en EPG"
+msgstr[1] "ChannelFinder – %d eventos encontrados en EPG"
+
+# ── BaseSearchScreen ─────────────────────────
+msgid "Back"
+msgstr "Volver"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Bouquets"
+msgstr "Listas"
+
+msgid "Keyboard"
+msgstr "Teclado"
+
+msgid "Enter text to search:"
+msgstr "Introduce el texto a buscar:"
+
+msgid "⚠  No TV bouquets found."
+msgstr "⚠  No se encontraron listas de canales."
+
+msgid "(⚠  none — press Yellow to choose)"
+msgstr "(⚠  ninguna — pulsa Amarillo para elegir)"
+
+msgid "⚠  First enter the text to search (OK or Blue)."
+msgstr "⚠  Primero introduce el texto a buscar (OK o Azul)."
+
+msgid "⚠  Choose at least one bouquet (Yellow button)."
+msgstr "⚠  Elige al menos una lista de canales (botón Amarillo)."
+
+msgid "Search channels and EPG event and program zaptimers for IPTV channels"
+msgstr "Buscar canales y eventos EPG y programa timers de Zap para canales IPTV"
+
+# ── ChannelSearchScreen ──────────────────────
+msgid "Channel to search  (OK = keyboard):"
+msgstr "Canal a buscar  (OK = teclado):"
+
+msgid "ChannelFinder – Search channel"
+msgstr "ChannelFinder – Buscar canal"
+
+msgid "⚠  Channel \"%s\" not found."
+msgstr "⚠  Canal \"%s\" no encontrado."
+
+# ── EPGSearchScreen ──────────────────────────
+msgid "EPG event to search  (OK = keyboard):"
+msgstr "Evento EPG a buscar  (OK = teclado):"
+
+msgid "ChannelFinder – Search in EPG"
+msgstr "ChannelFinder – Buscar en la EPG"
+
+msgid "⚠  \"%s\" not found in EPG."
+msgstr "⚠  \"%s\" no encontrado en la EPG."
+
+#~ msgid "%d channel found"
+#~ msgid_plural "%d channels found"
+#~ msgstr[0] "%d canal encontrado"
+#~ msgstr[1] "%d canales encontrados"
+
+#~ msgid "%d event found"
+#~ msgid_plural "%d events found"
+#~ msgstr[0] "%d evento encontrado"
+#~ msgstr[1] "%d eventos encontrados"
+
+#~ msgid "Search channels and EPG event"
+#~ msgstr "Buscar canales y eventos EPG"
