@@ -14,6 +14,7 @@
         <widget backgroundColor="black" font="Regular;35" foregroundColor="darkgrey" halign="right" position="1326,40" render="Label" size="145,45" source="global.CurrentTime" transparent="1" valign="center" text="1 ago">
             <convert type="ClockToText">Format:%e %b</convert>
         </widget>
+		<eLabel backgroundColor="darkgrey" name="new eLabel2" position="1584,42" size="2,42" noWrap="1" />
         <ePixmap alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/openstar.png" position="1601,45" size="222,44" zPosition="1" />
         <eLabel position="75,131" size="1771,927" zPosition="-10" backgroundColor="REGBackground" transparent="0" />
         <widget name="header" position="95,147" size="1700,50" font="Regular;28" halign="center" foregroundColor="REGAccent" backgroundColor="REGBackground" valign="center" />
@@ -46,7 +47,8 @@
                 source="global.CurrentTime" transparent="1" valign="center" text="1 ago">
             <convert type="ClockToText">Format:%e %b</convert>
         </widget>
-
+        <eLabel backgroundColor="darkgrey" name="new eLabel2" position="1584,42" size="2,42" noWrap="1" />
+		
         <!-- Logo -->
         <ePixmap alphatest="blend"
                  pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RecentEventsGo/images/openstar.png"
@@ -114,6 +116,7 @@
                 source="global.CurrentTime" transparent="1" valign="center" text="1 ago">
             <convert type="ClockToText">Format:%e %b</convert>
         </widget>
+		<eLabel backgroundColor="darkgrey" name="new eLabel2" position="1584,42" size="2,42" noWrap="1" />
 
         <!-- Logo -->
         <ePixmap alphatest="blend"
