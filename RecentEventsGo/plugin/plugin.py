@@ -469,6 +469,29 @@ def getRecentlyStarted(bouquet_refs_str, threshold_minutes=10):
     return grouped
 
 
+# ─── Funcion de zapeo reutilizable ────────────────────────────────────────────────────
+def doZap(session, sref_str=None):
+    if not sref_str:
+        return
+    try:
+        sref = eServiceReference(sref_str)
+        from Screens.InfoBar import InfoBar
+        ib = InfoBar.instance
+        sl = ib.servicelist
+
+        # setCurrentSelection + zap() SIEMPRE -> guarda en historial
+        sl.setCurrentSelection(sref)
+        sl.zap()
+
+        # Para IPTV (tipo != 1) zap() solo no arranca el stream -> forzamos playService ademas
+        if sref.type != 1:
+            ib.session.nav.playService(sref)
+
+        print("[RecentEventsGo] zap OK:", sref_str)
+    except Exception as e:
+        print("[RecentEventsGo] doZap error:", e)
+
+
 # ─── Extensión del InfoBar ────────────────────────────────────────────────────
 class InfoBarRecentStartsExtension:
     def __init__(self):
@@ -494,25 +517,7 @@ class InfoBarRecentStartsExtension:
         self.session.openWithCallback(self._doZap, RecentStartsScreen, grouped)
 
     def _doZap(self, sref_str=None):
-        if not sref_str:
-            return
-        try:
-            sref = eServiceReference(sref_str)
-            from Screens.InfoBar import InfoBar
-            ib = InfoBar.instance
-            sl = ib.servicelist
-
-            # setCurrentSelection + zap() SIEMPRE → guarda en historial
-            sl.setCurrentSelection(sref)
-            sl.zap()
-
-            # Para IPTV (tipo != 1) zap() solo no arranca el stream → forzamos playService además
-            if sref.type != 1:
-                ib.session.nav.playService(sref)
-
-            print("[RecentEventsGo] zap OK:", sref_str)
-        except Exception as e:
-            print("[RecentEventsGo] _doZap error:", e)
+        doZap(self.session, sref_str)
 
 def writeKeymap():
     key = config.plugins.recentstarts.hotkey.value
@@ -574,7 +579,12 @@ def Plugins(**kwargs):
             description=_("Recently started broadcasts"),
             where=PluginDescriptor.WHERE_EXTENSIONSMENU,
             icon=icon,
-            fnc=lambda session, **kwargs: session.open(RecentStartsScreen, getRecentlyStarted(config.plugins.recentstarts.bouquet_refs.value, config.plugins.recentstarts.minutes_threshold.value))
+            fnc=lambda session, **kwargs: session.openWithCallback(
+                lambda sref_str: doZap(session, sref_str),
+                RecentStartsScreen,
+                getRecentlyStarted(config.plugins.recentstarts.bouquet_refs.value,
+                                    config.plugins.recentstarts.minutes_threshold.value)
+            )
         ),
         PluginDescriptor(
             name=_("RecentEventsGo - Configuration"),
