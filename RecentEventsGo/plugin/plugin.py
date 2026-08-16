@@ -580,7 +580,7 @@ def Plugins(**kwargs):
             where=PluginDescriptor.WHERE_EXTENSIONSMENU,
             icon=icon,
             fnc=lambda session, **kwargs: session.openWithCallback(
-                lambda sref_str: doZap(session, sref_str),
+                lambda sref_str=None: doZap(session, sref_str),
                 RecentStartsScreen,
                 getRecentlyStarted(config.plugins.recentstarts.bouquet_refs.value,
                                     config.plugins.recentstarts.minutes_threshold.value)
