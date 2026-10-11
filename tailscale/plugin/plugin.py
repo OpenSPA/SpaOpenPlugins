@@ -22,6 +22,6 @@ def menuTailscale(menuid, **kwargs):
 def Plugins(**kwargs):
 	if getImageDistro() == 'openspa':
 		list = []
-		list.append(PluginDescriptor(name=_('Tailscale-VPN'), description=_('Global Area Networking'), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=mainTailscale, icon='plugin.png'))
-		list.append(PluginDescriptor(name=_('Tailscale-VPN'), description=_('Global Area Networking'), where = PluginDescriptor.WHERE_MENU, fnc=menuTailscale))
+		list.append(PluginDescriptor(name=_('Tailscale-VPN'), description=_('Zero Trust identity-based connectivity'), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=mainTailscale, icon='plugin.png'))
+		list.append(PluginDescriptor(name=_('Tailscale-VPN'), description=_('Zero Trust identity-based connectivity'), where = PluginDescriptor.WHERE_MENU, fnc=menuTailscale))
 		return list
