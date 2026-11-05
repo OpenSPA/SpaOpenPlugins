@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from twisted.internet.ssl import ClientContextFactory
-from twisted.internet._sslverify import ClientTLSOptions
+from OpenSSL import SSL
 from Screens.Screen import Screen
 from Components.MenuList import MenuList
 from Components.Label import Label
@@ -60,13 +60,25 @@ def readFromFile(filename):
 
 class WebClientContextFactory(ClientContextFactory):
 	def __init__(self, url=None):
-		domain = urlparse(url).netloc
-		self.hostname = domain
+		host = urlparse(url).hostname if url else None
+		if isinstance(host, bytes):
+			host = host.decode("utf-8", "ignore")
+		self.hostname = host
 
-	def getContext(self, hostname=None, port=None):
+	def getContext(self, *args, **kwargs):
 		ctx = ClientContextFactory.getContext(self)
-		if self.hostname and ClientTLSOptions is not None: # workaround for TLS SNI
-			ClientTLSOptions(self.hostname, ctx)
+		host = self.hostname
+		if host:
+			# SNI manual (compatible con Twisted nuevo y antiguo)
+			host_b = host.encode("idna")
+
+			def _sni_cb(conn, where, ret):
+				if where & SSL.SSL_CB_HANDSHAKE_START:
+					try:
+						conn.set_tlsext_host_name(host_b)
+					except Exception:
+						pass
+			ctx.set_info_callback(_sni_cb)
 		return ctx
 
 class FootOnSat(Screen):
